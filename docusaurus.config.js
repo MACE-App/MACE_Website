@@ -111,14 +111,14 @@ const config = {
             href: 'https://github.com/mace-app/mace/releases',
             position: 'right',
             className: 'header-download-link',
-            html: '<span class="visually-hidden">Download</span>',
+            label: 'Download',
             'aria-label': 'Download',
           },
           {
             href: 'https://github.com/mace-app/mace',
             position: 'right',
             className: 'header-github-link',
-            html: '<span class="visually-hidden">GitHub</span>',
+            label: 'GitHub',
             'aria-label': 'GitHub repository',
           },
         ],
@@ -164,15 +164,15 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'GitHub',
+                label: 'MACE GitHub',
                 href: 'https://github.com/mace-app/mace',
               },
               {
-                label: 'Download',
+                label: 'MACE Download',
                 href: 'https://github.com/mace-app/mace/releases',
               },
               {
-                label: 'mSCP Project',
+                label: 'mSCP GitHub',
                 href: 'https://github.com/usnistgov/macos_security',
               },
             ],

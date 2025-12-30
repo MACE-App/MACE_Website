@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import {useState, useEffect} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
@@ -109,17 +110,34 @@ function HomepageHeader() {
 function FeaturesSection() {
   const features = [
     {
-      icon: '🖥️',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      ),
       title: 'No Command Line Required',
       desc: 'Visual interface for creating and managing compliance baselines. Built with SwiftUI for a fast, native macOS experience.',
     },
     {
-      icon: '🔄',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      ),
       title: 'All-in-One Workflow',
       desc: 'Create, customize, audit, and export from a single app. Browse 500+ security rules with powerful search and filtering.',
     },
     {
-      icon: '📦',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      ),
       title: 'MDM-Ready Exports',
       desc: 'Generate deployment-ready profiles for Jamf, Intune, and more. Export to mobileconfig, plist, DDM, and signed profiles.',
     },
@@ -131,7 +149,9 @@ function FeaturesSection() {
         <div className={styles.featureGrid}>
           {features.map((feature, idx) => (
             <div key={idx} className={styles.featureCard}>
-              <span className={styles.featureIcon}>{feature.icon}</span>
+              <div className={styles.featureIconWrapper}>
+                {feature.icon}
+              </div>
               <Heading as="h3">{feature.title}</Heading>
               <p>{feature.desc}</p>
             </div>
@@ -142,21 +162,50 @@ function FeaturesSection() {
   );
 }
 
-function ScreenshotSection() {
+function ScreenshotCarousel() {
+  const screenshots = [
+    { src: '/img/screenshots/compliance_builder_hub.png', title: 'Compliance Editor', desc: 'Browse and customize 500+ security rules' },
+    { src: '/img/screenshots/audit.png', title: 'Audit & Export', desc: 'Run audits and generate detailed reports' },
+    { src: '/img/screenshots/new_project.png', title: 'Project Management', desc: 'Create and manage compliance baselines' },
+    { src: '/img/screenshots/documentation.png', title: 'Built-in Documentation', desc: 'Access rule details and remediation steps' },
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % screenshots.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [screenshots.length]);
+
   return (
-    <section className={styles.screenshots}>
+    <section className={styles.carousel}>
       <div className="container">
         <Heading as="h2" className="text--center margin-bottom--lg">
           See MACE in Action
         </Heading>
-        <div className={styles.screenshotGrid}>
-          <div className={styles.screenshotCard}>
-            <img src="/img/screenshots/compliance_builder_hub.png" alt="Compliance Editor" />
-            <p><strong>Compliance Editor</strong><br/>Browse and customize 500+ security rules</p>
+        <div className={styles.carouselWrapper}>
+          <div className={styles.carouselTrack} style={{ transform: `translateX(-${current * 100}%)` }}>
+            {screenshots.map((shot, idx) => (
+              <div key={idx} className={styles.carouselSlide}>
+                <img src={shot.src} alt={shot.title} />
+              </div>
+            ))}
           </div>
-          <div className={styles.screenshotCard}>
-            <img src="/img/screenshots/audit.png" alt="Audit Results" />
-            <p><strong>Audit & Export</strong><br/>Run audits and generate reports</p>
+          <div className={styles.carouselInfo}>
+            <h3>{screenshots[current].title}</h3>
+            <p>{screenshots[current].desc}</p>
+          </div>
+          <div className={styles.carouselDots}>
+            {screenshots.map((_, idx) => (
+              <button
+                key={idx}
+                className={clsx(styles.carouselDot, idx === current && styles.carouselDotActive)}
+                onClick={() => setCurrent(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -200,7 +249,7 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <FeaturesSection />
-        <ScreenshotSection />
+        <ScreenshotCarousel />
         <CTASection />
       </main>
     </Layout>
