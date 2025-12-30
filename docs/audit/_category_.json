@@ -1,0 +1,8 @@
+{
+  "label": "Audit & Verification",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Run compliance audits and export verification reports."
+  }
+}
