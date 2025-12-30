@@ -84,11 +84,11 @@ function HomepageHeader() {
           alt="MACE App Icon"
           className={styles.heroLogo}
         />
-        <Heading as="h1" className="hero__title">
+        <Heading as="h1" className={clsx('hero__title', styles.heroTitle)}>
           M.A.C.E.
         </Heading>
         <p className={styles.heroSubtitle}>macOS Advanced Compliance Editor</p>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className={clsx('hero__subtitle', styles.heroTagline)}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
             className={clsx(styles.heroButton, styles.heroButtonPrimary)}
