@@ -3,144 +3,71 @@ sidebar_position: 1
 slug: /intro
 ---
 
-# Introduction to MACE
+# Introduction
 
-**M.A.C.E. (macOS Advanced Compliance Editor)** is a native macOS application for building and managing macOS Security Compliance Project (mSCP) baselines. Built entirely in Swift with SwiftUI, MACE enables security professionals to create, customize, audit, and export compliance baselines without ever touching the command line.
+**M.A.C.E. (macOS Advanced Compliance Editor)** is a native macOS application for managing security compliance baselines. Built in Swift and SwiftUI, it gives you a visual interface to create, customize, audit, and export compliance configurations without touching the command line.
 
-## The Problem
+**Built by a Mac admin, for Mac admins.** MACE started from a simple frustration. As a Mac admin using [mSCP (macOS Security Compliance Project)](https://github.com/usnistgov/macos_security) day-to-day, the project was incredible, but the workflow wasn't. Bouncing between terminal windows, editing YAML files by hand, and running Python scripts just to see what changed got old fast.
 
-The [macOS Security Compliance Project (mSCP)](https://github.com/usnistgov/macos_security) provides excellent security baselines, but working with them traditionally requires:
+I wanted something I could actually *see*. A way to browse rules visually, tweak settings without memorizing syntax, and build outputs with a click instead of a command. Something I could hand to a newer Mac admin without a 30-minute crash course on Git and terminal basics.
 
-- Command line proficiency
-- Python scripting knowledge
-- YAML file editing expertise
-- Manual profile generation
-- Complex build processes
+So I built it.
 
-For security administrators, compliance officers, and IT teams who need to customize baselines for their organizations, this technical barrier can be overwhelming.
+<div class="themed-image">
+  <img src="/img/screenshots/main-menu-light.png" alt="MACE Main Menu" class="img-light" />
+  <img src="/img/screenshots/main-menu-dark.png" alt="MACE Main Menu" class="img-dark" />
+</div>
 
-## The Solution
+## Why MACE?
 
-MACE provides a complete visual interface for the entire compliance workflow:
+mSCP is the gold standard for Apple security baselines, backed by federal government Mac admins all coming together to build something better. The rules, frameworks, and compliance logic in MACE all come directly from mSCP. The expertise stays with the experts.
 
-- **Browse 500+ security rules** organized by section with powerful search and filtering
-- **Customize any rule** - edit discussions, checks, fixes, ODVs, and configurations
-- **Run live audits** with real-time progress and detailed results
-- **Export to any format** - PDF, HTML, CSV, CKL for STIG Viewer
-- **Generate deployment artifacts** - scripts, mobileconfigs, DDM declarations
-- **Support multiple frameworks** - STIG, CIS, NIST 800-53, CMMC, and more
+But mSCP traditionally requires Python, Ruby, Git, and terminal knowledge. That's a real barrier for admins who just want to secure their fleet without becoming command-line warriors first.
 
-## Supported Platforms
+MACE removes that learning curve. It's the visual layer mSCP deserves, bringing more Mac admins to the project by making it accessible to everyone, regardless of their terminal comfort level.
 
-MACE supports compliance management for:
+mSCP should focus on what it does best: more rules, more frameworks, more baselines. MACE is here to grow the mSCP community by lowering the barrier to entry.
 
-| Platform | Versions |
-|----------|----------|
-| **macOS** | 26 (Tahoe), 15 (Sequoia), 14 (Sonoma) |
-| **iOS/iPadOS** | 26, 18, 17 |
-| **visionOS** | 26 |
+## What MACE Does
 
-## Supported Compliance Frameworks
+MACE takes mSCP and gives it a GUI. All original mSCP files and folders remain the same in the project you create, letting you work in or outside of MACE at any point.
 
-| Framework | Description |
-|-----------|-------------|
-| **DISA STIG** | Defense Information Systems Agency Security Technical Implementation Guides |
-| **CIS Benchmarks** | Center for Internet Security Benchmarks (Level 1, Level 2, v8) |
-| **NIST 800-53** | High, Moderate, Low, and Privacy control baselines |
-| **NIST 800-171** | Protecting Controlled Unclassified Information |
-| **CMMC** | Cybersecurity Maturity Model Certification levels |
-| **Custom** | Build your own baseline from available rules |
+MACE handles the entire compliance workflow:
 
-## Key Capabilities
+<table class="icon-table">
+  <tr><td>📁</td><td><strong>Create</strong> projects for <span class="platform-badge">macOS</span> <span class="platform-badge">iOS</span> <span class="platform-badge">iPadOS</span> <span class="platform-badge">visionOS</span></td></tr>
+  <tr><td>🔍</td><td><strong>Browse</strong> hundreds of security rules organized by section</td></tr>
+  <tr><td>✏️</td><td><strong>Customize</strong> your baseline and rules, or create new rules from scratch</td></tr>
+  <tr><td>🔨</td><td><strong>Build</strong> deployment-ready scripts and configuration profiles</td></tr>
+  <tr><td>✅</td><td><strong>Audit</strong> devices with real-time compliance checks</td></tr>
+  <tr><td>📄</td><td><strong>Export</strong> reports and documentation in multiple formats</td></tr>
+</table>
 
-### Compliance Editor
-- Three-panel interface: sections sidebar, searchable rule list, and detailed editor
-- Filter by framework, section, tags, or modification status
-- "Show All" mode to view rules across all frameworks
-- Keyboard shortcuts for power users (Space to toggle rules)
+<div class="themed-image themed-image--wide">
+  <img src="/img/screenshots/compliance-hub-light.png" alt="MACE Compliance Builder Hub" class="img-light" />
+  <img src="/img/screenshots/compliance-hub-dark.png" alt="MACE Compliance Builder Hub" class="img-dark" />
+</div>
 
-### Rule Customization
-- Edit all rule fields: discussion, check, fix, references, tags
-- Modify ODVs (Organization Defined Values) for your requirements
-- Customize mobileconfig payloads and DDM declarations
-- Side-by-side comparison of baseline vs. custom values
-- Automatic YAML structure preservation
+All powered by your choice of two engines:
 
-### Build System
-Generate deployment-ready artifacts:
-- **Shell scripts** for audit and remediation
-- **Configuration profiles** (.mobileconfig, Jamf plist, Intune XML)
-- **DDM declarations** for modern Apple management
-- **Documentation** (HTML, PDF) with customizable branding
+<table class="icon-table">
+  <tr><td>🐍</td><td><strong>mSCP Scripts</strong> - The original Python scripts with their standard outputs</td></tr>
+  <tr><td>⚡</td><td><strong>MACE Engine</strong> - Built entirely in Swift for speed, with additional export customization options</td></tr>
+</table>
 
-### Audit Engine
-- Run compliance checks with privileged helper for root-level access
-- Real-time progress tracking with per-rule execution
-- Color-coded results: Pass, Fail, Error, Manual Review, N/A
-- Add comments and override statuses
-- Export to PDF, HTML, CSV, or DISA STIG CKL format
+## Ready to Try It?
 
-## System Requirements
+Runs on **macOS 14 (Sonoma) or later**, Apple Silicon or Intel. Admin access only needed for audits.
 
-- **macOS 14 (Sonoma)** or later
-- Apple Silicon or Intel Mac
-- Administrator access for audit features
+<a href="https://github.com/MACE-App/MACE/releases" class="button button--primary button--lg">Download MACE</a>
 
-## Quick Start
+Free and open source. Create your first project in minutes.
 
-1. **[Download](https://github.com/mace-app/mace/releases)** the latest release
-2. **Create** a new project selecting your platform and compliance framework
-3. **Customize** rules to fit your organization's requirements
-4. **Build** scripts and configuration profiles for deployment
-5. **Audit** your Mac and export compliance reports
+## Dive Deeper
 
-## Architecture Overview
-
-MACE is built with a modular architecture:
-
-```
-MACE/
-├── App/                    # Application entry and settings
-├── Core/
-│   ├── Models/            # Data models (Rules, Compliance, etc.)
-│   └── Services/          # Business logic and file operations
-│       └── Build/         # Artifact generation
-├── Features/
-│   ├── Audit/            # Compliance auditing
-│   ├── Build/            # Build configuration UI
-│   ├── ComplianceEditor/ # Main rule editor
-│   ├── Documentation/    # Doc generation
-│   ├── MainMenu/         # Welcome screen
-│   ├── ProjectCreation/  # New project wizard
-│   ├── RuleDetail/       # Rule editing views
-│   └── RulesList/        # Rule browsing
-└── Shared/               # Utilities and helpers
-```
-
-## Project File Structure
-
-When you create a MACE project, it uses this structure:
-
-```
-your_project/
-├── MACE_Project.mace              # Project configuration (plist)
-├── builder_files/
-│   ├── rules/                     # Baseline rule YAML files
-│   ├── custom/
-│   │   └── rules/                 # Your rule customizations
-│   └── build/
-│       └── baselines/             # Exported baseline files
-└── build_output/                  # Generated artifacts
-    ├── scripts/
-    ├── mobileconfigs/
-    ├── documentation/
-    └── ddm/
-```
-
-## Next Steps
-
-- [Installation](./installation) - Install and configure MACE
-- [Project Management](./features/project-management) - Create and manage projects
-- [Compliance Editor](./features/compliance-editor) - Browse and customize rules
-- [Build Capabilities](./build/overview) - Generate deployment artifacts
-- [Audit & Verification](./audit/overview) - Run compliance audits
+<table class="icon-table">
+  <tr><td>📂</td><td><strong><a href="./features/project-management">Project Management</a></strong> - Create and manage compliance projects</td></tr>
+  <tr><td>🛠️</td><td><strong><a href="./features/compliance-editor">Compliance Editor</a></strong> - Browse and customize rules</td></tr>
+  <tr><td>📦</td><td><strong><a href="./build/overview">Build Capabilities</a></strong> - Generate scripts, profiles, and docs</td></tr>
+  <tr><td>🔎</td><td><strong><a href="./audit/overview">Audit & Verification</a></strong> - Run compliance checks and export reports</td></tr>
+</table>

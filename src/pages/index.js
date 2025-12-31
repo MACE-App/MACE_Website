@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import {useState, useEffect, useRef} from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {useColorMode} from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 
 import Heading from '@theme/Heading';
@@ -319,11 +320,34 @@ function FeaturesSection() {
 }
 
 function ScreenshotCarousel() {
+  const {colorMode} = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+
   const screenshots = [
-    { src: '/img/screenshots/compliance_builder_hub.png', title: 'Compliance Editor', desc: 'Browse and customize 500+ security rules' },
-    { src: '/img/screenshots/audit.png', title: 'Audit & Export', desc: 'Run audits and generate detailed reports' },
-    { src: '/img/screenshots/new_project.png', title: 'Project Management', desc: 'Create and manage compliance baselines' },
-    { src: '/img/screenshots/documentation.png', title: 'Built-in Documentation', desc: 'Access rule details and remediation steps' },
+    {
+      light: '/img/screenshots/compliance-editor-light.png',
+      dark: '/img/screenshots/compliance-editor-dark.png',
+      title: 'Compliance Editor',
+      desc: 'Browse and customize 500+ security rules'
+    },
+    {
+      light: '/img/screenshots/audit-light.png',
+      dark: '/img/screenshots/audit-dark.png',
+      title: 'Audit & Export',
+      desc: 'Run audits and generate detailed reports'
+    },
+    {
+      light: '/img/screenshots/build-light.png',
+      dark: '/img/screenshots/build-dark.png',
+      title: 'Build Hub',
+      desc: 'Generate scripts, profiles, and configurations'
+    },
+    {
+      light: '/img/screenshots/documentation-light.png',
+      dark: '/img/screenshots/documentation-dark.png',
+      title: 'Documentation Options',
+      desc: 'Export comprehensive compliance documentation'
+    },
   ];
 
   const [current, setCurrent] = useState(0);
@@ -345,7 +369,7 @@ function ScreenshotCarousel() {
           <div className={styles.carouselTrack} style={{ transform: `translateX(-${current * 100}%)` }}>
             {screenshots.map((shot, idx) => (
               <div key={idx} className={styles.carouselSlide}>
-                <img src={shot.src} alt={shot.title} />
+                <img src={isDarkMode ? shot.dark : shot.light} alt={shot.title} />
               </div>
             ))}
           </div>

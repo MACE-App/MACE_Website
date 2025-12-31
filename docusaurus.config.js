@@ -75,6 +75,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'alpha_notice',
+        content: '🚧 MACE is currently in alpha. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.0.10-Alpha</a>',
+        backgroundColor: '#007AFF',
+        textColor: '#ffffff',
+        isCloseable: true,
+      },
       image: 'img/app-icon.png',
       colorMode: {
         respectPrefersColorScheme: true,
