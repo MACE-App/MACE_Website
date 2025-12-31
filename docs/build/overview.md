@@ -2,15 +2,14 @@
 sidebar_position: 1
 ---
 
-# Build Overview
+# Build
 
-MACE's build system generates deployment-ready artifacts from your compliance baseline. With a single build operation, you can create scripts, configuration profiles, DDM declarations, and documentation.
+MACE's build system generates deployment-ready artifacts from your compliance baseline. With a single build operation, you can create scripts, configuration profiles, and DDM declarations.
 
-{/* TODO: Add screenshot - build_options.png */}
-:::tip Screenshot Needed
-**Filename:** `build_options.png`
-**Description:** Build options dialog showing all available output types and configuration settings.
-:::
+<div className="themed-image">
+  <img src="/img/screenshots/build-light.png" alt="MACE Build" className="img-light" />
+  <img src="/img/screenshots/build-dark.png" alt="MACE Build" className="img-dark" />
+</div>
 
 ## Build Pipeline
 
@@ -160,7 +159,9 @@ After completion, MACE displays:
 
 ## Next Steps
 
-- [Script Generation](./scripts) - Details on generated scripts
-- [Configuration Profiles](./profiles) - Profile formats and options
-- [DDM Declarations](./ddm) - Declarative Device Management
-- [Documentation](./documentation) - Generated documentation
+<table className="icon-table">
+  <tr><td>📜</td><td><strong><a href="./scripts">Scripts</a></strong> - Details on generated audit and remediation scripts</td></tr>
+  <tr><td>⚙️</td><td><strong><a href="./profiles">Configuration Profiles</a></strong> - Profile formats and deployment options</td></tr>
+  <tr><td>📱</td><td><strong><a href="./ddm">DDM Declarations</a></strong> - Declarative Device Management</td></tr>
+  <tr><td>📄</td><td><strong><a href="../documentation/baseline-docs">Documentation</a></strong> - Generate baseline documentation</td></tr>
+</table>

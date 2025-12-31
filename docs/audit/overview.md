@@ -2,15 +2,14 @@
 sidebar_position: 1
 ---
 
-# Audit Overview
+# Audit
 
 MACE includes a powerful audit engine that runs compliance checks directly on your Mac, providing real-time results with detailed status reporting.
 
-{/* TODO: Add screenshot - audit_running.png */}
-:::tip Screenshot Needed
-**Filename:** `audit_running.png`
-**Description:** Audit in progress showing real-time progress bar, current rule being checked, and live pass/fail counts.
-:::
+<div className="themed-image">
+  <img src="/img/screenshots/audit-light.png" alt="MACE Audit" className="img-light" />
+  <img src="/img/screenshots/audit-dark.png" alt="MACE Audit" className="img-dark" />
+</div>
 
 ## How Auditing Works
 
@@ -183,5 +182,7 @@ The audit engine is optimized for:
 
 ## Next Steps
 
-- [Audit Results](./results) - Understanding and working with results
-- [Export Formats](./exports) - Exporting compliance reports
+<table className="icon-table">
+  <tr><td>📊</td><td><strong><a href="./results">Audit Results</a></strong> - Understanding and working with results</td></tr>
+  <tr><td>📄</td><td><strong><a href="../documentation/audit-reports">Export Reports</a></strong> - Export audit results in multiple formats</td></tr>
+</table>

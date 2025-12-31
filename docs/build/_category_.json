@@ -1,8 +1,8 @@
 {
-  "label": "Build Capabilities",
+  "label": "Build",
   "position": 4,
   "link": {
-    "type": "generated-index",
-    "description": "Generate scripts, profiles, and documentation from your compliance baseline."
+    "type": "doc",
+    "id": "build/overview"
   }
 }

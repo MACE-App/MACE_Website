@@ -63,11 +63,3 @@ Runs on **macOS 14 (Sonoma) or later**, Apple Silicon or Intel. Admin access onl
 
 Free and open source. Create your first project in minutes.
 
-## Dive Deeper
-
-<table class="icon-table">
-  <tr><td>📂</td><td><strong><a href="./features/project-management">Project Management</a></strong> - Create and manage compliance projects</td></tr>
-  <tr><td>🛠️</td><td><strong><a href="./features/compliance-editor">Compliance Editor</a></strong> - Browse and customize rules</td></tr>
-  <tr><td>📦</td><td><strong><a href="./build/overview">Build Capabilities</a></strong> - Generate scripts, profiles, and docs</td></tr>
-  <tr><td>🔎</td><td><strong><a href="./audit/overview">Audit & Verification</a></strong> - Run compliance checks and export reports</td></tr>
-</table>

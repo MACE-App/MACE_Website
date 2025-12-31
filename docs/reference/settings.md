@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 ---
 
-# Settings & Appearance
+# Settings
 
 MACE offers various settings to customize your experience.
 
@@ -28,16 +28,29 @@ Auto-save is enabled by default. Your work is automatically saved as you make ch
 
 MACE remembers your display preferences:
 
-- Window size and position
-- Sidebar widths
-- Sort preferences
-- Filter states
+<table className="icon-table">
+  <tr><td>📐</td><td>Window size and position</td></tr>
+  <tr><td>📏</td><td>Sidebar widths</td></tr>
+  <tr><td>🔤</td><td>Sort preferences</td></tr>
+  <tr><td>🔍</td><td>Filter states</td></tr>
+</table>
+
+## Build Engine
+
+Choose which engine to use for building outputs:
+
+| Engine | Description |
+|--------|-------------|
+| **MACE Engine** | Native Swift implementation with additional options |
+| **mSCP Engine** | Original Python scripts for compatibility |
+
+See the [Overview](../getting-started/overview) for details on engine differences.
 
 ## Application Logging
 
 Access the built-in logging console for troubleshooting:
 
-1. Open Settings
+1. Open Settings (`Cmd + ,`)
 2. Navigate to Logging
 3. View recent log entries
 4. Export logs for support requests
@@ -50,7 +63,6 @@ Quick reference for common actions:
 |----------|--------|
 | `Cmd + N` | New Project |
 | `Cmd + O` | Open Project |
-| `Cmd + S` | Save (manual) |
 | `Cmd + ,` | Settings |
 | `Cmd + F` | Search |
 | `Cmd + B` | Build |

@@ -94,14 +94,13 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            to: '/docs/intro',
+            label: 'Getting Started',
             position: 'left',
-            label: 'Docs',
           },
           {
-            to: '/docs/features/compliance-editor',
-            label: 'Features',
+            to: '/docs/compliance-editor/overview',
+            label: 'Editor',
             position: 'left',
           },
           {
@@ -112,6 +111,11 @@ const config = {
           {
             to: '/docs/audit/overview',
             label: 'Audit',
+            position: 'left',
+          },
+          {
+            to: '/docs/documentation/overview',
+            label: 'Documentation',
             position: 'left',
           },
           {
@@ -141,8 +145,8 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'Features',
-                to: '/docs/features/compliance-editor',
+                label: 'Compliance Editor',
+                to: '/docs/compliance-editor/overview',
               },
               {
                 label: 'Build',
@@ -151,6 +155,10 @@ const config = {
               {
                 label: 'Audit',
                 to: '/docs/audit/overview',
+              },
+              {
+                label: 'Documentation',
+                to: '/docs/documentation/overview',
               },
             ],
           },
