@@ -2,255 +2,296 @@
 sidebar_position: 3
 ---
 
-# Rule Examples
+# Examples
 
-Learn from these example custom rules. Copy and adapt them for your organization's needs.
+<div className="editor-intro">
+  <p className="editor-intro__lead">Sample custom rules to learn from and adapt.</p>
+  <p className="editor-intro__sub">Copy these examples and modify them for your organization's needs.</p>
+</div>
 
-## Basic Script Check
+## Basic Preference Check
 
-A simple rule that checks a preference value:
+A simple rule that checks a system preference:
 
 ```yaml
-id: org_finder_show_extensions
-title: "Ensure Finder Shows All File Extensions"
+id: os_finder_show_extensions
+title: Ensure Finder Shows All File Extensions
 discussion: |
+  File extensions _MUST_ be visible in Finder.
   Displaying file extensions helps users identify potentially malicious files
   that may be disguised with misleading names (e.g., "document.pdf.exe").
 
-  This setting should be enabled for all users to improve security awareness.
-check: |
-  /usr/bin/defaults read NSGlobalDomain AppleShowAllExtensions
-result:
-  string: "1"
-fix: |
-  /usr/bin/defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 references:
-  cis:
-    benchmark:
-      - "N/A (Custom)"
-    controls v8:
-      - "N/A"
+  nist:
+    cce:
+      macos_15:
+        - CCE-XXXXX-X
+  disa:
+    disa_stig:
+      macos_15:
+        - APPL-15-XXXXXX
+
+platforms:
+  macOS:
+    '15.0':
+      benchmarks:
+        - name: cis_lvl1
+    enforcement_info:
+      check:
+        shell: /usr/bin/defaults read NSGlobalDomain AppleShowAllExtensions
+        result:
+          string: '1'
+      fix:
+        shell: /usr/bin/defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
 tags:
-  - custom
-  - finder
-  - your-organization
-severity: "low"
-mobileconfig: false
-mobileconfig_info: {}
+  - cis_lvl1
 ```
 
-## Application-Specific Rule
+## Third-Party Application
 
-Check settings for a third-party application:
-
-```yaml
-id: org_slack_disable_link_previews
-title: "Disable Slack Link Previews for Security"
-discussion: |
-  Slack's link preview feature automatically fetches content from URLs
-  shared in messages. This can:
-  - Reveal your IP address to external servers
-  - Trigger requests to potentially malicious URLs
-  - Leak information about internal discussions
-
-  Organizations handling sensitive data should disable this feature.
-check: |
-  /usr/bin/defaults read com.tinyspeck.slackmacgap ShowLinkPreviews 2>/dev/null || echo "not set"
-result:
-  string: "0"
-fix: |
-  /usr/bin/defaults write com.tinyspeck.slackmacgap ShowLinkPreviews -bool false
-references:
-  cis:
-    benchmark:
-      - "N/A (Custom)"
-    controls v8:
-      - "N/A"
-tags:
-  - custom
-  - applications
-  - slack
-  - privacy
-severity: "medium"
-mobileconfig: false
-mobileconfig_info: {}
-```
-
-## Check with Complex Logic
-
-Using JavaScript for more complex checks:
+Check settings for an application not covered by baselines:
 
 ```yaml
-id: org_safari_developer_menu_disabled
-title: "Ensure Safari Developer Menu is Disabled"
+id: os_slack_disable_link_previews
+title: Disable Slack Link Previews
 discussion: |
-  The Safari Developer menu provides access to debugging tools that could
-  be used to bypass security controls or inspect sensitive data. For most
-  users, this menu should remain disabled.
-check: |
-  /usr/bin/osascript -l JavaScript << EOS
-  $.NSUserDefaults.alloc.initWithSuiteName('com.apple.Safari')\
-  .objectForKey('IncludeDevelopMenu').js
-  EOS
-result:
-  string: "false"
-fix: |
-  /usr/bin/defaults write com.apple.Safari IncludeDevelopMenu -bool false
+  Slack link previews _SHOULD_ be disabled for organizations handling sensitive data.
+
+  The link preview feature automatically fetches content from URLs shared in messages,
+  which can reveal your IP address to external servers and trigger requests to
+  potentially malicious URLs.
+
 references:
-  cis:
-    benchmark:
-      - "N/A (Custom)"
-    controls v8:
-      - "N/A"
+  nist:
+    cce:
+      macos_15:
+        - CCE-XXXXX-X
+  disa:
+    disa_stig:
+      macos_15:
+        - APPL-15-XXXXXX
+
+platforms:
+  macOS:
+    '15.0':
+      benchmarks:
+        - name: cis_lvl2
+    enforcement_info:
+      check:
+        shell: /usr/bin/defaults read com.tinyspeck.slackmacgap ShowLinkPreviews 2>/dev/null || echo "not set"
+        result:
+          string: '0'
+      fix:
+        shell: /usr/bin/defaults write com.tinyspeck.slackmacgap ShowLinkPreviews -bool false
+
 tags:
-  - custom
-  - safari
-  - browsers
-severity: "low"
-mobileconfig: true
-mobileconfig_info:
-  com.apple.Safari:
-    IncludeDevelopMenu: false
+  - cis_lvl2
 ```
 
 ## Rule with ODV
 
-Using Organization Defined Values for flexibility:
+Using Organization Defined Values for configurable thresholds:
 
 ```yaml
-id: org_max_failed_logins
-title: "Set Maximum Failed Login Attempts"
+id: system_settings_screensaver_timeout
+title: Set Screen Saver Timeout
 discussion: |
-  Limiting the number of failed login attempts helps protect against
-  brute force password attacks. After the specified number of failures,
-  the account should be locked.
+  The screen saver timeout _MUST_ be set to $ODV seconds or less.
 
-  The ODV allows each organization to set their own threshold based
-  on their security policy.
-check: |
-  /usr/bin/pwpolicy -getaccountpolicies 2>/dev/null | /usr/bin/grep -A1 "policyAttributeMaximumFailedAuthentications" | /usr/bin/tail -1 | /usr/bin/awk -F'[<>]' '{print $3}'
-result:
-  integer: $ODV
-odv:
-  hint: "Maximum number of failed login attempts before lockout"
-  recommended: 5
-  cis_lvl1: 5
-  cis_lvl2: 3
-  stig: 3
-fix: |
-  /usr/bin/pwpolicy -setaccountpolicies << EOP
-  <?xml version="1.0" encoding="UTF-8"?>
-  <plist version="1.0">
-  <dict>
-    <key>policyCategoryAuthentication</key>
-    <array>
-      <dict>
-        <key>policyAttributeMaximumFailedAuthentications</key>
-        <integer>$ODV</integer>
-      </dict>
-    </array>
-  </dict>
-  </plist>
-  EOP
+  The screen saver should activate after a period of inactivity to protect
+  unattended workstations.
+
 references:
-  cis:
-    benchmark:
-      - "5.2.1"
-    controls v8:
-      - "4.1"
+  nist:
+    cce:
+      macos_15:
+        - CCE-XXXXX-X
+  disa:
+    disa_stig:
+      macos_15:
+        - APPL-15-XXXXXX
+
+platforms:
+  macOS:
+    '15.0':
+      benchmarks:
+        - name: cis_lvl1
+        - name: cis_lvl2
+        - name: disa_stig
+          severity: medium
+    enforcement_info:
+      check:
+        shell: /usr/bin/defaults read com.apple.screensaver idleTime
+        result:
+          integer: $ODV
+      fix:
+        shell: /usr/bin/defaults write com.apple.screensaver idleTime -int $ODV
+
+odv:
+  hint:
+    datatype: number
+    description: Screen saver timeout in seconds (e.g., 300 for 5 minutes)
+    validation:
+      min: 60
+      max: 3600
+  recommended: 300
+  cis_lvl1: 1200
+  cis_lvl2: 300
+  stig: 900
+
+mobileconfig_info:
+  - PayloadType: com.apple.screensaver
+    PayloadContent:
+      - idleTime: $ODV
+
 tags:
-  - custom
-  - authentication
-  - password
-severity: "high"
-mobileconfig: false
-mobileconfig_info: {}
+  - cis_lvl1
+  - cis_lvl2
+  - 800-53r5_moderate
 ```
 
 ## Profile-Based Rule
 
-A rule that can be enforced via configuration profile:
+A rule enforced via configuration profile:
 
 ```yaml
-id: org_airdrop_contacts_only
-title: "Restrict AirDrop to Contacts Only"
+id: system_settings_airdrop_contacts_only
+title: Restrict AirDrop to Contacts Only
 discussion: |
-  AirDrop allows file sharing between Apple devices. When set to "Everyone",
-  any nearby device can send files, which could be used for:
-  - Sending malicious files
-  - Social engineering attacks
-  - Privacy violations
+  AirDrop _MUST_ be restricted to Contacts Only or disabled entirely.
 
-  Restricting to "Contacts Only" limits exposure while maintaining functionality.
-check: |
-  /usr/bin/defaults read com.apple.sharingd DiscoverableMode
-result:
-  string: "Contacts Only"
-fix: |
-  /usr/bin/defaults write com.apple.sharingd DiscoverableMode -string "Contacts Only"
+  When set to "Everyone", any nearby device can send files, which could be
+  used for social engineering or sending malicious content.
+
 references:
-  cis:
-    benchmark:
-      - "2.4.1"
-    controls v8:
-      - "4.8"
-tags:
-  - custom
-  - airdrop
-  - sharing
-severity: "medium"
-mobileconfig: true
+  nist:
+    cce:
+      macos_15:
+        - CCE-XXXXX-X
+  disa:
+    disa_stig:
+      macos_15:
+        - APPL-15-XXXXXX
+
+platforms:
+  macOS:
+    '15.0':
+      benchmarks:
+        - name: cis_lvl1
+    enforcement_info:
+      check:
+        shell: /usr/bin/defaults read com.apple.sharingd DiscoverableMode
+        result:
+          string: 'Contacts Only'
+      fix:
+        shell: /usr/bin/defaults write com.apple.sharingd DiscoverableMode -string "Contacts Only"
+
 mobileconfig_info:
-  com.apple.applicationaccess:
-    allowAirDrop: true
-  com.apple.sharingd:
-    DiscoverableMode: "Contacts Only"
+  - PayloadType: com.apple.sharingd
+    PayloadContent:
+      - DiscoverableMode: Contacts Only
+
+tags:
+  - cis_lvl1
 ```
 
-## Manual Review Rule
+## Rule with References
 
-A rule that requires human verification:
+Including compliance framework mappings:
 
 ```yaml
-id: org_physical_security_review
-title: "Verify Physical Security Controls"
+id: audit_flags_configure
+title: Configure Audit Flags
 discussion: |
-  Physical security is a critical component of overall security posture.
-  This rule requires manual verification that:
+  The audit system _MUST_ be configured to log specific events for
+  security monitoring and incident response.
 
-  - Device is stored in a secure location when not in use
-  - Screen lock is enabled and functioning
-  - No unauthorized USB devices are connected
-  - Privacy screen is installed (if required by policy)
-
-  This check cannot be automated and requires visual inspection.
-check: |
-  echo "MANUAL_REVIEW_REQUIRED"
-result:
-  string: "MANUAL_REVIEW_REQUIRED"
-fix: |
-  echo "This rule requires manual verification. Please review physical security controls."
 references:
+  nist:
+    cce:
+      macos_15:
+        - CCE-12345-6
+    800-53r5:
+      - AU-2
+      - AU-12
+    800-171r3:
+      - 03.03.01
+  disa:
+    cci:
+      - CCI-000130
+      - CCI-000131
+    srg:
+      - SRG-OS-000037-GPOS-00015
+    disa_stig:
+      macos_15:
+        - APPL-15-001001
   cis:
     benchmark:
-      - "N/A (Custom)"
-    controls v8:
-      - "N/A"
+      macos_15:
+        - '3.2 (level 2)'
+    controls_v8:
+      - '8.2'
+      - '8.5'
+
+platforms:
+  macOS:
+    '15.0':
+      benchmarks:
+        - name: cis_lvl2
+        - name: disa_stig
+          severity: medium
+    enforcement_info:
+      check:
+        shell: /usr/bin/grep -c "^flags:" /etc/security/audit_control
+        result:
+          integer: 1
+      fix:
+        shell: |
+          /usr/bin/sed -i '' 's/^flags:.*/flags:lo,aa,ad,fd,fm,-all/' /etc/security/audit_control
+          /usr/sbin/audit -s
+
 tags:
-  - custom
-  - physical-security
-  - manual-review
-severity: "medium"
-mobileconfig: false
-mobileconfig_info: {}
+  - cis_lvl2
+  - 800-53r5_moderate
 ```
 
 ## Tips for Writing Rules
 
-<table className="icon-table">
-  <tr><td>🧪</td><td><strong>Test thoroughly</strong> - Run check and fix scripts manually before using in MACE</td></tr>
-  <tr><td>📝</td><td><strong>Document clearly</strong> - Write detailed discussions explaining the "why"</td></tr>
-  <tr><td>🔄</td><td><strong>Make fixes idempotent</strong> - Running the fix twice should be safe</td></tr>
-  <tr><td>🛡️</td><td><strong>Handle errors</strong> - Use <code>2>/dev/null</code> or <code>|| echo "default"</code></td></tr>
-  <tr><td>🏷️</td><td><strong>Tag consistently</strong> - Use meaningful tags for filtering</td></tr>
-</table>
+<div className="best-practices">
+  <div className="practice-item">
+    <span className="practice-item__icon">🧪</span>
+    <div className="practice-item__content">
+      <strong>Test thoroughly</strong>
+      <p>Run check and fix commands manually before adding to MACE.</p>
+    </div>
+  </div>
+  <div className="practice-item">
+    <span className="practice-item__icon">📝</span>
+    <div className="practice-item__content">
+      <strong>Document clearly</strong>
+      <p>Write detailed discussions explaining why the rule matters.</p>
+    </div>
+  </div>
+  <div className="practice-item">
+    <span className="practice-item__icon">🔄</span>
+    <div className="practice-item__content">
+      <strong>Make fixes idempotent</strong>
+      <p>Running the fix multiple times should be safe.</p>
+    </div>
+  </div>
+  <div className="practice-item">
+    <span className="practice-item__icon">🛡️</span>
+    <div className="practice-item__content">
+      <strong>Handle errors</strong>
+      <p>Use <code>2>/dev/null</code> or <code>|| echo "default"</code> for commands that might fail.</p>
+    </div>
+  </div>
+  <div className="practice-item">
+    <span className="practice-item__icon">🏷️</span>
+    <div className="practice-item__content">
+      <strong>Tag consistently</strong>
+      <p>Use meaningful tags for filtering and organization.</p>
+    </div>
+  </div>
+</div>

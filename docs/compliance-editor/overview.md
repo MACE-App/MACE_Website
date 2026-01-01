@@ -6,7 +6,7 @@ sidebar_position: 1
 
 <div className="editor-intro">
   <p className="editor-intro__lead">Your central workspace for managing security rules.</p>
-  <p className="editor-intro__sub">Browse, search, and customize hundreds of compliance rules from mSCP baselines — all in one powerful interface.</p>
+  <p className="editor-intro__sub">Browse, search, and customize hundreds of compliance rules from mSCP baselines all in one powerful interface.</p>
 </div>
 
 <div className="themed-image themed-image--large">

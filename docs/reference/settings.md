@@ -4,69 +4,91 @@ sidebar_position: 1
 
 # Settings
 
-MACE offers various settings to customize your experience.
+<div className="editor-intro">
+  <p className="editor-intro__lead">Customize MACE to fit your workflow.</p>
+  <p className="editor-intro__sub">Configure auto-save, appearance, and manage cached data.</p>
+</div>
 
-## Theme Settings
+<div className="themed-image">
+  <img src="/img/screenshots/settings-light.png" alt="MACE Settings" className="img-light" />
+  <img src="/img/screenshots/settings-dark.png" alt="MACE Settings" className="img-dark" />
+</div>
 
-Choose your preferred appearance:
+Open Settings from the MACE menu bar.
 
-| Theme | Description |
-|-------|-------------|
-| **Light** | Light background with dark text |
-| **Dark** | Dark background with light text |
-| **System** | Follows your macOS appearance setting |
+## General
 
-## App Icons
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">💾</span>
+      <strong>Auto Save</strong>
+    </div>
+    <p>Automatically save changes to compliance baselines as you work. Your progress is saved continuously so you never lose changes.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔄</span>
+      <strong>Remember Settings</strong>
+    </div>
+    <p>Restore preferences for all hubs (Compliance, Audit, Documentation, Build) when you reopen MACE. Remembers window positions, sidebar widths, and filter states.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📥</span>
+      <strong>Auto-Download mSCP Rules</strong>
+    </div>
+    <p>Automatically fetch the latest rules from GitHub on app launch. Enable this to always have the newest mSCP baseline rules without manual updates.</p>
+  </div>
+</div>
 
-MACE includes seasonal and holiday app icons. Change your icon in Settings to add some personality to your dock.
+## Appearance
 
-## Auto-Save
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🎨</span>
+      <strong>Theme</strong>
+    </div>
+    <p>Choose your preferred appearance:</p>
+    <ul>
+      <li><strong>Light</strong> - Light background with dark text</li>
+      <li><strong>System</strong> - Follows your macOS appearance setting</li>
+      <li><strong>Dark</strong> - Dark background with light text</li>
+    </ul>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🎄</span>
+      <strong>Holiday Logo</strong>
+    </div>
+    <p>Show seasonal and holiday-themed logos on the main menu. Adds festive flair to your dock icon throughout the year.</p>
+  </div>
+</div>
 
-Auto-save is enabled by default. Your work is automatically saved as you make changes, so you never lose progress.
+## Advanced
 
-## Display Preferences
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🗑️</span>
+      <strong>Clear Cache</strong>
+    </div>
+    <p>Remove cached rule data to free memory or fix issues. Use this if MACE is running slowly or displaying stale data.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔃</span>
+      <strong>Clear Downloaded Rules</strong>
+    </div>
+    <p>Remove the mSCP rules cache to force a fresh download. Use this to get the latest rules or resolve issues with corrupted downloads.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📂</span>
+      <strong>Open Data Folder</strong>
+    </div>
+    <p>Opens the folder where MACE stores its data. Useful for troubleshooting or backing up your settings.</p>
+  </div>
+</div>
 
-MACE remembers your display preferences:
-
-<table className="icon-table">
-  <tr><td>📐</td><td>Window size and position</td></tr>
-  <tr><td>📏</td><td>Sidebar widths</td></tr>
-  <tr><td>🔤</td><td>Sort preferences</td></tr>
-  <tr><td>🔍</td><td>Filter states</td></tr>
-</table>
-
-## Build Engine
-
-Choose which engine to use for building outputs:
-
-| Engine | Description |
-|--------|-------------|
-| **MACE Engine** | Native Swift implementation with additional options |
-| **mSCP Engine** | Original Python scripts for compatibility |
-
-See the [Overview](../getting-started/overview) for details on engine differences.
-
-## Application Logging
-
-Access the built-in logging console for troubleshooting:
-
-1. Open Settings (`Cmd + ,`)
-2. Navigate to Logging
-3. View recent log entries
-4. Export logs for support requests
-
-## Keyboard Shortcuts
-
-Quick reference for common actions:
-
-| Shortcut | Action |
-|----------|--------|
-| `Cmd + N` | New Project |
-| `Cmd + O` | Open Project |
-| `Cmd + ,` | Settings |
-| `Cmd + F` | Search |
-| `Cmd + B` | Build |
-
-## Language Support
-
-Currently, MACE supports American English only. Additional language support is planned for future releases.

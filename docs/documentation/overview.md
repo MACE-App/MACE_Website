@@ -4,82 +4,229 @@ sidebar_position: 1
 
 # Documentation
 
-MACE generates professional documentation for both your compliance baseline and audit results. Export to multiple formats for different stakeholders and use cases.
+<div className="editor-intro">
+  <p className="editor-intro__lead">Generate professional compliance documentation in PDF or HTML format.</p>
+  <p className="editor-intro__sub">Create guides for auditors, technical teams, or management with customizable content and branding.</p>
+</div>
 
-<div className="themed-image">
+<div className="themed-image themed-image--large">
   <img src="/img/screenshots/documentation-light.png" alt="MACE Documentation" className="img-light" />
   <img src="/img/screenshots/documentation-dark.png" alt="MACE Documentation" className="img-dark" />
 </div>
 
-## Two Types of Documentation
+## What Does Documentation Do?
 
-<table className="icon-table">
-  <tr><td>📘</td><td><strong><a href="./baseline-docs">Baseline Documentation</a></strong> - Document your compliance baseline (rules, settings, rationale)</td></tr>
-  <tr><td>📊</td><td><strong><a href="./audit-reports">Audit Reports</a></strong> - Export audit results (pass/fail, findings, recommendations)</td></tr>
-</table>
+Documentation generates comprehensive guides from your compliance baseline. Instead of manually writing documentation, MACE creates professional documents that include rule details, remediation steps, configuration profiles, and compliance references.
 
-## Available Formats
+<div className="explanation-box">
+  <h4>Documentation vs Build vs Audit</h4>
+  <p><strong>Build</strong> creates deployable files (scripts, profiles, DDM) for your MDM.</p>
+  <p><strong>Audit</strong> checks a Mac's current compliance status.</p>
+  <p><strong>Documentation</strong> creates human-readable guides explaining your compliance requirements.</p>
+</div>
 
-| Format | Baseline Docs | Audit Reports | Best For |
-|--------|:-------------:|:-------------:|----------|
-| **PDF** | Yes | Yes | Formal audits, management presentations |
-| **HTML** | Yes | Yes | Web sharing, interactive review |
-| **CSV** | Yes | Yes | Spreadsheet analysis, data import |
-| **STIG CKL** | - | Yes | DISA compliance, STIG Viewer |
+## Output Formats
 
-## Engine Support
+<div className="output-types-grid">
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📄</span>
+      <h3>PDF</h3>
+    </div>
+    <p>Professional document format. Ideal for sharing with auditors, printing for meetings, or archiving compliance documentation. Supports pagination, page numbers, and clickable table of contents.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">🌐</span>
+      <h3>HTML</h3>
+    </div>
+    <p>Web-based format. Opens in any browser, easy to share via email, and works well for internal team reference. Self-contained single file with all styles embedded.</p>
+  </div>
+</div>
 
-Both engines can generate documentation:
+## Document Types
 
-| Engine | Baseline Docs | Audit Reports |
-|--------|:-------------:|:-------------:|
-| **MACE Engine** | Full support + branding | Full support + branding |
-| **mSCP Engine** | Standard output | Standard output |
+MACE offers three pre-configured document types, each designed for a different audience:
 
-The MACE Engine adds additional customization options like custom logos, colors, and footer text.
+<div className="engine-comparison">
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">📋</span>
+      <h3>Compliance Guide</h3>
+    </div>
+    <p>Full documentation for compliance teams and auditors.</p>
+    <ul>
+      <li>Rule discussions and rationale</li>
+      <li>Fix commands and remediation steps</li>
+      <li>Configuration profiles and DDM info</li>
+      <li>Compliance framework references</li>
+      <li>Section summaries with statistics</li>
+    </ul>
+  </div>
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">🔧</span>
+      <h3>Technical Reference</h3>
+    </div>
+    <p>Implementation-focused for IT administrators.</p>
+    <ul>
+      <li>Check and fix commands</li>
+      <li>Configuration profile payloads</li>
+      <li>DDM declaration details</li>
+      <li>Technical implementation notes</li>
+      <li>Command-focused format</li>
+    </ul>
+  </div>
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">📊</span>
+      <h3>Executive Summary</h3>
+    </div>
+    <p>High-level overview for management.</p>
+    <ul>
+      <li>Compliance scope and coverage</li>
+      <li>Key statistics and metrics</li>
+      <li>Minimal technical details</li>
+      <li>Stakeholder-friendly format</li>
+      <li>Quick overview of requirements</li>
+    </ul>
+  </div>
+</div>
 
-## Quick Start
+## Generating Documentation
 
-### Generate Baseline Documentation
+<div className="build-steps">
+  <div className="build-step">
+    <span className="build-step__number">1</span>
+    <div className="build-step__content">
+      <strong>Open your project</strong>
+      <span>Load a compliance project with your selected baseline and rules</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">2</span>
+    <div className="build-step__content">
+      <strong>Click Documentation</strong>
+      <span>Use the toolbar button to open the Documentation window</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">3</span>
+    <div className="build-step__content">
+      <strong>Select engine</strong>
+      <span>Choose M.A.C.E. Documentation (recommended)</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">4</span>
+    <div className="build-step__content">
+      <strong>Choose document type</strong>
+      <span>Select Compliance Guide, Technical Reference, or Executive Summary</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">5</span>
+    <div className="build-step__content">
+      <strong>Select output format</strong>
+      <span>Choose PDF or HTML</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">6</span>
+    <div className="build-step__content">
+      <strong>Configure options</strong>
+      <span>Customize content, structure, and branding</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">7</span>
+    <div className="build-step__content">
+      <strong>Click Generate</strong>
+      <span>Choose where to save and MACE creates your document</span>
+    </div>
+  </div>
+</div>
 
-1. Open your project
-2. Click **Build**
-3. Select documentation formats (HTML, PDF, CSV)
-4. Configure metadata (author, version, etc.)
-5. Build
+## Documentation Engines
 
-### Generate Audit Reports
+<div className="engine-comparison">
+  <div className="engine-card engine-card--primary">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">⚡</span>
+      <h3>M.A.C.E. Documentation Engine</h3>
+    </div>
+    <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
+    <ul>
+      <li>Professional PDF and HTML output</li>
+      <li>Clickable table of contents</li>
+      <li>Custom branding and colors</li>
+      <li>All content options available</li>
+    </ul>
+  </div>
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">🐍</span>
+      <h3>mSCP Documentation Engine</h3>
+    </div>
+    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
+    <ul>
+      <li><em>(Planned for future release)</em></li>
+    </ul>
+  </div>
+</div>
 
-1. Run an audit
-2. Click **Export**
-3. Select report formats
-4. Configure display options
-5. Export
+## What's in the Document?
 
-## Customization Options
+A generated document includes multiple sections organized for easy reference:
 
-### Metadata
-
-| Field | Description |
-|-------|-------------|
-| **Title** | Document or report title |
-| **Author** | Your name or organization |
-| **Version** | Baseline version number |
-| **Date** | Generation date |
-
-### Display Options
-
-| Option | Description |
-|--------|-------------|
-| **Include Disabled** | Show disabled rules in docs |
-| **Include References** | Add compliance framework citations |
-| **Include Charts** | Add visual statistics (PDF/HTML) |
-| **Show Rule IDs** | Display MACE rule identifiers |
-
-### Branding (MACE Engine)
-
-| Option | Description |
-|--------|-------------|
-| **Custom Logo** | Your organization's logo |
-| **Primary Color** | Accent color (hex value) |
-| **Footer Text** | Custom footer message |
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📖</span>
+      <strong>Cover Page</strong>
+    </div>
+    <p>Document title, compliance framework, version, author, and organization. Sets the professional tone for the document.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📑</span>
+      <strong>Table of Contents</strong>
+    </div>
+    <p>Clickable navigation to all sections. Optional detailed view with numbered sections and all rules listed.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📋</span>
+      <strong>Foreword & Scope</strong>
+    </div>
+    <p>Introduction explaining what platform and compliance framework the document covers.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📊</span>
+      <strong>Section Summaries</strong>
+    </div>
+    <p>Statistics for each section showing total rules, configurable rules, manual rules, and more.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📝</span>
+      <strong>Rule Details</strong>
+    </div>
+    <p>Each rule with its ID, title, discussion, commands, profiles, and references. The core content of the document.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔍</span>
+      <strong>Quick Reference Table</strong>
+    </div>
+    <p>Appendix table listing all rules at a glance for quick lookup.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📚</span>
+      <strong>Glossary & Acronyms</strong>
+    </div>
+    <p>Definitions of technical terms and abbreviations used in the document.</p>
+  </div>
+</div>
