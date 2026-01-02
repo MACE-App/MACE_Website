@@ -4,48 +4,66 @@ sidebar_position: 99
 
 # Community
 
-MACE is free, open source, and built for the Mac admin community.
+<div className="community-hero">
+  <h2><span className="wave">👋</span> Welcome!</h2>
+  <p>MACE is free, open source, and built with <span className="pulse">❤️</span> for Mac admins.</p>
+</div>
 
-## Get Help
+<div className="feedback-callout"><div className="feedback-callout__icon">🌱</div><div className="feedback-callout__content"><strong>Your feedback shapes MACE.</strong> Every suggestion, bug report, and idea helps make MACE better for the entire Mac admin community. This project grows because of you.</div></div>
 
-<table className="icon-table">
-  <tr><td>💬</td><td><strong><a href="https://github.com/mace-app/mace/discussions">GitHub Discussions</a></strong> — Ask questions, share tips, and connect with other users</td></tr>
-  <tr><td>🐛</td><td><strong><a href="https://github.com/mace-app/mace/issues">GitHub Issues</a></strong> — Report bugs or check known issues</td></tr>
-</table>
+<div className="mscp-badge">Built on the <a href="https://github.com/usnistgov/macos_security">macOS Security Compliance Project</a> — the gold standard for macOS compliance from NIST.</div>
 
-## Feature Requests & Feedback
+## Get Involved
 
-Have an idea for MACE? Found something that could work better?
+Your input directly influences what gets built next:
 
-<table className="icon-table">
-  <tr><td>💡</td><td><strong><a href="https://github.com/mace-app/mace/discussions/categories/ideas">Share Ideas</a></strong> — Suggest new features or improvements</td></tr>
-  <tr><td>📝</td><td><strong><a href="https://github.com/mace-app/mace/issues/new">Open an Issue</a></strong> — Detailed bug reports and feature requests</td></tr>
-</table>
+<div className="community-grid community-grid--two">
+  <a href="https://github.com/mace-app/mace/discussions" className="community-card community-card--link">
+    <span className="community-card__icon">💬</span>
+    <div className="community-card__title">Discussions</div>
+    <p className="community-card__desc">Ask questions, share your workflow, and connect with other Mac admins.</p>
+  </a>
+  <a href="https://github.com/mace-app/mace/discussions/categories/ideas" className="community-card community-card--link">
+    <span className="community-card__icon">💡</span>
+    <div className="community-card__title">Feature Ideas</div>
+    <p className="community-card__desc">Suggest and vote on features. Popular requests get prioritized.</p>
+  </a>
+  <a href="https://github.com/mace-app/mace/issues" className="community-card community-card--link">
+    <span className="community-card__icon">🐛</span>
+    <div className="community-card__title">Report Bugs</div>
+    <p className="community-card__desc">Found something broken? Let us know so we can fix it.</p>
+  </a>
+  <a href="https://macadmins.slack.com/archives/C0158JKQTC5" className="community-card community-card--link">
+    <span className="community-card__icon">💼</span>
+    <div className="community-card__title">Mac Admins Slack</div>
+    <p className="community-card__desc">Chat in #macos_security_compliance channel.</p>
+  </a>
+</div>
 
-Feedback from real Mac admins shapes what MACE becomes. Every suggestion is read and considered.
+## Open Source
 
-## Contributing
+<div className="coming-soon-notice"><div className="coming-soon-notice__icon">🔓</div><div className="coming-soon-notice__content"><strong>MACE is open source.</strong> The source code will be made public once mSCP 2.0 leaves beta. Until then, you can still contribute by reporting bugs, suggesting features, and sharing feedback.</div></div>
 
-MACE is open source and contributions are welcome.
+## No Code? No Problem!
 
-<table className="icon-table">
-  <tr><td>🔧</td><td><strong><a href="https://github.com/mace-app/mace">GitHub Repository</a></strong> — View source, fork, and submit pull requests</td></tr>
-  <tr><td>📖</td><td><strong><a href="https://github.com/mace-app/mace#contributing">Contributing Guide</a></strong> — How to get started</td></tr>
-</table>
+You don't need to write code to make a difference:
 
-## About mSCP
+<div className="help-list">
+  <div className="help-item"><span>⭐</span> Star the repo on GitHub</div>
+  <div className="help-item"><span>📢</span> Tell other Mac admins about MACE</div>
+  <div className="help-item"><span>📸</span> Share screenshots of your setup</div>
+  <div className="help-item"><span>✍️</span> Write about your experience</div>
+  <div className="help-item"><span>🎤</span> Mention MACE at meetups or conferences</div>
+</div>
 
-MACE is built on top of the [macOS Security Compliance Project (mSCP)](https://github.com/usnistgov/macos_security), created and maintained by federal government Mac admins at NIST. All the rules, frameworks, and compliance logic come directly from mSCP.
+## Created By
 
-<table className="icon-table">
-  <tr><td>🏛️</td><td><strong><a href="https://github.com/usnistgov/macos_security">mSCP GitHub</a></strong> — The source of all compliance baselines</td></tr>
-  <tr><td>📚</td><td><strong><a href="https://github.com/usnistgov/macos_security/wiki">mSCP Wiki</a></strong> — Documentation and guides</td></tr>
-</table>
+<div className="developer-card"><img src="https://github.com/cocopuff2u.png" alt="Cody Keats" className="developer-card__avatar" /><div className="developer-card__info"><div className="developer-card__name">Cody Keats</div><p className="developer-card__bio">Hey there! I'm a Mac Admin for a Navy fleet and contributor to the mSCP project. You might know me from the <a href="https://github.com/cocopuff2u/mofa">MOFA project</a>. I absolutely love connecting with fellow Mac admins — whether you have questions, ideas, or just want to chat, my door is always open. Seriously, don't be a stranger!</p><div className="developer-card__links"><a href="https://github.com/cocopuff2u" className="developer-link"><span>GitHub</span></a><a href="https://www.linkedin.com/in/cody-keats/" className="developer-link"><span>LinkedIn</span></a><a href="https://macadmins.slack.com/team/U03LXHQKQ3Z" className="developer-link"><span>Slack</span></a><a href="mailto:keats_cody@yahoo.com" className="developer-link"><span>Email</span></a></div></div></div>
 
-## About the Developer
+<div className="community-footer">
+  <p>Every bug report, feature idea, and question makes MACE better.</p>
+  <p><strong>Thank you for being part of this.</strong></p>
+</div>
 
-MACE is developed by a Mac admin who wanted a better way to work with mSCP. What started as a personal tool to avoid bouncing between terminal windows and YAML files became something worth sharing.
+<div style={{textAlign: 'center', margin: '2rem 0'}}><a href="https://github.com/mace-app/mace/discussions" className="community-cta">Join the Community →</a></div>
 
-Built in Swift and SwiftUI. No tracking, no telemetry, no accounts. Just a tool that does what it says.
-
-Questions or feedback? Reach out on [GitHub Discussions](https://github.com/mace-app/mace/discussions).
