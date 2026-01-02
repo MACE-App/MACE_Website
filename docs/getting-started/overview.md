@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn the MACE workflow for managing macOS security compliance from project creation to fleet deployment.
 ---
 
 # Overview

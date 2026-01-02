@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: Create and manage MACE projects containing compliance frameworks, customized rules, and deployment artifacts.
 ---
 
 # Projects
@@ -20,8 +21,8 @@ sidebar_position: 4
     </div>
   </div>
   <div className="themed-image">
-    <img src="/img/screenshots/main-menu-light.png" alt="MACE Main Menu" className="img-light" />
-    <img src="/img/screenshots/main-menu-dark.png" alt="MACE Main Menu" className="img-dark" />
+    <img src="/img/screenshots/main-menu-light.webp" alt="MACE Main Menu" className="img-light" />
+    <img src="/img/screenshots/main-menu-dark.webp" alt="MACE Main Menu" className="img-dark" />
   </div>
 </div>
 
@@ -34,8 +35,8 @@ sidebar_position: 4
     </div>
   </div>
   <div className="themed-image">
-    <img src="/img/screenshots/new-project-step2-light.png" alt="New Compliance Project - Choose Platform and Framework" className="img-light" />
-    <img src="/img/screenshots/new-project-step2-dark.png" alt="New Compliance Project - Choose Platform and Framework" className="img-dark" />
+    <img src="/img/screenshots/new-project-step2-light.webp" alt="New Compliance Project - Choose Platform and Framework" className="img-light" />
+    <img src="/img/screenshots/new-project-step2-dark.webp" alt="New Compliance Project - Choose Platform and Framework" className="img-dark" />
   </div>
 </div>
 
@@ -48,8 +49,8 @@ sidebar_position: 4
     </div>
   </div>
   <div className="themed-image">
-    <img src="/img/screenshots/new-project-step3-light.png" alt="Choose Project Location" className="img-light" />
-    <img src="/img/screenshots/new-project-step3-dark.png" alt="Choose Project Location" className="img-dark" />
+    <img src="/img/screenshots/new-project-step3-light.webp" alt="Choose Project Location" className="img-light" />
+    <img src="/img/screenshots/new-project-step3-dark.webp" alt="Choose Project Location" className="img-dark" />
   </div>
 </div>
 

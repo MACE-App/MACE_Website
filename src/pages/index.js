@@ -325,28 +325,40 @@ function ScreenshotCarousel() {
 
   const screenshots = [
     {
-      light: '/img/screenshots/compliance-editor-light.png',
-      dark: '/img/screenshots/compliance-editor-dark.png',
+      light: '/img/screenshots/main-menu-light.webp',
+      dark: '/img/screenshots/main-menu-dark.webp',
+      title: 'Main Menu',
+      desc: 'Your compliance command center'
+    },
+    {
+      light: '/img/screenshots/compliance-editor-light.webp',
+      dark: '/img/screenshots/compliance-editor-dark.webp',
       title: 'Compliance Editor',
       desc: 'Browse and customize 500+ security rules'
     },
     {
-      light: '/img/screenshots/audit-light.png',
-      dark: '/img/screenshots/audit-dark.png',
+      light: '/img/screenshots/rule-builder-light.webp',
+      dark: '/img/screenshots/rule-builder-dark.webp',
+      title: 'Rule Builder',
+      desc: 'Create custom compliance rules with ease'
+    },
+    {
+      light: '/img/screenshots/audit-light.webp',
+      dark: '/img/screenshots/audit-dark.webp',
       title: 'Audit & Export',
       desc: 'Run audits and generate detailed reports'
     },
     {
-      light: '/img/screenshots/build-light.png',
-      dark: '/img/screenshots/build-dark.png',
+      light: '/img/screenshots/build-light.webp',
+      dark: '/img/screenshots/build-dark.webp',
       title: 'Build Hub',
       desc: 'Generate scripts, profiles, and configurations'
     },
     {
-      light: '/img/screenshots/documentation-light.png',
-      dark: '/img/screenshots/documentation-dark.png',
-      title: 'Documentation Options',
-      desc: 'Export comprehensive compliance documentation'
+      light: '/img/screenshots/documentation-light.webp',
+      dark: '/img/screenshots/documentation-dark.webp',
+      title: 'Documentation',
+      desc: 'Export comprehensive compliance guides'
     },
   ];
 

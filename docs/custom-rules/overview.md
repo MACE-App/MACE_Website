@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Create custom compliance rules using mSCP YAML format that integrate with MACE features.
 ---
 
 # Custom Rules
@@ -53,8 +54,8 @@ sidebar_position: 1
 The Rule Builder Hub provides a guided interface for creating mSCP-compliant security rules.
 
 <div className="themed-image themed-image--large">
-  <img src="/img/screenshots/rule-builder-light.png" alt="Rule Builder Hub" className="img-light" />
-  <img src="/img/screenshots/rule-builder-dark.png" alt="Rule Builder Hub" className="img-dark" />
+  <img src="/img/screenshots/rule-builder-light.webp" alt="Rule Builder Hub" className="img-light" />
+  <img src="/img/screenshots/rule-builder-dark.webp" alt="Rule Builder Hub" className="img-dark" />
 </div>
 
 <div className="build-steps">

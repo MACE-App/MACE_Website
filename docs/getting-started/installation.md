@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Download and install MACE on macOS. Simple drag-and-drop installation with no dependencies required.
 ---
 
 # Installation
@@ -105,8 +106,8 @@ MACE keeps itself up to date so you don't have to.
 </table>
 
 <div className="themed-image">
-  <img src="/img/screenshots/update-light.png" alt="MACE Update Available" className="img-light" />
-  <img src="/img/screenshots/update-dark.png" alt="MACE Update Available" className="img-dark" />
+  <img src="/img/screenshots/update-light.webp" alt="MACE Update Available" className="img-light" />
+  <img src="/img/screenshots/update-dark.webp" alt="MACE Update Available" className="img-dark" />
 </div>
 
 View the full changelog on the [GitHub Releases](https://github.com/mace-app/mace/releases) page.

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Configure documentation content, structure, and format-specific settings for compliance guides.
 ---
 
 # Documentation Options

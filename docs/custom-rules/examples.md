@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Sample custom rules for preference checks, third-party apps, ODV values, and profile-based enforcement.
 ---
 
 # Examples

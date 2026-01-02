@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Generate professional compliance documentation in PDF or HTML format with custom branding.
 ---
 
 # Documentation
@@ -10,8 +11,8 @@ sidebar_position: 1
 </div>
 
 <div className="themed-image themed-image--large">
-  <img src="/img/screenshots/documentation-light.png" alt="MACE Documentation" className="img-light" />
-  <img src="/img/screenshots/documentation-dark.png" alt="MACE Documentation" className="img-dark" />
+  <img src="/img/screenshots/documentation-light.webp" alt="MACE Documentation" className="img-light" />
+  <img src="/img/screenshots/documentation-dark.webp" alt="MACE Documentation" className="img-dark" />
 </div>
 
 ## What Does Documentation Do?

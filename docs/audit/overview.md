@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Run real-time compliance audits on your Mac and identify compliant, non-compliant, and manual review items.
 ---
 
 # Audit
@@ -10,8 +11,8 @@ sidebar_position: 1
 </div>
 
 <div className="themed-image themed-image--large">
-  <img src="/img/screenshots/audit-light.png" alt="MACE Audit" className="img-light" />
-  <img src="/img/screenshots/audit-dark.png" alt="MACE Audit" className="img-dark" />
+  <img src="/img/screenshots/audit-light.webp" alt="MACE Audit" className="img-light" />
+  <img src="/img/screenshots/audit-dark.webp" alt="MACE Audit" className="img-dark" />
 </div>
 
 ## What Does Audit Do?

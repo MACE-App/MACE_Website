@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 slug: /intro
+description: MACE is a native macOS app for managing security compliance baselines. Built on mSCP, it provides a visual interface for Mac admins.
 ---
 
 # Introduction
@@ -14,8 +15,8 @@ I wanted something I could actually *see*. A way to browse rules visually, tweak
 So I built it.
 
 <div class="themed-image">
-  <img src="/img/screenshots/main-menu-light.png" alt="MACE Main Menu" class="img-light" />
-  <img src="/img/screenshots/main-menu-dark.png" alt="MACE Main Menu" class="img-dark" />
+  <img src="/img/screenshots/main-menu-light.webp" alt="MACE Main Menu" class="img-light" />
+  <img src="/img/screenshots/main-menu-dark.webp" alt="MACE Main Menu" class="img-dark" />
 </div>
 
 ## Why MACE?
@@ -44,8 +45,8 @@ MACE handles the entire compliance workflow:
 </table>
 
 <div class="themed-image themed-image--wide">
-  <img src="/img/screenshots/compliance-hub-light.png" alt="MACE Compliance Builder Hub" class="img-light" />
-  <img src="/img/screenshots/compliance-hub-dark.png" alt="MACE Compliance Builder Hub" class="img-dark" />
+  <img src="/img/screenshots/compliance-hub-light.webp" alt="MACE Compliance Builder Hub" class="img-light" />
+  <img src="/img/screenshots/compliance-hub-dark.webp" alt="MACE Compliance Builder Hub" class="img-dark" />
 </div>
 
 All powered by your choice of two engines:

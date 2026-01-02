@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Learn the mSCP YAML schema for custom rules including required and optional fields.
 ---
 
 # Rule Structure

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Analyze audit results, filter by status, and understand what each compliance check found.
 ---
 
 # Audit Results

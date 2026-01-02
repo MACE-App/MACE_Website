@@ -1,41 +1,74 @@
-# Website
+# MACE Documentation Website
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+<p align="center">
+  <img src="static/img/app-icon.png" alt="MACE Logo" width="150" height="150">
+</p>
 
-## Installation
+<p align="center">
+  <strong>Documentation for MACE - macOS Advanced Compliance Editor</strong>
+</p>
 
-```bash
-yarn
+<p align="center">
+  <a href="https://github.com/mace-app/mace">Main App Repository</a> •
+  <a href="https://github.com/mace-app/mace/releases">Download MACE</a> •
+  <a href="https://github.com/mace-app/mace/discussions">Community</a>
+</p>
+
+---
+
+This repository contains the documentation website for [MACE](https://github.com/mace-app/mace), a native macOS application for managing security compliance baselines using the [macOS Security Compliance Project (mSCP)](https://github.com/usnistgov/macos_security).
+
+## What is MACE?
+
+MACE provides a graphical interface to:
+
+- **Browse & Customize** 500+ security compliance rules from NIST, CIS, DISA STIG, and more
+- **Build** configuration profiles, scripts, and DDM declarations
+- **Audit** your Mac against security baselines in real-time
+- **Generate** professional compliance documentation
+
+## Documentation Structure
+
+```
+docs/
+├── getting-started/     # Installation, overview, projects
+├── compliance-editor/   # Rule browsing and customization
+├── build/               # Profile, script, and DDM generation
+├── audit/               # Running audits and exporting results
+├── documentation/       # Generating compliance docs
+├── custom-rules/        # Creating custom YAML rules
+└── reference/           # Settings and configuration
 ```
 
 ## Local Development
 
-```bash
-yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
+This site is built with [Docusaurus](https://docusaurus.io/).
 
 ```bash
-yarn build
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# Build for production
+npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Contributing
 
-## Deployment
+Found an error in the docs? Want to improve something?
 
-Using SSH:
+1. Fork this repository
+2. Create a branch for your changes
+3. Submit a pull request
 
-```bash
-USE_SSH=true yarn deploy
-```
+## Related Links
 
-Not using SSH:
+- [MACE App Repository](https://github.com/mace-app/mace)
+- [macOS Security Compliance Project](https://github.com/usnistgov/macos_security)
+- [NIST SP 800-219](https://csrc.nist.gov/publications/detail/sp/800-219/final)
 
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
+## License
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This documentation is released under the MIT License.

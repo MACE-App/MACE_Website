@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'MACE',
   tagline: 'Build, customize, audit, and deploy macOS security baselines',
-  favicon: 'img/app-icon.png',
+  favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -31,6 +31,66 @@ const config = {
   projectName: 'mace', // Usually your repo name.
 
   onBrokenLinks: 'throw',
+
+  // SEO: Structured data and favicon links
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/img/apple-touch-icon.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/img/favicon-32x32.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/img/favicon-16x16.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'MACE',
+        applicationCategory: 'SecurityApplication',
+        operatingSystem: 'macOS',
+        description: 'macOS Advanced Compliance Editor - A native macOS application for managing security compliance baselines using mSCP.',
+        author: {
+          '@type': 'Person',
+          name: 'Cody Keats',
+        },
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+      }),
+    },
+  ],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -62,7 +122,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/mace-app/mace_website/edit/main/',
         },
         blog: false,
         theme: {
@@ -75,6 +135,15 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // SEO: Meta tags for search engines and social media
+      metadata: [
+        {name: 'keywords', content: 'macOS, security, compliance, STIG, CIS, NIST, mSCP, Mac admin, configuration profiles, MDM, Apple, enterprise'},
+        {name: 'author', content: 'Cody Keats'},
+        {property: 'og:type', content: 'website'},
+        {property: 'og:site_name', content: 'MACE'},
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:creator', content: '@cocopuff2u'},
+      ],
       announcementBar: {
         id: 'alpha_notice',
         content: '🚧 MACE is currently in alpha. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.0.10-Alpha</a>',
@@ -82,7 +151,8 @@ const config = {
         textColor: '#ffffff',
         isCloseable: true,
       },
-      image: 'img/app-icon.png',
+      // Social card image for sharing (1200x630)
+      image: 'img/social-card.png',
       colorMode: {
         respectPrefersColorScheme: true,
       },

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 99
+description: Join the MACE community to share feedback, report bugs, suggest features, and connect with Mac admins.
 ---
 
 # Community

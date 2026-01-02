@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Export audit reports to PDF, HTML, CSV, or DISA STIG CKL format for documentation and auditors.
 ---
 
 # Exporting Reports

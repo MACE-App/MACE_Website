@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Create shell scripts for compliance auditing and remediation that deploy via MDM.
 ---
 
 # Scripts

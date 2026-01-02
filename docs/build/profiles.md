@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Build mobileconfig profiles that enforce macOS security settings through MDM.
 ---
 
 # Configuration Profiles

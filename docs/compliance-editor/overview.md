@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Browse, search, and customize hundreds of mSCP compliance rules in MACE's central editor interface.
 ---
 
 # Compliance Editor
@@ -10,8 +11,8 @@ sidebar_position: 1
 </div>
 
 <div className="themed-image themed-image--large">
-  <img src="/img/screenshots/compliance-editor-light.png" alt="MACE Compliance Editor" className="img-light" />
-  <img src="/img/screenshots/compliance-editor-dark.png" alt="MACE Compliance Editor" className="img-dark" />
+  <img src="/img/screenshots/compliance-editor-light.webp" alt="MACE Compliance Editor" className="img-light" />
+  <img src="/img/screenshots/compliance-editor-dark.webp" alt="MACE Compliance Editor" className="img-dark" />
 </div>
 
 ## Interface Layout
@@ -160,8 +161,8 @@ The top toolbar provides quick access to key actions.
 MACE checks your project's rules against the latest mSCP rules from GitHub and notifies you when updates are available. Your custom modifications are always preserved.
 
 <div className="themed-image">
-  <img src="/img/screenshots/rule-updates-light.png" alt="Rule Updates Available" className="img-light" />
-  <img src="/img/screenshots/rule-updates-dark.png" alt="Rule Updates Available" className="img-dark" />
+  <img src="/img/screenshots/rule-updates-light.webp" alt="Rule Updates Available" className="img-light" />
+  <img src="/img/screenshots/rule-updates-dark.webp" alt="Rule Updates Available" className="img-dark" />
 </div>
 
 <table className="icon-table">

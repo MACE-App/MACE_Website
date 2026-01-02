@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Customize compliance rules by adjusting ODV values, excluding rules, and tailoring baselines to your organization.
 ---
 
 # Customizing Rules
@@ -437,4 +438,4 @@ references:
 
 ## Creating New Rules
 
-Need to create entirely new rules that don't exist in any baseline? See [Custom Rules](/docs/custom-rules/overview) for creating your own rules from scratch using the mSCP YAML format.
+Need to create entirely new rules that don't exist in any baseline? See [Custom Rules](../custom-rules/overview) for creating your own rules from scratch using the mSCP YAML format.

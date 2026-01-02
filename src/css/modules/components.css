@@ -1,0 +1,272 @@
+/* ========================================
+   Status Badge Colors
+   ======================================== */
+
+.badge--pass {
+  background-color: var(--mace-accent-green);
+  color: white;
+}
+
+.badge--fail {
+  background-color: var(--mace-accent-red);
+  color: white;
+}
+
+.badge--warning {
+  background-color: var(--mace-accent-orange);
+  color: white;
+}
+
+.badge--manual {
+  background-color: var(--mace-accent-yellow);
+  color: #1D1D1F;
+}
+
+/* ========================================
+   Image Placeholders
+   ======================================== */
+
+.placeholder-image {
+  background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--mace-card-border) 100%);
+  border: 2px dashed var(--mace-card-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--ifm-font-color-secondary);
+  font-style: italic;
+}
+
+[data-theme='dark'] .placeholder-image {
+  background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
+}
+
+/* ========================================
+   Screenshot Cards
+   ======================================== */
+
+.screenshot-card {
+  background: var(--mace-card-bg);
+  border: 1px solid var(--mace-card-border);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--mace-shadow-sm);
+  overflow: hidden;
+}
+
+.screenshot-card img {
+  border-radius: 8px;
+  width: 100%;
+  display: block;
+}
+
+.screenshot-card p {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   Feature Cards (Homepage)
+   ======================================== */
+
+.feature-card {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.feature-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ========================================
+   Responsive Adjustments
+   ======================================== */
+
+@media (max-width: 996px) {
+  .hero--primary {
+    padding: 3rem 1rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ========================================
+   Smooth Scrolling
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   Selection Colors
+   ======================================== */
+
+::selection {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+[data-theme='dark'] ::selection {
+  background: var(--ifm-color-primary-light);
+}
+
+/* ========================================
+   Platform Badges
+   ======================================== */
+
+.platform-badge {
+  display: inline-block;
+  background: var(--ifm-color-primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.25rem;
+}
+
+[data-theme='dark'] .platform-badge {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* ========================================
+   Icon Tables (workflow, links)
+   ======================================== */
+
+.icon-table,
+.markdown table.icon-table {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-collapse: collapse;
+}
+
+.icon-table tr,
+.icon-table td,
+.icon-table th {
+  border: none !important;
+  background: transparent !important;
+}
+
+.icon-table td:first-child {
+  width: 40px;
+  text-align: center;
+  font-size: 1.25rem;
+  vertical-align: middle;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.icon-table td:last-child {
+  padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.icon-table tr:hover td {
+  background: transparent !important;
+}
+
+/* ========================================
+   Themed Images (Light/Dark Mode)
+   ======================================== */
+
+/* Container for themed screenshots */
+.themed-image {
+  max-width: 500px;
+  margin: 1.5rem auto;
+}
+
+.themed-image--wide {
+  max-width: 700px;
+}
+
+.themed-image--large {
+  max-width: 100%;
+}
+
+.themed-image img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Light mode - show light, hide dark */
+html:not([data-theme='dark']) .img-dark {
+  display: none !important;
+}
+
+html:not([data-theme='dark']) .img-light {
+  display: block;
+}
+
+/* Dark mode - show dark, hide light */
+html[data-theme='dark'] .img-light {
+  display: none !important;
+}
+
+html[data-theme='dark'] .img-dark {
+  display: block;
+}
+
+/* ========================================
+   Announcement Bar
+   ======================================== */
+
+html:not([data-theme='dark']) div[class*='announcementBar'] {
+  background-color: #007AFF !important;
+  color: #ffffff !important;
+}
+
+html:not([data-theme='dark']) div[class*='announcementBar'] a {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+html[data-theme='dark'] div[class*='announcementBar'] {
+  background-color: #004999 !important;
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] div[class*='announcementBar'] a {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ========================================
+   Docusaurus Overrides
+   ======================================== */
+
+.markdown h1:first-child {
+  font-size: 2.5rem;
+}
+
+.markdown h2 {
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--mace-card-border);
+}
+
+.markdown h2:first-of-type {
+  border-top: none;
+  margin-top: 1rem;
+}
+
+/* Better link styling */
+.markdown a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.markdown a:hover {
+  border-bottom-color: var(--ifm-color-primary);
+}
+

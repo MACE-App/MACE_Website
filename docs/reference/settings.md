@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Configure MACE settings including auto-save, appearance, theme, and cache management.
 ---
 
 # Settings
@@ -10,8 +11,8 @@ sidebar_position: 1
 </div>
 
 <div className="themed-image">
-  <img src="/img/screenshots/settings-light.png" alt="MACE Settings" className="img-light" />
-  <img src="/img/screenshots/settings-dark.png" alt="MACE Settings" className="img-dark" />
+  <img src="/img/screenshots/settings-light.webp" alt="MACE Settings" className="img-light" />
+  <img src="/img/screenshots/settings-dark.webp" alt="MACE Settings" className="img-dark" />
 </div>
 
 Open Settings from the MACE menu bar.

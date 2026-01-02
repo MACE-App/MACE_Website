@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: Generate Declarative Device Management declarations for Apple's modern autonomous device management.
 ---
 
 # Declarative Device Management (DDM)

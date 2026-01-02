@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Generate deployment-ready compliance artifacts including scripts, configuration profiles, and DDM declarations.
 ---
 
 # Build
@@ -10,8 +11,8 @@ sidebar_position: 1
 </div>
 
 <div className="themed-image themed-image--large">
-  <img src="/img/screenshots/build-light.png" alt="MACE Build" className="img-light" />
-  <img src="/img/screenshots/build-dark.png" alt="MACE Build" className="img-dark" />
+  <img src="/img/screenshots/build-light.webp" alt="MACE Build" className="img-light" />
+  <img src="/img/screenshots/build-dark.webp" alt="MACE Build" className="img-dark" />
 </div>
 
 ## What Does Build Do?
