@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://mace-app.example.com/sitemap.xml
+Sitemap: https://getmace.com/sitemap.xml
