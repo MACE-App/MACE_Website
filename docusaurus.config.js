@@ -150,7 +150,7 @@ const config = {
       ],
       announcementBar: {
         id: 'alpha_notice',
-        content: '🚧 MACE is currently in alpha. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.0.17-Alpha</a>',
+        content: '🚧 MACE is currently in alpha. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.0.22-Alpha</a>',
         backgroundColor: '#007AFF',
         textColor: '#ffffff',
         isCloseable: true,
