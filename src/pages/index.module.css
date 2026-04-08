@@ -190,7 +190,7 @@
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-200);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -203,6 +203,7 @@
   right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-light));
+  border-radius: 20px 20px 0 0;
   transform: scaleX(0);
   transition: transform 0.4s ease;
 }
