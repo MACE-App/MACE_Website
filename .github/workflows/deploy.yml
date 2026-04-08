@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_run:
-    workflows: ["Update Latest Release Version"]
-    types:
-      - completed
+  workflow_dispatch: # Allow manual or programmatic trigger
 
 permissions:
   contents: read

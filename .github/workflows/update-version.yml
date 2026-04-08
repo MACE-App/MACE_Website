@@ -42,3 +42,10 @@ jobs:
           git add docusaurus.config.js
           git commit -m "Update latest release version to ${{ steps.release.outputs.tag }}"
           git push
+
+      - name: Trigger deploy
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          gh workflow run deploy.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
