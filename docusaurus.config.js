@@ -30,10 +30,6 @@ const config = {
   organizationName: 'mace-app', // Usually your GitHub org/user name.
   projectName: 'mace', // Usually your repo name.
 
-  clientModules: [
-    './src/clientModules/announcementBarUpdater.js',
-  ],
-
   onBrokenLinks: 'throw',
 
   // SEO: Structured data and favicon links
