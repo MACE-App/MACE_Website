@@ -1,18 +1,18 @@
 ---
 sidebar_position: 3
-description: Export audit reports to PDF, HTML, CSV, or DISA STIG CKL format for documentation and auditors.
+description: Export audit reports to PDF, HTML, XLSX, CSV, or DISA STIG CKL format for documentation and auditors.
 ---
 
 # Exporting Reports
 
 <div className="editor-intro">
-  <p className="editor-intro__lead">Export audit results to PDF, HTML, CSV, or DISA STIG CKL format.</p>
+  <p className="editor-intro__lead">Export audit results to PDF, HTML, XLSX, CSV, or DISA STIG CKL format.</p>
   <p className="editor-intro__sub">Generate professional reports for auditors, documentation, and compliance tracking.</p>
 </div>
 
 ## Export Formats
 
-MACE can export audit results in four formats:
+MACE can export audit results in five formats:
 
 <div className="output-types-grid">
   <div className="output-type-card">
@@ -38,6 +38,13 @@ MACE can export audit results in four formats:
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
+      <span className="output-type-card__icon">📋</span>
+      <h3>XLSX</h3>
+    </div>
+    <p>Excel spreadsheet with formatted table, auto-filters, and frozen header row. Ideal for compliance teams who need to sort, filter, and analyze results in a spreadsheet.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
       <span className="output-type-card__icon">🛡️</span>
       <h3>STIG CKL</h3>
     </div>
@@ -51,6 +58,7 @@ MACE can export audit results in four formats:
   <tr><td>📄</td><td><strong>PDF</strong></td><td>Share with auditors or management</td></tr>
   <tr><td>🌐</td><td><strong>HTML</strong></td><td>Review results in a browser</td></tr>
   <tr><td>📊</td><td><strong>CSV</strong></td><td>Analyze data in Excel or Google Sheets</td></tr>
+  <tr><td>📋</td><td><strong>XLSX</strong></td><td>Pre-formatted Excel file with filters and frozen headers</td></tr>
   <tr><td>🛡️</td><td><strong>STIG CKL</strong></td><td>Submit for DoD compliance</td></tr>
 </table>
 
@@ -188,6 +196,13 @@ Before exporting, you can configure what to include in your report:
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
+      <span className="build-option-item__icon">🚩</span>
+      <strong>Include Flagged for Review (Default: OFF)</strong>
+    </div>
+    <p>Includes results you've flagged for follow-up, along with any review comments you added. Useful for tracking items that need further investigation or stakeholder sign-off before final reporting.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
       <span className="build-option-item__icon">✍️</span>
       <strong>Include Signature Section (Default: OFF)</strong>
     </div>
@@ -303,6 +318,36 @@ The CSV format allows you to:
 - Apply your own filtering and sorting
 - Generate charts and graphs
 - Combine with other data sources
+
+## XLSX Export
+
+The XLSX export creates a formatted Excel spreadsheet ready to open in Microsoft Excel or Numbers.
+
+### What's in the File
+
+- **Formatted table** with styled header row
+- **Auto-filters** on every column for quick sorting and filtering
+- **Frozen header row** so column names stay visible as you scroll
+- **One row per rule** with status, rule ID, title, section, expected/actual output, and comments
+- **Status color coding** to visually distinguish pass, fail, and other statuses
+
+### How to Export XLSX
+
+1. Complete your audit
+2. Click **Export** in the results toolbar
+3. Select **XLSX**
+4. Configure export options
+5. Choose save location
+6. Click **Export**
+
+### Opening the File
+
+Open the exported `.xlsx` file in:
+- **Microsoft Excel**: Double-click or use File → Open
+- **Numbers**: File → Open → Select the file
+- **Google Sheets**: File → Import → Upload the file
+
+XLSX is more structured than CSV — filters, column widths, and formatting are already set up when you open it.
 
 ## STIG CKL Export
 

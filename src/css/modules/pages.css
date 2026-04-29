@@ -243,142 +243,139 @@
    Overview Page - Workflow Diagram
    ======================================== */
 
-.workflow-container {
-  margin: 1rem 0;
-  padding: 1rem;
-  background: var(--ifm-background-surface-color);
-  border-radius: 16px;
+/* ========================================
+   MACE Workflow (Overview Page)
+   ======================================== */
+
+.mace-workflow {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mace-workflow__phase {
+  background: var(--mace-card-bg);
   border: 1px solid var(--mace-card-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
 }
 
-.workflow-section {
-  position: relative;
-}
-
-.workflow-phase-label {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
+.mace-workflow__phase-badge {
+  display: inline-block;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ifm-font-color-secondary);
-  width: 60px;
-  text-align: center;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.75rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
 }
 
-.workflow-cards {
+.mace-workflow__phase-badge--setup {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+.mace-workflow__phase-badge--test {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.mace-workflow__phase-badge--deploy {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.mace-workflow__steps {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  padding-left: 40px;
   flex-wrap: wrap;
 }
 
-.workflow-cards--center {
+.mace-workflow__steps--center {
   justify-content: center;
 }
 
-.workflow-card {
-  background: var(--mace-card-bg);
+.mace-workflow__step {
+  flex: 1;
+  min-width: 110px;
+  background: var(--ifm-background-surface-color);
   border: 1px solid var(--mace-card-border);
   border-radius: 10px;
-  padding: 0.75rem 1rem;
-  min-width: 120px;
+  padding: 0.85rem 1rem;
   text-align: center;
-  box-shadow: var(--mace-shadow-sm);
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.workflow-card:hover {
+.mace-workflow__step:hover {
   transform: translateY(-2px);
   box-shadow: var(--mace-shadow-md);
 }
 
-.workflow-card--highlight {
-  border-color: var(--ifm-color-primary);
-  border-width: 2px;
-}
-
-.workflow-card--final {
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+.mace-workflow__step--final {
+  flex: 0 1 260px;
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
   border: none;
   color: white;
-  min-width: 160px;
 }
 
-.workflow-card--final .workflow-card__title,
-.workflow-card--final .workflow-card__desc {
+.mace-workflow__step--final .mace-workflow__step-title,
+.mace-workflow__step--final .mace-workflow__step-desc {
   color: white;
 }
 
-.workflow-card--final .workflow-card__desc {
-  opacity: 0.9;
+.mace-workflow__step--final .mace-workflow__step-desc {
+  opacity: 0.85;
 }
 
-.workflow-card__icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.35rem;
+.mace-workflow__step-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
 }
 
-.workflow-card__title {
+.mace-workflow__step-title {
   font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 0.15rem;
+  font-size: 0.82rem;
+  margin-bottom: 0.2rem;
+  color: var(--ifm-font-color-base);
 }
 
-.workflow-card__desc {
+.mace-workflow__step-desc {
   font-size: 0.7rem;
   color: var(--ifm-font-color-secondary);
+  line-height: 1.4;
 }
 
-.workflow-arrow {
+.mace-workflow__connector {
   color: var(--ifm-color-primary);
-  font-size: 1.25rem;
-  font-weight: bold;
-  opacity: 0.5;
+  font-size: 1.1rem;
+  opacity: 0.4;
+  flex-shrink: 0;
 }
 
-.workflow-connector-vertical {
-  display: flex;
-  justify-content: center;
-  padding: 0.25rem 0;
-  padding-left: 40px;
-}
-
-.workflow-connector-vertical span {
+.mace-workflow__divider {
+  text-align: center;
   color: var(--ifm-color-primary);
-  font-size: 1.25rem;
-  font-weight: bold;
-  opacity: 0.5;
+  font-size: 1.1rem;
+  opacity: 0.4;
+  padding: 0.35rem 0;
 }
 
-/* Mobile adjustments for workflow */
 @media (max-width: 768px) {
-  .workflow-phase-label {
-    position: static;
-    transform: none;
-    margin-bottom: 0.75rem;
-    text-align: left;
-    padding-left: 1rem;
-  }
-
-  .workflow-cards {
-    padding-left: 0;
+  .mace-workflow__steps {
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: stretch;
   }
 
-  .workflow-arrow--horizontal {
+  .mace-workflow__connector {
     transform: rotate(90deg);
-    padding: 0.25rem 0;
+    align-self: center;
   }
 
-  .workflow-connector-vertical {
-    padding-left: 0;
+  .mace-workflow__step--final {
+    flex: 1;
   }
 }
 
@@ -504,6 +501,95 @@
 }
 
 /* ========================================
+   Overview Page - Data Source Grid
+   ======================================== */
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.source-card {
+  background: var(--mace-card-bg);
+  border: 1px solid var(--mace-card-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.source-card__label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  color: var(--ifm-color-primary);
+}
+
+.source-card__desc {
+  font-size: 0.82rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.4;
+}
+
+/* ========================================
+   Overview Page - How It Works Steps
+   ======================================== */
+
+.how-it-works-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1rem 0 1.5rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.how-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--mace-card-border);
+}
+
+.how-step:last-child {
+  border-bottom: none;
+}
+
+.how-step__number {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+
+.how-step__content {
+  flex: 1;
+}
+
+.how-step__content strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.how-step__content p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.5;
+}
+
+/* ========================================
    Overview Page - Engine Comparison
    ======================================== */
 
@@ -557,6 +643,35 @@
 
 .engine-card__icon {
   font-size: 1.75rem;
+}
+
+.engine-card__icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.engine-card__badge {
+  display: inline-block;
+  background: #FF9500;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.engine-card__tag {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--ifm-color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .engine-card__header h3 {
@@ -3265,7 +3380,7 @@
 }
 
 .engine-card--primary::before {
-  content: 'Active';
+  content: 'Recommended';
   position: absolute;
   top: -10px;
   right: 16px;
@@ -3314,6 +3429,14 @@
 
 .engine-card li em {
   color: var(--ifm-font-color-secondary);
+}
+
+.engine-card__tag {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--ifm-color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

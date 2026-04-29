@@ -43,6 +43,20 @@ Documentation generates comprehensive guides from your compliance baseline. Inst
     </div>
     <p>Web-based format. Opens in any browser, easy to share via email, and works well for internal team reference. Self-contained single file with all styles embedded.</p>
   </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📊</span>
+      <h3>XLSX</h3>
+    </div>
+    <p>Excel spreadsheet with auto-filters, formatted table, and frozen panes. Best for compliance teams who need to sort, filter, and work with rule data in a spreadsheet.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📝</span>
+      <h3>Markdown</h3>
+    </div>
+    <p>Lightweight text format that renders on GitHub, wikis, and most editors. Best for version-controlled documentation or internal knowledge bases.</p>
+  </div>
 </div>
 
 ## Document Types
@@ -151,28 +165,32 @@ MACE offers three pre-configured document types, each designed for a different a
 ## Documentation Engines
 
 <div className="engine-comparison">
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <h3>mSCP Documentation Engine <span className="engine-card__badge">Beta</span></h3>
+    </div>
+    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
+    <ul>
+      <li>Standard mSCP output formats</li>
+      <li>Python-based execution</li>
+      <li>Full mSCP compatibility</li>
+    </ul>
+    <span className="engine-card__tag">Official Scripts</span>
+  </div>
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <span className="engine-card__icon">⚡</span>
+      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
       <h3>M.A.C.E. Documentation Engine</h3>
     </div>
     <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
     <ul>
-      <li>Professional PDF and HTML output</li>
+      <li>PDF, HTML, XLSX, and Markdown output</li>
       <li>Clickable table of contents</li>
       <li>Custom branding and colors</li>
       <li>All content options available</li>
     </ul>
-  </div>
-  <div className="engine-card">
-    <div className="engine-card__header">
-      <span className="engine-card__icon">🐍</span>
-      <h3>mSCP Documentation Engine</h3>
-    </div>
-    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
-    <ul>
-      <li><em>(Planned for future release)</em></li>
-    </ul>
+    <span className="engine-card__tag">Fast &amp; Customizable</span>
   </div>
 </div>
 

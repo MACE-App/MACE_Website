@@ -51,7 +51,7 @@ description: Create custom compliance rules using mSCP YAML format that integrat
 
 ## Rule Builder Hub
 
-The Rule Builder Hub provides a guided interface for creating mSCP-compliant security rules.
+The Rule Builder Hub provides a guided interface for creating and editing mSCP-compliant security rules. You can open it to create a new rule from scratch, or open an existing custom rule YAML file to edit it.
 
 <div className="themed-image themed-image--large">
   <img src="/img/screenshots/rule-builder-light.webp" alt="Rule Builder Hub" className="img-light" />
@@ -63,7 +63,7 @@ The Rule Builder Hub provides a guided interface for creating mSCP-compliant sec
     <span className="build-step__number">1</span>
     <div className="build-step__content">
       <strong>Open Rule Builder Hub</strong>
-      <span>Click the + button in the Compliance Editor toolbar</span>
+      <span>Click the + button in the Compliance Editor toolbar to create a new rule, or right-click an existing custom rule and choose Edit to modify it</span>
     </div>
   </div>
   <div className="build-step">
@@ -76,15 +76,22 @@ The Rule Builder Hub provides a guided interface for creating mSCP-compliant sec
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
-      <strong>Select Platforms & Benchmarks</strong>
-      <span>Choose macOS versions and compliance benchmarks</span>
+      <strong>Select Platforms, Benchmarks & Tags</strong>
+      <span>Choose target platforms (macOS, iOS/iPadOS, visionOS), versions, compliance benchmarks, and framework tags</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">4</span>
     <div className="build-step__content">
+      <strong>Configure Check & Fix Commands</strong>
+      <span>Use a script template or write your own check and remediation commands</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">5</span>
+    <div className="build-step__content">
       <strong>Save your rule</strong>
-      <span>Click Save Rule to add it to your project</span>
+      <span>Click Save Rule to add it to your project's custom/rules/ folder</span>
     </div>
   </div>
 </div>
@@ -104,7 +111,21 @@ The Rule Builder Hub provides a guided interface for creating mSCP-compliant sec
       <span className="build-option-item__icon">💻</span>
       <strong>Platform & Benchmarks</strong>
     </div>
-    <p>Select target platforms (macOS, iOS/iPadOS), versions (26.0, 15.0, 14.0), and compliance benchmarks (CIS Level 1, CIS Level 2, DISA STIG). References are auto-generated based on your selections.</p>
+    <p>Select target platforms (macOS, iOS/iPadOS, visionOS), versions (macOS 26.0, 15.0, 14.0), and compliance benchmarks. macOS supports CIS Level 1, CIS Level 2, and DISA STIG. iOS supports CIS BYOD/Enterprise levels, iOS STIG, and INDIGO. visionOS supports the visionOS STIG. References are auto-generated based on your selections.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🏷️</span>
+      <strong>Tags</strong>
+    </div>
+    <p>Tag your rule with compliance framework identifiers so it appears in the right baseline filters. Available tag groups include NIST 800-53r5 (Low/Moderate/High/Privacy), NIST 800-171, CIS Controls v8, CNSSI-1253, CMMC Level 1 and 2, NLMAPGOV, and special tags like manual, inherent, and permanent.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📜</span>
+      <strong>Check Script Templates</strong>
+    </div>
+    <p>Starter templates for common check patterns: <code>defaults read</code>, <code>osascript</code>, <code>grep/awk</code>, and <code>pwpolicy</code>. Selecting a template fills in a working example you can adapt for your rule.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">

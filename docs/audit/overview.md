@@ -139,7 +139,7 @@ If the output was "Log mode is off", the result would be **Fail**.
 
 ## Privileged Helper
 
-Some compliance checks need administrator access to read protected system settings. MACE includes a helper tool that runs these checks securely.
+Some compliance checks need administrator access to read protected system settings. MACE includes a privileged helper tool that runs these checks securely.
 
 <div className="build-option-detail">
   <div className="build-option-item">
@@ -147,21 +147,14 @@ Some compliance checks need administrator access to read protected system settin
       <span className="build-option-item__icon">🔐</span>
       <strong>Why Admin Access?</strong>
     </div>
-    <p>Certain security settings can only be read with admin privileges. For example, checking FileVault status or reading protected system preferences.</p>
+    <p>Certain security settings can only be read with root privileges — for example, checking FileVault status or reading protected system preferences. The helper tool enables these checks without running the entire app as root.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📦</span>
-      <strong>Install Permanently</strong>
+      <strong>One-Time Approval</strong>
     </div>
-    <p>Installs the helper so it's always available for future audits. You'll still see a warning before each audit runs, but you won't need to enter your password again.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">⏱️</span>
-      <strong>Install for This Session</strong>
-    </div>
-    <p>Installs the helper temporarily. It automatically removes itself when MACE closes. Good if you only need to run a one-time audit.</p>
+    <p>On the first audit you run, macOS prompts you to approve the helper tool. This is a standard macOS security prompt for privileged tools. Once approved, the helper is available for all future audits and you won't be prompted again.</p>
   </div>
 </div>
 
@@ -240,9 +233,22 @@ Some compliance checks need administrator access to read protected system settin
 ## Audit Engines
 
 <div className="engine-comparison">
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <h3>mSCP Audit Engine <span className="engine-card__badge">Coming Soon</span></h3>
+    </div>
+    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
+    <ul>
+      <li>Standard mSCP audit output</li>
+      <li>Python-based execution</li>
+      <li>Full mSCP compatibility</li>
+    </ul>
+    <span className="engine-card__tag">Official Scripts</span>
+  </div>
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <span className="engine-card__icon">⚡</span>
+      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
       <h3>M.A.C.E. Audit Engine</h3>
     </div>
     <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
@@ -252,16 +258,7 @@ Some compliance checks need administrator access to read protected system settin
       <li>Override results and add comments</li>
       <li>Supports all customizations</li>
     </ul>
-  </div>
-  <div className="engine-card">
-    <div className="engine-card__header">
-      <span className="engine-card__icon">🐍</span>
-      <h3>mSCP Audit Engine</h3>
-    </div>
-    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
-    <ul>
-      <li><em>(Planned for future release)</em></li>
-    </ul>
+    <span className="engine-card__tag">Fast &amp; Customizable</span>
   </div>
 </div>
 

@@ -74,7 +74,7 @@ Control what sections appear in your document.
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📋</span>
-      <strong>Detailed Table of Contents (Default: OFF)</strong>
+      <strong>Detailed Table of Contents (Default: ON)</strong>
     </div>
     <p>Expand the table of contents to show numbered sections with every rule listed. Follows mSCP guidance style. More comprehensive but longer.</p>
   </div>
@@ -88,30 +88,37 @@ Control what sections appear in your document.
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔍</span>
-      <strong>Quick Reference (Default: OFF)</strong>
+      <strong>Quick Reference (Default: ON)</strong>
     </div>
     <p>Add an appendix table with all rules listed for quick lookup. Useful for finding specific rules without reading through the full document.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📚</span>
-      <strong>Acronyms & Glossary (Default: OFF)</strong>
+      <strong>Acronyms & Glossary (Default: ON)</strong>
     </div>
     <p>Include a section defining technical terms and abbreviations used in the document. Helpful for readers unfamiliar with compliance terminology.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📄</span>
-      <strong>Applicable Documents (Default: OFF)</strong>
+      <strong>Applicable Documents (Default: ON)</strong>
     </div>
     <p>List related compliance standards and reference documents. Shows what frameworks and publications the baseline is based on.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">👥</span>
-      <strong>mSCP Authors (Default: OFF)</strong>
+      <strong>mSCP Authors (Default: ON)</strong>
     </div>
     <p>Include information about the original mSCP project contributors. Gives credit to the community that created the baseline rules.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔤</span>
+      <strong>Alphabetical Order (Default: OFF)</strong>
+    </div>
+    <p>Sort rules alphabetically A-Z within each section. By default, rules appear in their original mSCP order.</p>
   </div>
 </div>
 
@@ -193,16 +200,16 @@ These options only apply when generating PDF documents.
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🦶</span>
-      <strong>Page Footer (Default: OFF)</strong>
+      <strong>Page Footer (Default: ON)</strong>
     </div>
     <p>Add a footer to each page showing the document name and generation date. Helps identify printed pages.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">#️⃣</span>
-      <strong>Page Numbers (Default: OFF)</strong>
+      <strong>Page Numbers (Default: ON)</strong>
     </div>
-    <p>Add page numbers in "Page X of Y" format. Requires pagination to be enabled. Useful for printed documents.</p>
+    <p>Add page numbers in "Page X of Y" format. Useful for printed documents and auditor reviews.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -211,12 +218,33 @@ These options only apply when generating PDF documents.
     </div>
     <p>Put each rule on its own page. Makes it easier to reference specific rules when printed, but creates a longer document.</p>
   </div>
+</div>
+
+## Rule Status Options
+
+Control how rules with special status are handled in the document. These options appear as tabs — Disabled, Added, and Review — and are most relevant when you've customized which rules are included in your baseline.
+
+<div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">🖨️</span>
-      <strong>Pagination for Printing (Default: OFF)</strong>
+      <span className="build-option-item__icon">🚫</span>
+      <strong>Disabled Rules</strong>
     </div>
-    <p>Format the PDF for US Letter paper with automatic page breaks. When off, creates a continuous single-page document (better for digital viewing).</p>
+    <p>Rules you've turned off in the Compliance Editor. By default, disabled rules are excluded from documentation. You can include them with options to show why they were disabled and optionally group them in their own section.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">➕</span>
+      <strong>Added Rules</strong>
+    </div>
+    <p>Rules you manually added to your baseline that aren't part of the default compliance selection. You can show an "added" indicator on these rules, include your justification for adding them, and group them in their own section.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🚩</span>
+      <strong>Flagged for Review</strong>
+    </div>
+    <p>Rules you've flagged in the Compliance Editor as needing review. You can show a flag indicator on these rules, include your review comments, and group them in their own section. Options only appear if you have flagged rules in your project.</p>
   </div>
 </div>
 

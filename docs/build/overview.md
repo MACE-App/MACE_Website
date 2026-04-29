@@ -214,6 +214,20 @@ When you click Build, MACE processes your rules through these phases:
     <p><strong>Combined:</strong> One script containing all rules. Easier to manage and run everything at once.<br/>
     <strong>Individual:</strong> Separate script per rule. Useful when you need to deploy specific checks to your MDM.</p>
   </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📡</span>
+      <strong>Offline Script Mode</strong>
+    </div>
+    <p>Generates an installer package that drops a <strong>LaunchDaemon</strong> and your compliance script onto the Mac. The script then runs automatically on a schedule you configure — no MDM check-in required for each run.</p>
+    <p><strong>When to use:</strong> Devices that aren't always online, environments where you want continuous compliance without waiting for MDM check-ins, or when you want to ship one installer and have it self-maintain.</p>
+    <p><strong>What gets generated:</strong> An installer script, an uninstaller script, and a suppression profile. Push the installer once from your MDM; the daemon handles future runs independently.</p>
+    <div className="explanation-box">
+      <h4>Standard vs Offline Script</h4>
+      <p><strong>Standard scripts</strong> run when your MDM triggers them. Each execution depends on a policy or check-in.</p>
+      <p><strong>Offline Script</strong> installs a LaunchDaemon. The Mac runs the script on your chosen interval whether or not it's online or has checked in.</p>
+    </div>
+  </div>
 </div>
 
 ### Profile Options
@@ -287,6 +301,20 @@ When you click Build, MACE processes your rules through these phases:
     </div>
     <p>Creates a YAML file compatible with the original mSCP Python scripts. Use this if you need to work with mSCP's generate_guidance.py or other mSCP tools.</p>
   </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📈</span>
+      <strong>Generate Excel (XLSX)</strong>
+    </div>
+    <p>Exports all rules and their details to an Excel spreadsheet with formatted columns and auto-filters. Useful for compliance tracking in spreadsheet tools.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔭</span>
+      <strong>Generate Tenable Export</strong>
+    </div>
+    <p>Creates an export file compatible with Tenable vulnerability management. Use this if your organization uses Tenable for compliance tracking.</p>
+  </div>
 </div>
 
 ### Author Settings
@@ -335,9 +363,22 @@ build/
 ## Build Engines
 
 <div className="engine-comparison">
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <h3>mSCP Build Engine <span className="engine-card__badge">Beta</span></h3>
+    </div>
+    <p>Integration with the original mSCP Python scripts for organizations that need compatibility with existing workflows.</p>
+    <ul>
+      <li>Standard mSCP output formats</li>
+      <li>Python-based execution</li>
+      <li>Full mSCP compatibility</li>
+    </ul>
+    <span className="engine-card__tag">Official Scripts</span>
+  </div>
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <span className="engine-card__icon">⚡</span>
+      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
       <h3>M.A.C.E. Build Engine</h3>
     </div>
     <p>MACE's native Swift build engine. Fast, fully featured, and supports all customizations.</p>
@@ -346,18 +387,9 @@ build/
       <li>All output formats</li>
       <li>Profile signing</li>
       <li>Custom rule support</li>
+      <li>Direct MDM export</li>
     </ul>
-  </div>
-  <div className="engine-card">
-    <div className="engine-card__header">
-      <span className="engine-card__icon">🐍</span>
-      <h3>mSCP Build Engine</h3>
-    </div>
-    <p>Integration with the original mSCP Python scripts for organizations that need compatibility with existing workflows.</p>
-    <ul>
-      <li>Uses mSCP's generate_guidance.py</li>
-      <li><em>(Planned for future release)</em></li>
-    </ul>
+    <span className="engine-card__tag">Fast &amp; Customizable</span>
   </div>
 </div>
 
@@ -406,6 +438,50 @@ build/
       <span>Watch progress as MACE generates your files</span>
     </div>
   </div>
+</div>
+
+## MDM Export
+
+In addition to generating files locally, the Build Hub can upload your compliance artifacts directly to your MDM. Select the MDM tab in the Build window to configure a connection and export.
+
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🟢</span>
+      <strong>Jamf Pro</strong>
+    </div>
+    <p>Connect to your Jamf Pro server with API Client credentials or username/password. MACE generates scripts, profiles, and extension attributes, then uploads them to Jamf's Scripts, Configuration Profiles, and Extension Attributes objects automatically. You can upload as a combined object or individual items per rule, and configure naming prefixes.</p>
+    <p>Also supports <strong>Offline Script mode</strong> for Jamf — MACE uploads the installer and suppression profile directly to your Jamf server.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🟠</span>
+      <strong>Workspace ONE</strong>
+    </div>
+    <p>Connect to your Workspace ONE UEM tenant using Basic Auth or OAuth. MACE generates compliance scripts, profiles, and sensors, then uploads them to Workspace ONE. Configure your Organization Group and select which artifacts to upload.</p>
+    <p>Also supports <strong>Offline Script mode</strong> for Workspace ONE deployments.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔵</span>
+      <strong>Microsoft Intune</strong>
+    </div>
+    <p>Connect to Intune using your Azure AD tenant ID, client ID, and client secret. MACE generates compliance scripts, configuration profiles, and custom attributes, then uploads them to your Intune tenant. Configure naming and select which artifacts to push.</p>
+    <p>Also supports <strong>Offline Script mode</strong> for Intune deployments.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🟣</span>
+      <strong>Kandji</strong>
+    </div>
+    <p>Kandji export is planned for a future release.</p>
+  </div>
+</div>
+
+<div className="explanation-box">
+  <h4>Local Build vs MDM Export</h4>
+  <p><strong>Local Build</strong> generates files to a folder on your Mac. You then upload them to your MDM manually.</p>
+  <p><strong>MDM Export</strong> generates the same files and uploads them directly to your MDM in one step. Each MDM tab has its own build options and connection settings independent of the Local Build tab.</p>
 </div>
 
 ## What's Next?

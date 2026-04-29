@@ -95,6 +95,25 @@
   z-index: 10;
 }
 
+.heroSlackLink {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.heroSlackLink:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.heroSlackLink strong {
+  color: white;
+}
+
 .heroButton {
   width: 160px;
   padding: 0.85rem 0;

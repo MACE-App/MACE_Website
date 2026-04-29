@@ -1,88 +1,133 @@
 ---
 sidebar_position: 3
-description: Learn the MACE workflow for managing macOS security compliance from project creation to fleet deployment.
+description: Learn how MACE works — from government-sourced security data through customization and deployment to your Mac fleet.
 ---
 
-# Overview
+# How MACE Works
 
-MACE gives you a complete workflow for managing macOS security compliance. Here's how the pieces fit together.
+MACE is a native macOS app that takes government-sourced security compliance data, lets you customize it for your organization, and outputs it in formats you can deploy directly to your fleet.
 
-## The MACE Workflow
+## Where the Data Comes From
 
-Build once, test on a small fleet, then deploy everywhere. This workflow catches issues early, before they reach production.
+The security rules inside MACE originate from the **macOS Security Compliance Project (mSCP)** — an open-source project hosted on GitHub and maintained in collaboration with NIST and various U.S. government agencies and security teams. mSCP continuously pulls from a wide range of government and industry security standards, packages that guidance into structured YAML — rules, baselines, and remediation scripts — and publishes it publicly. New frameworks and updates are added regularly as the project evolves.
 
-<div className="workflow-container">
-  <div className="workflow-section">
-    <div className="workflow-phase-label">Setup</div>
-    <div className="workflow-cards">
-      <div className="workflow-card">
-        <div className="workflow-card__icon">📁</div>
-        <div className="workflow-card__title">Create Project</div>
-        <div className="workflow-card__desc">Choose platform & baseline</div>
-      </div>
-      <div className="workflow-arrow">→</div>
-      <div className="workflow-card">
-        <div className="workflow-card__icon">🔍</div>
-        <div className="workflow-card__title">Customize Rules</div>
-        <div className="workflow-card__desc">Enable, disable, edit ODVs</div>
-      </div>
-      <div className="workflow-arrow">→</div>
-      <div className="workflow-card">
-        <div className="workflow-card__icon">🔨</div>
-        <div className="workflow-card__title">Build</div>
-        <div className="workflow-card__desc">Scripts, Profiles, DDM</div>
-      </div>
+MACE ingests that data directly so you always have access to the latest government-vetted security guidance. On top of that, MACE is actively building its own hardcoded rule library to surface additional compliance options and mappings that aren't yet part of the public mSCP project — giving you access to more coverage, sooner.
+
+## What MACE Does With It
+
+Once ingested, MACE gives you a native macOS interface to work with that data end-to-end:
+
+<div className="how-it-works-steps">
+  <div className="how-step">
+    <div className="how-step__number">1</div>
+    <div className="how-step__content">
+      <strong>Ingest</strong>
+      <p>MACE loads the mSCP rule library and baselines so you can browse 500+ security rules across every supported framework — no command line, no Python, no manual YAML.</p>
     </div>
   </div>
-
-  <div className="workflow-connector-vertical">
-    <span>↓</span>
-  </div>
-
-  <div className="workflow-section">
-    <div className="workflow-phase-label">Test</div>
-    <div className="workflow-cards">
-      <div className="workflow-card">
-        <div className="workflow-card__icon">🖥️</div>
-        <div className="workflow-card__title">Deploy to Test</div>
-        <div className="workflow-card__desc">Apply build to test fleet</div>
-      </div>
-      <div className="workflow-arrow">→</div>
-      <div className="workflow-card">
-        <div className="workflow-card__icon">✅</div>
-        <div className="workflow-card__title">Audit</div>
-        <div className="workflow-card__desc">Verify compliance works</div>
-      </div>
-      <div className="workflow-arrow">→</div>
-      <div className="workflow-card">
-        <div className="workflow-card__icon">📄</div>
-        <div className="workflow-card__title">Document</div>
-        <div className="workflow-card__desc">Finalize compliance docs</div>
-      </div>
+  <div className="how-step">
+    <div className="how-step__number">2</div>
+    <div className="how-step__content">
+      <strong>Customize</strong>
+      <p>Enable or disable rules for your environment, set organization-defined values (ODVs), and tailor baselines to your specific requirements. You can also write and add your own custom rules to MACE — covering anything not already in the mSCP library.</p>
     </div>
   </div>
-
-  <div className="workflow-connector-vertical">
-    <span>↓</span>
+  <div className="how-step">
+    <div className="how-step__number">3</div>
+    <div className="how-step__content">
+      <strong>Build</strong>
+      <p>Generate deployment-ready output from your customized baseline — shell scripts, configuration profiles (.mobileconfig), declarative device management (DDM), and signed profiles ready for your MDM.</p>
+    </div>
   </div>
-
-  <div className="workflow-section">
-    <div className="workflow-phase-label">Deploy</div>
-    <div className="workflow-cards workflow-cards--center">
-      <div className="workflow-card workflow-card--final">
-        <div className="workflow-card__icon">🚀</div>
-        <div className="workflow-card__title">Push to Fleet</div>
-        <div className="workflow-card__desc">Deploy final build via MDM</div>
-      </div>
+  <div className="how-step">
+    <div className="how-step__number">4</div>
+    <div className="how-step__content">
+      <strong>Audit</strong>
+      <p>Run real-time compliance checks directly on any Mac to verify what's passing, what's failing, and what needs attention — before and after deployment.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">5</div>
+    <div className="how-step__content">
+      <strong>Document</strong>
+      <p>Generate human-readable compliance documentation for your security team, auditors, or leadership — showing exactly which controls are in place and why.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">6</div>
+    <div className="how-step__content">
+      <strong>Deploy</strong>
+      <p>Push your validated build to your production fleet via MDM. Use the audit scripts and extension attributes generated by MACE to monitor ongoing compliance across every device.</p>
     </div>
   </div>
 </div>
 
-**Setup** — Start with a proven or required baseline (STIG, CIS, NIST, or CMMC), then tailor it to your organization's needs. Enable or disable rules, adjust values, and add custom rules.
+## The MACE Workflow
 
-**Test** — Deploy to a small test fleet first. Run audits to verify everything works as expected. Generate documentation for yourself, your security team, or auditors to show exactly what's being applied to the fleet.
+Build once, test on a small fleet, then deploy everywhere.
 
-**Deploy** — Once validated, push the same build to your production fleet via MDM. Use the audit scripts and extension attributes you built to verify deployment and monitor ongoing compliance across your fleet.
+<div className="mace-workflow">
+  <div className="mace-workflow__phase">
+    <div className="mace-workflow__phase-badge mace-workflow__phase-badge--setup">Setup</div>
+    <div className="mace-workflow__steps">
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">📁</div>
+        <div className="mace-workflow__step-title">Create Project</div>
+        <div className="mace-workflow__step-desc">Choose your platform and baseline</div>
+      </div>
+      <div className="mace-workflow__connector">→</div>
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">🔍</div>
+        <div className="mace-workflow__step-title">Customize Rules</div>
+        <div className="mace-workflow__step-desc">Enable, disable, and tune ODVs</div>
+      </div>
+      <div className="mace-workflow__connector">→</div>
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">🔨</div>
+        <div className="mace-workflow__step-title">Build</div>
+        <div className="mace-workflow__step-desc">Generate scripts, profiles, DDM</div>
+      </div>
+    </div>
+  </div>
+
+  <div className="mace-workflow__divider">↓</div>
+
+  <div className="mace-workflow__phase">
+    <div className="mace-workflow__phase-badge mace-workflow__phase-badge--test">Test</div>
+    <div className="mace-workflow__steps">
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">🖥️</div>
+        <div className="mace-workflow__step-title">Deploy to Test Fleet</div>
+        <div className="mace-workflow__step-desc">Apply build to a small group</div>
+      </div>
+      <div className="mace-workflow__connector">→</div>
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">✅</div>
+        <div className="mace-workflow__step-title">Audit</div>
+        <div className="mace-workflow__step-desc">Verify compliance passes</div>
+      </div>
+      <div className="mace-workflow__connector">→</div>
+      <div className="mace-workflow__step">
+        <div className="mace-workflow__step-icon">📄</div>
+        <div className="mace-workflow__step-title">Document</div>
+        <div className="mace-workflow__step-desc">Generate reports for your team</div>
+      </div>
+    </div>
+  </div>
+
+  <div className="mace-workflow__divider">↓</div>
+
+  <div className="mace-workflow__phase mace-workflow__phase--deploy">
+    <div className="mace-workflow__phase-badge mace-workflow__phase-badge--deploy">Deploy</div>
+    <div className="mace-workflow__steps mace-workflow__steps--center">
+      <div className="mace-workflow__step mace-workflow__step--final">
+        <div className="mace-workflow__step-icon">🚀</div>
+        <div className="mace-workflow__step-title">Push to Production Fleet</div>
+        <div className="mace-workflow__step-desc">Deploy via MDM and monitor ongoing compliance</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## Core Features
 
@@ -124,42 +169,39 @@ Each step in the workflow maps to a core feature in MACE:
   </a>
 </div>
 
-:::tip Start Simple
-Begin with a framework baseline and only customize what you need. You can always add more rules or adjust settings as your requirements evolve.
-:::
-
 ## Two Engines, One Interface
 
-All output files (scripts, profiles, DDM, documentation) can be built using two different methods:
+All of those features feed into one moment: generating your output. When you're ready to build, MACE gives you two engine options to process your customized baseline — same rules, same settings, your choice of how to run it:
 
 <div className="engine-comparison">
   <div className="engine-card">
     <div className="engine-card__header">
-      <span className="engine-card__icon">🐍</span>
-      <h3>mSCP Scripts</h3>
+      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <h3>mSCP Build <span className="engine-card__badge">Beta</span></h3>
     </div>
-    <p>The original Python scripts provided by mSCP. Use this for full compatibility with standard mSCP workflows.</p>
+    <p>Uses mSCP scripts with default options. Customize by editing files directly.</p>
     <ul>
       <li>Standard mSCP output formats</li>
       <li>Python-based execution</li>
       <li>Full mSCP compatibility</li>
     </ul>
+    <span className="engine-card__tag">Official Scripts</span>
   </div>
 
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <span className="engine-card__icon">⚡</span>
-      <h3>MACE Engine</h3>
+      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
+      <h3>M.A.C.E. Build</h3>
     </div>
-    <p>Native Swift implementation built into MACE. Offers more customization options than the Python scripts.</p>
+    <p>Built on Swift, the M.A.C.E. engine is faster, easier to use, and more customizable than mSCP's Python scripts — no manual file edits required.</p>
     <ul>
       <li>Extended export options</li>
       <li>Profile signing support</li>
       <li>Custom branding for docs</li>
       <li>No Python required</li>
     </ul>
+    <span className="engine-card__tag">Fast &amp; Customizable</span>
   </div>
 </div>
 
 You can switch between engines at any time. Your project and customizations remain the same.
-

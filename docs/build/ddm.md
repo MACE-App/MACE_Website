@@ -282,13 +282,6 @@ DDM is supported by major MDM solutions. Each MDM has its own interface for conf
     </div>
   </div>
   <div className="mdm-compat-item">
-    <span className="mdm-compat-item__icon">🟣</span>
-    <div className="mdm-compat-item__details">
-      <strong>Mosyle</strong>
-      <span>DDM configuration through management console</span>
-    </div>
-  </div>
-  <div className="mdm-compat-item">
     <span className="mdm-compat-item__icon">🟠</span>
     <div className="mdm-compat-item__details">
       <strong>Kandji</strong>

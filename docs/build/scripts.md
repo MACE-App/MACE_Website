@@ -176,7 +176,6 @@ fi
 **The output format matters:** Different MDMs expect different formats:
 - **Jamf Pro:** `<result>value</result>`
 - **Kandji:** Plain text output
-- **Mosyle:** Plain text output
 - **Intune:** Specific schema requirements
 
 MACE generates EAs in the correct format for each supported MDM.
@@ -320,7 +319,6 @@ Scripts work with any MDM that supports running shell scripts on macOS:
 
 <table className="icon-table">
   <tr><td>🟠</td><td><strong>Kandji</strong></td><td>Use Custom Scripts library item. Set to run on a schedule or once.</td></tr>
-  <tr><td>🟣</td><td><strong>Mosyle</strong></td><td>Use Custom Commands. Upload script and assign to device groups.</td></tr>
   <tr><td>⚫</td><td><strong>Workspace ONE</strong></td><td>Use Scripts feature. Configure trigger and assignment.</td></tr>
 </table>
 

@@ -269,6 +269,13 @@ function HomepageHeader() {
             Download
           </Link>
         </div>
+        <a
+          href="https://macadmins.slack.com/app_redirect?channel=mace-app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.heroSlackLink}>
+          💬 Join us in <strong>#mace-app</strong> on Mac Admins Slack
+        </a>
       </div>
     </header>
   );
