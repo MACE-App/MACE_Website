@@ -150,7 +150,7 @@ const config = {
       ],
       announcementBar: {
         id: 'beta_notice',
-        content: '🚧 MACE is currently in beta. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.1.4-beta</a>',
+        content: '🚧 MACE is currently in beta. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v0.1.5-beta</a>',
         backgroundColor: '#007AFF',
         textColor: '#ffffff',
         isCloseable: true,
