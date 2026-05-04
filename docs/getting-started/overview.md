@@ -9,7 +9,7 @@ MACE is a native macOS app that takes government-sourced security compliance dat
 
 ## Where the Data Comes From
 
-The security rules inside MACE originate from the **macOS Security Compliance Project (mSCP)** — an open-source project hosted on GitHub and maintained in collaboration with NIST and various U.S. government agencies and security teams. mSCP continuously pulls from a wide range of government and industry security standards, packages that guidance into structured YAML — rules, baselines, and remediation scripts — and publishes it publicly. New frameworks and updates are added regularly as the project evolves.
+The security rules inside MACE originate from the **macOS Security Compliance Project (mSCP)** — a publicly hosted project on GitHub maintained in collaboration with NIST and various U.S. government agencies and security teams. mSCP continuously pulls from a wide range of government and industry security standards, packages that guidance into structured YAML — rules, baselines, and remediation scripts — and publishes it publicly. New frameworks and updates are added regularly as the project evolves.
 
 MACE ingests that data directly so you always have access to the latest government-vetted security guidance. On top of that, MACE is actively building its own hardcoded rule library to surface additional compliance options and mappings that aren't yet part of the public mSCP project — giving you access to more coverage, sooner.
 

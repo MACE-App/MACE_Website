@@ -6,7 +6,7 @@ hide_title: true
 
 <div className="community-hero">
   <h2><span className="wave">👋</span> Welcome to the MACE Community</h2>
-  <p>Free, open source, and built with <span className="pulse">❤️</span> for Mac admins everywhere.</p>
+  <p>Free and built with <span className="pulse">❤️</span> for Mac admins everywhere.</p>
 </div>
 
 ## Get Involved

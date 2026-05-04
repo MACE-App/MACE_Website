@@ -62,5 +62,5 @@ Runs on **macOS 14 (Sonoma) or later**, Apple Silicon or Intel. Admin access onl
 
 <a href="https://github.com/MACE-App/MACE/releases" class="button button--primary button--lg">Download MACE</a>
 
-Free and open source. Create your first project in minutes.
+Free to use. Create your first project in minutes.
 

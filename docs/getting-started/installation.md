@@ -20,7 +20,7 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 
 <div className="icon-table-centered">
 <table className="icon-table">
-  <tr><td>✅</td><td><strong>Free & Open Source</strong></td></tr>
+  <tr><td>✅</td><td><strong>Free to Use</strong></td></tr>
   <tr><td>⚡</td><td><strong>Native macOS App</strong> built in Swift</td></tr>
   <tr><td>📦</td><td><strong>Single download</strong> with no extra dependencies</td></tr>
 </table>
