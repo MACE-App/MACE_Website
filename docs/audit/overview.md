@@ -236,7 +236,7 @@ Some compliance checks need administrator access to read protected system settin
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Audit Engine <span className="engine-card__badge">Coming Soon</span></h3>
+      <h3>mSCP Audit Engine</h3>
     </div>
     <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
     <ul>
@@ -254,7 +254,7 @@ Some compliance checks need administrator access to read protected system settin
     <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
     <ul>
       <li>Real-time results with Watch Live</li>
-      <li>Export to PDF, HTML, CSV, CKL</li>
+      <li>Export to PDF, HTML, XLSX, CSV, JSON, and STIG CKL/CKLB</li>
       <li>Override results and add comments</li>
       <li>Supports all customizations</li>
     </ul>
@@ -332,7 +332,7 @@ Each row shows one rule with its:
       <span className="build-option-item__icon">📤</span>
       <strong>Export Reports</strong>
     </div>
-    <p>Export results to PDF, HTML, CSV, or DISA STIG CKL format for documentation and auditors.</p>
+    <p>Open a live <strong>Export Preview</strong>, then export to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB for documentation and auditors.</p>
   </div>
 </div>
 
@@ -367,5 +367,5 @@ This information is optional and can be included in exported reports to identify
 
 <table className="icon-table">
   <tr><td>📊</td><td><strong><a href="./results">Audit Results</a></strong></td><td>Deep dive into working with results, overrides, and comments</td></tr>
-  <tr><td>📄</td><td><strong><a href="./exporting">Exporting Reports</a></strong></td><td>Export to PDF, HTML, CSV, and STIG CKL formats</td></tr>
+  <tr><td>📄</td><td><strong><a href="./exporting">Exporting Reports</a></strong></td><td>Live preview and export to PDF, HTML, XLSX, CSV, JSON, and STIG CKL/CKLB</td></tr>
 </table>

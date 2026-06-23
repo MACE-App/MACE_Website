@@ -274,7 +274,7 @@ odv:
   stig: 3
 ```
 
-ODV datatypes: `string`, `number`, `integer`, `boolean`, `regex`
+ODV datatypes: `string`, `number`, `boolean`
 
 Use `$ODV` in check/fix scripts to reference the value:
 

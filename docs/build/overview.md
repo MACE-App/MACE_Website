@@ -175,41 +175,49 @@ When you click Build, MACE processes your rules through these phases:
 
 ## Build Options
 
-### Script Options
+The Build Hub organizes outputs into three main columns — **Scripts**, **Profiles**, and **Audit & Reporting** — plus **Additional Outputs** for extra export formats and **Personalized Branding**. Compliance rules can be enforced via shell scripts, configuration profiles, or DDM, so you choose the output formats that match your deployment workflow.
+
+### Scripts
+
+*Audit & remediate macOS security settings.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📜</span>
-      <strong>Generate Scripts</strong>
+      <strong>Compliance Scripts</strong>
     </div>
-    <p>Master toggle for script generation. When enabled, MACE creates shell scripts from the check and fix commands defined in your rules.</p>
+    <p>Master toggle for script generation. Creates zsh shell scripts that check and remediate security settings on macOS devices.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔍</span>
-      <strong>Include Audit Functions</strong>
+      <strong>Audit Script</strong>
     </div>
-    <p>Adds the check/audit commands to your script. These verify whether each setting is compliant and report pass/fail status.</p>
+    <p>Adds the check/audit commands. These verify whether each setting is compliant, report pass/fail status, and log failures to <code>/Library/Logs</code>.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔧</span>
-      <strong>Include Remediation Functions</strong>
+      <strong>Remediation Script</strong>
     </div>
-    <p>Adds the fix commands to your script. These apply the correct settings when a check fails.</p>
+    <p>Adds the fix commands. These apply the correct settings to bring non-compliant settings into compliance when a check fails.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📊</span>
-      <strong>Generate Extension Attributes</strong>
+      <span className="build-option-item__icon">🎚️</span>
+      <strong>Forced Mode</strong>
     </div>
-    <p>Creates individual scripts formatted for your MDM's extension attribute feature. These let your MDM collect compliance data and display it in device inventory.</p>
+    <p>Controls how the script behaves when run, by setting <code>FORCED_MODE</code> in the script:<br/>
+    <strong>None (Empty):</strong> read the mode at runtime (command-line argument or Jamf <code>$4</code>).<br/>
+    <strong>--check:</strong> audit only.<br/>
+    <strong>--fix:</strong> remediate only.<br/>
+    <strong>--cfc:</strong> check, fix, then check again.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📦</span>
-      <strong>Output Mode: Combined vs Individual</strong>
+      <strong>Output Format: Combined vs Individual</strong>
     </div>
     <p><strong>Combined:</strong> One script containing all rules. Easier to manage and run everything at once.<br/>
     <strong>Individual:</strong> Separate script per rule. Useful when you need to deploy specific checks to your MDM.</p>
@@ -217,9 +225,9 @@ When you click Build, MACE processes your rules through these phases:
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📡</span>
-      <strong>Offline Script Mode</strong>
+      <strong>Offline Script (Advanced)</strong>
     </div>
-    <p>Generates an installer package that drops a <strong>LaunchDaemon</strong> and your compliance script onto the Mac. The script then runs automatically on a schedule you configure — no MDM check-in required for each run.</p>
+    <p>Switches the Scripts column into Offline Script mode, which generates an installer that drops a <strong>LaunchDaemon</strong> and your compliance script onto the Mac. The script then runs automatically on a schedule you configure — no MDM check-in required for each run.</p>
     <p><strong>When to use:</strong> Devices that aren't always online, environments where you want continuous compliance without waiting for MDM check-ins, or when you want to ship one installer and have it self-maintain.</p>
     <p><strong>What gets generated:</strong> An installer script, an uninstaller script, and a suppression profile. Push the installer once from your MDM; the daemon handles future runs independently.</p>
     <div className="explanation-box">
@@ -230,100 +238,109 @@ When you click Build, MACE processes your rules through these phases:
   </div>
 </div>
 
-### Profile Options
+### Profiles
+
+*Configuration profiles for deploying security settings via MDM.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📱</span>
-      <strong>Combined Mobileconfig</strong>
+      <span className="build-option-item__icon">⚙️</span>
+      <strong>Configuration Profiles</strong>
     </div>
-    <p>Creates one .mobileconfig file containing all payloads merged together. Simpler to deploy with just one profile to push to all devices.</p>
+    <p>Master toggle for profile generation. Creates <code>.mobileconfig</code> files for deploying security settings via MDM (Jamf, Intune, etc.).</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📂</span>
-      <strong>Individual Mobileconfigs</strong>
+      <strong>Output Format</strong>
     </div>
-    <p>Creates separate .mobileconfig files grouped by PayloadType (e.g., one for screensaver settings, one for firewall). Useful when you want granular control or need to scope different settings to different device groups.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🟢</span>
-      <strong>Jamf Plist</strong>
-    </div>
-    <p>Generates .plist files for Jamf Pro's Custom Settings payload. Use these when configuring preference domains in Jamf.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🔵</span>
-      <strong>Intune XML</strong>
-    </div>
-    <p>Generates .xml files formatted for Microsoft Intune's custom profile format.</p>
+    <p>Choose how profiles are packaged:<br/>
+    <strong>Combined Mobileconfig:</strong> a single <code>.mobileconfig</code> with all settings (supported by most MDM vendors).<br/>
+    <strong>Individual Mobileconfigs:</strong> separate files grouped by PayloadType for granular control.<br/>
+    <strong>Jamf Plist / Intune Plist:</strong> formats tailored to Jamf Pro's Custom Settings and Intune's custom profile format.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔐</span>
       <strong>Sign Profiles</strong>
     </div>
-    <p>Digitally signs profiles using a certificate from your Keychain. Signed profiles show as "Verified" when installed and can't be modified after deployment. Required by some organizations for security.</p>
+    <p>Most MDMs sign profiles automatically when deployed, but can modify them first. Pre-signing with a certificate from your Keychain locks the profile and shows it as "Verified" when installed.</p>
   </div>
 </div>
 
-### Other Options
+### Audit & Reporting
+
+*Audit exemptions and MDM compliance reporting.*
+
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📋</span>
+      <strong>Audit Preferences</strong>
+    </div>
+    <p>Exempt rules from audit and remediation scripts. The compliance script reads these preferences to skip rules you've marked as exempt. Deploy via MDM or <code>~/Library/Preferences</code>. The <strong>Output Format</strong> can be a mobileconfig (for MDM) or a plist.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📊</span>
+      <strong>MDM Reporting — Extension Attributes</strong>
+    </div>
+    <p>Reports failed rules to your MDM for Smart Groups and dashboards. Generates extension-attribute scripts for <strong>Jamf, Kandji, Intune, and WS1</strong>.</p>
+  </div>
+</div>
+
+### Additional Outputs
+
+*Extra export formats for documentation, scanning, and legacy workflows.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📱</span>
-      <strong>Generate DDM</strong>
+      <strong>DDM</strong>
     </div>
-    <p>Creates Declarative Device Management declarations. Apple's modern management format where the device enforces settings autonomously. Requires macOS 13+ and MDM support.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📊</span>
-      <strong>Generate CSV</strong>
-    </div>
-    <p>Exports all rules to a spreadsheet. Includes rule IDs, titles, check/fix commands, and all framework references (NIST, DISA, CIS). Great for documentation, auditor reviews, or importing into other systems.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📋</span>
-      <strong>Generate Audit Plist</strong>
-    </div>
-    <p>Creates a preferences file that tracks which rules have exemptions. The compliance script reads this to skip rules you've marked as exempt for specific reasons.</p>
+    <p>Declarative Device Management declarations. Apple's modern management format where the device enforces settings autonomously. Requires macOS 13+ and MDM support.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📝</span>
-      <strong>Generate Baseline</strong>
+      <strong>Baseline YAML</strong>
     </div>
-    <p>Creates a YAML file compatible with the original mSCP Python scripts. Use this if you need to work with mSCP's generate_guidance.py or other mSCP tools.</p>
+    <p>A YAML baseline compatible with the original mSCP Python scripts. Use this if you need to work with mSCP's <code>generate_guidance.py</code> or other mSCP tools.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📈</span>
-      <strong>Generate Excel (XLSX)</strong>
+      <span className="build-option-item__icon">📊</span>
+      <strong>CSV</strong>
     </div>
-    <p>Exports all rules and their details to an Excel spreadsheet with formatted columns and auto-filters. Useful for compliance tracking in spreadsheet tools.</p>
+    <p>Spreadsheet export of all rules — rule IDs, titles, check/fix commands, and framework references (NIST, DISA, CIS). Great for documentation, auditor reviews, or importing into other systems.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔭</span>
-      <strong>Generate Tenable Export</strong>
+      <strong>Tenable Audit</strong>
     </div>
-    <p>Creates an export file compatible with Tenable vulnerability management. Use this if your organization uses Tenable for compliance tracking.</p>
+    <p>A Tenable/Nessus <code>.audit</code> file for vulnerability scanning. Use this if your organization uses Tenable for compliance tracking.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🧩</span>
+      <strong>Manifest</strong>
+    </div>
+    <p>A JSON vendor manifest describing the generated artifacts — useful for automation and tooling that ingests the build output.</p>
   </div>
 </div>
 
-### Author Settings
+### Personalized Branding
+
+*Customize author attribution and branding in generated files.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">👤</span>
-      <strong>Author Name & Organization</strong>
+      <strong>Author Info</strong>
     </div>
     <p>Your name and organization appear in generated files including script headers, profile metadata, and documentation. Helps identify who created this baseline.</p>
   </div>
@@ -366,7 +383,7 @@ build/
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Build Engine <span className="engine-card__badge">Beta</span></h3>
+      <h3>mSCP Build Engine</h3>
     </div>
     <p>Integration with the original mSCP Python scripts for organizations that need compatibility with existing workflows.</p>
     <ul>
@@ -406,36 +423,36 @@ build/
   <div className="build-step">
     <span className="build-step__number">2</span>
     <div className="build-step__content">
-      <strong>Click Build</strong>
+      <strong>Open the Build Hub</strong>
       <span>Use the toolbar button or press <code>Cmd+B</code></span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
-      <strong>Select build engine</strong>
-      <span>Choose M.A.C.E. engine (recommended)</span>
+      <strong>Choose a destination</strong>
+      <span>Select the <strong>Local Build</strong> tab, or an MDM tab (Jamf Pro, Workspace ONE, Intune) to upload directly</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">4</span>
     <div className="build-step__content">
-      <strong>Configure output options</strong>
-      <span>Select which scripts, profiles, and other files to generate</span>
+      <strong>Configure outputs</strong>
+      <span>Toggle Scripts, Profiles, Audit &amp; Reporting, and Additional Outputs to match your workflow</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">5</span>
     <div className="build-step__content">
-      <strong>Enter author info</strong>
-      <span>Add your name and organization for attribution</span>
+      <strong>Add branding</strong>
+      <span>Set author info and branding under Personalized Branding</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">6</span>
     <div className="build-step__content">
-      <strong>Click Build</strong>
-      <span>Watch progress as MACE generates your files</span>
+      <strong>Click Generate</strong>
+      <span>Watch progress as MACE generates your files, then use <strong>View Build Folder</strong> to open them</span>
     </div>
   </div>
 </div>

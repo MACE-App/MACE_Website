@@ -352,5 +352,5 @@ Enable "Section Summary" in export options to see compliance by category. This h
 ## What's Next?
 
 <table className="icon-table">
-  <tr><td>📄</td><td><strong><a href="./exporting">Exporting Reports</a></strong></td><td>Export to PDF, HTML, CSV, and STIG CKL formats</td></tr>
+  <tr><td>📄</td><td><strong><a href="./exporting">Exporting Reports</a></strong></td><td>Live preview and export to PDF, HTML, XLSX, CSV, JSON, and STIG CKL/CKLB</td></tr>
 </table>

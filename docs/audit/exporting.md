@@ -1,18 +1,18 @@
 ---
 sidebar_position: 3
-description: Export audit reports to PDF, HTML, XLSX, CSV, or DISA STIG CKL format for documentation and auditors.
+description: Export audit reports to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format for documentation and auditors.
 ---
 
 # Exporting Reports
 
 <div className="editor-intro">
-  <p className="editor-intro__lead">Export audit results to PDF, HTML, XLSX, CSV, or DISA STIG CKL format.</p>
+  <p className="editor-intro__lead">Export audit results to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format.</p>
   <p className="editor-intro__sub">Generate professional reports for auditors, documentation, and compliance tracking.</p>
 </div>
 
 ## Export Formats
 
-MACE can export audit results in five formats:
+MACE can export audit results in seven formats:
 
 <div className="output-types-grid">
   <div className="output-type-card">
@@ -45,10 +45,24 @@ MACE can export audit results in five formats:
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
+      <span className="output-type-card__icon">🧩</span>
+      <h3>JSON</h3>
+    </div>
+    <p>Structured data format containing audit results and summary statistics. Ideal for automation, custom dashboards, or feeding results into other tools and scripts.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
       <span className="output-type-card__icon">🛡️</span>
       <h3>STIG CKL</h3>
     </div>
     <p>DISA STIG Checklist format (XML). Required for DoD compliance. Updates existing CKL templates with your audit results.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">🛡️</span>
+      <h3>STIG CKLB</h3>
+    </div>
+    <p>DISA STIG Viewer 3.x checklist format (JSON). The modern replacement for the XML-based CKL. Can update an existing CKLB template or generate one from an XCCDF benchmark.</p>
   </div>
 </div>
 
@@ -59,8 +73,56 @@ MACE can export audit results in five formats:
   <tr><td>🌐</td><td><strong>HTML</strong></td><td>Review results in a browser</td></tr>
   <tr><td>📊</td><td><strong>CSV</strong></td><td>Analyze data in Excel or Google Sheets</td></tr>
   <tr><td>📋</td><td><strong>XLSX</strong></td><td>Pre-formatted Excel file with filters and frozen headers</td></tr>
-  <tr><td>🛡️</td><td><strong>STIG CKL</strong></td><td>Submit for DoD compliance</td></tr>
+  <tr><td>🧩</td><td><strong>JSON</strong></td><td>Feed results into automation, dashboards, or other tools</td></tr>
+  <tr><td>🛡️</td><td><strong>STIG CKL</strong></td><td>Submit for DoD compliance (STIG Viewer 2.x)</td></tr>
+  <tr><td>🛡️</td><td><strong>STIG CKLB</strong></td><td>Submit for DoD compliance (STIG Viewer 3.x)</td></tr>
 </table>
+
+## Live Preview
+
+When your audit finishes, click **Export Preview** in the results toolbar to open the live export preview. The preview renders your report exactly as it will export, and updates in real time as you change options — what you see is what you get.
+
+<div className="themed-image themed-image--large">
+  <img src="/img/screenshots/audit-export-preview-light.webp" alt="MACE Audit Export Preview" className="img-light" />
+  <img src="/img/screenshots/audit-export-preview-dark.webp" alt="MACE Audit Export Preview" className="img-dark" />
+</div>
+
+<div className="output-types-grid">
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">🔄</span>
+      <h3>Switch Formats Live</h3>
+    </div>
+    <p>Toggle between <strong>HTML</strong>, <strong>PDF</strong>, <strong>XLSX</strong>, <strong>CSV</strong>, and <strong>JSON</strong> with the format tabs at the top — the preview re-renders instantly for each.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">🌓</span>
+      <h3>Theme &amp; Zoom</h3>
+    </div>
+    <p>Preview in light, auto, or dark mode and adjust the zoom level to check exactly how the report will look before exporting.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">⚙️</span>
+      <h3>Configure Everything</h3>
+    </div>
+    <p>The sidebar groups all options into <strong>Branding</strong>, <strong>Audit Info</strong>, <strong>Device Info</strong>, and <strong>Structure</strong>. Toggle content on or off and watch the preview update live.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">⚡</span>
+      <h3>Remember for Quick Export</h3>
+    </div>
+    <p>Enable <strong>Remember for Quick Export</strong> to save your current settings, so future exports use the same configuration without reopening the preview.</p>
+  </div>
+</div>
+
+When the preview looks right, click **Export** and choose a save location.
+
+:::note STIG CKL & CKLB
+The live preview covers HTML, PDF, XLSX, CSV, and JSON. To produce a **STIG CKL** or **CKLB** checklist, use the **STIG Checklist** button in the results toolbar instead — these formats map your results onto a DISA checklist rather than a formatted report.
+:::
 
 ## Export Options
 
@@ -110,9 +172,12 @@ Before exporting, you can configure what to include in your report:
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🖼️</span>
-      <strong>Include Logo (Default: ON)</strong>
+      <strong>Logo Source</strong>
     </div>
-    <p>Adds a logo to the report header. MACE looks for a file named <code>logo.png</code> in your project folder. If not found, uses the default MACE logo.</p>
+    <p>Choose the logo shown in the report header:<br/>
+    <strong>M.A.C.E.</strong> — the built-in M.A.C.E. logo (default).<br/>
+    <strong>Custom</strong> — your own image, added with the <strong>Upload Logo</strong> button.<br/>
+    <strong>None</strong> — no logo.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -255,11 +320,10 @@ The PDF export creates a professional compliance report suitable for auditors an
 ### How to Export PDF
 
 1. Complete your audit
-2. Click **Export** in the results toolbar
-3. Select **PDF**
-4. Configure export options
-5. Choose save location
-6. Click **Export**
+2. Click **Export Preview** in the results toolbar
+3. Select the **PDF** tab
+4. Configure export options in the sidebar
+5. Click **Export** and choose a save location
 
 ## HTML Export
 
@@ -277,11 +341,10 @@ The HTML export creates an interactive web report that can be opened in any brow
 ### How to Export HTML
 
 1. Complete your audit
-2. Click **Export** in the results toolbar
-3. Select **HTML**
-4. Configure export options
-5. Choose save location
-6. Click **Export**
+2. Click **Export Preview** in the results toolbar
+3. Select the **HTML** tab
+4. Configure export options in the sidebar
+5. Click **Export** and choose a save location
 
 ### Viewing the Report
 
@@ -300,11 +363,10 @@ The CSV export creates a spreadsheet-compatible file for data analysis.
 ### How to Export CSV
 
 1. Complete your audit
-2. Click **Export** in the results toolbar
-3. Select **CSV**
-4. Configure export options
-5. Choose save location
-6. Click **Export**
+2. Click **Export Preview** in the results toolbar
+3. Select the **CSV** tab
+4. Configure export options in the sidebar
+5. Click **Export** and choose a save location
 
 ### Using the CSV
 
@@ -334,11 +396,10 @@ The XLSX export creates a formatted Excel spreadsheet ready to open in Microsoft
 ### How to Export XLSX
 
 1. Complete your audit
-2. Click **Export** in the results toolbar
-3. Select **XLSX**
-4. Configure export options
-5. Choose save location
-6. Click **Export**
+2. Click **Export Preview** in the results toolbar
+3. Select the **XLSX** tab
+4. Configure export options in the sidebar
+5. Click **Export** and choose a save location
 
 ### Opening the File
 
@@ -349,49 +410,78 @@ Open the exported `.xlsx` file in:
 
 XLSX is more structured than CSV — filters, column widths, and formatting are already set up when you open it.
 
-## STIG CKL Export
+## JSON Export
 
-The CKL (Checklist) export creates DISA STIG-compliant XML files required for DoD security assessments.
+The JSON export creates a structured data file containing your audit results and summary statistics — ideal for automation, custom dashboards, or feeding results into other tools.
 
-### What is CKL?
+### What's in the File
 
-CKL is the standard format for DISA STIG checklists. It's an XML file that contains:
+- **Summary** with total rules, pass/fail/manual counts, and pass rate
+- **Audit metadata** (platform, baseline version, framework, device info)
+- **One entry per rule** with status, expected/actual output, and comments
+
+### How to Export JSON
+
+1. Complete your audit
+2. Click **Export Preview** in the results toolbar
+3. Select the **JSON** tab
+4. Configure export options in the sidebar
+5. Click **Export** and choose a save location
+
+### Using the JSON
+
+Parse the file in any language or pipeline to build dashboards, track compliance trends over time, or integrate results with ticketing and SIEM tools.
+
+## STIG Checklist Export (CKL & CKLB)
+
+For DoD security assessments, MACE can export your results as a DISA STIG checklist in two formats:
+
+- **CKL** — the XML format used by STIG Viewer 2.x
+- **CKLB** — the JSON format used by STIG Viewer 3.x (the modern replacement for CKL)
+
+Both are produced from the **STIG Checklist** button in the results toolbar (rather than the live Export Preview).
+
+### What's in a Checklist?
+
+Both formats are the standard for DISA STIG checklists and contain:
 - Device identification
 - Vulnerability assessments
 - Finding details and status
 - Comments and notes
 
-### How CKL Export Works
+### How Checklist Export Works
 
-MACE updates an existing CKL template file with your audit results:
+For **CKL** and for updating an existing **CKLB**, MACE merges your results into a template:
 
-1. **You provide a template CKL** (from DISA or your organization)
+1. **You provide a template** (CKL or CKLB, from DISA or your organization)
 2. **MACE matches STIG IDs** between your audit and the template
 3. **Results are merged** into the template
-4. **Updated CKL is saved** with your findings
+4. **The updated checklist is saved** with your findings
+
+For **CKLB**, MACE can also generate a checklist from scratch — including directly from an XCCDF benchmark, which supplies authoritative DISA metadata.
 
 ### Status Mapping
 
-MACE audit statuses map to CKL statuses:
+MACE audit statuses map to checklist statuses:
 
 <table className="icon-table">
-  <tr><td>✅</td><td><strong>Pass</strong></td><td>NotAFinding</td></tr>
-  <tr><td>❌</td><td><strong>Fail</strong></td><td>Open</td></tr>
-  <tr><td>➖</td><td><strong>N/A</strong></td><td>Not_Applicable</td></tr>
-  <tr><td>⚠️</td><td><strong>Error</strong></td><td>Not_Reviewed</td></tr>
-  <tr><td>👁️</td><td><strong>Manual Review</strong></td><td>Not_Reviewed</td></tr>
-  <tr><td>⏳</td><td><strong>Pending</strong></td><td>Not_Reviewed</td></tr>
+  <tr><td>✅</td><td><strong>Pass</strong></td><td>NotAFinding / not_a_finding</td></tr>
+  <tr><td>❌</td><td><strong>Fail</strong></td><td>Open / open</td></tr>
+  <tr><td>➖</td><td><strong>N/A</strong></td><td>Not_Applicable / not_applicable</td></tr>
+  <tr><td>⚠️</td><td><strong>Error</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
+  <tr><td>👁️</td><td><strong>Manual Review</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
+  <tr><td>⏳</td><td><strong>Pending</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
 </table>
 
-### How to Export CKL
+(CKL uses the capitalized XML statuses; CKLB uses the lowercase JSON statuses.)
 
-1. Complete your audit (must be STIG compliance)
-2. Go to **Audit → STIG CKL Export** in the menu bar
-3. Select your CKL template file
-4. Choose where to save the updated CKL
-5. Click **Export**
+### How to Export a Checklist
 
-The Audit menu only appears when the audit results window is open.
+1. Complete your audit (must use a STIG baseline)
+2. Click **STIG Checklist** in the results toolbar
+3. Choose **CKL** or **CKLB**
+4. Select a template file (or, for CKLB, generate from scratch / an XCCDF benchmark)
+5. Choose where to save the checklist and export
 
 ### What Gets Updated
 
@@ -404,16 +494,18 @@ For each matching STIG ID:
 ### Requirements
 
 - Audit must use a STIG baseline
-- You must have a CKL template file
 - STIG IDs must match between your audit and the template
+- A template file is required for CKL and for updating an existing CKLB (CKLB can also be generated from scratch or from an XCCDF benchmark)
 
 ## Custom Logo
 
-To use your organization's logo in reports:
+To use your organization's logo in reports, open the **Branding** section of the export preview:
 
-1. Create a PNG image named `logo.png`
-2. Place it in your MACE project folder
-3. MACE automatically uses it in PDF and HTML exports
+1. Set **Logo Source** to **Custom**
+2. Click **Upload Logo** and choose your image
+3. The logo appears in the preview immediately and is used in the export
+
+MACE saves your uploaded logo as `logo.png` in the project folder, so it's reused across exports. If a `logo.png` already exists in the project folder, MACE detects it automatically and offers it as the Custom logo. Use the trash button next to Upload Logo to remove a custom logo (Logo Source falls back to M.A.C.E.).
 
 **Logo recommendations:**
 - Format: PNG with transparency

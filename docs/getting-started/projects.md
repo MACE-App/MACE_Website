@@ -146,6 +146,24 @@ When you create a project, MACE sets up a folder structure that keeps everything
   </div>
 </div>
 
+## Importing a Project
+
+Instead of starting from scratch, you can create a project from an existing source with **Import & Create Project** on the welcome screen.
+
+<div className="output-types-grid">
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📥</span>
+      <h3>Jamf Compliance Editor (.jce)</h3>
+    </div>
+    <p>Import a <code>.jce</code> file to auto-detect the platform, version, compliance framework, and rule exclusions, then build a MACE project from it.</p>
+  </div>
+</div>
+
+:::note
+Importing from **mSCP 1.0 rule folders** is planned for a future release.
+:::
+
 ## Opening Projects
 
 There are a few ways to open an existing project:

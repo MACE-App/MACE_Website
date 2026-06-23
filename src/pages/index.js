@@ -292,7 +292,7 @@ function FeaturesSection() {
     {
       icon: <WorkflowAnimation />,
       title: 'All-in-One Workflow',
-      desc: 'Create, customize, audit, and export from a single app. Browse 500+ security rules with powerful search and filtering.',
+      desc: 'Create, customize, audit, and export from a single app. Browse 800+ security rules with powerful search and filtering.',
       customIcon: true,
     },
     {
@@ -341,7 +341,7 @@ function ScreenshotCarousel() {
       light: '/img/screenshots/compliance-editor-light.webp',
       dark: '/img/screenshots/compliance-editor-dark.webp',
       title: 'Compliance Editor',
-      desc: 'Browse and customize 500+ security rules'
+      desc: 'Browse and customize 800+ security rules'
     },
     {
       light: '/img/screenshots/rule-builder-light.webp',

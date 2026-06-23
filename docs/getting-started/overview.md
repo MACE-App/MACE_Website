@@ -22,7 +22,7 @@ Once ingested, MACE gives you a native macOS interface to work with that data en
     <div className="how-step__number">1</div>
     <div className="how-step__content">
       <strong>Ingest</strong>
-      <p>MACE loads the mSCP rule library and baselines so you can browse 500+ security rules across every supported framework — no command line, no Python, no manual YAML.</p>
+      <p>MACE loads the mSCP rule library and baselines so you can browse 800+ security rules across every supported framework — no command line, no Python, no manual YAML.</p>
     </div>
   </div>
   <div className="how-step">
@@ -177,7 +177,7 @@ All of those features feed into one moment: generating your output. When you're 
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Build <span className="engine-card__badge">Beta</span></h3>
+      <h3>mSCP Build</h3>
     </div>
     <p>Uses mSCP scripts with default options. Customize by editing files directly.</p>
     <ul>

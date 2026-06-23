@@ -87,9 +87,9 @@ Open Settings from the MACE menu bar.
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📂</span>
-      <strong>Open Data Folder</strong>
+      <strong>Application Support</strong>
     </div>
-    <p>Opens the folder where MACE stores its data. Useful for troubleshooting or backing up your settings.</p>
+    <p>Opens the MACE application support folder in Finder, where MACE stores its data. Useful for troubleshooting or backing up your settings.</p>
   </div>
 </div>
 

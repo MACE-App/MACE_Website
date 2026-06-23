@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
-description: Generate professional compliance documentation in PDF or HTML format with custom branding.
+description: Generate professional compliance documentation in PDF, HTML, Markdown, AsciiDoc, XLSX, CSV, or JSON format with custom branding.
 ---
 
 # Documentation
 
 <div className="editor-intro">
-  <p className="editor-intro__lead">Generate professional compliance documentation in PDF or HTML format.</p>
+  <p className="editor-intro__lead">Generate professional compliance documentation in seven formats, with a live preview.</p>
   <p className="editor-intro__sub">Create guides for auditors, technical teams, or management with customizable content and branding.</p>
 </div>
 
@@ -57,19 +57,58 @@ Documentation generates comprehensive guides from your compliance baseline. Inst
     </div>
     <p>Lightweight text format that renders on GitHub, wikis, and most editors. Best for version-controlled documentation or internal knowledge bases.</p>
   </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📑</span>
+      <h3>AsciiDoc</h3>
+    </div>
+    <p>Structured authoring format popular for technical documentation and publishing toolchains. Converts cleanly to other formats and works well in docs-as-code workflows.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📊</span>
+      <h3>CSV</h3>
+    </div>
+    <p>Spreadsheet-friendly export of rule data. Import into Excel, Google Sheets, or Numbers for custom filtering, sorting, and analysis.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">🧩</span>
+      <h3>JSON</h3>
+    </div>
+    <p>Structured data format for automation and integrations. Feed rule content into custom tooling, dashboards, or other systems.</p>
+  </div>
 </div>
+
+:::tip Live Preview
+The Documentation Builder includes a live preview. Switch formats with the tabs at the top, toggle content and structure options in the sidebar, and the preview updates in real time — what you see is what you generate. Use **Show Raw** to inspect the underlying output.
+:::
 
 ## Document Types
 
-MACE offers three pre-configured document types, each designed for a different audience:
+MACE offers six pre-configured document types, each designed for a different audience:
 
 <div className="engine-comparison">
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">📚</span>
+      <h3>Full Report</h3>
+    </div>
+    <p>Everything enabled — the most comprehensive option.</p>
+    <ul>
+      <li>All rule content and discussions</li>
+      <li>Check and fix commands</li>
+      <li>Configuration profiles and DDM info</li>
+      <li>Framework references and appendices</li>
+      <li>Complete structure (ToC, glossary, quick reference)</li>
+    </ul>
+  </div>
   <div className="engine-card">
     <div className="engine-card__header">
       <span className="engine-card__icon">📋</span>
       <h3>Compliance Guide</h3>
     </div>
-    <p>Full documentation for compliance teams and auditors.</p>
+    <p>Policy-focused documentation for compliance teams and auditors.</p>
     <ul>
       <li>Rule discussions and rationale</li>
       <li>Fix commands and remediation steps</li>
@@ -90,6 +129,32 @@ MACE offers three pre-configured document types, each designed for a different a
       <li>DDM declaration details</li>
       <li>Technical implementation notes</li>
       <li>Command-focused format</li>
+    </ul>
+  </div>
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">🔧</span>
+      <h3>Remediation Guide</h3>
+    </div>
+    <p>Fix-focused guide for hands-on remediation.</p>
+    <ul>
+      <li>Remediation steps for each rule</li>
+      <li>Fix commands and verification commands</li>
+      <li>Minimal background — action-oriented</li>
+      <li>Ideal for working through non-compliant settings</li>
+    </ul>
+  </div>
+  <div className="engine-card">
+    <div className="engine-card__header">
+      <span className="engine-card__icon">✅</span>
+      <h3>Audit Report</h3>
+    </div>
+    <p>Audit trail for evidence and assessments.</p>
+    <ul>
+      <li>Rule status and justifications</li>
+      <li>Compliance framework mapping</li>
+      <li>Suitable as an audit record</li>
+      <li>Documents what was checked and the outcome</li>
     </ul>
   </div>
   <div className="engine-card">
@@ -168,7 +233,7 @@ MACE offers three pre-configured document types, each designed for a different a
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Documentation Engine <span className="engine-card__badge">Beta</span></h3>
+      <h3>mSCP Documentation Engine</h3>
     </div>
     <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
     <ul>
