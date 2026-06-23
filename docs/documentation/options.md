@@ -130,9 +130,12 @@ Control document appearance and identifying information.
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🖼️</span>
-      <strong>Include Logo (Default: ON)</strong>
+      <strong>Logo Source</strong>
     </div>
-    <p>Add a logo to the document cover and headers. MACE looks for <code>logo.png</code> in your project folder. If not found, uses the default MACE logo.</p>
+    <p>Choose the logo shown on the document cover and headers:<br/>
+    <strong>M.A.C.E.</strong> — the built-in M.A.C.E. logo (default).<br/>
+    <strong>Custom</strong> — your own image, added with the <strong>Upload Logo</strong> button.<br/>
+    <strong>None</strong> — no logo.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -250,11 +253,13 @@ Control how rules with special status are handled in the document. These options
 
 ## Custom Logo
 
-To use your organization's logo in documents:
+To use your organization's logo in documents, open the **Branding** section of the Documentation Builder:
 
-1. Create a PNG image named `logo.png`
-2. Place it in your MACE project folder
-3. MACE automatically uses it in generated documents
+1. Set **Logo Source** to **Custom**
+2. Click **Upload Logo** and choose your image
+3. The logo appears in the preview immediately and is used in generated documents
+
+MACE saves your uploaded logo as `logo.png` in the project folder, so it's reused across documents. If a `logo.png` already exists in the project folder, MACE detects it automatically and offers it as the Custom logo. Removing a custom logo resets Logo Source to M.A.C.E.
 
 **Logo recommendations:**
 - Format: PNG with transparency

@@ -75,7 +75,7 @@ When you create a project, MACE sets up a folder structure that keeps everything
       </div>
       <div className="file-item">
         <span className="file-icon">🖼️</span>
-        <span className="file-name">Logo.png</span>
+        <span className="file-name">logo.png</span>
         <span className="folder-badge folder-badge--mace">MACE</span>
         <span className="file-desc">Your custom logo for documentation</span>
       </div>
