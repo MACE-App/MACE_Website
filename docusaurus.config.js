@@ -149,9 +149,9 @@ const config = {
         {name: 'twitter:creator', content: '@cocopuff2u'},
       ],
       announcementBar: {
-        id: 'beta_notice',
-        content: '🚧 MACE is currently in beta. Latest release: <a href="https://github.com/MACE-App/MACE/releases">v1.0.0</a>',
-        backgroundColor: '#007AFF',
+        id: 'v1_release',
+        content: '🎉 MACE 1.0 is here! Latest release: <a href="https://github.com/MACE-App/MACE/releases">v1.0.0</a>',
+        backgroundColor: '#34C759',
         textColor: '#ffffff',
         isCloseable: true,
       },
