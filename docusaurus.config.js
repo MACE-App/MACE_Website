@@ -150,7 +150,7 @@ const config = {
       ],
       announcementBar: {
         id: 'v1_release',
-        content: '🎉 MACE 1.0 is here! Latest release: <a href="https://github.com/MACE-App/MACE/releases">null</a>',
+        content: '🎉 MACE 1.0 is here! Latest release: <a href="https://github.com/MACE-App/MACE/releases">v1.0.0</a>',
         backgroundColor: '#34C759',
         textColor: '#ffffff',
         isCloseable: true,
