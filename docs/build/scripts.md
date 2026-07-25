@@ -1,13 +1,27 @@
 ---
 sidebar_position: 2
 description: Create shell scripts for compliance auditing and remediation that deploy via MDM.
+title: "Scripts"
+hide_title: true
 ---
 
-# Scripts
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Shell scripts that audit compliance status and remediate non-compliant settings.</p>
-  <p className="editor-intro__sub">Deploy via MDM to continuously monitor and enforce your security baseline.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Scripts</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/terminal-wizard.webp"
+        alt="MACE mascot as a terminal wizard"
+        className="doc-hero__mascot"
+        width="400"
+        height="400"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Shell scripts that audit compliance status and remediate non-compliant settings.</p>
+      <p className="doc-hero__sub">Deploy via MDM to continuously monitor and enforce your security baseline.</p>
+    </div>
+  </div>
 </div>
 
 ## What Are Compliance Scripts?
@@ -175,7 +189,7 @@ fi
 
 **The output format matters:** Different MDMs expect different formats:
 - **Jamf Pro:** `<result>value</result>`
-- **Kandji:** Plain text output
+- **Iru:** Plain text output
 - **Intune:** Specific schema requirements
 
 MACE generates EAs in the correct format for each supported MDM.
@@ -318,8 +332,10 @@ MACE generates EAs in the correct format for each supported MDM.
 Scripts work with any MDM that supports running shell scripts on macOS:
 
 <table className="icon-table">
-  <tr><td>🟠</td><td><strong>Kandji</strong></td><td>Use Custom Scripts library item. Set to run on a schedule or once.</td></tr>
+  <tr><td>🟣</td><td><strong>Iru</strong></td><td>Use Custom Scripts library item. Set to run on a schedule or once.</td></tr>
   <tr><td>⚫</td><td><strong>Workspace ONE</strong></td><td>Use Scripts feature. Configure trigger and assignment.</td></tr>
+  <tr><td>🟤</td><td><strong>Addigy</strong></td><td>Use a Custom Software item or script policy to run on a schedule or once.</td></tr>
+  <tr><td>🔴</td><td><strong>Fleet</strong></td><td>Use Scripts to run shell scripts on enrolled Macs, on demand or via policy automation.</td></tr>
 </table>
 
 ## What Happens on the Mac

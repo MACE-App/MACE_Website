@@ -743,26 +743,6 @@
    Projects Page Styles
    ======================================== */
 
-/* Project Intro */
-.project-intro {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.project-intro__lead {
-  font-size: 1.4rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: var(--ifm-font-color-base);
-}
-
-.project-intro__sub {
-  font-size: 1rem;
-  color: var(--ifm-font-color-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 /* Project Structure Visual */
 .project-structure-visual {
   margin: 1.5rem 0;
@@ -1122,24 +1102,166 @@
    Compliance Editor Overview
    ======================================== */
 
-/* Editor Intro */
-.editor-intro {
+/* ========================================
+   Doc Page Hero
+   Title, optional mascot, and intro copy in one panel. The mascot is
+   optional — without .doc-hero__mascot the copy simply centers.
+   Pages using this set `hide_title: true` so the h1 lives in the panel.
+   ======================================== */
+.doc-hero {
+  /* Kept narrow so the art sits close to the copy instead of being
+     stranded at the edge of a full-width panel. */
+  max-width: 52rem;
+  margin: 0 auto 2rem;
+  padding: 1.5rem 2rem;
   text-align: center;
-  margin-bottom: 2rem;
+  border-radius: 20px;
+  /* Light mode: the card bg matches the page bg, so a plain white panel
+     would be invisible. A faint blue wash and tinted border give it the
+     same presence the dark panel gets for free from its darker fill. */
+  border: 1px solid rgba(0, 122, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(0, 122, 255, 0.055) 0%, rgba(0, 122, 255, 0.014) 60%, transparent 100%),
+    var(--mace-card-bg);
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.04),
+    0 8px 24px rgba(0, 122, 255, 0.06);
 }
 
-.editor-intro__lead {
-  font-size: 1.4rem;
+[data-theme='dark'] .doc-hero {
+  border-color: var(--mace-card-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 55%),
+    var(--mace-card-bg);
+  box-shadow: var(--mace-shadow-sm);
+}
+
+.doc-hero__title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--ifm-heading-color);
+  background-image: linear-gradient(135deg, #0B57D0 0%, #007AFF 45%, #35B4FF 100%);
+}
+
+[data-theme='dark'] .doc-hero__title {
+  background-image: linear-gradient(135deg, #7FB8FF 0%, #3E9BFF 45%, #86DBFF 100%);
+}
+
+/* Only go transparent where the gradient can actually paint the glyphs,
+   otherwise the title would render invisible. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .doc-hero__title {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Accent rule ties the title to the panel it sits in */
+.doc-hero__title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin: 0.6rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ifm-color-primary), #5AC8FA);
+}
+
+/* Everything stacks on one centre axis — title, art, then copy. Nothing
+   sits beside anything, so the art can never crowd the text at any width. */
+.doc-hero__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 1.15rem;
+}
+
+.doc-hero__text {
+  max-width: 34rem;
+}
+
+/* Hairlines fade outward from the art so the space either side of it
+   reads as a framed divider rather than a gap. */
+.doc-hero__figure {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.doc-hero__figure::before,
+.doc-hero__figure::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  /* Tinted to match the title's accent bar and the glow behind the art,
+     so the three read as one system rather than three separate marks. */
+  background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.4) 92%);
+}
+
+.doc-hero__figure::after {
+  background: linear-gradient(90deg, rgba(0, 122, 255, 0.4) 8%, transparent);
+}
+
+[data-theme='dark'] .doc-hero__figure::before {
+  background: linear-gradient(90deg, transparent, rgba(10, 132, 255, 0.55) 92%);
+}
+
+[data-theme='dark'] .doc-hero__figure::after {
+  background: linear-gradient(90deg, rgba(10, 132, 255, 0.55) 8%, transparent);
+}
+
+.doc-hero__mascot {
+  flex-shrink: 0;
+  width: 132px;
+  height: auto;
+  background: radial-gradient(
+    circle at 50% 54%,
+    rgba(0, 122, 255, 0.2) 0%,
+    rgba(0, 122, 255, 0.09) 42%,
+    transparent 68%
+  );
+}
+
+[data-theme='dark'] .doc-hero__mascot {
+  background: radial-gradient(
+    circle at 50% 54%,
+    rgba(10, 132, 255, 0.22) 0%,
+    rgba(10, 132, 255, 0.1) 42%,
+    transparent 68%
+  );
+}
+
+.doc-hero__lead {
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--ifm-font-color-base);
   margin-bottom: 0.5rem;
 }
 
-.editor-intro__sub {
+.doc-hero__sub {
   font-size: 1rem;
   color: var(--ifm-font-color-secondary);
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .doc-hero {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .doc-hero__title {
+    font-size: 1.9rem;
+  }
+
+  .doc-hero__mascot {
+    width: 112px;
+  }
 }
 
 /* Interface Layout Visual */

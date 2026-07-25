@@ -32,6 +32,10 @@ const config = {
 
   onBrokenLinks: 'throw',
 
+  // Ensures window.gtag always exists so blocked analytics scripts
+  // (ad blockers / privacy extensions) don't crash client-side navigation.
+  clientModules: [require.resolve('./src/gtag-fallback.js')],
+
   // SEO: Structured data and favicon links
   headTags: [
     {

@@ -1,13 +1,18 @@
 ---
 sidebar_position: 2
 description: Configure documentation content, structure, and format-specific settings for compliance guides.
+title: "Documentation Options"
+hide_title: true
 ---
 
-# Documentation Options
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Customize what goes into your documentation.</p>
-  <p className="editor-intro__sub">Control content, structure, branding, and format-specific settings.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Documentation Options</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Customize what goes into your documentation.</p>
+      <p className="doc-hero__sub">Control content, structure, branding, and format-specific settings.</p>
+    </div>
+  </div>
 </div>
 
 ## Rule Content Options

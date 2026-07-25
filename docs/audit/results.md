@@ -1,13 +1,18 @@
 ---
 sidebar_position: 2
 description: Analyze audit results, filter by status, and understand what each compliance check found.
+title: "Audit Results"
+hide_title: true
 ---
 
-# Audit Results
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">View, filter, edit, and understand your compliance audit results.</p>
-  <p className="editor-intro__sub">Every rule's status, what was checked, and what was found.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Audit Results</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">View, filter, edit, and understand your compliance audit results.</p>
+      <p className="doc-hero__sub">Every rule's status, what was checked, and what was found.</p>
+    </div>
+  </div>
 </div>
 
 ## Results Overview

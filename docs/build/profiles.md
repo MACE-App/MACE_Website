@@ -1,13 +1,27 @@
 ---
 sidebar_position: 3
 description: Build mobileconfig profiles that enforce macOS security settings through MDM.
+title: "Configuration Profiles"
+hide_title: true
 ---
 
-# Configuration Profiles
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">XML files that configure macOS settings automatically via MDM.</p>
-  <p className="editor-intro__sub">Settings are enforced by macOS itself. Users can't change them.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Configuration Profiles</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/config-profiles.webp"
+        alt="MACE mascot adjusting configuration profile settings"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">XML files that configure macOS settings automatically via MDM.</p>
+      <p className="doc-hero__sub">Settings are enforced by macOS itself. Users can't change them.</p>
+    </div>
+  </div>
 </div>
 
 ## What Are Configuration Profiles?

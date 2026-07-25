@@ -1,13 +1,18 @@
 ---
 sidebar_position: 2
 description: Customize compliance rules by adjusting ODV values, excluding rules, and tailoring baselines to your organization.
+title: "Customizing Rules"
+hide_title: true
 ---
 
-# Customizing Rules
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Full control over every aspect of your security rules.</p>
-  <p className="editor-intro__sub">Edit check scripts, fix commands, ODVs, profiles, and more. MACE preserves your customizations while keeping baseline rules intact.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Customizing Rules</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Full control over every aspect of your security rules.</p>
+      <p className="doc-hero__sub">Edit check scripts, fix commands, ODVs, profiles, and more. MACE preserves your customizations while keeping baseline rules intact.</p>
+    </div>
+  </div>
 </div>
 
 ## Understanding Rules

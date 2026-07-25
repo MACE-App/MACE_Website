@@ -94,6 +94,39 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 
 That's it! You're ready to start building your first compliance baseline.
 
+## Alternative Installation Methods
+
+Prefer the command line, or deploying MACE across a fleet? It's also available through Homebrew and Installomator.
+
+:::note[Stable releases only]
+Homebrew and Installomator always install the latest **stable** release. Beta and pre-release builds aren't published to these channels — to try a beta, download the pre-release <code>.dmg</code> directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases).
+:::
+
+### Homebrew
+
+Install the [Homebrew cask](https://formulae.brew.sh/cask/mace):
+
+```bash
+brew install --cask mace
+```
+
+Upgrade or remove it later with:
+
+```bash
+brew upgrade --cask mace
+brew uninstall --cask mace
+```
+
+### Installomator
+
+For MDM-driven or scripted deployments, MACE ships as an [Installomator](https://github.com/Installomator/Installomator) label. Install the latest release with the `mace` label:
+
+```bash
+Installomator.sh mace
+```
+
+This pulls the latest signed `.dmg` directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases) and installs MACE into `/Applications`, making it easy to package for Jamf Pro, Munki, or any MDM.
+
 ## Automatic Updating
 
 MACE keeps itself up to date so you don't have to.
@@ -141,7 +174,7 @@ To completely remove MACE from your Mac:
   <tr><td>🔧</td><td>If you installed the audit helper, delete <code>/Library/LaunchDaemons/com.mace.helper.plist</code></td></tr>
 </table>
 
-:::tip Coming Soon
+:::tip[Coming Soon]
 A built-in uninstaller is planned for a future release to make this process even easier.
 :::
 

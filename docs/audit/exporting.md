@@ -1,13 +1,18 @@
 ---
 sidebar_position: 3
 description: Export audit reports to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format for documentation and auditors.
+title: "Exporting Reports"
+hide_title: true
 ---
 
-# Exporting Reports
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Export audit results to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format.</p>
-  <p className="editor-intro__sub">Generate professional reports for auditors, documentation, and compliance tracking.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Exporting Reports</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Export audit results to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format.</p>
+      <p className="doc-hero__sub">Generate professional reports for auditors, documentation, and compliance tracking.</p>
+    </div>
+  </div>
 </div>
 
 ## Export Formats
@@ -120,7 +125,7 @@ When your audit finishes, click **Export Preview** in the results toolbar to ope
 
 When the preview looks right, click **Export** and choose a save location.
 
-:::note STIG CKL & CKLB
+:::note[STIG CKL & CKLB]
 The live preview covers HTML, PDF, XLSX, CSV, and JSON. To produce a **STIG CKL** or **CKLB** checklist, use the **STIG Checklist** button in the results toolbar instead — these formats map your results onto a DISA checklist rather than a formatted report.
 :::
 

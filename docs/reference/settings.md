@@ -1,13 +1,27 @@
 ---
 sidebar_position: 1
 description: Configure MACE settings including auto-save, appearance, theme, and cache management.
+title: "Settings"
+hide_title: true
 ---
 
-# Settings
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Customize MACE to fit your workflow.</p>
-  <p className="editor-intro__sub">Configure auto-save, appearance, and manage cached data.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Settings</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/settings-gear.webp"
+        alt="MACE mascot holding a gear and a settings panel"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Customize MACE to fit your workflow.</p>
+      <p className="doc-hero__sub">Configure auto-save, appearance, and manage cached data.</p>
+    </div>
+  </div>
 </div>
 
 <div className="themed-image">

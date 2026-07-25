@@ -1,13 +1,18 @@
 ---
 sidebar_position: 2
 description: Learn the mSCP YAML schema for custom rules including required and optional fields.
+title: "Rule Structure"
+hide_title: true
 ---
 
-# Rule Structure
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Learn the mSCP YAML format for writing custom rules.</p>
-  <p className="editor-intro__sub">Required fields, optional fields, and how they all fit together.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Rule Structure</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Learn the mSCP YAML format for writing custom rules.</p>
+      <p className="doc-hero__sub">Required fields, optional fields, and how they all fit together.</p>
+    </div>
+  </div>
 </div>
 
 ## Basic Structure

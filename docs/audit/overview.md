@@ -1,13 +1,27 @@
 ---
 sidebar_position: 1
 description: Run real-time compliance audits on your Mac and identify compliant, non-compliant, and manual review items.
+title: "Audit"
+hide_title: true
 ---
 
-# Audit
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Run compliance checks directly on your Mac and see results in real-time.</p>
-  <p className="editor-intro__sub">Instantly identify what's compliant, what's not, and what needs manual review.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Audit</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/audit-check.webp"
+        alt="MACE mascot holding a completed audit checklist"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Run compliance checks directly on your Mac and see results in real-time.</p>
+      <p className="doc-hero__sub">Instantly identify what's compliant, what's not, and what needs manual review.</p>
+    </div>
+  </div>
 </div>
 
 <div className="themed-image themed-image--large">

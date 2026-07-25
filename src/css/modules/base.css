@@ -474,25 +474,26 @@ code {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Logo peeking up from copyright bar */
+/* Mascot peeking up from copyright bar (rises on hover) */
 .footer--dark .footer__copyright::before {
   content: '';
   position: absolute;
-  top: -35px;
+  top: -42px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 100px;
   height: 80px;
-  background: url('/img/logo.png') no-repeat center top;
+  background: url('/img/mascots/peek.webp') no-repeat center top;
   background-size: contain;
-  clip-path: inset(0 0 55% 0);
-  opacity: 0.9;
+  clip-path: inset(0 0 50% 0);
+  opacity: 0.92;
   transition: all 0.3s ease;
 }
 
+.footer--dark:hover .footer__copyright::before,
 .footer--dark .footer__copyright:hover::before {
-  clip-path: inset(0 0 35% 0);
-  top: -50px;
+  clip-path: inset(0 0 0 0);
+  top: -72px;
   opacity: 1;
 }
 

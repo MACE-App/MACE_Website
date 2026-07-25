@@ -1,13 +1,27 @@
 ---
 sidebar_position: 1
 description: Create custom compliance rules using mSCP YAML format that integrate with MACE features.
+title: "Custom Rules"
+hide_title: true
 ---
 
-# Custom Rules
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Create your own compliance rules using the mSCP YAML format.</p>
-  <p className="editor-intro__sub">Custom rules integrate with baseline rules and work with Audit, Build, and Documentation.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Custom Rules</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/rule-builder.webp"
+        alt="MACE mascot holding a rule checklist and a wrench"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Create your own compliance rules using the mSCP YAML format.</p>
+      <p className="doc-hero__sub">Custom rules integrate with baseline rules and work with Audit, Build, and Documentation.</p>
+    </div>
+  </div>
 </div>
 
 ## Why Create Custom Rules?

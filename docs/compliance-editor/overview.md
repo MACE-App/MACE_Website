@@ -1,13 +1,18 @@
 ---
 sidebar_position: 1
 description: Browse, search, and customize hundreds of mSCP compliance rules in MACE's central editor interface.
+title: "Compliance Editor"
+hide_title: true
 ---
 
-# Compliance Editor
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Your central workspace for managing security rules.</p>
-  <p className="editor-intro__sub">Browse, search, and customize hundreds of compliance rules from mSCP baselines all in one powerful interface.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Compliance Editor</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Your central workspace for managing security rules.</p>
+      <p className="doc-hero__sub">Browse, search, and customize hundreds of compliance rules from mSCP baselines all in one powerful interface.</p>
+    </div>
+  </div>
 </div>
 
 <div className="themed-image themed-image--large">

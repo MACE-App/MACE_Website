@@ -1,13 +1,18 @@
 ---
 sidebar_position: 1
 description: Generate professional compliance documentation in PDF, HTML, Markdown, AsciiDoc, XLSX, CSV, or JSON format with custom branding.
+title: "Documentation"
+hide_title: true
 ---
 
-# Documentation
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Generate professional compliance documentation in seven formats, with a live preview.</p>
-  <p className="editor-intro__sub">Create guides for auditors, technical teams, or management with customizable content and branding.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Documentation</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Generate professional compliance documentation in seven formats, with a live preview.</p>
+      <p className="doc-hero__sub">Create guides for auditors, technical teams, or management with customizable content and branding.</p>
+    </div>
+  </div>
 </div>
 
 <div className="themed-image themed-image--large">
@@ -80,7 +85,7 @@ Documentation generates comprehensive guides from your compliance baseline. Inst
   </div>
 </div>
 
-:::tip Live Preview
+:::tip[Live Preview]
 The Documentation Builder includes a live preview. Switch formats with the tabs at the top, toggle content and structure options in the sidebar, and the preview updates in real time — what you see is what you generate. Use **Show Raw** to inspect the underlying output.
 :::
 

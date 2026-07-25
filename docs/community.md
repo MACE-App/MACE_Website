@@ -1,11 +1,13 @@
 ---
 sidebar_position: 99
+sidebar_label: Community
 description: Join the MACE community to share feedback, report bugs, suggest features, and connect with Mac admins.
 hide_title: true
 ---
 
 <div className="community-hero">
-  <h2><span className="wave">👋</span> Welcome to the MACE Community</h2>
+  <img src="/img/mascots/community-wave.webp" alt="MACE mascot waving hello" className="community-hero__mascot" width="380" height="337" />
+  <h2>Welcome to the MACE Community</h2>
   <p>Free and built with <span className="pulse">❤️</span> for Mac admins everywhere.</p>
 </div>
 
@@ -15,17 +17,17 @@ Your input directly shapes what gets built next:
 
 <div className="community-grid community-grid--three">
   <a href="https://github.com/mace-app/mace/discussions" className="community-card community-card--link">
-    <span className="community-card__icon">💬</span>
+    <img src="/img/mascots/discussion-bubble.webp" alt="" className="community-card__mascot" width="440" height="440" loading="lazy" />
     <div className="community-card__title">Discussions</div>
     <p className="community-card__desc">Ask questions, share your workflow, and connect with other Mac admins.</p>
   </a>
   <a href="https://github.com/mace-app/mace/discussions/categories/ideas" className="community-card community-card--link">
-    <span className="community-card__icon">💡</span>
+    <img src="/img/mascots/idea-spark.webp" alt="" className="community-card__mascot" width="440" height="440" loading="lazy" />
     <div className="community-card__title">Feature Ideas</div>
     <p className="community-card__desc">Suggest and vote on features. Popular requests get prioritized.</p>
   </a>
   <a href="https://github.com/mace-app/mace/issues" className="community-card community-card--link">
-    <span className="community-card__icon">🐛</span>
+    <img src="/img/mascots/bug-hunter.webp" alt="" className="community-card__mascot" width="440" height="440" loading="lazy" />
     <div className="community-card__title">Report Bugs</div>
     <p className="community-card__desc">Found something broken? Let us know so we can fix it.</p>
   </a>
@@ -33,12 +35,12 @@ Your input directly shapes what gets built next:
 
 <div className="community-grid community-grid--two">
   <a href="https://macadmins.slack.com/app_redirect?channel=mace-app" className="community-card community-card--link">
-    <span className="community-card__icon">💬</span>
+    <img src="/img/mascots/slack-channel.webp" alt="" className="community-card__mascot" width="440" height="440" loading="lazy" />
     <div className="community-card__title">#mace-app on Mac Admins Slack</div>
     <p className="community-card__desc">The dedicated MACE channel. Ask questions, share tips, and connect directly with the community.</p>
   </a>
   <a href="https://macadmins.slack.com/archives/C0158JKQTC5" className="community-card community-card--link">
-    <span className="community-card__icon">🔒</span>
+    <img src="/img/mascots/mscp-compliance.webp" alt="" className="community-card__mascot" width="440" height="440" loading="lazy" />
     <div className="community-card__title">#macos_security_compliance</div>
     <p className="community-card__desc">The broader mSCP community channel for compliance discussions and questions about the underlying framework.</p>
   </a>
@@ -50,17 +52,17 @@ You don't have to write code to help MACE grow. Here's how the project knows it'
 
 <div className="impact-cards">
   <div className="impact-card">
-    <span className="impact-card__icon">⭐</span>
+    <img src="/img/mascots/star-github.webp" alt="" className="impact-card__mascot" width="440" height="440" loading="lazy" />
     <strong className="impact-card__label">Star on GitHub</strong>
     <p className="impact-card__desc">Stars show the project matters. Every one counts.</p>
   </div>
   <div className="impact-card">
-    <span className="impact-card__icon">📢</span>
+    <img src="/img/mascots/spread-word.webp" alt="" className="impact-card__mascot" width="440" height="440" loading="lazy" />
     <strong className="impact-card__label">Spread the Word</strong>
     <p className="impact-card__desc">Tell other Mac admins, post about it, mention it in Slack.</p>
   </div>
   <div className="impact-card">
-    <span className="impact-card__icon">📥</span>
+    <img src="/img/mascots/drive-downloads.webp" alt="" className="impact-card__mascot" width="440" height="440" loading="lazy" />
     <strong className="impact-card__label">Drive Downloads</strong>
     <p className="impact-card__desc">Share at meetups, conferences, or in your team.</p>
   </div>

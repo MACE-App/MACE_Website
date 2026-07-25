@@ -1,13 +1,27 @@
 ---
 sidebar_position: 4
 description: Create and manage MACE projects containing compliance frameworks, customized rules, and deployment artifacts.
+title: "Projects"
+hide_title: true
 ---
 
-# Projects
-
-<div className="project-intro">
-  <p className="project-intro__lead">Projects are how MACE organizes your compliance work.</p>
-  <p className="project-intro__sub">Each project contains your selected framework, customized rules, mSCP files, and everything MACE needs to build deployment-ready outputs.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Projects</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/projects-build.webp"
+        alt="MACE mascot in a hard hat holding project blueprints"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Projects are how MACE organizes your compliance work.</p>
+      <p className="doc-hero__sub">Each project contains your selected framework, customized rules, mSCP files, and everything MACE needs to build deployment-ready outputs.</p>
+    </div>
+  </div>
 </div>
 
 ## Creating a Project

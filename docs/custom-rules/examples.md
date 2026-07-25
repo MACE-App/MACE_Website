@@ -1,13 +1,18 @@
 ---
 sidebar_position: 3
 description: Sample custom rules for preference checks, third-party apps, ODV values, and profile-based enforcement.
+title: "Examples"
+hide_title: true
 ---
 
-# Examples
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Sample custom rules to learn from and adapt.</p>
-  <p className="editor-intro__sub">Copy these examples and modify them for your organization's needs.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Examples</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Sample custom rules to learn from and adapt.</p>
+      <p className="doc-hero__sub">Copy these examples and modify them for your organization's needs.</p>
+    </div>
+  </div>
 </div>
 
 ## Basic Preference Check

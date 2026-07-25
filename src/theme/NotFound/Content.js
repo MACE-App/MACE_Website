@@ -60,7 +60,7 @@ export default function NotFoundContent() {
       </div>
       <div className={styles.content}>
         <img
-          src="/img/logo.png"
+          src="/img/mascots/confused-404.webp"
           alt="MACE mascot looking confused"
           className={styles.mascot}
         />

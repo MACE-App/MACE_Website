@@ -1,13 +1,18 @@
 ---
 sidebar_position: 4
 description: Generate Declarative Device Management declarations for Apple's modern autonomous device management.
+title: "Declarative Device Management (DDM)"
+hide_title: true
 ---
 
-# Declarative Device Management (DDM)
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Apple's modern device management framework for autonomous policy enforcement.</p>
-  <p className="editor-intro__sub">The device enforces settings on its own. No more waiting for MDM commands.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Declarative Device Management (DDM)</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Apple's modern device management framework for autonomous policy enforcement.</p>
+      <p className="doc-hero__sub">The device enforces settings on its own. No more waiting for MDM commands.</p>
+    </div>
+  </div>
 </div>
 
 ## What is DDM?
@@ -282,9 +287,9 @@ DDM is supported by major MDM solutions. Each MDM has its own interface for conf
     </div>
   </div>
   <div className="mdm-compat-item">
-    <span className="mdm-compat-item__icon">🟠</span>
+    <span className="mdm-compat-item__icon">🟣</span>
     <div className="mdm-compat-item__details">
-      <strong>Kandji</strong>
+      <strong>Iru</strong>
       <span>DDM integrated into library items</span>
     </div>
   </div>
@@ -293,6 +298,20 @@ DDM is supported by major MDM solutions. Each MDM has its own interface for conf
     <div className="mdm-compat-item__details">
       <strong>Workspace ONE</strong>
       <span>DDM support for macOS devices</span>
+    </div>
+  </div>
+  <div className="mdm-compat-item">
+    <span className="mdm-compat-item__icon">🟤</span>
+    <div className="mdm-compat-item__details">
+      <strong>Addigy</strong>
+      <span>DDM via declarative library items and status subscriptions</span>
+    </div>
+  </div>
+  <div className="mdm-compat-item">
+    <span className="mdm-compat-item__icon">🔴</span>
+    <div className="mdm-compat-item__details">
+      <strong>Fleet</strong>
+      <span>DDM for OS updates and supported declarations</span>
     </div>
   </div>
 </div>

@@ -85,14 +85,17 @@
   filter: drop-shadow(0 8px 30px rgba(0, 122, 255, 0.4));
 }
 
+/* Use transform-level properties (rotate/translate) so the mascot's motion
+   is painted, not laid out — otherwise animating margin changes the page
+   height every frame and makes the footer bob up and down. */
 @keyframes wobble {
-  0%, 100% { transform: rotate(-8deg); }
-  50% { transform: rotate(8deg); }
+  0%, 100% { rotate: -8deg; }
+  50% { rotate: 8deg; }
 }
 
 @keyframes float {
-  0%, 100% { margin-top: 0; }
-  50% { margin-top: -10px; }
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
 }
 
 /* Glitch effect on 404 */

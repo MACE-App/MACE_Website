@@ -1,13 +1,18 @@
 ---
 sidebar_position: 1
 description: Generate deployment-ready compliance artifacts including scripts, configuration profiles, and DDM declarations.
+title: "Build"
+hide_title: true
 ---
 
-# Build
-
-<div className="editor-intro">
-  <p className="editor-intro__lead">Generate deployment-ready artifacts from your compliance baseline.</p>
-  <p className="editor-intro__sub">Scripts, configuration profiles, DDM declarations, and more with a single build operation.</p>
+<div className="doc-hero">
+  <h1 className="doc-hero__title">Build</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">Generate deployment-ready artifacts from your compliance baseline.</p>
+      <p className="doc-hero__sub">Scripts, configuration profiles, DDM declarations, and more with a single build operation.</p>
+    </div>
+  </div>
 </div>
 
 <div className="themed-image themed-image--large">
@@ -286,7 +291,7 @@ The Build Hub organizes outputs into three main columns — **Scripts**, **Profi
       <span className="build-option-item__icon">📊</span>
       <strong>MDM Reporting — Extension Attributes</strong>
     </div>
-    <p>Reports failed rules to your MDM for Smart Groups and dashboards. Generates extension-attribute scripts for <strong>Jamf, Kandji, Intune, and WS1</strong>.</p>
+    <p>Reports failed rules to your MDM for Smart Groups and dashboards. Generates extension-attribute scripts for <strong>Jamf, Iru, Intune, WS1, Addigy, and Fleet</strong>.</p>
   </div>
 </div>
 
@@ -489,9 +494,23 @@ In addition to generating files locally, the Build Hub can upload your complianc
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🟣</span>
-      <strong>Kandji</strong>
+      <strong>Iru</strong> <span className="badge badge--warning">Beta</span>
     </div>
-    <p>Kandji export is planned for a future release.</p>
+    <p>Connect to your Iru tenant to upload MACE's compliance scripts, profiles, and custom attributes directly. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🟤</span>
+      <strong>Addigy</strong> <span className="badge badge--warning">Beta</span>
+    </div>
+    <p>Connect to your Addigy account to push MACE's compliance profiles, scripts, and attribute checks. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔴</span>
+      <strong>Fleet</strong> <span className="badge badge--warning">Beta</span>
+    </div>
+    <p>Connect to your Fleet instance to deploy MACE's compliance scripts and policies. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
   </div>
 </div>
 
