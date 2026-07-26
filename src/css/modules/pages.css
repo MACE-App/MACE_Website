@@ -3883,3 +3883,150 @@
   line-height: 1.5;
 }
 
+
+/* ========================================
+   Intro Page - mSCP Attribution Callout
+   ======================================== */
+
+.mscp-callout {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--mace-card-bg);
+  border: 1px solid var(--mace-card-border);
+  border-radius: 12px;
+}
+
+.mscp-callout__logo {
+  width: 56px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.mscp-callout__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.mscp-callout__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
+
+.mscp-callout__desc {
+  font-size: 0.88rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.5;
+}
+
+.mscp-callout__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .mscp-callout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+}
+
+/* ========================================
+   Intro Page - Section Mascot
+   ======================================== */
+
+.intro-mascot {
+  float: right;
+  width: 150px;
+  height: auto;
+  margin: 0 0 1rem 1.5rem;
+  shape-outside: circle(50%);
+}
+
+@media (max-width: 768px) {
+  .intro-mascot {
+    float: none;
+    display: block;
+    width: 120px;
+    margin: 0 auto 1rem;
+  }
+}
+
+.intro-mascot--left {
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .intro-mascot--left {
+    float: none;
+    margin: 0 auto 1rem;
+  }
+}
+
+/* ========================================
+   Intro Page - Download CTA
+   ======================================== */
+
+.intro-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.intro-cta__mascot {
+  width: 150px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.intro-cta__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.intro-cta__body p {
+  margin: 0;
+}
+
+.intro-cta__note {
+  font-size: 0.92rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+@media (max-width: 768px) {
+  .intro-cta {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .intro-cta__mascot {
+    width: 120px;
+  }
+
+  .intro-cta__body {
+    align-items: center;
+  }
+}
+
+.intro-cta__body .button {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+}

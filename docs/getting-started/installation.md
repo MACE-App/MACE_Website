@@ -37,7 +37,7 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 </div>
 
 <p style={{textAlign: 'center', marginTop: '1.5rem'}}>
-<a href="https://github.com/MACE-App/MACE/releases" class="button button--primary button--lg">Download MACE</a>
+<a href="https://github.com/MACE-App/MACE/releases/latest" class="button button--primary button--lg">Download MACE</a>
 </p>
 
 ---
