@@ -178,12 +178,12 @@ html {
 
 /* Container for themed screenshots */
 .themed-image {
-  max-width: 500px;
-  margin: 1.5rem auto;
+  max-width: 640px;
+  margin: 1.75rem auto;
 }
 
 .themed-image--wide {
-  max-width: 700px;
+  max-width: 880px;
 }
 
 .themed-image--large {
@@ -194,6 +194,170 @@ html {
   width: 100%;
   display: block;
   border-radius: 12px;
+}
+
+/* Screenshots are click-to-expand wherever they appear, themed or not. */
+.themed-image img,
+img[src*="/img/screenshots/"],
+.zoomable img,
+img.zoomable {
+  cursor: zoom-in;
+  transition: transform 0.15s ease;
+}
+
+.themed-image img:hover,
+img[src*="/img/screenshots/"]:hover,
+.zoomable img:hover,
+img.zoomable:hover {
+  transform: scale(1.01);
+}
+
+/* Linked screenshots keep link behavior, so keep the link cursor too. */
+a img[src*="/img/screenshots/"] {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .themed-image img,
+  img[src*="/img/screenshots/"],
+  .zoomable img,
+  img.zoomable {
+    transition: none;
+  }
+
+  .themed-image img:hover,
+  img[src*="/img/screenshots/"]:hover,
+  .zoomable img:hover,
+  img.zoomable:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   Image Lightbox (click to expand)
+   ======================================== */
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  /* Tinted rather than pure black: reads as deliberate in light mode and
+     still separates a dark screenshot from the page behind it. */
+  background: rgba(17, 24, 39, 0.78);
+  backdrop-filter: blur(6px);
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+html[data-theme='dark'] .image-lightbox {
+  background: rgba(0, 0, 0, 0.86);
+}
+
+.image-lightbox.is-open {
+  opacity: 1;
+}
+
+/* Opening or fading out: not interactive, so clicks fall through cleanly. */
+.image-lightbox:not(.is-open) {
+  pointer-events: none;
+}
+
+.image-lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+  /* No border or outline: the screenshots carry their own window chrome and
+     transparent padding, so any frame here boxes the padding, not the app. */
+  /* Default is zoom-out (a click dismisses). Only an image with more detail
+     left to show gets the zoom-in cursor, via .can-zoom below. */
+  cursor: zoom-out;
+  transform: scale(0.98);
+  transition: transform 0.2s ease;
+}
+
+.image-lightbox.can-zoom .image-lightbox__img {
+  cursor: zoom-in;
+}
+
+.image-lightbox.is-open .image-lightbox__img {
+  transform: scale(1);
+}
+
+/* Second click on the image: drop the fit-to-screen cap and show it at full
+   resolution, with the overlay scrolling to pan. */
+.image-lightbox.is-zoomed {
+  overflow: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  cursor: default;
+}
+
+.image-lightbox.is-zoomed .image-lightbox__img {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  /* Flex centering plus an SVG mark: no font baseline to fight. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.image-lightbox__close svg {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.image-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.image-lightbox__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .image-lightbox {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-lightbox,
+  .image-lightbox__img {
+    transition: none;
+  }
 }
 
 /* Light mode - show light, hide dark */

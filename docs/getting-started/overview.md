@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-description: Learn how MACE works — from government-sourced security data through customization and deployment to your Mac fleet.
+description: Learn how MACE works, from government-sourced security data through customization and deployment to your Mac fleet.
 ---
 
 # How MACE Works
@@ -9,57 +9,119 @@ MACE is a native macOS app that takes government-sourced security compliance dat
 
 ## Where the Data Comes From
 
-The security rules inside MACE originate from the **macOS Security Compliance Project (mSCP)** — a publicly hosted project on GitHub maintained in collaboration with NIST and various U.S. government agencies and security teams. mSCP continuously pulls from a wide range of government and industry security standards, packages that guidance into structured YAML — rules, baselines, and remediation scripts — and publishes it publicly. New frameworks and updates are added regularly as the project evolves.
+<img src="/img/mascots/mscp-compliance.webp" alt="" className="intro-mascot" width="440" height="440" loading="lazy" />
 
-MACE ingests that data directly so you always have access to the latest government-vetted security guidance. On top of that, MACE is actively building its own hardcoded rule library to surface additional compliance options and mappings that aren't yet part of the public mSCP project — giving you access to more coverage, sooner.
+The security rules inside MACE come straight from the **[macOS Security Compliance Project (mSCP)](https://github.com/usnistgov/macos_security)**, a publicly hosted project on GitHub maintained in collaboration with NIST and various U.S. government agencies and security teams. It takes guidance from a wide range of government and industry security standards and turns it into structured YAML: rules, baselines, and remediation scripts, all published in the open. New frameworks and revisions land regularly.
+
+MACE reads from the project's **`main` branch**. It's designed around the **mSCP 2.0 unified codebase**, which is where the single OS-agnostic rule set lives, rather than the older per-release branches that each covered one version of macOS.
+
+Because MACE reads that data directly, you're always working against current government-vetted guidance. MACE also maintains a built-in rule library of its own for compliance options and mappings that haven't made it into the public project yet, so you get that coverage sooner.
+
+## Staying in Sync with mSCP
+
+MACE pulls mSCP **straight from GitHub** and keeps a copy on disk. The rules you see are the ones the project published today, not whatever happened to be current the last time MACE shipped. There is a bundled copy inside the app, but it's a fallback for working offline.
+
+<div className="how-it-works-steps">
+  <div className="how-step">
+    <div className="how-step__number">1</div>
+    <div className="how-step__content">
+      <strong>Pulls straight from the source</strong>
+      <p>Open MACE and it checks GitHub for the latest version of the mSCP repository.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">2</div>
+    <div className="how-step__content">
+      <strong>Caches it locally</strong>
+      <p>The repo lands in <code>~/Library/Application Support/MACE/RepoCache</code>. Browsing rules and baselines reads from there, so nothing waits on the network.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">3</div>
+    <div className="how-step__content">
+      <strong>Works offline</strong>
+      <p>Every MACE release carries a full copy of mSCP frozen on the day it shipped. A build released on June 24 has the June 24 library inside it. That's what an air-gapped or offline Mac falls back to, so everything still works, you're just pinned to that date until the Mac can reach GitHub again.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">4</div>
+    <div className="how-step__content">
+      <strong>Syncs when you open a project</strong>
+      <p>A new project gets a clone of the current mSCP. When you open an older one, MACE compares it against the latest and asks whether you want to upgrade. It won't rewrite your work behind your back.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">5</div>
+    <div className="how-step__content">
+      <strong>Shows you exactly what changed</strong>
+      <p>Before you accept an upgrade, MACE lists every rule and file being updated, counts how many are new, removed, or relevant to your baseline, and links out to the full mSCP changelog. Your own edits and exported baselines come through untouched.</p>
+    </div>
+  </div>
+</div>
+
+<div className="themed-image themed-image--wide">
+  <img src="/img/screenshots/project-updates-light.webp" alt="MACE prompting that newer mSCP content is available, listing the files being updated" className="img-light" />
+  <img src="/img/screenshots/project-updates-dark.webp" alt="MACE prompting that newer mSCP content is available, listing the files being updated" className="img-dark" />
+</div>
+
+:::tip[Living project, cutting-edge rules]
+mSCP moves quickly, so don't be surprised if upgrade prompts turn up often. That's the deal: a bit of churn in return for building against current guidance instead of a copy that's a year stale. And it's always your call. Nothing changes until you approve it.
+:::
 
 ## What MACE Does With It
 
-Once ingested, MACE gives you a native macOS interface to work with that data end-to-end:
+From there, the whole job happens in the app:
 
 <div className="how-it-works-steps">
   <div className="how-step">
     <div className="how-step__number">1</div>
     <div className="how-step__content">
       <strong>Ingest</strong>
-      <p>MACE loads the mSCP rule library and baselines so you can browse 800+ security rules across every supported framework — no command line, no Python, no manual YAML.</p>
+      <p>MACE loads the mSCP rule library and baselines so you can browse 800+ security rules across every supported framework, without touching the command line or hand-editing YAML.</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">2</div>
     <div className="how-step__content">
       <strong>Customize</strong>
-      <p>Enable or disable rules for your environment, set organization-defined values (ODVs), and tailor baselines to your specific requirements. You can also write and add your own custom rules to MACE — covering anything not already in the mSCP library.</p>
+      <p>Turn rules on or off, set organization-defined values (ODVs), and shape baselines around what your environment actually needs. Every change is written back into the project on disk, the same edits you'd otherwise make by hand at the command line. Need something mSCP doesn't cover? Write your own rules and add them.</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">3</div>
     <div className="how-step__content">
       <strong>Build</strong>
-      <p>Generate deployment-ready output from your customized baseline — shell scripts, configuration profiles (.mobileconfig), declarative device management (DDM), and signed profiles ready for your MDM.</p>
+      <p>Send your baseline through <a href="#two-engines-one-interface">the engine of your choice</a> and get back deployment-ready output: shell scripts, configuration profiles (.mobileconfig), declarative device management (DDM), and signed profiles for your MDM.</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">4</div>
     <div className="how-step__content">
       <strong>Audit</strong>
-      <p>Run real-time compliance checks directly on any Mac to verify what's passing, what's failing, and what needs attention — before and after deployment.</p>
+      <p>Check compliance on a real Mac, before you deploy and again afterward, to see what's passing and what needs attention.</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">5</div>
     <div className="how-step__content">
       <strong>Document</strong>
-      <p>Generate human-readable compliance documentation for your security team, auditors, or leadership — showing exactly which controls are in place and why.</p>
+      <p>Produce readable documentation for your security team, your auditors, or leadership, showing which controls are in place and why.</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">6</div>
     <div className="how-step__content">
       <strong>Deploy</strong>
-      <p>Push your validated build to your production fleet via MDM. Use the audit scripts and extension attributes generated by MACE to monitor ongoing compliance across every device.</p>
+      <p>Push the validated build to your production fleet through your MDM, then keep an eye on it with the audit scripts and extension attributes MACE generated along the way.</p>
     </div>
   </div>
+</div>
+
+Most of that happens in the compliance editor, where every rule in your baseline is one list away and its details are editable on the spot:
+
+<div className="themed-image themed-image--wide">
+  <img src="/img/screenshots/compliance-editor-light.webp" alt="The MACE compliance editor showing a rule list and editable rule values" className="img-light" />
+  <img src="/img/screenshots/compliance-editor-dark.webp" alt="The MACE compliance editor showing a rule list and editable rule values" className="img-dark" />
 </div>
 
 ## The MACE Workflow
@@ -129,9 +191,9 @@ Build once, test on a small fleet, then deploy everywhere.
   </div>
 </div>
 
-## Core Features
+### Where Each Step Happens
 
-Each step in the workflow maps to a core feature in MACE:
+Each phase above lives in its own part of the app:
 
 <div className="pillars-container">
   <div className="pillars-row">
@@ -171,18 +233,18 @@ Each step in the workflow maps to a core feature in MACE:
 
 ## Two Engines, One Interface
 
-All of those features feed into one moment: generating your output. When you're ready to build, MACE gives you two engine options to process your customized baseline — same rules, same settings, your choice of how to run it:
+Once you've finished adding, removing, and tuning rules, that project has to become something you can actually deploy. That's the engine's job, and MACE gives you two to choose from. Both read the same project and the same settings; what differs is how they run:
 
 <div className="engine-comparison">
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Build</h3>
+      <h3>mSCP Engine</h3>
     </div>
-    <p>Uses mSCP scripts with default options. Customize by editing files directly.</p>
+    <p>The original Python scripts, run exactly as the project intends. You get what the scripts expose, the same way you always have.</p>
     <ul>
       <li>Standard mSCP output formats</li>
-      <li>Python-based execution</li>
+      <li>Only the options the scripts offer</li>
       <li>Full mSCP compatibility</li>
     </ul>
     <span className="engine-card__tag">Official Scripts</span>
@@ -191,17 +253,58 @@ All of those features feed into one moment: generating your output. When you're 
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
       <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
-      <h3>M.A.C.E. Build</h3>
+      <h3>M.A.C.E. Engine</h3>
     </div>
-    <p>Built on Swift, the M.A.C.E. engine is faster, easier to use, and more customizable than mSCP's Python scripts — no manual file edits required.</p>
+    <p>Built in Swift. Tweak almost everything about every output, with options the scripts were never built to expose.</p>
     <ul>
-      <li>Extended export options</li>
-      <li>Profile signing support</li>
-      <li>Custom branding for docs</li>
-      <li>No Python required</li>
+      <li>Tweak almost every setting on every output</li>
+      <li>Visual and content control across Build, Audit, and Documentation</li>
+      <li>Direct MDM export, and more on the way</li>
     </ul>
     <span className="engine-card__tag">Fast &amp; Customizable</span>
   </div>
 </div>
 
-You can switch between engines at any time. Your project and customizations remain the same.
+Switch between them whenever you like. Your project and everything you've customized stays put.
+
+### What Runs Under the Hood
+
+MACE brings its own runtime along, so there's nothing for you to install and nothing that touches the Python or development setup already on your Mac.
+
+<div className="how-it-works-steps">
+  <div className="how-step">
+    <div className="how-step__number">1</div>
+    <div className="how-step__content">
+      <strong>mSCP Engine: bundled Python and Ruby</strong>
+      <p>Python is bundled inside the app, and Ruby already comes with macOS. The first time you run the mSCP engine, MACE checks what dependencies mSCP currently wants (they change as the project moves) and installs them into their own environments at <code>&#126;/Library/Application Support/MACE/python_env</code> and <code>&#126;/Library/Application Support/MACE/ruby_gems</code>. Nothing goes system-wide.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">2</div>
+    <div className="how-step__content">
+      <strong>Set up once</strong>
+      <p>Those environments stick around after that first run. Later builds only check whether mSCP's dependency list has changed, so you sit through setup once rather than on every build.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">3</div>
+    <div className="how-step__content">
+      <strong>M.A.C.E. Engine: native Swift</strong>
+      <p>The M.A.C.E. engine skips all of that and does the work in native Swift, so there's no Python, no gems, and no dependency check to wait on.</p>
+    </div>
+  </div>
+  <div className="how-step">
+    <div className="how-step__number">4</div>
+    <div className="how-step__content">
+      <strong>You pick what comes out</strong>
+      <p>Either engine gives you what you asked for: <strong>Build</strong> artifacts (scripts, profiles, DDM), <strong>Audit</strong> checks to run against a Mac, or <strong>Documentation</strong> for your team and auditors.</p>
+    </div>
+  </div>
+</div>
+
+You pick all of that in the build hub before anything runs:
+
+<div className="themed-image themed-image--wide">
+  <img src="/img/screenshots/build-light.webp" alt="The MACE build hub with output options for scripts, profiles, and audit reporting" className="img-light" />
+  <img src="/img/screenshots/build-dark.webp" alt="The MACE build hub with output options for scripts, profiles, and audit reporting" className="img-dark" />
+</div>

@@ -165,9 +165,9 @@ The top toolbar provides quick access to key actions.
 
 MACE checks your project's rules against the latest mSCP rules from GitHub and notifies you when updates are available. Your custom modifications are always preserved.
 
-<div className="themed-image">
-  <img src="/img/screenshots/rule-updates-light.webp" alt="Rule Updates Available" className="img-light" />
-  <img src="/img/screenshots/rule-updates-dark.webp" alt="Rule Updates Available" className="img-dark" />
+<div className="themed-image themed-image--wide">
+  <img src="/img/screenshots/project-updates-light.webp" alt="Project Updates Available" className="img-light" />
+  <img src="/img/screenshots/project-updates-dark.webp" alt="Project Updates Available" className="img-dark" />
 </div>
 
 <table className="icon-table">
