@@ -10,19 +10,20 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 <img src="/img/app-icon.png" alt="MACE" style={{width: '100px', height: '100px', marginBottom: '1.5rem'}} />
 
 <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '0.5rem'}}>
-  Simple. Native. Ready in seconds.
+  One self-contained <code>.app</code>. Nothing else to install.
 </p>
 <p style={{fontSize: '1rem', color: 'var(--ifm-font-color-secondary)', marginBottom: '2rem'}}>
-  No installers, no dependencies, no configuration required.
+  MACE ships as a single native macOS application — no installer, no runtimes, no dependencies.
 </p>
 
 </div>
 
 <div className="icon-table-centered">
 <table className="icon-table">
-  <tr><td>✅</td><td><strong>Free to Use</strong></td></tr>
-  <tr><td>⚡</td><td><strong>Native macOS App</strong> built in Swift</td></tr>
-  <tr><td>📦</td><td><strong>Single download</strong> with no extra dependencies</td></tr>
+  <tr><td>📦</td><td><strong>Self-contained <code>.app</code></strong> — everything is bundled inside</td></tr>
+  <tr><td>⚡</td><td><strong>Native macOS app</strong> built in Swift</td></tr>
+  <tr><td>🔏</td><td><strong>Signed release builds</strong> — no Gatekeeper workarounds needed</td></tr>
+  <tr><td>✅</td><td><strong>Free to use</strong></td></tr>
 </table>
 </div>
 
@@ -43,6 +44,24 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 ---
 
 ## Quick Start
+
+Because MACE is just an app bundle, you can install it however you prefer — drag and drop it yourself, push it to a fleet with Installomator, or grab it from Homebrew. Pick whichever fits your workflow:
+
+<table className="icon-table">
+  <tr><td>💿</td><td><strong><a href="#manual-install-preferred">Manual</a></strong> <em>(preferred)</em> — drag and drop the <code>.dmg</code>, works for everyone</td></tr>
+  <tr><td>🚀</td><td><strong><a href="#installomator-fleet-deployments">Installomator</a></strong> — great for MDM and fleet deployments</td></tr>
+  <tr><td>🍺</td><td><strong><a href="#homebrew-command-line">Homebrew</a></strong> — for the <code>brew</code> crowd</td></tr>
+</table>
+
+:::note[Stable releases only]
+Homebrew and Installomator always install the latest **stable** release. Beta and pre-release builds aren't published to these channels — to try a beta, either download the pre-release <code>.dmg</code> directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases), or install MACE and switch to the [beta release channel](#release-channels) so it updates itself to pre-release builds.
+:::
+
+## Installation Methods
+
+### Manual Install (Preferred)
+
+The simplest way, and the one we recommend for most people.
 
 <table className="icon-table">
   <tr><td>1️⃣</td><td><strong>Download</strong> the latest <code>.dmg</code> from <a href="https://github.com/mace-app/mace/releases">GitHub Releases</a></td></tr>
@@ -94,17 +113,19 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 
 That's it! You're ready to start building your first compliance baseline.
 
-## Alternative Installation Methods
+### Installomator (Fleet Deployments)
 
-Prefer the command line, or deploying MACE across a fleet? It's also available through Homebrew and Installomator.
+Deploying to more than one Mac? MACE ships as an [Installomator](https://github.com/Installomator/Installomator) label, so you can install it with a single command:
 
-:::note[Stable releases only]
-Homebrew and Installomator always install the latest **stable** release. Beta and pre-release builds aren't published to these channels — to try a beta, download the pre-release <code>.dmg</code> directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases).
-:::
+```bash
+Installomator.sh mace
+```
 
-### Homebrew
+This pulls the latest signed `.dmg` directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases) and installs MACE into `/Applications` — easy to wrap in a policy or package for Jamf Pro, Munki, Intune, or any MDM.
 
-Install the [Homebrew cask](https://formulae.brew.sh/cask/mace):
+### Homebrew (Command Line)
+
+For the `brew` users, MACE is available as a [Homebrew cask](https://formulae.brew.sh/cask/mace):
 
 ```bash
 brew install --cask mace
@@ -117,24 +138,15 @@ brew upgrade --cask mace
 brew uninstall --cask mace
 ```
 
-### Installomator
-
-For MDM-driven or scripted deployments, MACE ships as an [Installomator](https://github.com/Installomator/Installomator) label. Install the latest release with the `mace` label:
-
-```bash
-Installomator.sh mace
-```
-
-This pulls the latest signed `.dmg` directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases) and installs MACE into `/Applications`, making it easy to package for Jamf Pro, Munki, or any MDM.
-
 ## Automatic Updating
 
-MACE keeps itself up to date so you don't have to.
+MACE keeps itself up to date so you don't have to. As long as your Mac can reach GitHub, MACE checks for a newer version on its own — no matter how you installed it.
 
 <table className="icon-table">
   <tr><td>🔄</td><td><strong>Automatic checks</strong> on every launch</td></tr>
+  <tr><td>🌐</td><td><strong>Just needs a network connection</strong> to GitHub to see if a new version is available</td></tr>
   <tr><td>🔔</td><td><strong>Manual check</strong> anytime via <strong>Check for Updates</strong></td></tr>
-  <tr><td>📋</td><td><strong>Release notes</strong> show what's new in each update</td></tr>
+  <tr><td>📋</td><td><strong>Release notes</strong> show what's new in each update — the full changelog lives on <a href="https://github.com/mace-app/mace/releases">GitHub Releases</a></td></tr>
   <tr><td>⬇️</td><td><strong>One click</strong> to download and install</td></tr>
 </table>
 
@@ -143,11 +155,20 @@ MACE keeps itself up to date so you don't have to.
   <img src="/img/screenshots/update-dark.webp" alt="MACE Update Available" className="img-dark" />
 </div>
 
-View the full changelog on the [GitHub Releases](https://github.com/mace-app/mace/releases) page.
-
 :::tip
 You may be prompted for admin credentials if the application is not owned by your user account. Older versions may not support automatic updates. Download the latest version from [GitHub Releases](https://github.com/mace-app/mace/releases) to enable this feature.
 :::
+
+### Release Channels
+
+By default MACE only updates to **stable** releases. If you want to run pre-release builds, switch the release channel:
+
+<table className="icon-table">
+  <tr><td>⚙️</td><td>Open <strong>MACE Settings → Updates</strong></td></tr>
+  <tr><td>🧪</td><td>Set <strong>Release Channel</strong> to <strong>Beta</strong></td></tr>
+</table>
+
+MACE will then pick up beta and pre-release versions automatically, the same way it handles stable updates. Switch back to **Stable** at any time to return to release builds only.
 
 ## Uninstalling
 
