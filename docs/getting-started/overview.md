@@ -1,11 +1,28 @@
 ---
 sidebar_position: 3
 description: Learn how MACE works, from government-sourced security data through customization and deployment to your Mac fleet.
+title: "How MACE Works"
+hide_title: true
 ---
 
-# How MACE Works
-
-MACE is a native macOS app that takes government-sourced security compliance data, lets you customize it for your organization, and outputs it in formats you can deploy directly to your fleet.
+<div className="doc-hero">
+  <h1 className="doc-hero__title">How MACE Works</h1>
+  <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/how-mace-works.webp"
+        alt="MACE mascot holding up a gear and cradling a sealed government scroll"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
+    <div className="doc-hero__text">
+      <p className="doc-hero__lead">MACE turns government-sourced security compliance data into builds you can deploy.</p>
+      <p className="doc-hero__sub">It's a native macOS app that takes that data, lets you customize it for your organization, and outputs it in formats you can push directly to your fleet.</p>
+    </div>
+  </div>
+</div>
 
 ## Where the Data Comes From
 

@@ -4030,3 +4030,87 @@
   align-items: center;
   margin: 0;
 }
+
+/* ============================================
+   Roadmap Cards
+   Colorful tinted cards used only on /docs/roadmap.
+   Each variant sets --rc (an RGB triple) that drives the
+   gradient wash, border, icon chip, and hover glow.
+   ============================================ */
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.roadmap-card {
+  --rc: 0, 122, 255;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid rgba(var(--rc), 0.35);
+  background:
+    linear-gradient(135deg, rgba(var(--rc), 0.14) 0%, rgba(var(--rc), 0.04) 55%, transparent 100%),
+    var(--mace-card-bg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(var(--rc), 0.25);
+}
+
+.roadmap-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  border-radius: 13px;
+  background: rgba(var(--rc), 0.18);
+  border: 1px solid rgba(var(--rc), 0.3);
+}
+
+.roadmap-card__body h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.roadmap-card__body p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ifm-font-color-secondary, inherit);
+}
+
+.roadmap-card--red    { --rc: 255, 59, 48; }
+.roadmap-card--orange { --rc: 255, 149, 0; }
+.roadmap-card--yellow { --rc: 255, 204, 0; }
+.roadmap-card--green  { --rc: 52, 199, 89; }
+.roadmap-card--teal   { --rc: 48, 176, 199; }
+.roadmap-card--blue   { --rc: 0, 122, 255; }
+.roadmap-card--purple { --rc: 175, 82, 222; }
+
+[data-theme='dark'] .roadmap-card {
+  border-color: rgba(var(--rc), 0.45);
+  background:
+    linear-gradient(135deg, rgba(var(--rc), 0.22) 0%, rgba(var(--rc), 0.07) 55%, transparent 100%),
+    var(--mace-card-bg);
+}
+
+[data-theme='dark'] .roadmap-card__icon {
+  background: rgba(var(--rc), 0.26);
+  border-color: rgba(var(--rc), 0.4);
+}
+
+@media (max-width: 768px) {
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+}

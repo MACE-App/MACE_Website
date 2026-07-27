@@ -172,32 +172,68 @@ From then on MACE picks up beta and pre-release versions automatically, exactly 
 
 ## Uninstalling
 
-To completely remove MACE from your Mac:
+### Built-in Uninstaller (Recommended)
 
-### Remove the App
+MACE ships with an uninstaller script inside the app bundle. It lists everything it will remove, asks for confirmation, and only prompts for an admin password if the privileged helpers are installed:
+
+```bash
+/Applications/MACE.app/Contents/Resources/uninstaller.sh
+```
 
 <table className="icon-table">
-  <tr><td>⛔</td><td>Quit MACE if running</td></tr>
-  <tr><td>🗑️</td><td>Drag MACE from <strong>Applications</strong> to Trash</td></tr>
+  <tr><td>👀</td><td><code>--dry-run</code> — list what would be removed without removing anything</td></tr>
+  <tr><td>✅</td><td><code>--yes</code> — skip the confirmation prompt</td></tr>
+  <tr><td>♻️</td><td><code>--keep-app</code> — reset MACE by removing all data but leaving the app in place</td></tr>
 </table>
 
-### Remove Project Files
+Your compliance project folders are **never touched** — they live wherever you saved them and are treated as user documents.
+
+### Manual Removal
+
+If you prefer to remove MACE by hand (or already dragged the app to Trash), here is everything the app creates:
+
+**1. Quit MACE**, then drag <code>MACE.app</code> from **Applications** to Trash. If you installed via Homebrew, run <code>brew uninstall --cask mace</code> instead — but note that Homebrew only removes the app bundle, so the steps below still apply.
+
+**2. Remove application data and preferences** from your home Library folder:
+
+```bash
+rm -rf ~/Library/Application\ Support/MACE
+rm -f  ~/Library/Preferences/com.mace.app.plist
+rm -rf ~/Library/Caches/com.mace.app
+rm -rf ~/Library/HTTPStorages/com.mace.app
+rm -f  ~/Library/HTTPStorages/com.mace.app.binarycookies
+rm -rf ~/Library/WebKit/com.mace.app
+rm -rf ~/Library/Saved\ Application\ State/com.mace.app.savedState
+rm -rf ~/Library/Containers/com.mace.app
+rm -rf ~/Library/Application\ Scripts/com.mace.app
+rm -f  ~/Library/Cookies/com.mace.app.binarycookies
+```
+
+**3. Remove the privileged helpers** (only present if you ran audits or updates that required admin rights). Unload the daemons first, then delete their files:
+
+```bash
+sudo launchctl bootout system/com.mace.helper
+sudo launchctl bootout system/com.mace.updater
+sudo rm -rf /Library/PrivilegedHelperTools/com.mace.helper \
+            /Library/PrivilegedHelperTools/com.mace.updater \
+            /Library/LaunchDaemons/com.mace.helper.plist \
+            /Library/LaunchDaemons/com.mace.updater.plist \
+            "/Library/Application Support/MACE"
+```
+
+**4. Clear cached preferences** — macOS caches preferences in memory, so deleting the plist alone isn't enough:
+
+```bash
+defaults delete com.mace.app
+killall cfprefsd
+```
+
+### Project Files
 
 <table className="icon-table">
-  <tr><td>📁</td><td>Delete the MACE project folder, or just the <code>.mace</code> file inside it</td></tr>
+  <tr><td>📁</td><td>Your compliance project folders are <strong>not</strong> removed by any of the steps above — delete them (or just the <code>.mace</code> file inside) only if you no longer want them</td></tr>
   <tr><td>💾</td><td>Keep the <code>MSCP_Project_Files</code> folder if you want to preserve your mSCP project</td></tr>
 </table>
-
-### Remove App Data
-
-<table className="icon-table">
-  <tr><td>📂</td><td>Delete <code>~/Library/Application Support/MACE</code></td></tr>
-  <tr><td>🔧</td><td>If you installed the audit helper, delete <code>/Library/LaunchDaemons/com.mace.helper.plist</code></td></tr>
-</table>
-
-:::tip[Coming Soon]
-A built-in uninstaller is planned for a future release to make this process even easier.
-:::
 
 ## Need Help?
 
