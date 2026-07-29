@@ -221,7 +221,8 @@
 
 /* Get Involved rows center their art/icon above the text */
 .community-grid--three .community-card,
-.community-grid--two .community-card {
+.community-grid--two .community-card,
+.community-grid--compact .community-card {
   text-align: center;
 }
 
@@ -663,6 +664,34 @@ a.community-card--link .community-card__desc {
 /* 3-column grid variant */
 .community-grid--three {
   grid-template-columns: repeat(3, 1fr);
+}
+
+/* Compact 2-up: cards sized like the 3-up grid and centered; art boxed
+   square so non-square logos keep titles at the same height */
+.community-grid--compact {
+  /* minmax(0, 1fr) keeps the tracks equal even when a card holds an
+     unbreakable title like #macos_security_compliance */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: min(100%, 700px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.community-grid--compact .community-card__title {
+  overflow-wrap: anywhere;
+}
+
+.community-grid--compact .community-card__mascot {
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .community-grid--compact {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {

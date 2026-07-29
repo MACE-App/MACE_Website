@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 sidebar_label: Roadmap
 title: Roadmap
 description: What's being worked on now and the features planned for future versions of MACE, shaped by community feedback.
