@@ -200,7 +200,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/mace-app/mace/releases',
+            href: 'https://github.com/MACE-App/MACE/releases/latest',
             position: 'right',
             className: 'header-download-link',
             label: 'Download',
