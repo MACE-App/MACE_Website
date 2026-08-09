@@ -7,11 +7,11 @@ hide_title: true
 
 <div className="community-hero">
   <img src="/img/mascots/community-wave.webp" alt="MACE mascot waving hello" className="community-hero__mascot" width="380" height="337" />
-  <h2>Welcome to the MACE Community</h2>
-  <p>Free and built with <span className="pulse">❤️</span> for Mac admins everywhere.</p>
+  <h1>Welcome to the MACE Community</h1>
+  <p>Ask questions, help it grow, share it around. Free and built with <span className="pulse">❤️</span> for Mac admins everywhere.</p>
 </div>
 
-## Get Involved
+## Join the Conversation
 
 Your input directly shapes what gets built next:
 
@@ -68,18 +68,27 @@ You don't have to write code to help MACE grow. Here's how the project knows it'
   </div>
 </div>
 
-<div className="help-list">
-  <div className="help-item"><span>📸</span> Share screenshots of your setup</div>
-  <div className="help-item"><span>✍️</span> Write about your experience</div>
-  <div className="help-item"><span>🎤</span> Mention MACE at meetups or conferences</div>
-  <div className="help-item"><span>🔗</span> Link to MACE from your blog or wiki</div>
+## Share the Project
+
+import LogoFlipBoard from '@site/src/components/LogoFlipBoard';
+
+<LogoFlipBoard />
+
+MACE ships with **75+ logos that shuffle between the seasons** and the calendar. It's a small thing, but it keeps MACE feeling fun and lively for the people who live in it week to week.
+
+<div className="icon-callout">
+  <div className="icon-callout__icon">📥</div>
+  <div className="icon-callout__body">
+    <strong>Feel free to use these images whenever you talk about the project. They're here for fun.</strong>
+    <p>Save the entire collection to your Mac from <a href="/docs/reference/settings#logo">Settings ▸ Appearance ▸ Download All Logos</a>, then use them however you like: slide decks, blog posts, Slack emoji, meetup talks, wiki pages.</p>
+  </div>
 </div>
 
-<div style={{textAlign: 'center', margin: '2rem 0'}}>
-  <a href="https://github.com/mace-app/mace" className="community-cta">⭐ Star on GitHub</a>
-</div>
+These are purely for fun. My goal was never to offend anyone; it was to make sure everyone felt included, at a fun level. We all come from different walks of life and work all over the world. The Mac community is a worldwide team.
 
-## About
+**Want to see a logo that isn't here? Tell me.** I always love adding more, and the gap I'd most like to close is holidays and celebrations outside the US. If something is a big deal where you are, I probably don't know about it yet, and I'd rather hear it from you than guess. [Suggest a logo](https://github.com/mace-app/mace/discussions/categories/ideas) and it goes on the list.
+
+## About the Developer
 
 <div className="developer-profile">
   <div className="developer-profile__header">
@@ -94,10 +103,25 @@ You don't have to write code to help MACE grow. Here's how the project knows it'
   </div>
   <div className="developer-profile__body">
     <p>
-      Hey! I'm the solo developer behind MACE and also known for the{' '}
+      Hey! I'm the solo developer behind MACE, and also known for the{' '}
       <a href="https://github.com/cocopuff2u/mofa">MOFA project</a>.
-      I know MACE is making an impact when the stars go up, it gets mentioned, and downloads grow —
-      so if it's helped you, a star or shoutout means a lot. Don't be a stranger!
+    </p>
+    <p>
+      MACE started as something I wanted for myself. The Jamf Compliance Editor deserves the
+      credit for getting here first, and it's a great tool, but it wasn't cutting it for the way
+      I work. I wanted to customize more. I wanted it to be simple to use. I wanted it to feel
+      welcoming and creative instead of like a chore. So I built my own.
+    </p>
+    <p>
+      It's built with the Mac admin in mind, and with mSCP, which I'm a part of. The goal was an
+      app that works hand in hand with the project rather than alongside it: when mSCP changes,
+      MACE can adopt it quickly instead of leaving you waiting.
+    </p>
+    <p>
+      I know MACE is doing well when I see the stars go up, when it gets mentioned on some site,
+      and when people tell me it works. I want the community to be what feeds its ideas, and so
+      far it has. Most of what's in here started as your ideas. I just put them together.
+      Don't be a stranger!
     </p>
     <div className="developer-profile__links">
       <a href="https://codykeats.com" className="developer-link">Website</a>

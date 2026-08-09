@@ -79,13 +79,14 @@
   50% { translate: 0 -8px; }
 }
 
-.community-hero h2 {
+.community-hero h1 {
   position: relative;
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 0.75rem;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   letter-spacing: -0.02em;
+  color: inherit;
 }
 
 .community-hero p {
@@ -710,44 +711,6 @@ a.community-card--link .community-card__desc {
   background: linear-gradient(135deg, rgba(10, 132, 255, 0.12) 0%, rgba(10, 132, 255, 0.04) 100%);
 }
 
-/* Help list - non-code contributions */
-.help-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 1rem 0;
-}
-
-.help-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--mace-card-border);
-  border-radius: 50px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.help-item:hover {
-  transform: translateY(-2px);
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
-}
-
-.help-item span {
-  font-size: 1.1rem;
-}
-
-[data-theme='dark'] .help-item {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .help-item:hover {
-  box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
-}
-
 /* mSCP badge */
 .mscp-badge {
   display: block;
@@ -1012,5 +975,57 @@ a.community-card--link .community-card__desc {
 
   .developer-profile__links {
     justify-content: center;
+  }
+}
+
+/* ========================================
+   Share the Project - app icon showcase
+   ======================================== */
+
+.icon-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(0, 122, 255, 0.03) 100%);
+  border: 1px solid rgba(0, 122, 255, 0.2);
+  border-radius: 16px;
+}
+
+[data-theme='dark'] .icon-callout {
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.14) 0%, rgba(10, 132, 255, 0.04) 100%);
+  border-color: rgba(10, 132, 255, 0.28);
+}
+
+.icon-callout__icon {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.icon-callout__body > strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--ifm-font-color-base);
+}
+
+.icon-callout__body a {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.icon-callout__body p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ifm-font-color-secondary);
+}
+
+@media (max-width: 500px) {
+  .icon-callout {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.1rem 1.25rem;
   }
 }

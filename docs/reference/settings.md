@@ -59,27 +59,61 @@ Open Settings from the MACE menu bar.
 
 ## Appearance
 
+<div className="themed-image">
+  <img src="/img/screenshots/settings-appearance-light.webp" alt="MACE Appearance settings pane" className="img-light" />
+  <img src="/img/screenshots/settings-appearance-dark.webp" alt="MACE Appearance settings pane" className="img-dark" />
+</div>
+
+### Sync Indicator
+
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">🎨</span>
-      <strong>Theme</strong>
+      <span className="build-option-item__icon">🔄</span>
+      <strong>Hide Sync Indicator</strong>
     </div>
-    <p>Choose your preferred appearance:</p>
-    <ul>
-      <li><strong>Light</strong> - Light background with dark text</li>
-      <li><strong>System</strong> - Follows your macOS appearance setting</li>
-      <li><strong>Dark</strong> - Dark background with light text</li>
-    </ul>
+    <p>Remove the sync status pill from the compliance editor title bar. <em>Default: Off</em></p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">🎄</span>
-      <strong>Holiday Logo</strong>
+      <span className="build-option-item__icon">⚠️</span>
+      <strong>Show Output Icons</strong>
     </div>
-    <p>Show seasonal and holiday-themed logos on the main menu. Adds festive flair to your dock icon throughout the year.</p>
+    <p>Replace the generic "Output Drift" label with colored icons showing which outputs are affected. <em>Default: Off</em></p>
   </div>
 </div>
+
+### Logo
+
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">✨</span>
+      <strong>Holiday Logo</strong>
+    </div>
+    <p>Show seasonal and holiday-themed logos on the main menu. MACE ships with 75+ seasonal, holiday, and character logos that switch automatically by date. <em>Default: On</em></p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🖼️</span>
+      <strong>Logo Override</strong>
+    </div>
+    <p>Pick one specific logo to use year-round instead of the automatic seasonal rotation. Turn off <strong>Holiday Logo</strong> above to enable this menu.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📥</span>
+      <strong>Download All Logos</strong>
+    </div>
+    <p>Enjoying the logos as much as we do? Save the entire collection to your Mac and take them with you. Click <strong>Download</strong> and choose where to put them, then use them however you like when you talk about MACE. See <a href="/docs/community#share-the-project">Share the Project</a>.</p>
+  </div>
+</div>
+
+:::info These logos are here purely for fun
+A little something for those of us who live in apps like this every day, instead of the same static images we're used to. None of them were ever designed to offend; they're a lighthearted way to celebrate people from all walks of life. Apps should be more fun, and I hope MACE brings a bit of that.
+:::
+
+Use **Reset Appearance Settings to Defaults** at the bottom of the pane to restore every option in this section.
 
 ## Advanced
 
