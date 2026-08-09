@@ -4418,3 +4418,183 @@ select.build-option-item__menu:disabled {
   font-weight: 600;
   color: var(--ifm-font-color-base);
 }
+
+/* ========================================
+   Beta page
+   ======================================== */
+
+/* Version anatomy: the number itself, colour-coded, with a legend */
+
+.version-anatomy {
+  margin: 1.25rem 0 2rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 12px;
+  background: var(--mace-card-bg);
+  overflow: hidden;
+}
+
+.version-anatomy__display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 1.5rem 1rem 1.25rem;
+  background: var(--mace-control-bg);
+  border-bottom: 1px solid var(--mace-card-border);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: clamp(1.75rem, 6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.version-anatomy__part {
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  color: var(--part-tint);
+  background: color-mix(in srgb, var(--part-tint) 15%, transparent);
+}
+
+.version-anatomy__part--major { --part-tint: var(--mace-accent-red); }
+.version-anatomy__part--minor { --part-tint: var(--ifm-color-primary); }
+.version-anatomy__part--patch { --part-tint: var(--mace-accent-green); }
+
+.version-anatomy__dot {
+  color: var(--ifm-font-color-secondary);
+  padding: 0 0.1rem;
+}
+
+.version-anatomy__suffix {
+  margin-left: 0.35rem;
+  font-size: 0.5em;
+  font-weight: 600;
+  color: var(--ifm-font-color-secondary);
+}
+
+.version-anatomy__legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.version-anatomy__item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.15rem;
+  border-right: 1px solid var(--mace-card-border);
+}
+
+.version-anatomy__item:last-child { border-right: none; }
+
+.version-anatomy__rule {
+  flex: none;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--part-tint);
+}
+
+.version-anatomy__item--major { --part-tint: var(--mace-accent-red); }
+.version-anatomy__item--minor { --part-tint: var(--ifm-color-primary); }
+.version-anatomy__item--patch { --part-tint: var(--mace-accent-green); }
+
+.version-anatomy__label {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-base);
+}
+
+.version-anatomy__pos {
+  display: inline-block;
+  margin: 0.2rem 0 0.45rem;
+  padding: 0.05rem 0.4rem;
+  border: none;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--part-tint) 14%, transparent);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  color: var(--part-tint);
+}
+
+.version-anatomy__item p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+}
+
+@media (max-width: 640px) {
+  .version-anatomy__item {
+    border-right: none;
+    border-bottom: 1px solid var(--mace-card-border);
+  }
+  .version-anatomy__item:last-child { border-bottom: none; }
+}
+
+/* Numbered steps */
+
+.beta-steps {
+  list-style: none;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.beta-steps li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 10px;
+  background: var(--mace-card-bg);
+}
+
+.beta-steps__num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Two-up choice cards */
+
+.beta-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.beta-choice {
+  padding: 1.15rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 10px;
+  background: var(--mace-card-bg);
+}
+
+.beta-choice__header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.beta-choice__header strong {
+  font-size: 1rem;
+  color: var(--ifm-font-color-base);
+}
+
+.beta-choice p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ifm-font-color-secondary);
+}
