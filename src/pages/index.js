@@ -82,6 +82,15 @@ function WorkflowAnimation() {
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      ),
+      label: 'Build'
+    },
+    {
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 12l2 2 4-4"/>
           <path d="M12 3a9 9 0 1 0 9 9"/>
         </svg>
@@ -99,15 +108,6 @@ function WorkflowAnimation() {
         </svg>
       ),
       label: 'Document'
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
-      ),
-      label: 'Build'
     },
   ];
   const [activeStep, setActiveStep] = useState(0);
@@ -174,11 +174,8 @@ function ExportAnimation() {
   );
 }
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-
-  // Matrix rain - macOS commands and configs
-  const macTerms = [
+// Matrix rain - macOS commands and configs
+const MAC_TERMS = [
     'sudo', 'defaults', 'write', 'read', 'killall', 'launchctl', 'pmset', 'nvram',
     'spctl', 'csrutil', 'firmwarepasswd', 'fdesetup', 'security', 'codesign',
     'systemsetup', 'networksetup', 'scutil', 'dscl', 'pwpolicy', 'profiles',
@@ -218,34 +215,47 @@ function HomepageHeader() {
     'MCX', 'DirectoryService', 'OpenDirectory', 'ActiveDirectory', 'LDAP',
     'Kerberos', 'SAML', 'OAuth', 'OIDC', 'SSO', 'PlatformSSO', 'SmartCard',
     'PIV', 'CAC', 'CryptoTokenKit', 'SecureToken', 'Bootstrap', 'Volume',
-  ];
-  const columns = Array.from({ length: 60 }, (_, i) => {
+];
+
+// Decorative falling-terms background, shared by the hero and the closing CTA.
+function MatrixRain({count = 60, duration = 22}) {
+  const columns = Array.from({length: count}, (_, i) => {
     // Shuffle and pick unique terms for each column
-    const shuffled = [...macTerms].sort(() => Math.random() - 0.5);
-    const terms = shuffled.slice(0, 5).join('\n');
-    // Random start times, consistent speed
-    const delay = Math.random() * 20;
-    const duration = 22;
-    return { id: i, terms, delay, duration };
+    const shuffled = [...MAC_TERMS].sort(() => Math.random() - 0.5);
+    return {
+      id: i,
+      terms: shuffled.slice(0, 5).join('\n'),
+      // Negative delay pre-warms each column so the rain is already mid-fall
+      // on the first paint instead of filling in over time
+      delay: -Math.random() * duration,
+    };
   });
 
   return (
+    <div className={styles.matrixBackground} aria-hidden="true">
+      {columns.map((col) => (
+        <div
+          key={col.id}
+          className={styles.matrixColumn}
+          style={{
+            left: `${(col.id * 100) / count}%`,
+            animationDelay: `${col.delay}s`,
+            animationDuration: `${duration}s`,
+          }}
+        >
+          {col.terms}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
+
+  return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className={styles.matrixBackground}>
-        {columns.map((col) => (
-          <div
-            key={col.id}
-            className={styles.matrixColumn}
-            style={{
-              left: `${col.id * 1.7}%`,
-              animationDelay: `${col.delay}s`,
-              animationDuration: `${col.duration}s`,
-            }}
-          >
-            {col.terms}
-          </div>
-        ))}
-      </div>
+      <MatrixRain />
       <div className="container">
         <img
           src="/img/logo.png"
@@ -265,12 +275,12 @@ function HomepageHeader() {
           </Link>
           <Link
             className={clsx(styles.heroButton, styles.heroButtonSecondary)}
-            href="https://github.com/mace-app/mace/releases">
+            href="https://github.com/MACE-App/MACE/releases/latest">
             Download
           </Link>
         </div>
         <a
-          href="https://macadmins.slack.com/app_redirect?channel=mace-app"
+          href="https://macadmins.org/community/slack/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.heroSlackLink}>
@@ -286,19 +296,30 @@ function FeaturesSection() {
     {
       icon: <TerminalAnimation />,
       title: 'No Command Line Required',
-      desc: 'Visual interface for creating and managing compliance baselines. Built with SwiftUI for a fast, native macOS experience.',
+      desc: 'mSCP normally runs on scripts. MACE takes that hassle away, offering the official mSCP build engine alongside its own native engine for building compliance.',
       customIcon: true,
     },
     {
       icon: <WorkflowAnimation />,
       title: 'All-in-One Workflow',
-      desc: 'Create, customize, audit, and export from a single app. Browse 800+ security rules with powerful search and filtering.',
+      desc: (
+        <>
+          Create, customize, build, audit, and document your baselines all in one app. All 800+ rules come straight from the{' '}
+          <Link
+            href="https://github.com/usnistgov/macos_security"
+            target="_blank"
+            rel="noopener noreferrer">
+            macOS Security Compliance Project (mSCP)
+          </Link>
+          , hosted by NIST.
+        </>
+      ),
       customIcon: true,
     },
     {
       icon: <ExportAnimation />,
       title: 'MDM-Ready Exports',
-      desc: 'Generate deployment-ready profiles for Jamf, Intune, and more. Export to mobileconfig, plist, DDM, and signed profiles.',
+      desc: 'Deploy straight to Jamf Pro, Workspace ONE, Intune, Iru, Fleet, Addigy, and more, or build mobileconfig, plist, DDM, and signed profiles locally for any MDM.',
       customIcon: true,
     },
   ];
@@ -415,9 +436,10 @@ function ScreenshotCarousel() {
 function CTASection() {
   return (
     <section className={styles.cta}>
+      <MatrixRain />
       <div className="container">
         <Heading as="h2" className="text--center">
-          Ready to Simplify macOS Compliance?
+          Ready to Simplify Apple Compliance?
         </Heading>
         <p className="text--center">
           Download MACE for free and start building your security baselines today.
@@ -425,7 +447,7 @@ function CTASection() {
         <div className={styles.ctaButtons}>
           <Link
             className="button button--primary button--lg"
-            href="https://github.com/mace-app/mace/releases">
+            href="https://github.com/MACE-App/MACE/releases/latest">
             Download MACE
           </Link>
           <Link
@@ -444,7 +466,7 @@ export default function Home() {
   return (
     <Layout
       title="macOS Advanced Compliance Editor"
-      description="Build, customize, audit, and deploy macOS security baselines — no command line required.">
+      description="Build, customize, audit, and deploy Apple security baselines — no command line required.">
       <HomepageHeader />
       <main>
         <FeaturesSection />

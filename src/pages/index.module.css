@@ -23,6 +23,8 @@
   bottom: 0;
   overflow: hidden;
   z-index: 0;
+  /* Purely decorative - never intercept clicks on the content above it */
+  pointer-events: none;
 }
 
 .matrixColumn {
@@ -43,7 +45,9 @@
   text-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
 }
 
-.heroBanner .container {
+/* :global is required - `container` is Docusaurus's global class, so an
+   unwrapped selector here would be hashed as a CSS module local and never match */
+.heroBanner :global(.container) {
   position: relative;
   z-index: 1;
 }
@@ -96,22 +100,28 @@
 }
 
 .heroSlackLink {
+  position: relative;
+  z-index: 2;
   display: inline-block;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
   letter-spacing: 0.01em;
-  transition: color 0.2s ease;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .heroSlackLink:hover {
-  color: white;
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
 }
 
 .heroSlackLink strong {
-  color: white;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .heroButton {
@@ -698,10 +708,17 @@
 
 /* CTA Section */
 .cta {
+  position: relative;
+  overflow: hidden;
   padding: 5rem 0;
   background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-darker) 100%);
   color: white;
   text-align: center;
+}
+
+.cta :global(.container) {
+  position: relative;
+  z-index: 1;
 }
 
 .cta h2 {

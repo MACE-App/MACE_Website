@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MACE',
-  tagline: 'Build, customize, audit, and deploy macOS security baselines',
+  tagline: 'Build, customize, audit, and deploy Apple security baselines',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -272,7 +272,7 @@ const config = {
               },
               {
                 label: 'MACE Download',
-                href: 'https://github.com/mace-app/mace/releases',
+                href: 'https://github.com/MACE-App/MACE/releases/latest',
               },
               {
                 label: 'mSCP GitHub',
