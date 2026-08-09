@@ -3643,13 +3643,41 @@
 .build-option-item__header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .build-option-item__icon {
   font-size: 1.25rem;
 }
+
+/* Rounded colored tile behind the glyph, as the app draws it */
+
+.build-option-item__icon--tile {
+  --tile-tint: var(--ifm-font-color-secondary);
+
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--ifm-background-surface-color);
+  background: color-mix(in srgb, var(--tile-tint) 16%, transparent);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.build-option-item__icon--green  { --tile-tint: var(--mace-accent-green); }
+.build-option-item__icon--blue   { --tile-tint: var(--ifm-color-primary); }
+.build-option-item__icon--orange { --tile-tint: var(--mace-accent-orange); }
+.build-option-item__icon--red    { --tile-tint: var(--mace-accent-red); }
+.build-option-item__icon--purple { --tile-tint: #AF52DE; }
+.build-option-item__icon--teal   { --tile-tint: #30B0C7; }
+.build-option-item__icon--indigo { --tile-tint: #5E5CE6; }
+.build-option-item__icon--gray   { --tile-tint: var(--ifm-font-color-secondary); }
 
 .build-option-item__header strong {
   font-size: 1rem;
@@ -3661,6 +3689,180 @@
   font-size: 0.9rem;
   color: var(--ifm-font-color-secondary);
   line-height: 1.55;
+}
+
+/* Control shown at the right of each option box, mirroring the app's own
+   switch, popup menu, or button, drawn in its default position. */
+
+.build-option-item__control {
+  margin-left: auto;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  user-select: none;
+}
+
+/* Switch */
+
+.build-option-item__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.build-option-item__track {
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--mace-switch-off);
+  cursor: pointer;
+  transition: background 170ms ease;
+}
+
+.build-option-item__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--mace-switch-knob);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 170ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.build-option-item__input:checked ~ .build-option-item__track {
+  background: var(--ifm-color-primary);
+}
+
+.build-option-item__input:checked ~ .build-option-item__track::after {
+  transform: translateX(16px);
+}
+
+.build-option-item__input:focus-visible ~ .build-option-item__track {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
+/* Off-default state, drawn as the app's orange Restore Default badge */
+
+.build-option-item__label .is-restore {
+  display: none;
+}
+
+.build-option-item__control--default-on .build-option-item__input:not(:checked) ~ .build-option-item__label .is-default,
+.build-option-item__control--default-off .build-option-item__input:checked ~ .build-option-item__label .is-default {
+  display: none;
+}
+
+.build-option-item__control--default-on .build-option-item__input:not(:checked) ~ .build-option-item__label .is-restore,
+.build-option-item__control--default-off .build-option-item__input:checked ~ .build-option-item__label .is-restore {
+  display: inline;
+}
+
+.build-option-item__control--default-on .build-option-item__input:not(:checked) ~ .build-option-item__label,
+.build-option-item__control--default-off .build-option-item__input:checked ~ .build-option-item__label {
+  --default-dot: var(--mace-accent-orange);
+
+  color: var(--mace-accent-orange);
+  border-color: color-mix(in srgb, var(--mace-accent-orange) 40%, transparent);
+  background: color-mix(in srgb, var(--mace-accent-orange) 14%, transparent);
+}
+
+.build-option-item__control--default-on .build-option-item__input:not(:checked) ~ .build-option-item__label b,
+.build-option-item__control--default-off .build-option-item__input:checked ~ .build-option-item__label b {
+  color: var(--mace-accent-orange);
+}
+
+/* Popup menu and value chip */
+
+.build-option-item__menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 7px;
+  background: var(--mace-control-bg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  white-space: nowrap;
+}
+
+.build-option-item__menu--popup::after {
+  content: '▾';
+  font-size: 0.7rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* Button, for rows that run an action */
+
+.build-option-item__button {
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: transform 90ms ease, background 140ms ease;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 7px;
+  background: var(--mace-control-bg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  white-space: nowrap;
+}
+
+/* "Default: On" pill under the control */
+
+.build-option-item__label {
+  --default-dot: var(--ifm-font-color-secondary);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 999px;
+  background: var(--mace-control-bg);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+  white-space: nowrap;
+}
+
+.build-option-item__label::before {
+  content: '';
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--default-dot);
+}
+
+.build-option-item__label b {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+.build-option-item__label--on {
+  --default-dot: var(--mace-accent-green);
+}
+
+.build-option-item__label--value {
+  --default-dot: var(--ifm-color-primary);
+}
+
+@media (max-width: 500px) {
+  .build-option-item__control {
+    margin-left: 0;
+    align-items: flex-start;
+  }
 }
 
 /* ========================================
@@ -4113,4 +4315,106 @@
   .roadmap-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Interactive polish for the demo controls */
+
+.build-option-item__button:hover,
+.build-option-item__menu:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.build-option-item__button:active {
+  transform: scale(0.94);
+}
+
+.build-option-item__button:focus-visible,
+select.build-option-item__menu:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+select.build-option-item__menu {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%2386868B' d='M5 7 0 1.6 1.5 0 5 3.9 8.5 0 10 1.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  transition: border-color 140ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .build-option-item__track,
+  .build-option-item__track::after,
+  .build-option-item__button {
+    transition: none;
+  }
+}
+
+/* A menu moved off its default shows the same orange Restore Default badge */
+
+.build-option-item__control--auto:has(option:checked:not(.is-default-option)) .is-default {
+  display: none;
+}
+
+.build-option-item__control--auto:has(option:checked:not(.is-default-option)) .is-restore {
+  display: inline;
+}
+
+.build-option-item__control--auto:has(option:checked:not(.is-default-option)) .build-option-item__label {
+  --default-dot: var(--mace-accent-orange);
+
+  color: var(--mace-accent-orange);
+  border-color: color-mix(in srgb, var(--mace-accent-orange) 40%, transparent);
+  background: color-mix(in srgb, var(--mace-accent-orange) 14%, transparent);
+}
+
+.build-option-item__control--auto:has(option:checked:not(.is-default-option)) .build-option-item__label b {
+  color: var(--mace-accent-orange);
+}
+
+/* React-driven controls flag their own off-default state */
+
+.build-option-item__label--changed {
+  --default-dot: var(--mace-accent-orange);
+
+  color: var(--mace-accent-orange);
+  border-color: color-mix(in srgb, var(--mace-accent-orange) 40%, transparent);
+  background: color-mix(in srgb, var(--mace-accent-orange) 14%, transparent);
+}
+
+.build-option-item__label--changed b {
+  color: var(--mace-accent-orange);
+}
+
+select.build-option-item__menu:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Live logo preview under the Logo Override row */
+
+.logo-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--mace-card-border);
+  border-radius: 10px;
+  background: var(--mace-control-bg);
+}
+
+.logo-preview__img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  flex: none;
+}
+
+.logo-preview__caption {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
 }
