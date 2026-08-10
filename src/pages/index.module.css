@@ -759,6 +759,16 @@
   animation: statFadeIn 0.5s ease both;
 }
 
+/* Lighter and smaller than the digits so an approximate figure sits level with
+   the exact ones instead of drawing the eye */
+.statSuffix {
+  font-size: 0.6em;
+  font-weight: 700;
+  opacity: 0.55;
+  margin-left: 0.05em;
+  vertical-align: 0.15em;
+}
+
 /* Holds the line height while the live figure loads, so the number fades in
    once instead of appearing as an estimate and then correcting itself */
 .statPlaceholder {

@@ -436,7 +436,12 @@ function StatsBand() {
               {stat.value == null ? (
                 <span className={styles.statPlaceholder} aria-hidden="true" />
               ) : (
-                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statValue}>
+                  {String(stat.value).replace(/\+$/, '')}
+                  {String(stat.value).endsWith('+') && (
+                    <span className={styles.statSuffix}>+</span>
+                  )}
+                </span>
               )}
               <span className={styles.statLabel}>{stat.label}</span>
             </div>
