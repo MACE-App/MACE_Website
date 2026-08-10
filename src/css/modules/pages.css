@@ -1510,43 +1510,303 @@
 .status-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.9rem;
   margin: 1.5rem 0 2rem;
+}
+
+/* Odd count: let the last card span the full row instead of dangling */
+.status-grid .status-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 768px) {
   .status-grid {
     grid-template-columns: 1fr;
   }
+
+  .status-grid .status-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
 }
 
-.status-item--pass {
-  border-left: 4px solid var(--mace-accent-green);
+/* Audit Status Cards */
+.status-card {
+  --sc-color: var(--ifm-color-primary);
+  --sc-ink: var(--sc-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--sc-color) 5%, var(--mace-card-bg));
+  border: 1px solid color-mix(in srgb, var(--sc-color) 24%, transparent);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.status-item--fail {
-  border-left: 4px solid var(--mace-accent-red);
+.status-card:hover {
+  border-color: color-mix(in srgb, var(--sc-color) 45%, transparent);
+  box-shadow: var(--mace-shadow-sm);
 }
 
-.status-item--error {
-  border-left: 4px solid var(--mace-accent-orange);
+.status-card--pass {
+  --sc-color: var(--mace-accent-green);
 }
 
-.status-item--manual {
-  border-left: 4px solid var(--mace-accent-yellow);
+.status-card--fail {
+  --sc-color: var(--mace-accent-red);
 }
 
-.status-item--na {
-  border-left: 4px solid var(--ifm-font-color-secondary);
+.status-card--error {
+  --sc-color: var(--mace-accent-orange);
 }
 
-.status-item--pending {
-  border-left: 4px solid var(--ifm-color-primary);
+.status-card--manual {
+  --sc-color: var(--mace-accent-yellow);
+  /* Pure yellow text is unreadable on light backgrounds — mix toward the text color */
+  --sc-ink: color-mix(in srgb, var(--mace-accent-yellow) 55%, var(--ifm-font-color-base));
 }
 
-.status-item--running {
-  border-left: 4px solid var(--ifm-color-primary);
-  background: linear-gradient(90deg, rgba(0, 122, 255, 0.05), var(--mace-card-bg));
+.status-card--na {
+  --sc-color: var(--ifm-font-color-secondary);
+}
+
+.status-card__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--sc-ink);
+  background: color-mix(in srgb, var(--sc-color) 14%, transparent);
+}
+
+.status-card__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.status-card--pending .status-card__dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.status-card--running .status-card__dot {
+  animation: status-dot-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes status-dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-card--running .status-card__dot {
+    animation: none;
+  }
+}
+
+.status-card p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* Privileged Helper Cards */
+.helper-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .helper-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.helper-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ifm-color-primary) 4%, var(--mace-card-bg));
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 20%, transparent);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.helper-card:hover {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
+  box-shadow: var(--mace-shadow-sm);
+}
+
+.helper-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.helper-card__icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.helper-card__header strong {
+  font-size: 0.95rem;
+}
+
+.helper-card p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* Audit Option Cards */
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+/* Odd count: let the last card span the full row instead of dangling */
+.option-grid .option-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .option-grid .option-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 12px;
+  background: var(--mace-card-bg);
+  border: 1px solid var(--mace-card-border);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.option-card:hover {
+  box-shadow: var(--mace-shadow-sm);
+}
+
+.option-card--default {
+  background: color-mix(in srgb, var(--ifm-color-primary) 4%, var(--mace-card-bg));
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 30%, transparent);
+}
+
+.option-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.option-card__header strong {
+  font-size: 0.95rem;
+}
+
+.option-card__icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, transparent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.option-card__badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  flex-shrink: 0;
+}
+
+/* Static toggle showing the option's default state */
+.option-card__switch {
+  margin-left: auto;
+  width: 36px;
+  height: 21px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ifm-font-color-secondary) 35%, transparent);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.option-card__switch::after {
+  content: "";
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.option-card__switch--on {
+  background: var(--mace-accent-green);
+}
+
+.option-card__switch--on::after {
+  left: auto;
+  right: 2.5px;
+}
+
+.option-card p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+}
+
+.option-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* Row of status pills, e.g. summary badge legend */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 .status-item {

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-description: Export audit reports to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format for documentation and auditors.
+description: Export audit reports in nine formats — from PDF and HTML to spreadsheets, Markdown, and DISA STIG checklists.
 title: "Exporting Reports"
 hide_title: true
 ---
@@ -8,8 +8,17 @@ hide_title: true
 <div className="doc-hero">
   <h1 className="doc-hero__title">Exporting Reports</h1>
   <div className="doc-hero__body">
+    <div className="doc-hero__figure">
+      <img
+        src="/img/mascots/export-reports.webp"
+        alt="MACE mascot sending out a box of audit reports"
+        className="doc-hero__mascot"
+        width="440"
+        height="440"
+      />
+    </div>
     <div className="doc-hero__text">
-      <p className="doc-hero__lead">Export audit results to PDF, HTML, XLSX, CSV, JSON, or DISA STIG CKL/CKLB format.</p>
+      <p className="doc-hero__lead">Export audit results in nine formats — from PDF and HTML to spreadsheets, Markdown, and DISA STIG checklists.</p>
       <p className="doc-hero__sub">Generate professional reports for auditors, documentation, and compliance tracking.</p>
     </div>
   </div>
@@ -17,7 +26,7 @@ hide_title: true
 
 ## Export Formats
 
-MACE can export audit results in seven formats:
+MACE can export audit results in nine formats:
 
 <div className="output-types-grid">
   <div className="output-type-card">
@@ -57,30 +66,48 @@ MACE can export audit results in seven formats:
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
+      <span className="output-type-card__icon">📝</span>
+      <h3>Markdown</h3>
+    </div>
+    <p>Plain-text report with Markdown formatting. Drop it into wikis, GitHub, or ticketing systems that render Markdown.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
+      <span className="output-type-card__icon">📃</span>
+      <h3>AsciiDoc</h3>
+    </div>
+    <p>Plain-text report in AsciiDoc format. Fits documentation pipelines built on Asciidoctor or Antora.</p>
+  </div>
+  <div className="output-type-card">
+    <div className="output-type-card__header">
       <span className="output-type-card__icon">🛡️</span>
       <h3>STIG CKL</h3>
     </div>
-    <p>DISA STIG Checklist format (XML). Required for DoD compliance. Updates existing CKL templates with your audit results.</p>
+    <p>DISA STIG Checklist format (XML). Required for DoD compliance. Updates existing CKL templates with your audit results. Only available for STIG frameworks.</p>
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
       <span className="output-type-card__icon">🛡️</span>
       <h3>STIG CKLB</h3>
     </div>
-    <p>DISA STIG Viewer 3.x checklist format (JSON). The modern replacement for the XML-based CKL. Can update an existing CKLB template or generate one from an XCCDF benchmark.</p>
+    <p>DISA STIG Viewer 3.x checklist format (JSON). The modern replacement for the XML-based CKL. Can update an existing CKLB template or generate one from an XCCDF benchmark. Only available for STIG frameworks.</p>
   </div>
 </div>
 
 ### Which Format Should I Use?
 
 <table className="icon-table">
+  <tbody>
   <tr><td>📄</td><td><strong>PDF</strong></td><td>Share with auditors or management</td></tr>
   <tr><td>🌐</td><td><strong>HTML</strong></td><td>Review results in a browser</td></tr>
   <tr><td>📊</td><td><strong>CSV</strong></td><td>Analyze data in Excel or Google Sheets</td></tr>
   <tr><td>📋</td><td><strong>XLSX</strong></td><td>Pre-formatted Excel file with filters and frozen headers</td></tr>
   <tr><td>🧩</td><td><strong>JSON</strong></td><td>Feed results into automation, dashboards, or other tools</td></tr>
-  <tr><td>🛡️</td><td><strong>STIG CKL</strong></td><td>Submit for DoD compliance (STIG Viewer 2.x)</td></tr>
-  <tr><td>🛡️</td><td><strong>STIG CKLB</strong></td><td>Submit for DoD compliance (STIG Viewer 3.x)</td></tr>
+  <tr><td>📝</td><td><strong>Markdown</strong></td><td>Paste into wikis, GitHub, or Markdown-aware tools</td></tr>
+  <tr><td>📃</td><td><strong>AsciiDoc</strong></td><td>Use in Asciidoctor/Antora documentation pipelines</td></tr>
+  <tr><td>🛡️</td><td><strong>STIG CKL</strong></td><td>Submit for DoD compliance (STIG Viewer 2.x) — STIG frameworks only</td></tr>
+  <tr><td>🛡️</td><td><strong>STIG CKLB</strong></td><td>Submit for DoD compliance (STIG Viewer 3.x) — STIG frameworks only</td></tr>
+  </tbody>
 </table>
 
 ## Live Preview
@@ -98,7 +125,7 @@ When your audit finishes, click **Export Preview** in the results toolbar to ope
       <span className="output-type-card__icon">🔄</span>
       <h3>Switch Formats Live</h3>
     </div>
-    <p>Toggle between <strong>HTML</strong>, <strong>PDF</strong>, <strong>XLSX</strong>, <strong>CSV</strong>, and <strong>JSON</strong> with the format tabs at the top — the preview re-renders instantly for each.</p>
+    <p>Toggle between <strong>HTML</strong>, <strong>PDF</strong>, <strong>Markdown</strong>, <strong>AsciiDoc</strong>, <strong>XLSX</strong>, <strong>CSV</strong>, and <strong>JSON</strong> with the format tabs at the top — the preview re-renders instantly for each.</p>
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
@@ -119,403 +146,381 @@ When your audit finishes, click **Export Preview** in the results toolbar to ope
       <span className="output-type-card__icon">⚡</span>
       <h3>Remember for Quick Export</h3>
     </div>
-    <p>Enable <strong>Remember for Quick Export</strong> to save your current settings, so future exports use the same configuration without reopening the preview.</p>
+    <p>Enable <strong>Remember for Quick Export</strong> to save your current settings — a <strong>Quick Export</strong> menu then appears in the results toolbar with every format plus <strong>Export All Formats</strong>, no preview needed.</p>
   </div>
 </div>
 
-When the preview looks right, click **Export** and choose a save location.
+### How to Export
+
+The flow is the same for every report format:
+
+<div className="build-steps">
+  <div className="build-step">
+    <span className="build-step__number">1</span>
+    <div className="build-step__content">
+      <strong>Complete your audit</strong>
+      <span>Run the audit and review the results</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">2</span>
+    <div className="build-step__content">
+      <strong>Click Export Preview</strong>
+      <span>In the results toolbar</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">3</span>
+    <div className="build-step__content">
+      <strong>Select a format tab</strong>
+      <span>HTML, PDF, Markdown, AsciiDoc, XLSX, CSV, or JSON</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">4</span>
+    <div className="build-step__content">
+      <strong>Configure export options</strong>
+      <span>Use the sidebar and watch the preview update live</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">5</span>
+    <div className="build-step__content">
+      <strong>Click Export</strong>
+      <span>Choose a save location and you're done</span>
+    </div>
+  </div>
+</div>
 
 :::note[STIG CKL & CKLB]
-The live preview covers HTML, PDF, XLSX, CSV, and JSON. To produce a **STIG CKL** or **CKLB** checklist, use the **STIG Checklist** button in the results toolbar instead — these formats map your results onto a DISA checklist rather than a formatted report.
+The live preview covers all the report formats above. To produce a **STIG CKL** or **CKLB** checklist, use the **STIG Checklist** button in the results toolbar instead — these formats map your results onto a DISA checklist rather than a formatted report. See [STIG Checklist Export](#stig-checklist-export-ckl--cklb) below.
 :::
 
 ## Export Options
 
-Before exporting, you can configure what to include in your report:
+The export preview sidebar holds everything you can configure — toggle options on or off and the preview updates live. The exact set of options evolves with each release, but they fall into these groups:
 
-### Author and Metadata
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">👤</span>
-      <strong>Include Author Data (Default: ON)</strong>
+<div className="option-grid">
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">🎨</span>
+      <strong>Branding</strong>
     </div>
-    <p>Adds your name, organization, and benchmark name to the report header. Helps identify who performed the audit.</p>
+    <p>Control the report's look — choose the logo (M.A.C.E., a custom image, or none), and decide whether attribution and the footer appear. Useful for white-labeled or sanitized reports.</p>
   </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🏢</span>
-      <strong>Author Name & Organization</strong>
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">🧾</span>
+      <strong>Audit Info</strong>
     </div>
-    <p>Your name and organization appear in the report header. Set these in the export options.</p>
+    <p>Identify the audit itself — author name, organization, benchmark name, and other metadata shown in the report header.</p>
+  </div>
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">💻</span>
+      <strong>Device Info</strong>
+    </div>
+    <p>Identify the audited Mac — serial number, model, macOS version, hostname, and similar device details. Off by default; enable what you need.</p>
+  </div>
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">🗂️</span>
+      <strong>Structure</strong>
+    </div>
+    <p>Shape the report's content — which columns and sections appear, such as outputs, discussions, check and fix scripts, section summaries, executive summary, and signature lines.</p>
   </div>
 </div>
 
-### Device Information
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">💻</span>
-      <strong>Include Device Info (Default: OFF)</strong>
-    </div>
-    <p>Adds the audited Mac's serial number, model name, and macOS version to the report. Identifies which specific device was checked.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🖥️</span>
-      <strong>Include Hostname (Default: OFF)</strong>
-    </div>
-    <p>Adds the computer's hostname to the device information section.</p>
-  </div>
-</div>
-
-### Logo and Branding
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🖼️</span>
-      <strong>Logo Source</strong>
-    </div>
-    <p>Choose the logo shown in the report header:<br/>
-    <strong>M.A.C.E.</strong> — the built-in M.A.C.E. logo (default).<br/>
-    <strong>Custom</strong> — your own image, added with the <strong>Upload Logo</strong> button.<br/>
-    <strong>None</strong> — no logo.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🏷️</span>
-      <strong>Hide M.A.C.E. Branding (Default: OFF)</strong>
-    </div>
-    <p>Removes "Generated by M.A.C.E." attribution from the report. Use this for sanitized or white-labeled reports.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🦶</span>
-      <strong>Hide Footer (Default: OFF)</strong>
-    </div>
-    <p>Removes the entire footer section from the report, including generation timestamp and any branding.</p>
-  </div>
-</div>
-
-### Content Options
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📋</span>
-      <strong>Hide Outputs (Default: OFF)</strong>
-    </div>
-    <p>Hides the Expected Output and Actual Output columns. Simplifies the report if these details aren't needed.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📝</span>
-      <strong>Hide Discussions (Default: OFF)</strong>
-    </div>
-    <p>Hides the Discussion/Notes column. Reduces report length if rule explanations aren't needed.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">⏱️</span>
-      <strong>Hide Execution Time (Default: OFF)</strong>
-    </div>
-    <p>Hides the time taken for each check. Simplifies the output if timing isn't relevant.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📜</span>
-      <strong>Include Check Script (Default: OFF)</strong>
-    </div>
-    <p>Shows the command that was run for each rule. Useful for technical reviewers who want to see exactly what was tested.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🔧</span>
-      <strong>Include Fix Script (Default: OFF)</strong>
-    </div>
-    <p>Shows the remediation command for each rule. Helps teams understand how to fix failing items.</p>
-  </div>
-</div>
-
-### Analysis Options
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📊</span>
-      <strong>Include Section Summary (Default: OFF)</strong>
-    </div>
-    <p>Adds a breakdown of pass/fail rates by section. Highlights problem areas with lowest pass rates first.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">✏️</span>
-      <strong>Include Override Indicators (Default: OFF)</strong>
-    </div>
-    <p>Adds a column showing which results were manually modified. Important for audit trails where changes must be documented.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📋</span>
-      <strong>Include Executive Summary (Default: OFF, PDF only)</strong>
-    </div>
-    <p>Adds a high-level overview at the beginning of the report. Summarizes key findings and critical areas for management review.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🚩</span>
-      <strong>Include Flagged for Review (Default: OFF)</strong>
-    </div>
-    <p>Includes results you've flagged for follow-up, along with any review comments you added. Useful for tracking items that need further investigation or stakeholder sign-off before final reporting.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">✍️</span>
-      <strong>Include Signature Section (Default: OFF)</strong>
-    </div>
-    <p>Adds signature lines at the end of the report for auditor sign-off. Includes fields for Signature, Date, Printed Name, and Title/Role.</p>
-  </div>
-</div>
-
-### Format-Specific Options
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🖨️</span>
-      <strong>Paginate for Printing (Default: OFF, PDF only)</strong>
-    </div>
-    <p>Formats the PDF for US Letter paper with page breaks. When off, creates a continuous single-page document (better for digital viewing).</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🔢</span>
-      <strong>Show STIG ID (STIG compliance only)</strong>
-    </div>
-    <p>Displays STIG IDs (like APPL-15-005001) instead of Rule IDs in the table. Standard for STIG documentation.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📑</span>
-      <strong>Include CIS ID (CIS compliance only)</strong>
-    </div>
-    <p>Adds a column showing CIS Benchmark reference numbers (like 2.6.6).</p>
-  </div>
+<div className="explanation-box">
+  <h4>Some Options Are Contextual</h4>
+  <p>Certain options only appear for specific formats or baselines — for example, pagination applies to PDF, STIG IDs appear for STIG baselines, and CIS IDs for CIS baselines. The preview always shows what's available for your current format and project.</p>
 </div>
 
 ## PDF Export
 
 The PDF export creates a professional compliance report suitable for auditors and official documentation.
 
-### What's Included
-
-- **Header**: Logo, report title, author, organization, date
-- **Summary Statistics**: Total rules, pass/fail counts, pass rate percentage
-- **Pie Chart**: Visual breakdown of results by status
-- **Device Information** (optional): Serial number, model, OS version
-- **Executive Summary** (optional): High-level findings overview
-- **Section Summary** (optional): Pass rates by category
-- **Results Table**: All rules with status, expected/actual values, comments
-- **Signature Section** (optional): Sign-off lines for auditors
-- **Footer**: Generation timestamp, page numbers (if paginated)
-
-### How to Export PDF
-
-1. Complete your audit
-2. Click **Export Preview** in the results toolbar
-3. Select the **PDF** tab
-4. Configure export options in the sidebar
-5. Click **Export** and choose a save location
+<table className="icon-table">
+  <tbody>
+  <tr><td>🎨</td><td><strong>Header</strong></td><td>Logo, report title, author, organization, date</td></tr>
+  <tr><td>📊</td><td><strong>Summary Statistics</strong></td><td>Total rules, pass/fail counts, pass rate percentage</td></tr>
+  <tr><td>🥧</td><td><strong>Pie Chart</strong></td><td>Visual breakdown of results by status</td></tr>
+  <tr><td>💻</td><td><strong>Device Information</strong></td><td>Serial number, model, OS version <em>(optional)</em></td></tr>
+  <tr><td>📋</td><td><strong>Executive Summary</strong></td><td>High-level findings overview <em>(optional)</em></td></tr>
+  <tr><td>📈</td><td><strong>Section Summary</strong></td><td>Pass rates by category <em>(optional)</em></td></tr>
+  <tr><td>🗂️</td><td><strong>Results Table</strong></td><td>All rules with status, expected/actual values, comments</td></tr>
+  <tr><td>✍️</td><td><strong>Signature Section</strong></td><td>Sign-off lines for auditors <em>(optional)</em></td></tr>
+  <tr><td>🦶</td><td><strong>Footer</strong></td><td>Generation timestamp, page numbers (if paginated)</td></tr>
+  </tbody>
+</table>
 
 ## HTML Export
 
 The HTML export creates an interactive web report that can be opened in any browser.
 
-### Features
+<table className="icon-table">
+  <tbody>
+  <tr><td>📱</td><td><strong>Responsive Design</strong></td><td>Works on desktop, tablet, and mobile</td></tr>
+  <tr><td>🌓</td><td><strong>Dark Mode Support</strong></td><td>Automatically adapts to system preferences</td></tr>
+  <tr><td>🔽</td><td><strong>Expandable Details</strong></td><td>Click rows to see more information</td></tr>
+  <tr><td>🚦</td><td><strong>Status Color Coding</strong></td><td>Visual pass/fail indicators</td></tr>
+  <tr><td>🧭</td><td><strong>Section Navigation</strong></td><td>Jump to specific sections</td></tr>
+  <tr><td>🥧</td><td><strong>Pie Chart</strong></td><td>SVG visualization of results</td></tr>
+  </tbody>
+</table>
 
-- **Responsive Design**: Works on desktop, tablet, and mobile
-- **Dark Mode Support**: Automatically adapts to system preferences
-- **Expandable Details**: Click rows to see more information
-- **Status Color Coding**: Visual pass/fail indicators
-- **Section Navigation**: Jump to specific sections
-- **Pie Chart**: SVG visualization of results
-
-### How to Export HTML
-
-1. Complete your audit
-2. Click **Export Preview** in the results toolbar
-3. Select the **HTML** tab
-4. Configure export options in the sidebar
-5. Click **Export** and choose a save location
-
-### Viewing the Report
-
-Open the exported `.html` file in any web browser (Safari, Chrome, Firefox, etc.). The report is self-contained with all styles embedded.
+<div className="explanation-box">
+  <h4>Viewing the Report</h4>
+  <p>Open the exported <code>.html</code> file in any web browser (Safari, Chrome, Firefox, etc.). The report is self-contained with all styles embedded — no internet connection needed.</p>
+</div>
 
 ## CSV Export
 
-The CSV export creates a spreadsheet-compatible file for data analysis.
+The CSV export creates a spreadsheet-compatible file for data analysis:
 
-### What's in the File
+<table className="icon-table">
+  <tbody>
+  <tr><td>📊</td><td><strong>Summary Info</strong></td><td>Pass/fail counts at the top of the file</td></tr>
+  <tr><td>🏷️</td><td><strong>Column Headers</strong></td><td>Based on your export options</td></tr>
+  <tr><td>🗂️</td><td><strong>One Row Per Rule</strong></td><td>All the details for every checked rule</td></tr>
+  </tbody>
+</table>
 
-- **Summary info** at the top with pass/fail counts
-- **Column headers** based on your export options
-- **One row per rule** with all the details
-
-### How to Export CSV
-
-1. Complete your audit
-2. Click **Export Preview** in the results toolbar
-3. Select the **CSV** tab
-4. Configure export options in the sidebar
-5. Click **Export** and choose a save location
-
-### Using the CSV
-
-Import into:
-- **Microsoft Excel**: File → Open → Select the CSV
-- **Google Sheets**: File → Import → Upload the CSV
-- **Numbers**: File → Open → Select the CSV
-
-The CSV format allows you to:
-- Create custom pivot tables
-- Apply your own filtering and sorting
-- Generate charts and graphs
-- Combine with other data sources
+<div className="explanation-box">
+  <h4>Using the CSV</h4>
+  <p>Import into <strong>Excel</strong> (File → Open), <strong>Google Sheets</strong> (File → Import), or <strong>Numbers</strong> (File → Open) to create custom pivot tables, apply your own filtering and sorting, generate charts, or combine audit data with other sources.</p>
+</div>
 
 ## XLSX Export
 
-The XLSX export creates a formatted Excel spreadsheet ready to open in Microsoft Excel or Numbers.
+The XLSX export creates a formatted Excel spreadsheet ready to open in Microsoft Excel or Numbers:
 
-### What's in the File
+<table className="icon-table">
+  <tbody>
+  <tr><td>🎨</td><td><strong>Formatted Table</strong></td><td>Styled header row, ready to read on open</td></tr>
+  <tr><td>🔽</td><td><strong>Auto-Filters</strong></td><td>Every column can be sorted and filtered instantly</td></tr>
+  <tr><td>🧊</td><td><strong>Frozen Header Row</strong></td><td>Column names stay visible as you scroll</td></tr>
+  <tr><td>🗂️</td><td><strong>One Row Per Rule</strong></td><td>Status, rule ID, title, section, expected/actual output, and comments</td></tr>
+  <tr><td>🚦</td><td><strong>Status Color Coding</strong></td><td>Visually distinguishes pass, fail, and other statuses</td></tr>
+  </tbody>
+</table>
 
-- **Formatted table** with styled header row
-- **Auto-filters** on every column for quick sorting and filtering
-- **Frozen header row** so column names stay visible as you scroll
-- **One row per rule** with status, rule ID, title, section, expected/actual output, and comments
-- **Status color coding** to visually distinguish pass, fail, and other statuses
-
-### How to Export XLSX
-
-1. Complete your audit
-2. Click **Export Preview** in the results toolbar
-3. Select the **XLSX** tab
-4. Configure export options in the sidebar
-5. Click **Export** and choose a save location
-
-### Opening the File
-
-Open the exported `.xlsx` file in:
-- **Microsoft Excel**: Double-click or use File → Open
-- **Numbers**: File → Open → Select the file
-- **Google Sheets**: File → Import → Upload the file
-
-XLSX is more structured than CSV — filters, column widths, and formatting are already set up when you open it.
+<div className="explanation-box">
+  <h4>XLSX vs CSV</h4>
+  <p>XLSX is more structured than CSV — filters, column widths, and formatting are already set up when you open it. Choose CSV when you want raw data for pipelines; choose XLSX when a person will read it.</p>
+</div>
 
 ## JSON Export
 
-The JSON export creates a structured data file containing your audit results and summary statistics — ideal for automation, custom dashboards, or feeding results into other tools.
+The JSON export creates a structured data file containing your audit results and summary statistics — ideal for automation, custom dashboards, or feeding results into other tools:
 
-### What's in the File
+<table className="icon-table">
+  <tbody>
+  <tr><td>📊</td><td><strong>Summary</strong></td><td>Total rules, pass/fail/manual counts, and pass rate</td></tr>
+  <tr><td>🧾</td><td><strong>Audit Metadata</strong></td><td>Platform, baseline version, framework, device info</td></tr>
+  <tr><td>🗂️</td><td><strong>One Entry Per Rule</strong></td><td>Status, expected/actual output, and comments</td></tr>
+  </tbody>
+</table>
 
-- **Summary** with total rules, pass/fail/manual counts, and pass rate
-- **Audit metadata** (platform, baseline version, framework, device info)
-- **One entry per rule** with status, expected/actual output, and comments
+<div className="explanation-box">
+  <h4>Using the JSON</h4>
+  <p>Parse the file in any language or pipeline to build dashboards, track compliance trends over time, or integrate results with ticketing and SIEM tools.</p>
+</div>
 
-### How to Export JSON
+## Markdown & AsciiDoc Export
 
-1. Complete your audit
-2. Click **Export Preview** in the results toolbar
-3. Select the **JSON** tab
-4. Configure export options in the sidebar
-5. Click **Export** and choose a save location
+Both create plain-text reports for documentation workflows:
 
-### Using the JSON
+<table className="icon-table">
+  <tbody>
+  <tr><td>📝</td><td><strong>Markdown</strong></td><td>Renders anywhere Markdown does — wikis, GitHub, ticketing systems, and note apps</td></tr>
+  <tr><td>📃</td><td><strong>AsciiDoc</strong></td><td>Slots into Asciidoctor and Antora documentation pipelines</td></tr>
+  <tr><td>🗂️</td><td><strong>Same Content</strong></td><td>Summary statistics and the full results table, following your export options</td></tr>
+  </tbody>
+</table>
 
-Parse the file in any language or pipeline to build dashboards, track compliance trends over time, or integrate results with ticketing and SIEM tools.
+<div className="explanation-box">
+  <h4>Why Plain Text?</h4>
+  <p>Text-based reports diff cleanly in version control — commit one per audit and your compliance history becomes reviewable over time.</p>
+</div>
 
 ## STIG Checklist Export (CKL & CKLB)
 
-For DoD security assessments, MACE can export your results as a DISA STIG checklist in two formats:
+For DoD security assessments, MACE can export your results as a DISA STIG checklist in two formats. Both are produced from the **STIG Checklist** button in the results toolbar (rather than the live Export Preview):
 
-- **CKL** — the XML format used by STIG Viewer 2.x
-- **CKLB** — the JSON format used by STIG Viewer 3.x (the modern replacement for CKL)
+<div className="option-grid">
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">🛡️</span>
+      <strong>CKL</strong>
+      <span className="option-card__badge">STIG Viewer 2.x</span>
+    </div>
+    <p>The XML checklist format. Requires a template (from DISA or your organization) that MACE updates with your results.</p>
+  </div>
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">🛡️</span>
+      <strong>CKLB</strong>
+      <span className="option-card__badge">STIG Viewer 3.x</span>
+    </div>
+    <p>The modern JSON checklist format. Can update an existing template, or be generated from scratch — including directly from an XCCDF benchmark with authoritative DISA metadata.</p>
+  </div>
+</div>
 
-Both are produced from the **STIG Checklist** button in the results toolbar (rather than the live Export Preview).
-
-### What's in a Checklist?
-
-Both formats are the standard for DISA STIG checklists and contain:
-- Device identification
-- Vulnerability assessments
-- Finding details and status
-- Comments and notes
+Both formats are the standard for DISA STIG checklists and contain device identification, vulnerability assessments, finding details and status, and comments.
 
 ### How Checklist Export Works
 
 For **CKL** and for updating an existing **CKLB**, MACE merges your results into a template:
 
-1. **You provide a template** (CKL or CKLB, from DISA or your organization)
-2. **MACE matches STIG IDs** between your audit and the template
-3. **Results are merged** into the template
-4. **The updated checklist is saved** with your findings
-
-For **CKLB**, MACE can also generate a checklist from scratch — including directly from an XCCDF benchmark, which supplies authoritative DISA metadata.
+<div className="build-steps">
+  <div className="build-step">
+    <span className="build-step__number">1</span>
+    <div className="build-step__content">
+      <strong>You provide a template</strong>
+      <span>A CKL or CKLB file from DISA or your organization</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">2</span>
+    <div className="build-step__content">
+      <strong>MACE matches STIG IDs</strong>
+      <span>Between your audit results and the template</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">3</span>
+    <div className="build-step__content">
+      <strong>Results are merged</strong>
+      <span>Statuses, findings, and comments flow into the template</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">4</span>
+    <div className="build-step__content">
+      <strong>The updated checklist is saved</strong>
+      <span>Ready to open in STIG Viewer with your findings</span>
+    </div>
+  </div>
+</div>
 
 ### Status Mapping
 
 MACE audit statuses map to checklist statuses:
 
 <table className="icon-table">
-  <tr><td>✅</td><td><strong>Pass</strong></td><td>NotAFinding / not_a_finding</td></tr>
-  <tr><td>❌</td><td><strong>Fail</strong></td><td>Open / open</td></tr>
-  <tr><td>➖</td><td><strong>N/A</strong></td><td>Not_Applicable / not_applicable</td></tr>
-  <tr><td>⚠️</td><td><strong>Error</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
-  <tr><td>👁️</td><td><strong>Manual Review</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
-  <tr><td>⏳</td><td><strong>Pending</strong></td><td>Not_Reviewed / not_reviewed</td></tr>
+  <tbody>
+  <tr><td><span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Pass</span></td><td><code>NotAFinding</code> / <code>not_a_finding</code></td><td>The control is in place</td></tr>
+  <tr><td><span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Fail</span></td><td><code>Open</code> / <code>open</code></td><td>The control is not in place — an open finding</td></tr>
+  <tr><td><span className="status-card--na status-card__pill"><span className="status-card__dot"></span>N/A</span></td><td><code>Not_Applicable</code> / <code>not_applicable</code></td><td>The control doesn't apply to this system</td></tr>
+  <tr><td><span className="status-card--error status-card__pill"><span className="status-card__dot"></span>Error</span></td><td><code>Not_Reviewed</code> / <code>not_reviewed</code></td><td>The check couldn't run — needs review</td></tr>
+  <tr><td><span className="status-card--manual status-card__pill"><span className="status-card__dot"></span>Manual Review</span></td><td><code>Not_Reviewed</code> / <code>not_reviewed</code></td><td>Human verification still required</td></tr>
+  <tr><td><span className="status-card--pending status-card__pill"><span className="status-card__dot"></span>Pending</span></td><td><code>Not_Reviewed</code> / <code>not_reviewed</code></td><td>The rule wasn't checked</td></tr>
+  </tbody>
 </table>
 
 (CKL uses the capitalized XML statuses; CKLB uses the lowercase JSON statuses.)
 
 ### How to Export a Checklist
 
-1. Complete your audit (must use a STIG baseline)
-2. Click **STIG Checklist** in the results toolbar
-3. Choose **CKL** or **CKLB**
-4. Select a template file (or, for CKLB, generate from scratch / an XCCDF benchmark)
-5. Choose where to save the checklist and export
+<div className="build-steps">
+  <div className="build-step">
+    <span className="build-step__number">1</span>
+    <div className="build-step__content">
+      <strong>Complete your audit</strong>
+      <span>Must use a STIG baseline</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">2</span>
+    <div className="build-step__content">
+      <strong>Click STIG Checklist</strong>
+      <span>In the results toolbar</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">3</span>
+    <div className="build-step__content">
+      <strong>Choose CKL or CKLB</strong>
+      <span>Match your STIG Viewer version</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">4</span>
+    <div className="build-step__content">
+      <strong>Select a template file</strong>
+      <span>Or, for CKLB, generate from scratch or from an XCCDF benchmark</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">5</span>
+    <div className="build-step__content">
+      <strong>Choose where to save</strong>
+      <span>The checklist exports with your findings merged in</span>
+    </div>
+  </div>
+</div>
 
 ### What Gets Updated
 
 For each matching STIG ID:
-- **STATUS**: Updated to match audit result
-- **FINDING_DETAILS**: Populated with check command and output
-- **COMMENTS**: Filled with user comments or rule discussion
-- **HOST_NAME**: Set from device information
 
-### Requirements
+<table className="icon-table">
+  <tbody>
+  <tr><td>🚦</td><td><strong>STATUS</strong></td><td>Updated to match your audit result</td></tr>
+  <tr><td>🔍</td><td><strong>FINDING_DETAILS</strong></td><td>Populated with the check command and output</td></tr>
+  <tr><td>💬</td><td><strong>COMMENTS</strong></td><td>Filled with user comments or rule discussion</td></tr>
+  <tr><td>🖥️</td><td><strong>HOST_NAME</strong></td><td>Set from device information</td></tr>
+  </tbody>
+</table>
 
-- Audit must use a STIG baseline
-- STIG IDs must match between your audit and the template
-- A template file is required for CKL and for updating an existing CKLB (CKLB can also be generated from scratch or from an XCCDF benchmark)
+<div className="explanation-box explanation-box--warning">
+  <h4>Requirements</h4>
+  <p>The audit must use a <strong>STIG baseline</strong>, and STIG IDs must match between your audit and the template. A template file is required for CKL and for updating an existing CKLB — CKLB can also be generated from scratch or from an XCCDF benchmark.</p>
+</div>
 
 ## Custom Logo
 
 To use your organization's logo in reports, open the **Branding** section of the export preview:
 
-1. Set **Logo Source** to **Custom**
-2. Click **Upload Logo** and choose your image
-3. The logo appears in the preview immediately and is used in the export
+<div className="build-steps">
+  <div className="build-step">
+    <span className="build-step__number">1</span>
+    <div className="build-step__content">
+      <strong>Set Logo Source to Custom</strong>
+      <span>In the Branding section of the export preview sidebar</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">2</span>
+    <div className="build-step__content">
+      <strong>Click Upload Logo</strong>
+      <span>Choose your image file</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">3</span>
+    <div className="build-step__content">
+      <strong>Preview and export</strong>
+      <span>The logo appears in the preview immediately and is used in the export</span>
+    </div>
+  </div>
+</div>
 
-MACE saves your uploaded logo as `logo.png` in the project folder, so it's reused across exports. If a `logo.png` already exists in the project folder, MACE detects it automatically and offers it as the Custom logo. Use the trash button next to Upload Logo to remove a custom logo (Logo Source falls back to M.A.C.E.).
+<div className="explanation-box">
+  <h4>Your Logo Travels With the Project</h4>
+  <p>MACE saves your uploaded logo as <code>logo.png</code> in the project folder, so it's reused across exports. If a <code>logo.png</code> already exists in the project folder, MACE detects it automatically and offers it as the Custom logo. Use the trash button next to Upload Logo to remove it (Logo Source falls back to M.A.C.E.).</p>
+</div>
 
 **Logo recommendations:**
-- Format: PNG with transparency
-- Size: 200-400 pixels wide
-- Aspect ratio: Horizontal works best
+
+<table className="icon-table">
+  <tbody>
+  <tr><td>🖼️</td><td><strong>Format</strong></td><td>PNG with transparency</td></tr>
+  <tr><td>📏</td><td><strong>Size</strong></td><td>200–400 pixels wide</td></tr>
+  <tr><td>↔️</td><td><strong>Aspect Ratio</strong></td><td>Horizontal works best</td></tr>
+  </tbody>
+</table>
 
 ## Best Practices
 
