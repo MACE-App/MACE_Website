@@ -397,7 +397,11 @@ function StatsBand() {
           setDownloads(total);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        // Only fall back to a floor once the request has actually failed, so a
+        // visitor never watches an approximate number correct itself
+        if (!cancelled) setDownloads('8,900+');
+      });
 
     fetch('https://api.github.com/repos/MACE-App/MACE')
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
@@ -406,17 +410,21 @@ function StatsBand() {
           setStars(repo.stargazers_count);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        if (!cancelled) setStars('150+');
+      });
 
     return () => {
       cancelled = true;
     };
   }, []);
 
+  const format = (value) => (typeof value === 'number' ? value.toLocaleString() : value);
+
   const stats = [
-    {value: downloads ? downloads.toLocaleString() : '8,900+', label: 'Downloads'},
+    {value: format(downloads), label: 'Downloads'},
     {value: '800+', label: 'Security rules'},
-    {value: stars ? stars.toLocaleString() : '150+', label: 'GitHub stars'},
+    {value: format(stars), label: 'GitHub stars'},
   ];
 
   return (
@@ -425,7 +433,11 @@ function StatsBand() {
         <div className={styles.stats}>
           {stats.map((stat) => (
             <div key={stat.label} className={styles.statItem}>
-              <span className={styles.statValue}>{stat.value}</span>
+              {stat.value == null ? (
+                <span className={styles.statPlaceholder} aria-hidden="true" />
+              ) : (
+                <span className={styles.statValue}>{stat.value}</span>
+              )}
               <span className={styles.statLabel}>{stat.label}</span>
             </div>
           ))}

@@ -756,6 +756,38 @@
   color: var(--ifm-color-primary);
   /* Digits share a width so the live count doesn't jitter on update */
   font-variant-numeric: tabular-nums;
+  animation: statFadeIn 0.5s ease both;
+}
+
+/* Holds the line height while the live figure loads, so the number fades in
+   once instead of appearing as an estimate and then correcting itself */
+.statPlaceholder {
+  display: block;
+  width: 4.5rem;
+  height: 2.31rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  opacity: 0.5;
+  animation: statPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes statFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes statPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .statLabel {
