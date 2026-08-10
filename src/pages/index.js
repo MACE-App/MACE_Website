@@ -376,55 +376,12 @@ function FeaturesSection() {
 }
 
 function StatsBand() {
-  // Live totals from GitHub. Both fall back to a rounded-down floor if the API
-  // is unreachable or rate limited (60 req/hr per IP for unauthenticated calls).
-  const [downloads, setDownloads] = useState(null);
-  const [stars, setStars] = useState(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    fetch('https://api.github.com/repos/MACE-App/MACE/releases?per_page=100')
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((releases) => {
-        const total = releases.reduce(
-          (sum, release) =>
-            sum +
-            (release.assets || []).reduce((n, asset) => n + (asset.download_count || 0), 0),
-          0,
-        );
-        if (!cancelled && total > 0) {
-          setDownloads(total);
-        }
-      })
-      .catch(() => {
-        // Only fall back to a floor once the request has actually failed, so a
-        // visitor never watches an approximate number correct itself
-        if (!cancelled) setDownloads('8,900+');
-      });
-
-    fetch('https://api.github.com/repos/MACE-App/MACE')
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((repo) => {
-        if (!cancelled && repo.stargazers_count > 0) {
-          setStars(repo.stargazers_count);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setStars('150+');
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const format = (value) => (typeof value === 'number' ? value.toLocaleString() : value);
-
+  // Deliberately static, so the numbers are in the HTML on first paint with no
+  // loading state. Rounded down, so they stay true as the real totals climb.
   const stats = [
-    {value: format(downloads), label: 'Downloads'},
+    {value: '8,900+', label: 'Downloads'},
     {value: '800+', label: 'Security rules'},
-    {value: format(stars), label: 'GitHub stars'},
+    {value: '150+', label: 'GitHub stars'},
   ];
 
   return (
@@ -433,16 +390,10 @@ function StatsBand() {
         <div className={styles.stats}>
           {stats.map((stat) => (
             <div key={stat.label} className={styles.statItem}>
-              {stat.value == null ? (
-                <span className={styles.statPlaceholder} aria-hidden="true" />
-              ) : (
-                <span className={styles.statValue}>
-                  {String(stat.value).replace(/\+$/, '')}
-                  {String(stat.value).endsWith('+') && (
-                    <span className={styles.statSuffix}>+</span>
-                  )}
-                </span>
-              )}
+              <span className={styles.statValue}>
+                {stat.value.replace(/\+$/, '')}
+                {stat.value.endsWith('+') && <span className={styles.statSuffix}>+</span>}
+              </span>
               <span className={styles.statLabel}>{stat.label}</span>
             </div>
           ))}
