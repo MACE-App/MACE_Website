@@ -286,7 +286,7 @@ function HomepageHeader() {
       <MatrixRain />
       <div className="container">
         <img
-          src="/img/logo.png"
+          src="/img/logo.webp"
           alt="MACE App Icon"
           className={styles.heroLogo}
         />

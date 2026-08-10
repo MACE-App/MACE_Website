@@ -237,7 +237,7 @@ MACE offers six pre-configured document types, each designed for a different aud
 <div className="engine-comparison">
   <div className="engine-card">
     <div className="engine-card__header">
-      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <img src="/img/engine-mscp.webp" alt="mSCP" className="engine-card__icon-img" />
       <h3>mSCP Documentation Engine</h3>
     </div>
     <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
@@ -250,7 +250,7 @@ MACE offers six pre-configured document types, each designed for a different aud
   </div>
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
+      <img src="/img/engine-mace.webp" alt="M.A.C.E." className="engine-card__icon-img" />
       <h3>M.A.C.E. Documentation Engine</h3>
     </div>
     <p>The recommended engine. Fast, full-featured, and built into MACE.</p>

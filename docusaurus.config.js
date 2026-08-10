@@ -171,7 +171,7 @@ const config = {
         title: 'MACE',
         logo: {
           alt: 'MACE Logo',
-          src: 'img/app-icon.png',
+          src: 'img/app-icon.webp',
         },
         items: [
           {

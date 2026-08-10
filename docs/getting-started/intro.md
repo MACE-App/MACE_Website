@@ -50,7 +50,7 @@ MACE is the front end. It takes what mSCP already does well and puts a real inte
 That split is the point. mSCP keeps doing what it does best, which is more rules, more frameworks, more baselines. MACE brings more people to it.
 
 <div class="mscp-callout">
-  <img src="/img/engine-mscp.png" alt="macOS Security Compliance Project logo" class="mscp-callout__logo" />
+  <img src="/img/engine-mscp.webp" alt="macOS Security Compliance Project logo" class="mscp-callout__logo" />
   <div class="mscp-callout__body">
     <strong class="mscp-callout__title">macOS Security Compliance Project</strong>
     <span class="mscp-callout__desc">A collaboration between NIST, NASA, DISA, and LANL. Every rule in MACE starts here.</span>
@@ -91,7 +91,7 @@ Building, auditing, documenting — whichever one you're doing, you pick how it 
 <div class="engine-comparison">
   <div class="engine-card">
     <div class="engine-card__header">
-      <img src="/img/engine-mscp.png" alt="mSCP" class="engine-card__icon-img" />
+      <img src="/img/engine-mscp.webp" alt="mSCP" class="engine-card__icon-img" />
       <h3>mSCP Engine</h3>
     </div>
     <p>The original Python scripts, run exactly as the project intends. You get what the scripts expose, the same way you always have.</p>
@@ -104,7 +104,7 @@ Building, auditing, documenting — whichever one you're doing, you pick how it 
   </div>
   <div class="engine-card engine-card--primary">
     <div class="engine-card__header">
-      <img src="/img/engine-mace.png" alt="M.A.C.E." class="engine-card__icon-img" />
+      <img src="/img/engine-mace.webp" alt="M.A.C.E." class="engine-card__icon-img" />
       <h3>M.A.C.E. Engine</h3>
     </div>
     <p>Built in Swift. Tweak almost everything about every output, with options the scripts were never built to expose.</p>

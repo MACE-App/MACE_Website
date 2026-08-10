@@ -255,7 +255,7 @@ Once you've finished adding, removing, and tuning rules, that project has to bec
 <div className="engine-comparison">
   <div className="engine-card">
     <div className="engine-card__header">
-      <img src="/img/engine-mscp.png" alt="mSCP" className="engine-card__icon-img" />
+      <img src="/img/engine-mscp.webp" alt="mSCP" className="engine-card__icon-img" />
       <h3>mSCP Engine</h3>
     </div>
     <p>The original Python scripts, run exactly as the project intends. You get what the scripts expose, the same way you always have.</p>
@@ -269,7 +269,7 @@ Once you've finished adding, removing, and tuning rules, that project has to bec
 
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
-      <img src="/img/engine-mace.png" alt="M.A.C.E." className="engine-card__icon-img" />
+      <img src="/img/engine-mace.webp" alt="M.A.C.E." className="engine-card__icon-img" />
       <h3>M.A.C.E. Engine</h3>
     </div>
     <p>Built in Swift. Tweak almost everything about every output, with options the scripts were never built to expose.</p>

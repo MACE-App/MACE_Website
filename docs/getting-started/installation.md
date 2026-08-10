@@ -7,7 +7,7 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 
 <div style={{textAlign: 'center'}}>
 
-<img src="/img/app-icon.png" alt="MACE" style={{width: '100px', height: '100px', marginBottom: '1.5rem'}} />
+<img src="/img/app-icon.webp" alt="MACE" style={{width: '100px', height: '100px', marginBottom: '1.5rem'}} />
 
 <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '0.5rem'}}>
   One self-contained <code>.app</code>. Nothing else to install.
@@ -71,7 +71,7 @@ The simplest option, and what we'd suggest for most people.
 
 <div className="install-drag-visual">
   <div className="drag-item">
-    <img src="/img/app-icon.png" alt="MACE" className="app-icon" />
+    <img src="/img/app-icon.webp" alt="MACE" className="app-icon" />
     <svg className="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 4L10.5 20L12.5 13.5L19 11.5L4 4Z" fill="#ffffff" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
