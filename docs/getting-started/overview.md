@@ -94,7 +94,7 @@ From there, the whole job happens in the app:
     <div className="how-step__number">1</div>
     <div className="how-step__content">
       <strong>Ingest</strong>
-      <p>MACE loads the mSCP rule library and baselines so you can browse 800+ security rules across every supported framework, without touching the command line or hand-editing YAML.</p>
+      <p>MACE loads the mSCP rule library and baselines so you can browse 800+ rules across every supported macOS, iOS, and visionOS release, without touching the command line or hand-editing YAML.</p>
     </div>
   </div>
   <div className="how-step">

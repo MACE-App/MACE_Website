@@ -60,7 +60,30 @@ function TerminalAnimation() {
   );
 }
 
+// Each step's gradient picks up where the previous one left off, walking from
+// the brand blue to the same green the export checkmarks use for "done".
+// Dark mode runs the same blue-to-green walk in brighter tones, since the
+// light ramp's deep blues disappear against a dark background.
+const STEP_COLORS = [
+  ['#0066CC', '#0A84FF'],
+  ['#0A84FF', '#00A9C9'],
+  ['#00A9C9', '#14B87A'],
+  ['#14B87A', '#30D158'],
+  ['#30D158', '#34C759'],
+];
+
+const STEP_COLORS_DARK = [
+  ['#0A84FF', '#32ADE6'],
+  ['#32ADE6', '#40C8E0'],
+  ['#40C8E0', '#34D399'],
+  ['#34D399', '#30D158'],
+  ['#30D158', '#34C759'],
+];
+
 function WorkflowAnimation() {
+  const {colorMode} = useColorMode();
+  const stepColors = colorMode === 'dark' ? STEP_COLORS_DARK : STEP_COLORS;
+
   const steps = [
     {
       icon: (
@@ -68,7 +91,7 @@ function WorkflowAnimation() {
           <path d="M12 5v14M5 12h14"/>
         </svg>
       ),
-      label: 'Create'
+      label: 'New baseline'
     },
     {
       icon: (
@@ -77,16 +100,17 @@ function WorkflowAnimation() {
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
         </svg>
       ),
-      label: 'Customize'
+      label: 'Tailored rules'
     },
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
         </svg>
       ),
-      label: 'Build'
+      label: 'Scripts & profiles'
     },
     {
       icon: (
@@ -95,7 +119,7 @@ function WorkflowAnimation() {
           <path d="M12 3a9 9 0 1 0 9 9"/>
         </svg>
       ),
-      label: 'Audit'
+      label: 'Compliance report'
     },
     {
       icon: (
@@ -107,7 +131,7 @@ function WorkflowAnimation() {
           <polyline points="10 9 9 9 8 9"/>
         </svg>
       ),
-      label: 'Document'
+      label: 'Guides & docs'
     },
   ];
   const [activeStep, setActiveStep] = useState(0);
@@ -126,6 +150,10 @@ function WorkflowAnimation() {
           <div
             key={idx}
             className={`${styles.workflowStep} ${idx === activeStep ? styles.workflowStepActive : ''}`}
+            style={{
+              '--step-from': stepColors[idx][0],
+              '--step-to': stepColors[idx][1],
+            }}
           >
             {step.icon}
           </div>
@@ -304,14 +332,14 @@ function FeaturesSection() {
       title: 'All-in-One Workflow',
       desc: (
         <>
-          Create, customize, build, audit, and document your baselines all in one app. All 800+ rules come straight from the{' '}
+          Create, customize, build, audit, and document baselines in one app. 800+ rules from every supported macOS, iOS, and visionOS release in NIST's{' '}
           <Link
             href="https://github.com/usnistgov/macos_security"
             target="_blank"
             rel="noopener noreferrer">
-            macOS Security Compliance Project (mSCP)
+            macOS Security Compliance Project
           </Link>
-          , hosted by NIST.
+          .
         </>
       ),
       customIcon: true,
@@ -347,6 +375,168 @@ function FeaturesSection() {
   );
 }
 
+function StatsBand() {
+  // Live totals from GitHub. Both fall back to a rounded-down floor if the API
+  // is unreachable or rate limited (60 req/hr per IP for unauthenticated calls).
+  const [downloads, setDownloads] = useState(null);
+  const [stars, setStars] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch('https://api.github.com/repos/MACE-App/MACE/releases?per_page=100')
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((releases) => {
+        const total = releases.reduce(
+          (sum, release) =>
+            sum +
+            (release.assets || []).reduce((n, asset) => n + (asset.download_count || 0), 0),
+          0,
+        );
+        if (!cancelled && total > 0) {
+          setDownloads(total);
+        }
+      })
+      .catch(() => {});
+
+    fetch('https://api.github.com/repos/MACE-App/MACE')
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((repo) => {
+        if (!cancelled && repo.stargazers_count > 0) {
+          setStars(repo.stargazers_count);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const stats = [
+    {value: downloads ? downloads.toLocaleString() : '8,900+', label: 'Downloads'},
+    {value: '800+', label: 'Security rules'},
+    {value: stars ? stars.toLocaleString() : '150+', label: 'GitHub stars'},
+  ];
+
+  return (
+    <section className={styles.statsBand}>
+      <div className="container">
+        <div className={styles.stats}>
+          {stats.map((stat) => (
+            <div key={stat.label} className={styles.statItem}>
+              <span className={styles.statValue}>{stat.value}</span>
+              <span className={styles.statLabel}>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FrameworksStrip() {
+  // Ordered by breadth of adoption, widest first
+  const frameworks = [
+    'CIS Level 1 & 2',
+    'NIST 800-53',
+    'DISA STIG',
+    'CMMC',
+    'NIST 800-171',
+    'CIS v8',
+    'CNSSI-1253',
+    'HICP',
+    'NL MAPGOV',
+  ];
+
+  return (
+    <section className={styles.frameworks}>
+      <div className="container">
+        <p className={styles.frameworksLabel}>Built for the frameworks you answer to</p>
+        <ul className={styles.frameworksList}>
+          {frameworks.map((name) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
+        <Link
+          className={styles.frameworksLink}
+          href="https://github.com/usnistgov/macos_security"
+          target="_blank"
+          rel="noopener noreferrer">
+          See every baseline on the mSCP GitHub
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function SampleOutputs() {
+  // Hosted locally so HTML renders as a real page - GitHub only shows its source.
+  // Markdown is the exception: GitHub renders it, a static .md would just download.
+  const samples = [
+    {
+      title: 'Audit Report',
+      desc: 'Rule-by-rule pass and fail results with pass rate, severity, and compliance mapping, ready to hand to an auditor.',
+      links: [
+        {label: 'HTML', href: '/examples/Audit_Report_Example.html'},
+        {label: 'PDF', href: '/examples/Audit_Report_Example.pdf'},
+        {label: 'XLSX', href: '/examples/Audit_Report_Example.xlsx'},
+        {label: 'CSV', href: '/examples/Audit_Report_Example.csv'},
+        {label: 'JSON', href: '/examples/Audit_Report_Example.json'},
+        {label: 'Markdown', href: '/examples/Audit_Report_Example.md'},
+        {label: 'AsciiDoc', href: '/examples/Audit_Report_Example.adoc'},
+      ],
+    },
+    {
+      title: 'Compliance Documentation',
+      desc: 'Full baseline guide with rule discussions, check procedures, and remediation steps for every control.',
+      links: [
+        {label: 'HTML', href: '/examples/Documentation_Example.html'},
+        {label: 'PDF', href: '/examples/Documentation_Example.pdf'},
+        {label: 'XLSX', href: '/examples/Documentation_Example.xlsx'},
+        {label: 'CSV', href: '/examples/Documentation_Example.csv'},
+        {label: 'JSON', href: '/examples/Documentation_Example.json'},
+        {label: 'Markdown', href: '/examples/Documentation_Example.md'},
+        {label: 'AsciiDoc', href: '/examples/Documentation_Example.adoc'},
+      ],
+    },
+  ];
+
+  return (
+    <section className={styles.samples}>
+      <div className="container">
+        <Heading as="h2" className="text--center">
+          See What MACE Produces
+        </Heading>
+        <p className={styles.samplesIntro}>Real output from a real build.</p>
+        <div className={styles.samplesGrid}>
+          {samples.map((sample) => (
+            <div key={sample.title} className={styles.sampleCard}>
+              <Heading as="h3">{sample.title}</Heading>
+              <p>{sample.desc}</p>
+              <div className={styles.sampleLinks}>
+                {sample.links.map((link) => (
+                  <Link
+                    key={link.label}
+                    className={styles.sampleLink}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className={styles.samplesNote}>
+          * Every report is fully customizable. These are the default outputs.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function ScreenshotCarousel() {
   const {colorMode} = useColorMode();
   const isDarkMode = colorMode === 'dark';
@@ -362,7 +552,7 @@ function ScreenshotCarousel() {
       light: '/img/screenshots/compliance-editor-light.webp',
       dark: '/img/screenshots/compliance-editor-dark.webp',
       title: 'Compliance Editor',
-      desc: 'Browse and customize 800+ security rules'
+      desc: 'Browse and customize 800+ rules across macOS, iOS, and visionOS'
     },
     {
       light: '/img/screenshots/rule-builder-light.webp',
@@ -469,8 +659,11 @@ export default function Home() {
       description="Build, customize, audit, and deploy Apple security baselines — no command line required.">
       <HomepageHeader />
       <main>
+        <StatsBand />
         <FeaturesSection />
+        <FrameworksStrip />
         <ScreenshotCarousel />
+        <SampleOutputs />
         <CTASection />
       </main>
     </Layout>

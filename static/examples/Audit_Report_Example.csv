@@ -1,0 +1,237 @@
+# M.A.C.E. Audit Report
+# Example Benchmark
+# Organization: Example Organization
+# Author: John Doe
+# Serial Number: XXXXXXXXXX
+# Model: MacBook Air
+# OS Version: macOS 27.0.0
+#
+# Summary
+# Total: 117
+# Passed: 35
+# Failed: 80
+# Manual Review: 1
+# Errors: 0
+# Pass Rate: 30.4%
+# Platform: macOS
+# Version: macOS 26 (Tahoe)
+# Compliance: CIS Level 2
+# Generated: 2026-08-09T23:54:11Z
+#
+# Section Summary
+# Password Policy: 0/8 passed (0%)
+# Supplemental: 0/1 passed (0%)
+# iCloud: 0/1 passed (0%)
+# System Settings: 11/44 passed (25%)
+# Audit: 7/21 passed (33%)
+# Operating System: 17/42 passed (40%)
+#
+Title,Section,Status,Expected Output,Actual Output,Discussion,Comment,Error Message,Timestamp
+Ensure Location Services Is In the Menu Bar,system_settings,Fail,1,,,,"Expected: 1, Got: ",2026-08-09T23:53:39Z
+Enforce macOS Updates are Automatically Installed,system_settings,Pass,true,true,,,,2026-08-09T23:53:39Z
+Enforce Session Lock After Screen Saver is Started,system_settings,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:39Z
+Ensure Time Machine Volumes are Encrypted,system_settings,Pass,0,0,,,,2026-08-09T23:53:39Z
+Disable Guest Access to Shared SMB Folders,system_settings,Pass,1,1,,,,2026-08-09T23:53:39Z
+Disable Printer Sharing,system_settings,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:39Z
+Disable the Guest Account,system_settings,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:39Z
+Enable Location Services,system_settings,Pass,true,true,,,,2026-08-09T23:53:39Z
+Require Administrator Password to Modify System-Wide Preferences,system_settings,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:40Z
+Disable Improve Search Information to Apple,system_settings,Fail,2,,,,"Expected: 2, Got: ",2026-08-09T23:53:40Z
+Disable Server Message Block Sharing,system_settings,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:40Z
+Secure Hot Corners,system_settings,Pass,0,0,,,,2026-08-09T23:53:40Z
+Disable Remote Management,system_settings,Pass,1,1,,,,2026-08-09T23:53:40Z
+Configure Login Window to Prompt for Username and Password,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:41Z
+Disable Personalized Advertising,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:41Z
+Configure Time Machine for Automatic Backups,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:41Z
+Disable Password Hints,system_settings,Fail,0,,,,"Expected: 0, Got: ",2026-08-09T23:53:41Z
+Disable Screen Sharing and Apple Remote Desktop,system_settings,Pass,PASS,PASS,,,,2026-08-09T23:53:41Z
+Disable External Intelligence Integrations,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:41Z
+Enforce Screen Saver Timeout,system_settings,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:41Z
+Ensure Software Update is Updated and Current,system_settings,Pass,1,1,,,,2026-08-09T23:53:41Z
+Disable SSH Server for Remote Access Sessions,system_settings,Pass,PASS,PASS,,,,2026-08-09T23:53:41Z
+Enforce FileVault,system_settings,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:41Z
+Disable Content Caching Service,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:41Z
+Disable Internet Sharing,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:41Z
+Enable macOS Application Firewall,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:42Z
+Enforce Software Update Downloads Updates Automatically,system_settings,Pass,true,true,,,,2026-08-09T23:53:42Z
+Enforce Critical Security Updates to be Installed,system_settings,Pass,true,true,,,,2026-08-09T23:53:42Z
+Disable Siri,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:42Z
+Disable Bluetooth Sharing,system_settings,Fail,0,,,,"Expected: 0, Got: ",2026-08-09T23:53:42Z
+Ensure Wake for Network Access Is Disabled,system_settings,Fail,0,1,,,"Expected: 0, Got: 1",2026-08-09T23:53:42Z
+Disable Sending Diagnostic and Usage Data to Apple,system_settings,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:42Z
+Disable Improve Siri and Dictation Information to Apple,system_settings,Fail,2,,,,"Expected: 2, Got: ",2026-08-09T23:53:42Z
+Configure Login Window to Show A Custom Message,system_settings,Fail,Q2VudGVyIGZvciBJbnRlcm5ldCBTZWN1cml0eSBUZXN0IE1lc3NhZ2UK,,,,"Expected: Q2VudGVyIGZvciBJbnRlcm5ldCBTZWN1cml0eSBUZXN0IE1lc3NhZ2UK, Got: ",2026-08-09T23:53:42Z
+Disable Unattended or Automatic Logon to the System,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:42Z
+Disable External Intelligence Integration Sign In,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:42Z
+Disable Sending Audio Recordings and Transcripts to Apple,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:42Z
+Enforce macOS Time Synchronization,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:43Z
+Enforce Screen Saver Password,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:43Z
+Configure macOS to Use an Authorized Time Server,system_settings,Fail,time.apple.com,,,,"Expected: time.apple.com, Got: ",2026-08-09T23:53:43Z
+Disable Media Sharing,system_settings,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:43Z
+Disable Airplay Receiver,system_settings,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:43Z
+Disable Remote Apple Events,system_settings,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:43Z
+CIS Manual Recommendations,supplemental,Manual Review,,,"List of CIS recommendations that are manual check in the CIS macOS Benchmark.
+
+[cols=""15%h, 85%a""]
+|===
+|Section
+|System Settings
+
+|Recommendations
+| 1.7 Ensure the System is Managed by a Mobile Device Management (MDM) Software
+|===
+
+[cols=""15%h, 85%a""]
+|===
+|Section
+|System Settings
+
+|Recommendations
+|2.1.1.1 Audit iCloud Keychain +
+2.1.1.2 Audit iCloud Drive +
+2.1.1.4 Audit Security Keys Used With Apple Accounts +
+2.1.1.5 Audit Freeform Sync to iCloud +
+2.1.1.6 Audit Find My Mac +
+2.1.2 Audit App Store Password Settings +
+2.3.3.11 Ensure Computer Name Does Not Contain PII or Protected Organizational Information +
+2.4.1 Audit Menu Bar and Control Center Icons +
+2.5.2.2 Ensure Listen for Siri is Disabled +
+2.6.1.3 Audit Location Services Access +
+2.6.2.1 Audit Full Disk Access for Applications +
+2.6.3.5 Ensure Share iCloud Analytics Is Disabled +
+2.6.7 Audit Lockdown Mode +
+2.7.2 Audit iPhone Mirroring +
+2.8.1 Audit Universal Control Settings +
+2.10.1.1 Ensure the OS Is Not Active When Resuming from Standby (Intel) +
+2.12.2 Audit Touch ID +
+2.14.1 Audit Game Center Settings +
+2.15.1 Audit Notification & Focus Settings +
+2.16.1 Audit Wallet & Apple Pay Settings +
+2.17.1 Audit Internet Accounts for Authorized Use +
+|===
+
+[cols=""15%h, 85%a""]
+|===
+|Section
+|Logging and Auditing
+
+|Recommendations
+|3.6 Audit Software Inventory
+|===
+
+[cols=""15%h, 85%a""]
+|===
+|Section
+|System Access, Authentication and Authorization
+
+|Recommendations
+|5.2.3 Ensure Complex Password Must Contain Alphabetic Characters Is Configured +
+5.2.4 Ensure Complex Password Must Contain Numeric Character Is Configured +
+5.2.5 Ensure Complex Password Must Contain Special Character Is Configured +
+5.2.6 Ensure Complex Password Must Contain Uppercase and Lowercase Characters Is Configured +
+5.3.1 Ensure All User Storage APFS Volumes are Encrypted +
+5.3.2 Ensure All User Storage CoreStorage Volumes are Encrypted +
+|===
+
+[cols=""15%h, 85%a""]
+|===
+|Section
+|Applications
+
+|Recommendations
+|6.1.1 Ensure Show All Filename Extensions Setting is Enabled +
+6.2.1 Ensure Protect Mail Activity in Mail Is Enabled +
+6.3.2 Audit History and Remove History Items +
+6.3.5 Audit Hide IP Address in Safari Setting +
+6.3.8 Audit Autofill +
+6.3.9 Audit Pop-up Windows +
+6.5.1 Audit Passwords +
+|===
+",,No automated check available,2026-08-09T23:53:43Z
+Configure System to Audit All Failed Change of Object Attributes,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:43Z
+Configure Audit Log Folders Group to Wheel,audit,Pass,0,0,,,,2026-08-09T23:53:43Z
+Configure Audit_Control Owner to Mode 440 or Less Permissive,audit,Pass,0,0,,,,2026-08-09T23:53:43Z
+Configure System to Audit All Authorization and Authentication Events,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:43Z
+Configure System to Audit All Administrative Action Events,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:43Z
+Configure System to Audit All Failed Program Execution on the System,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:43Z
+Enable Security Auditing,audit,Fail,pass,fail,,,"Expected: pass, Got: fail",2026-08-09T23:53:43Z
+Configure Audit Log Files to be Owned by Root,audit,Pass,0,0,,,,2026-08-09T23:53:43Z
+Configure Audit Log Files to Mode 440 or Less Permissive,audit,Fail,0,22,,,"Expected: 0, Got: 22",2026-08-09T23:53:43Z
+Configure Audit_Control Owner to Root,audit,Fail,0,,,,"Expected: 0, Got: ",2026-08-09T23:53:43Z
+Configure Audit Log Folders to be Owned by Root,audit,Pass,0,0,,,,2026-08-09T23:53:43Z
+Configure System to Audit All Failed Read Actions on the System,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:44Z
+Configure System to Audit All Failed Write Actions on the System,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:44Z
+Configure Audit Retention to $ODV,audit,Fail,60d OR 5G,,,,"Expected: 60d OR 5G, Got: ",2026-08-09T23:53:44Z
+Configure Audit_Control to Not Contain Access Control Lists,audit,Pass,0,0,,,,2026-08-09T23:53:44Z
+Configure Audit Log Folders to Mode 700 or Less Permissive,audit,Fail,700,666,,,"Expected: 700, Got: 666",2026-08-09T23:53:44Z
+Configure System to Audit All Log In and Log Out Events,audit,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:44Z
+Configure Audit_Control Group to Wheel,audit,Fail,0,,,,"Expected: 0, Got: ",2026-08-09T23:53:44Z
+Configure Audit Log Files Group to Wheel,audit,Fail,0,320,,,"Expected: 0, Got: 320",2026-08-09T23:53:44Z
+Configure Audit Log Files to Not Contain Access Control Lists,audit,Pass,0,0,,,,2026-08-09T23:53:44Z
+Ensure Warn When Visiting A Fraudulent Website in Safari Is Enabled,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:44Z
+Disable Power Nap,os,N/A,,,"Power Nap _MUST_ be disabled.
+
+NOTE: Power Nap allows your Mac to perform actions while a Mac is asleep. This can interfere with USB power and may cause devices such as smartcards to stop functioning until a reboot and must therefore be disabled on all applicable systems.
+
+The following Macs support Power Nap:
+
+* MacBook (Early 2015 and later)
+* MacBook Air (Late 2010 and later)
+* MacBook Pro (all models with Retina display)
+* Mac mini (Late 2012 and later)
+* iMac (Late 2012 and later)
+* Mac Pro (Late 2013 and later)
+",,Rule does not apply to this architecture (arm64),2026-08-09T23:53:44Z
+Configure Audit Log Folder to Not Contain Access Control Lists,audit,Pass,0,0,,,,2026-08-09T23:53:44Z
+Disable Root Login,os,Pass,0,0,,,,2026-08-09T23:53:44Z
+Disable Apple Intelligence Notes Transcription,os,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:44Z
+Must Use an Approved Antivirus Program,os,Pass,2,2,,,,2026-08-09T23:53:44Z
+Ensure No World Writable Files Exist in the System Folder,os,Pass,0,0,,,,2026-08-09T23:53:45Z
+Ensure All Internal User Storage APFS Volumes Are Encrypted,os,Pass,Yes,Yes,,,,2026-08-09T23:53:45Z
+Disable Automatic Opening of Safe Files in Safari,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:45Z
+Disable Apple Intelligence Mail Summary,os,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:46Z
+Ensure All APFS and HFS+ External User Storage Volumes Are Encrypted,os,Pass,Yes,Yes,,,,2026-08-09T23:53:46Z
+Disable Apple Intelligence Notes Transcription Summary,os,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:46Z
+Enable Authenticated Root,os,Pass,sealed,sealed,,,,2026-08-09T23:53:46Z
+Ensure Advertising Privacy Protection in Safari Is Enabled,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:46Z
+Enforce Installation of XProtect Remediator and Gatekeeper Updates Automatically,os,Pass,true,true,,,,2026-08-09T23:53:46Z
+Remove Guest Folder if Present,os,Pass,0,0,,,,2026-08-09T23:53:46Z
+Ensure Sleep and Display Sleep Is Enabled on Apple Silicon Devices,os,Fail,0,1,,,"Expected: 0, Got: 1",2026-08-09T23:53:46Z
+Remove Password Hint From User Accounts,os,Pass,PASS,PASS,,,,2026-08-09T23:53:46Z
+Enable Firewall Stealth Mode,system_settings,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:46Z
+Enforce Software Update App Update Updates Automatically,os,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:46Z
+Configure Sudo To Log Events,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:47Z
+Display Policy Banner at Login Window,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:47Z
+Disable Apple Intelligence Writing Tools,os,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:47Z
+Configure Sudoers Timestamp Type,os,Pass,tty,tty,,,,2026-08-09T23:53:47Z
+Disable Network File System Service,os,Fail,pass,fail,,,"Expected: pass, Got: fail",2026-08-09T23:53:47Z
+Disable the Built-in Web Server,os,Pass,PASS,PASS,,,,2026-08-09T23:53:47Z
+Disable AirDrop,os,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:47Z
+Ensure Show Full Website Address in Safari Is Enabled,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:47Z
+Enable Apple Mobile File Integrity,os,Pass,0,0,,,,2026-08-09T23:53:47Z
+Ensure System Integrity Protection is Enabled,os,Pass,1,1,,,,2026-08-09T23:53:47Z
+Ensure Secure Keyboard Entry Terminal.app is Enabled,os,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:47Z
+Enable Gatekeeper,os,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:47Z
+Ensure No World Writable Files Exist in the Library Folder,os,Pass,0,0,,,,2026-08-09T23:53:50Z
+Enable Time Synchronization Daemon,os,Pass,1,1,,,,2026-08-09T23:53:50Z
+Configure Sudo Timeout Period to $ODV,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:50Z
+Ensure Appropriate Permissions Are Enabled for System Wide Applications,os,Pass,0,0,,,,2026-08-09T23:53:58Z
+Ensure Software Update Deferment Is Less Than or Equal to $ODV Days,os,Pass,true,true,,,,2026-08-09T23:53:58Z
+Secure User's Home Folders,os,Fail,0,3,,,"Expected: 0, Got: 3",2026-08-09T23:53:58Z
+Configure Install.log Retention to $ODV,os,Fail,Yes,"all_max setting is configured, must be removed
+TTL not configured",,,"Expected: Yes, Got: all_max setting is configured, must be removed
+TTL not configured",2026-08-09T23:53:58Z
+Enforce On Device Dictation,os,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:58Z
+Ensure Prevent Cross-site Tracking in Safari Is Enabled,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:58Z
+Disable Bonjour Multicast,os,Fail,true,,,,"Expected: true, Got: ",2026-08-09T23:53:58Z
+Require Passwords to Match the Defined Custom Regular Expression,pwpolicy,Fail,true,false,,,"Expected: true, Got: false",2026-08-09T23:53:58Z
+Restrict Maximum Password Lifetime to $ODV Days,pwpolicy,Fail,pass,,,,"Expected: pass, Got: ",2026-08-09T23:53:58Z
+Prohibit Password Reuse for a Minimum of $ODV Generations,pwpolicy,Fail,pass,,,,"Expected: pass, Got: ",2026-08-09T23:53:58Z
+Limit Consecutive Failed Login Attempts to $ODV,pwpolicy,Fail,pass,,,,"Expected: pass, Got: ",2026-08-09T23:53:58Z
+Require Passwords Contain a Minimum of One Special Character,pwpolicy,Fail,pass,,,,"Expected: pass, Got: ",2026-08-09T23:53:58Z
+Set Account Lockout Time to $ODV Minutes,pwpolicy,Fail,pass,,,,"Expected: pass, Got: ",2026-08-09T23:53:58Z
+Require Passwords Contain a Minimum of One Numeric Character,pwpolicy,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:58Z
+Require a Minimum Password Length of $ODV Characters,pwpolicy,Fail,pass,fail,,,"Expected: pass, Got: fail",2026-08-09T23:53:58Z
+Disable iCloud Desktop and Document Folder Sync,icloud,Fail,false,,,,"Expected: false, Got: ",2026-08-09T23:53:58Z
+Disable Login to Other User's Active and Locked Sessions,os,Fail,PASS,FAIL,,,"Expected: PASS, Got: FAIL",2026-08-09T23:53:58Z
+Ensure Show Safari shows the Status Bar is Enabled,os,Fail,1,0,,,"Expected: 1, Got: 0",2026-08-09T23:53:59Z

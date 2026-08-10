@@ -24,7 +24,7 @@ jobs:
 
       - name: Update version in config
         run: |
-          sed -i "s|Latest release: <a href=\"https://github.com/MACE-App/MACE/releases\">.*</a>|Latest release: <a href=\"https://github.com/MACE-App/MACE/releases\">${{ steps.release.outputs.tag }}</a>|" docusaurus.config.js
+          sed -i "s|Latest release: <a href=\"https://github.com/MACE-App/MACE/releases/latest\">.*</a>|Latest release: <a href=\"https://github.com/MACE-App/MACE/releases/latest\">${{ steps.release.outputs.tag }}</a>|" docusaurus.config.js
 
       - name: Check for changes
         id: diff
