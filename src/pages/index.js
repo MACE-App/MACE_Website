@@ -379,7 +379,7 @@ function StatsBand() {
   // Deliberately static, so the numbers are in the HTML on first paint with no
   // loading state. Rounded down, so they stay true as the real totals climb.
   const stats = [
-    {value: '8,900+', label: 'Downloads'},
+    {value: '10,000+', label: 'Downloads'},
     {value: '800+', label: 'Security rules'},
     {value: '150+', label: 'GitHub stars'},
   ];
