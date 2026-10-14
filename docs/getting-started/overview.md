@@ -30,7 +30,7 @@ hide_title: true
 
 The security rules inside MACE come straight from the **[macOS Security Compliance Project (mSCP)](https://github.com/usnistgov/macos_security)**, a publicly hosted project on GitHub maintained in collaboration with NIST and various U.S. government agencies and security teams. It takes guidance from a wide range of government and industry security standards and turns it into structured YAML: rules, baselines, and remediation scripts, all published in the open. New frameworks and revisions land regularly.
 
-MACE reads from the project's **`main` branch**. It's designed around the **mSCP 2.0 unified codebase**, which is where the single OS-agnostic rule set lives, rather than the older per-release branches that each covered one version of macOS.
+By default MACE reads from the project's **`main` branch**. You can point new projects at an mSCP development branch, or a public fork, with the **Rules Source** setting (see [Beta Testers](../beta/overview#beta-os-versions-from-mscp)). It's designed around the **mSCP 2.0 unified codebase**, which is where the single OS-agnostic rule set lives, rather than the older per-release branches that each covered one version of macOS.
 
 Because MACE reads that data directly, you're always working against current government-vetted guidance. MACE also maintains a built-in rule library of its own for compliance options and mappings that haven't made it into the public project yet, so you get that coverage sooner.
 
@@ -43,7 +43,7 @@ MACE pulls mSCP **straight from GitHub** and keeps a copy on disk. The rules you
     <div className="how-step__number">1</div>
     <div className="how-step__content">
       <strong>Pulls straight from the source</strong>
-      <p>Open MACE and it checks GitHub for the latest version of the mSCP repository.</p>
+      <p>Open MACE and it checks GitHub for the latest version of the mSCP repository. That's the <strong>Auto-Download Rules</strong> setting, on by default.</p>
     </div>
   </div>
   <div className="how-step">
@@ -64,14 +64,14 @@ MACE pulls mSCP **straight from GitHub** and keeps a copy on disk. The rules you
     <div className="how-step__number">4</div>
     <div className="how-step__content">
       <strong>Syncs when you open a project</strong>
-      <p>A new project gets a clone of the current mSCP. When you open an older one, MACE compares it against the latest and asks whether you want to upgrade. It won't rewrite your work behind your back.</p>
+      <p>A new project gets a clone of the current mSCP. When you open an older one, MACE compares it against the latest copy of the branch it came from and asks whether you want to upgrade. It won't rewrite your work behind your back. You can also check any time with <strong>Rules ▸ Check for Rule Updates</strong> (<code>Shift+Cmd+U</code>).</p>
     </div>
   </div>
   <div className="how-step">
     <div className="how-step__number">5</div>
     <div className="how-step__content">
       <strong>Shows you exactly what changed</strong>
-      <p>Before you accept an upgrade, MACE lists every rule and file being updated, counts how many are new, removed, or relevant to your baseline, and links out to the full mSCP changelog. Your own edits and exported baselines come through untouched.</p>
+      <p>Before you accept an upgrade, MACE lists every rule and file being updated, counts rules updated, rules removed, rules affecting your baseline, and project files changed, shows a What's Changing diff for each, and links out to the full mSCP changelog. Your own edits and exported baselines come through untouched.</p>
     </div>
   </div>
 </div>
@@ -243,6 +243,17 @@ Each phase above lives in its own part of the app:
     <div className="custom-rules-callout__content">
       <strong>Need custom rules?</strong>
       <span>Create your own YAML rules from scratch for any compliance requirement.</span>
+    </div>
+    <span className="custom-rules-callout__arrow">→</span>
+  </a>
+</div>
+
+<div className="custom-rules-callout">
+  <a href="../baseline-compare/overview">
+    <span className="custom-rules-callout__icon">⚖️</span>
+    <div className="custom-rules-callout__content">
+      <strong>Not sure which framework to pick?</strong>
+      <span>Compare any two baselines side by side and see exactly which rules differ.</span>
     </div>
     <span className="custom-rules-callout__arrow">→</span>
   </a>

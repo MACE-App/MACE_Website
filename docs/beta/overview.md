@@ -102,7 +102,7 @@ There are two ways to get on the beta channel:
 ### Option 1: Switch Channels in the App (Recommended)
 
 <ol className="beta-steps">
-  <li><span className="beta-steps__num">1</span><div>Open <strong>MACE Settings → Updates</strong></div></li>
+  <li><span className="beta-steps__num">1</span><div>Open <strong>MACE ▸ App Settings… → Updates</strong></div></li>
   <li><span className="beta-steps__num">2</span><div>Set <strong>Release Channel</strong> to <strong>Beta</strong> instead of <strong>Stable</strong></div></li>
 </ol>
 
@@ -112,9 +112,9 @@ There are two ways to get on the beta channel:
       <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--purple">📦</span>
       <strong>Release Channel</strong>
       <span className="build-option-item__control build-option-item__control--menu build-option-item__control--auto">
-        <select className="build-option-item__menu" aria-label="Release Channel">
-          <option className="is-default-option">Stable</option>
+        <select className="build-option-item__menu" aria-label="Release Channel" defaultValue="Stable">
           <option>Beta</option>
+          <option className="is-default-option">Stable</option>
         </select>
         <span className="build-option-item__label build-option-item__label--value">
           <span className="is-default">Default: <b>Stable</b></span>
@@ -131,47 +131,56 @@ There are two ways to get on the beta channel:
   <img src="/img/screenshots/beta-settings-dark.webp" alt="MACE Settings Updates pane with Release Channel set to Beta" className="img-dark" />
 </div>
 
-From then on MACE automatically picks up beta and pre-release builds, exactly the way it handles stable updates. Switch back to **Stable** anytime to return to release builds only.
+MACE checks for an update as soon as you close Settings, and from then on picks up beta and pre-release builds exactly the way it handles stable updates. Switch back to **Stable** anytime to return to release builds only.
 
 ### Option 2: Download a Pre-Release
 
 Grab the latest pre-release `.dmg` from the [pre-releases list on GitHub](https://github.com/mace-app/mace/releases?q=prerelease%3Atrue&expanded=true) (the newest one is at the top) and install it like any other build.
 
 :::caution[Set your channel to Beta after installing]
-If you download a pre-release but **don't** switch the release channel to **Beta** in **Settings → Updates**, the app will stay pinned on that version and won't see any updates. Always set the channel to Beta so you keep receiving new builds.
+If you download a pre-release but **don't** switch the release channel to **Beta** in **Settings → Updates**, the app stays on the Stable channel. It will still update when the next stable release ships, but it won't see any later betas. Set the channel to Beta so you keep receiving new beta builds.
 :::
 
 ## Beta OS Versions from mSCP
 
-Beta isn't just about app builds. mSCP maintains **beta branches** where it tests rules for things that aren't out yet, like macOS 27. MACE can offer these beta OS versions when creating projects, and keep their rules downloaded for offline use.
+Beta isn't just about app builds. mSCP maintains **development branches** such as `dev_27` where it tests rules for things that aren't out yet, like macOS 27. MACE can create projects straight from one of those branches.
 
 <ol className="beta-steps">
-  <li><span className="beta-steps__num">1</span><div>Open <strong>MACE Settings → General</strong></div></li>
-  <li><span className="beta-steps__num">2</span><div>Turn on <strong>Show mSCP Beta Versions</strong> under <strong>mSCP Rules</strong></div></li>
+  <li><span className="beta-steps__num">1</span><div>Open <strong>MACE ▸ App Settings… → General</strong></div></li>
+  <li><span className="beta-steps__num">2</span><div>Under <strong>Rules</strong>, set <strong>Rules Source</strong> to a <strong>Beta (dev_…)</strong> branch. Click <strong>Refresh branches</strong> if the one you want isn't listed yet</div></li>
+  <li><span className="beta-steps__num">3</span><div>Create a new project. The versions, frameworks, and rules now come entirely from that branch</div></li>
 </ol>
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--red">🧪</span>
-      <strong>Show mSCP Beta Versions</strong>
-      <span className="build-option-item__control build-option-item__control--default-off">
-        <input type="checkbox" id="sw-beta-page-mscp" className="build-option-item__input" aria-label="Show mSCP Beta Versions demo switch" />
-        <label className="build-option-item__track" htmlFor="sw-beta-page-mscp"></label>
-        <span className="build-option-item__label build-option-item__label--off">
-          <span className="is-default">Default: <b>Off</b></span>
-          <span className="is-restore">Restore Default: <b>Off</b></span>
+      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--blue">🌿</span>
+      <strong>Rules Source</strong>
+      <span className="build-option-item__control build-option-item__control--menu build-option-item__control--auto">
+        <select className="build-option-item__menu" aria-label="Rules Source" defaultValue="Release (main)">
+          <option className="is-default-option">Release (main)</option>
+          <option>Beta (dev_27)</option>
+        </select>
+        <span className="build-option-item__label build-option-item__label--value">
+          <span className="is-default">Default: <b>Release (main)</b></span>
+          <span className="is-restore">Restore Default: <b>Release (main)</b></span>
         </span>
       </span>
     </div>
-    <p>Off until you turn it on. See <a href="/docs/reference/settings#mscp-rules">Settings → General → mSCP Rules</a> for the full reference.</p>
+    <p>Ships as <strong>Release (main)</strong>. See <a href="/docs/reference/settings#rules">Settings → General → Rules</a> for the full reference, including how to add forks under Additional Sources.</p>
   </div>
 </div>
 
-<div className="themed-image themed-image--large">
-  <img src="/img/screenshots/mscp-beta-light.webp" alt="MACE Settings General pane with Show mSCP Beta Versions turned on" className="img-light" />
-  <img src="/img/screenshots/mscp-beta-dark.webp" alt="MACE Settings General pane with Show mSCP Beta Versions turned on" className="img-dark" />
-</div>
+What to expect once a dev branch is selected:
+
+<table className="icon-table">
+  <tr><td>🏷️</td><td>The New Project sheet shows an orange <strong>Using beta branch</strong> badge. Click it to jump to the Rules Source setting.</td></tr>
+  <tr><td>⚠️</td><td>Before the project is created, a <strong>Beta mSCP Content</strong> alert reminds you the rules are pre-release and may not match what ships. Click <strong>Continue Anyway</strong>.</td></tr>
+  <tr><td>📥</td><td>The first project on a branch downloads it from GitHub. The branch is kept for offline use while <strong>Auto-Download Rules</strong> is on.</td></tr>
+  <tr><td>🔀</td><td>Each project remembers its branch. To move an existing project, use <strong>Rules ▸ Switch Branch…</strong> in the Compliance Editor, then <strong>Switch &amp; Check for Updates</strong>.</td></tr>
+  <tr><td>🧹</td><td>Dev branches are retired once their rules ship on <code>main</code>. When that happens, opening the project shows <strong>Branch No Longer Available</strong> and offers the switch sheet so you can move to Release.</td></tr>
+  <tr><td>⚖️</td><td>Want to see what's coming before you switch? <a href="/docs/baseline-compare/overview">Baseline Compare</a> can put a dev branch next to <code>main</code>.</td></tr>
+</table>
 
 ### mSCP Needs Beta Testers Too
 

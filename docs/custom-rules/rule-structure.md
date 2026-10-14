@@ -29,15 +29,18 @@ discussion: |
 references:
   nist:
     cce:
-      macos_15:
-        - CCE-XXXXX-X
+      macos_26: []
+      macos_15: []
   disa:
     disa_stig:
-      macos_15:
-        - APPL-15-XXXXXX
+      macos_26: []
+      macos_15: []
 
 platforms:
   macOS:
+    '26.0':
+      benchmarks:
+        - name: cis_lvl1
     '15.0':
       benchmarks:
         - name: cis_lvl1
@@ -58,7 +61,7 @@ platforms:
       <span className="build-option-item__icon">🔤</span>
       <strong>id</strong>
     </div>
-    <p>Unique identifier. Lowercase letters and underscores only. Must match the filename.</p>
+    <p>Unique identifier. mSCP convention is lowercase letters and underscores. The Rule Builder replaces spaces with underscores, and the editor's import accepts letters, digits, dots, dashes, and underscores. MACE reads the ID from the file's content, not its name.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -110,9 +113,9 @@ id: os_chrome_autoupdate_enabled
 - `settings_` - Settings rules
 
 **Requirements:**
-- Lowercase letters and underscores only
-- Must be unique across all rules
-- Filename must match: `os_chrome_autoupdate_enabled.yaml`
+- Lowercase letters and underscores by mSCP convention
+- Must be unique across all rules, or MACE treats the file as a modification of the existing rule with that ID
+- Name the file to match: `os_chrome_autoupdate_enabled.yaml`
 
 ### title
 
@@ -327,7 +330,7 @@ platforms:
           severity: medium
 ```
 
-Severity levels: `low`, `medium`, `high`, `critical`
+Severity levels: `low`, `medium`, `high`. The Rule Builder adds `severity: medium` automatically to STIG and INDIGO benchmarks. iOS and visionOS versions also carry `supervised: true` or `false`.
 
 ### tags
 
@@ -349,18 +352,15 @@ Save your rule as `{id}.yaml`:
 os_chrome_autoupdate_enabled.yaml
 ```
 
-The filename must match the `id` field exactly. The Rule Builder handles this automatically.
+The Rule Builder proposes this name automatically. MACE reads the ID from inside the file, but the editor's Delete and Show in Finder actions look for `custom/rules/<id>.yaml`, so keep them matching.
 
 ## Validation
 
-MACE validates custom rules when loading:
+MACE does minimal validation when loading a custom rule:
 
 <table className="icon-table">
-  <tr><td>✅</td><td>Required fields present</td></tr>
-  <tr><td>✅</td><td>ID is unique</td></tr>
   <tr><td>✅</td><td>YAML syntax is valid</td></tr>
-  <tr><td>✅</td><td>Result type is recognized</td></tr>
-  <tr><td>✅</td><td>Filename matches ID</td></tr>
+  <tr><td>✅</td><td><code>id</code> and <code>title</code> are present</td></tr>
 </table>
 
-Invalid rules are skipped with a warning.
+A file that fails is skipped and the reason is written to the app log; there is no alert in the UI. Two silent cases to watch for: a `platforms` block that doesn't include the project's platform hides the rule entirely, and a rule that isn't tagged or benchmarked for the project's framework shows as Not Included until you check it.

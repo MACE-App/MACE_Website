@@ -74,6 +74,10 @@ Each rule receives one of these statuses after checking:
   </div>
 </div>
 
+:::info Exempt rules
+Rules marked exempt in the Compliance Editor are still checked. Choose what to honor with the **Include Exemptions** picker in the engine sheet: **None**, **Local Exemptions** already deployed on this Mac, **Compliance Exemptions** marked in this project, or both. Honored rules keep their Pass or Fail, gain an **Exempt** badge, and drop out of the pass rate. See [Exempting Rules](../compliance-editor/overview#exempting-rules).
+:::
+
 ## How Auditing Works
 
 When you run an audit, MACE goes through each enabled rule and executes its check command:
@@ -139,7 +143,7 @@ For a rule like "Enable Firewall Logging":
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Expected value</strong>
-      <span>Output should contain "Log mode is on"</span>
+      <span>Output must equal "Log mode is on" after trimming whitespace. Integer and boolean results are compared by value</span>
     </div>
   </div>
   <div className="build-step">
@@ -183,7 +187,7 @@ Some compliance checks need administrator access to read protected system settin
 
 <div className="explanation-box explanation-box--warning">
   <h4>Safety First</h4>
-  <p>The audit helper will not install or run without your permission. You choose how it's used: install it permanently, or do a one-time run where the helper is removed as soon as the audit finishes. MACE also shows a code execution warning each time you start an audit — review it and acknowledge before any checks run.</p>
+  <p>The audit helper will not install or run without your permission. The first time, an <strong>Administrator Access Required</strong> sheet offers <strong>Keep Installed</strong>, so you're never prompted again, or <strong>This Session Only</strong>, which removes the helper when the audit window closes. Once the helper is installed, every later audit starts with a <strong>Review Before Running</strong> sheet that tells you how many checks are about to run. You can remove the helper any time under <strong>Settings → Advanced → Privileged Helpers</strong>.</p>
   <p>Because the helper runs your rules' check commands with admin privileges, make sure you trust the baseline you're using. If you've added custom rules or are using an unfamiliar baseline, review them first.</p>
 </div>
 
@@ -201,68 +205,68 @@ Some compliance checks need administrator access to read protected system settin
     <span className="build-step__number">2</span>
     <div className="build-step__content">
       <strong>Click Audit</strong>
-      <span>Use the toolbar button to open the Audit window</span>
+      <span>Use the Audit button in the editor's bottom bar. It's only enabled for macOS projects</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Select audit engine</strong>
-      <span>Choose M.A.C.E. engine (recommended)</span>
+      <span>In the Select Engine sheet, choose M.A.C.E. Audit (preselected) or mSCP Audit</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">4</span>
     <div className="build-step__content">
       <strong>Configure options</strong>
-      <span>Pick the audit mode (Full Audit Scan or Profile Inspector) and toggle Watch Live and Include Disabled Rules</span>
+      <span>Pick the audit mode (Full Audit Scan or Profile Inspector), then set Watch Live, Include Disabled Rules, and Include Exemptions</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">5</span>
     <div className="build-step__content">
       <strong>Click Start Audit</strong>
-      <span>Review the code execution warning and acknowledge to proceed</span>
+      <span>Approve the helper the first time, or click Continue on the Review Before Running sheet</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">6</span>
     <div className="build-step__content">
       <strong>Watch progress</strong>
-      <span>See pass/fail status for each rule as it completes</span>
+      <span>With Watch Live on, see each rule's status as it completes with a time estimate and a Stop Audit button. With it off, a progress window shows "Checking rule X of Y"</span>
     </div>
   </div>
 </div>
 
 <div className="explanation-box">
   <h4>Tip: Load Last Audit</h4>
-  <p>With <strong><a href="../reference/settings#audits">Save Last Audit</a></strong> enabled in Settings, MACE saves each completed run to the project. On your next audit, the code execution warning offers <strong>Load Last Audit</strong> — restore those results instantly instead of re-running every check.</p>
+  <p>With <strong><a href="../reference/settings#audits">Save Last Audit</a></strong> enabled in Settings (off by default), MACE saves the most recent run to the project's <code>.mace</code> file. On your next audit, the Review Before Running sheet offers <strong>Load Last Audit</strong> with its date and pass/fail counts, so you can restore those results instantly instead of re-running every check.</p>
 </div>
 
 ## Audit Engines
 
-Choosing an engine is the first decision when you start an audit — the engine cards appear at the top of the audit sheet:
+Choosing an engine is the first decision when you start an audit. The <strong>Select Engine</strong> sheet shows two cards:
 
 <div className="engine-comparison">
   <div className="engine-card">
     <div className="engine-card__header">
       <img src="/img/engine-mscp.webp" alt="mSCP" className="engine-card__icon-img" />
-      <h3>mSCP Audit Engine</h3>
+      <h3>mSCP Audit</h3>
     </div>
-    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
+    <p>Uses the original mSCP Python scripts with default options. Customize by editing files directly.</p>
     <ul>
-      <li>Standard mSCP audit output</li>
-      <li>Python-based execution</li>
-      <li>Full mSCP compatibility</li>
+      <li>Results in <code>/Library/Preferences</code> and <code>/Library/Logs</code></li>
+      <li>Custom script flags and a command preview under Advanced</li>
+      <li>An Audit Report window with Passed, Failed, Exempt, and N/A counts</li>
     </ul>
     <span className="engine-card__tag">Official Scripts</span>
   </div>
   <div className="engine-card engine-card--primary">
     <div className="engine-card__header">
       <img src="/img/engine-mace.webp" alt="M.A.C.E." className="engine-card__icon-img" />
-      <h3>M.A.C.E. Audit Engine</h3>
+      <h3>M.A.C.E. Audit</h3>
     </div>
-    <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
+    <p>Native Swift engine with more customization and output options built into the app. Preselected.</p>
     <ul>
       <li>Real-time results with Watch Live</li>
       <li>Export to PDF, HTML, spreadsheets, JSON, Markdown, and STIG checklists</li>
@@ -293,7 +297,7 @@ After selecting the M.A.C.E. engine, its options appear below the engine cards:
       <span className="option-card__icon">📋</span>
       <strong>Profile Inspector</strong>
     </div>
-    <p>Compares locally deployed mobileconfig profiles against what each rule requires. Only works with rules that have <code>mobileconfig_info</code> defined — script-based rules are excluded.</p>
+    <p>Compares locally deployed mobileconfig profiles against what each rule requires. Only works with rules that have <code>mobileconfig_info</code> defined — script-based rules are excluded. Results can be viewed By Rule or By Profile with Setting, Expected, Current, and Status columns, and re-inspected on demand. Only Include Disabled Rules applies in this mode.</p>
   </div>
 </div>
 
@@ -316,7 +320,14 @@ After selecting the M.A.C.E. engine, its options appear below the engine cards:
       <span className="option-card__switch"></span>
     </div>
     <p>Also audits rules you've excluded from the baseline. Useful for seeing where your Mac stands on the full rule set, even settings you've chosen not to enforce.</p>
-    <p>Only available when the baseline has excluded rules.</p>
+    <p>Stays visible but disabled when the baseline has no excluded rules.</p>
+  </div>
+  <div className="option-card">
+    <div className="option-card__header">
+      <span className="option-card__icon">➖</span>
+      <strong>Include Exemptions</strong>
+    </div>
+    <p><strong>None</strong> ignores exemptions so every rule reports its plain Pass or Fail. <strong>Local Exemptions</strong> honors what's already deployed on this Mac in the <code>org.&lt;baseline&gt;.audit</code> domain. <strong>Compliance Exemptions</strong> honors the rules marked exempt in this project. <strong>Local + Compliance</strong> honors both, with the deployed one winning on conflicts. Honored rules keep their result and get an Exempt badge.</p>
   </div>
 </div>
 
@@ -332,32 +343,32 @@ After the audit completes, you'll see:
       <span className="option-card__icon">📊</span>
       <strong>Pass Rate</strong>
     </div>
-    <p>The percentage of rules that passed. N/A and Manual Review rules don't count toward this number since they aren't automated checks.</p>
+    <p>The percentage of rules that passed. N/A, Manual Review, and exempt rules are left out of the calculation. Errors still count against it. Green at 80% or more, orange at 50% or more, red below.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">📈</span>
       <strong>Status Counts</strong>
     </div>
-    <p>Badges showing how many rules are in each status: Total, Passed, Failed, Manual Review, Errors, N/A.</p>
+    <p>Badges showing how many rules are in each status: All, Passed, Failed, Manual, N/A, and Errors when there are any. A <strong>Need Attention</strong> counter adds up unexempt failures, manual reviews, and errors. With nothing selected, the detail area shows a dashboard with a pass-rate donut and a By Section breakdown, worst first.</p>
   </div>
 </div>
 
-### Results Table
+### Results List
 
 Each row shows one rule with its:
 
 <table className="icon-table">
   <tbody>
-  <tr><td>🏷️</td><td><strong>Status</strong></td><td>Color-coded badge, e.g. <span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Pass</span> <span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Fail</span></td></tr>
-  <tr><td>🆔</td><td><strong>Rule ID</strong></td><td>Unique identifier (or STIG ID for STIG compliance)</td></tr>
-  <tr><td>📝</td><td><strong>Title</strong></td><td>Human-readable rule name</td></tr>
-  <tr><td>📂</td><td><strong>Section</strong></td><td>Category the rule belongs to</td></tr>
-  <tr><td>🎯</td><td><strong>Expected Output</strong></td><td>What the check should return</td></tr>
-  <tr><td>💻</td><td><strong>Actual Output</strong></td><td>What was actually found</td></tr>
-  <tr><td>⏱️</td><td><strong>Execution Time</strong></td><td>How long the check took</td></tr>
+  <tr><td>🏷️</td><td><strong>Status</strong></td><td>Color-coded icon, e.g. <span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Pass</span> <span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Fail</span></td></tr>
+  <tr><td>📝</td><td><strong>Title or Rule ID</strong></td><td>Whichever you pick in the Title / ID switch is the main line; the other is the caption</td></tr>
+  <tr><td>🆔</td><td><strong>STIG ID, CIS ID, Section</strong></td><td>Optional extras from the view menu</td></tr>
+  <tr><td>🏷️</td><td><strong>Pills</strong></td><td>N/A, Overridden, Modified, Disabled, Exempt, Review, or Comment when they apply</td></tr>
+  <tr><td>⏱️</td><td><strong>Execution Time</strong></td><td>How long the check took, on the right</td></tr>
   </tbody>
 </table>
+
+Expected and actual output, the discussion for manual rules, comments, and the exemption reason live in the detail panel on the right.
 
 ### What You Can Do With Results
 
@@ -367,14 +378,14 @@ Each row shows one rule with its:
       <span className="option-card__icon">🔍</span>
       <strong>Filter and Search</strong>
     </div>
-    <p>Filter by status (show only failures) or search by Rule ID, title, or section.</p>
+    <p>Click a status badge to filter, use the Filter menu for payload types, Has Script, Has ODV, Exempt, Modified, Disabled, or Flagged rules, and search by Rule ID, title, STIG or CIS ID, comment, exemption reason, or status.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">✏️</span>
       <strong>Override Status</strong>
     </div>
-    <p>Manually change a rule's status if needed. Overrides are tracked and appear in exports.</p>
+    <p>Set a rule to Pass, Fail, Manual Review, or N/A, or override its output values. Overrides are tracked and can be shown in exports.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
@@ -388,14 +399,14 @@ Each row shows one rule with its:
       <span className="option-card__icon">🔄</span>
       <strong>Re-run Individual Rules</strong>
     </div>
-    <p>Re-check a single rule without running the entire audit again.</p>
+    <p>Click <strong>Rerun</strong> in the detail header to re-check one rule, or <strong>Rerun All</strong> in the footer to repeat the whole audit. Rerun All keeps comments but clears overrides.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">📤</span>
       <strong>Export Reports</strong>
     </div>
-    <p>Open a live <strong>Export Preview</strong>, then export in any of nine formats — from PDF and HTML to spreadsheets and DISA STIG checklists.</p>
+    <p>From the footer bar, open a live <strong>Export Preview</strong>, use <strong>Quick Export</strong>, or build a DISA <strong>STIG Checklist</strong>. Nine formats, from PDF and HTML to spreadsheets and checklists.</p>
   </div>
 </div>
 
@@ -449,6 +460,7 @@ MACE can collect device information to include in reports:
   <tr><td>📱</td><td><strong>Model Name</strong></td><td>e.g., "MacBook Pro" or "Mac mini"</td></tr>
   <tr><td>🖥️</td><td><strong>Hostname</strong></td><td>Your computer's network name</td></tr>
   <tr><td>🍎</td><td><strong>macOS Version</strong></td><td>e.g., 15.0.1</td></tr>
+  <tr><td>🌐</td><td><strong>IP Address and MAC Address</strong></td><td>Off by default in exports</td></tr>
   </tbody>
 </table>
 

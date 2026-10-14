@@ -117,9 +117,9 @@ When you enable DDM in MACE's build options, it creates three types of files:
       <span className="ddm-output__icon">✅</span>
       <h3>Activations</h3>
     </div>
-    <p>JSON files that control when configurations apply. They can enable configurations based on conditions or device properties.</p>
+    <p>JSON files that switch configurations on. MACE writes one activation per configuration, so each setting can be delivered on its own.</p>
     <div className="ddm-output__example">
-      <strong>Example:</strong> An activation that enables security configurations only on devices in a specific group.
+      <strong>Example:</strong> An activation that turns on the screen saver configuration.
     </div>
   </div>
   <div className="ddm-output">
@@ -127,9 +127,9 @@ When you enable DDM in MACE's build options, it creates three types of files:
       <span className="ddm-output__icon">📦</span>
       <h3>Assets</h3>
     </div>
-    <p>Supporting files that configurations reference including scripts, certificates, or other resources the device needs.</p>
+    <p>Supporting files for configuration-file declarations such as SSH, sudo, or PAM settings. MACE writes a zip of the files plus an asset declaration that points at where you'll host it.</p>
     <div className="ddm-output__example">
-      <strong>Example:</strong> A script asset that a configuration references to run a compliance check.
+      <strong>Example:</strong> An <code>sshd.zip</code> asset that a services configuration references for the SSH daemon config.
     </div>
   </div>
 </div>
@@ -141,8 +141,7 @@ DDM declarations are JSON files with a specific structure. Here's what a configu
 ```json
 {
   "Type": "com.apple.configuration.screensaver.settings",
-  "Identifier": "com.mace.screensaver.askpassword",
-  "ServerToken": "1.0.0",
+  "Identifier": "org.mscp.cis_lvl1.config.screensaver.settings",
   "Payload": {
     "askForPassword": true,
     "askForPasswordDelay": 0,
@@ -156,7 +155,7 @@ DDM declarations are JSON files with a specific structure. Here's what a configu
 
   <strong>Identifier</strong>: A unique ID for this declaration. Each declaration needs a unique identifier.
 
-  <strong>ServerToken</strong>: A version string. When you update this, the device knows the declaration changed.
+  <strong>Identifier pattern</strong>: MACE uses <code>org.mscp.&lt;baseline&gt;.config.&lt;type&gt;</code> for configurations and <code>org.mscp.&lt;baseline&gt;.activation.&lt;type&gt;</code> for activations, and names each file after its identifier. Your MDM adds its own server token when it sends the declaration.
 
   <strong>Payload</strong>: The actual settings. This is where you define what you want configured.
 </div>
@@ -168,55 +167,55 @@ Activations are like switches that turn configurations on or off. Here's an exam
 ```json
 {
   "Type": "com.apple.activation.simple",
-  "Identifier": "com.mace.activation.security",
-  "ServerToken": "1.0.0",
+  "Identifier": "org.mscp.cis_lvl1.activation.screensaver.settings",
   "Payload": {
     "StandardConfigurations": [
-      "com.mace.screensaver.askpassword",
-      "com.mace.firewall.enable",
-      "com.mace.passcode.requirements"
+      "org.mscp.cis_lvl1.config.screensaver.settings"
     ]
   }
 }
 ```
 
-This activation says: "Turn on these three configurations." The device receives the activation and immediately begins enforcing those configurations.
+This activation says: "Turn on this configuration." The device receives the activation and immediately begins enforcing it. MACE writes one activation per configuration rather than one grouped activation, so you can deliver settings individually.
 
 ### How Assets Work
 
-Assets provide external resources that configurations can reference:
+Assets provide external resources that configurations can reference. MACE only writes them for <code>com.apple.configuration.services.configuration-files</code> declarations, which carry whole config files for services like SSH, sudo, and PAM:
 
 ```json
 {
   "Type": "com.apple.asset.data",
-  "Identifier": "com.mace.asset.compliance-script",
-  "ServerToken": "1.0.0",
+  "Identifier": "org.mscp.cis_lvl1.asset.sshd",
   "Payload": {
-    "DataURL": "https://your-server.com/compliance.sh",
-    "ContentType": "application/x-sh",
-    "Hash-SHA-256": "abc123..."
+    "Reference": {
+      "ContentType": "application/zip",
+      "DataURL": "https://hostname.site.com/sshd.zip",
+      "Hash-SHA-256": "abc123..."
+    },
+    "Authentication": { "Type": "None" }
   }
 }
 ```
 
-The device downloads the asset and makes it available for configurations to use.
+MACE writes the matching <code>sshd.zip</code> next to it. Host the zip somewhere your Macs can reach, update the <code>DataURL</code>, and the device downloads it when the configuration activates.
 
 ## Output Structure
 
 After building with DDM enabled, you'll find this structure in your build folder:
 
 ```
-declarative/
+{baseline}_declarative/
 ├── configurations/
-│   ├── screensaver-settings.json
-│   ├── passcode-requirements.json
-│   ├── firewall-settings.json
+│   ├── org.mscp.cis_lvl1.config.screensaver.settings.json
+│   ├── org.mscp.cis_lvl1.config.passcode.settings.json
 │   └── ...
 ├── activations/
-│   ├── security-activation.json
+│   ├── org.mscp.cis_lvl1.activation.screensaver.settings.json
+│   ├── org.mscp.cis_lvl1.activation.passcode.settings.json
 │   └── ...
 └── assets/
-    ├── compliance-script.json
+    ├── org.mscp.cis_lvl1.asset.sshd.json
+    ├── sshd.zip
     └── ...
 ```
 
@@ -225,10 +224,14 @@ Each folder contains JSON files that show the exact settings and values for each
 ## Deploying DDM
 
 <div className="explanation-box explanation-box--warning">
-  <h4>MDM GUI Configuration Required</h4>
-  <p>Currently, no MDMs support directly importing DDM JSON declaration files. All MDMs require you to configure DDM settings through their own graphical interface.</p>
-  <p>The JSON files MACE generates serve as a <strong>reference</strong> showing you the exact configuration values needed. Use these files to understand what settings to configure, then enter those values manually in your MDM's DDM section.</p>
+  <h4>Most MDMs Still Need GUI Configuration</h4>
+  <p>Few MDMs accept declaration JSON files for direct import today, so for most of them the files MACE generates serve as a <strong>reference</strong> showing the exact values to enter in the MDM's own DDM section.</p>
+  <p>The exception is <strong>Fleet</strong>. MACE's Fleet upload sends the declarations itself, and a rule delivered by DDM is dropped from the profiles and script fixes in that same export so nothing doubles up. The Fleet GitOps kit includes them too.</p>
 </div>
+
+:::info DDM coverage note
+Most rules with a DDM form also have a profile payload or script fix, so they're enforced either way. A few are DDM only. The build results and every MDM review screen list those rules and flag them as not enforced until the declarations reach the Mac.
+:::
 
 ## What Happens on the Mac
 
@@ -444,7 +447,7 @@ Common issues and solutions:
     <ul>
       <li>DDM declarations and profiles can conflict if they manage the same setting</li>
       <li>Remove conflicting profiles before deploying DDM for the same settings</li>
-      <li>Choose one method per setting: DDM or profile, not both</li>
+      <li>Choose one method per setting: DDM or profile, not both. The Fleet export handles this automatically</li>
     </ul>
   </div>
 </div>

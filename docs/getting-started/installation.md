@@ -33,7 +33,7 @@ description: Download and install MACE on macOS. Simple drag-and-drop installati
 <table className="icon-table">
   <tr><td>💻</td><td><strong>macOS 14 (Sonoma)</strong> or later</td></tr>
   <tr><td>🖥️</td><td><strong>Apple Silicon</strong> or <strong>Intel</strong> Mac</td></tr>
-  <tr><td>🔐</td><td><strong>Admin access</strong> only needed for audits</td></tr>
+  <tr><td>🔐</td><td><strong>Admin access</strong> only needed for audits, and for updates when the app folder isn't writable by your account</td></tr>
 </table>
 </div>
 
@@ -118,10 +118,10 @@ That's it! You're ready to start building your first compliance baseline.
 Deploying to more than one Mac? MACE has an [Installomator](https://github.com/Installomator/Installomator) label, so a single command does the job:
 
 ```bash
-Installomator.sh mace
+sudo ./Installomator.sh mace
 ```
 
-This pulls the latest signed `.dmg` directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases) and installs MACE into `/Applications`, so it's easy to wrap in a policy or package for Jamf Pro, Munki, Intune, or any MDM.
+Installomator must run as root. The label verifies MACE's Team ID (`7U624389H9`), pulls the latest signed `.dmg` directly from [GitHub Releases](https://github.com/MACE-App/MACE/releases) and installs MACE into `/Applications`, so it's easy to wrap in a policy or package for Jamf Pro, Munki, Intune, or any MDM.
 
 ### Homebrew (Command Line)
 
@@ -143,11 +143,11 @@ brew uninstall --cask mace
 MACE keeps itself up to date. As long as the Mac can reach GitHub, it checks for a newer version on its own, no matter how you installed it.
 
 <table className="icon-table">
-  <tr><td>🔄</td><td><strong>Automatic checks</strong> on every launch</td></tr>
+  <tr><td>🔄</td><td><strong>Automatic checks</strong> on every launch, while <strong>Check for Updates on Launch</strong> is on in Settings</td></tr>
   <tr><td>🌐</td><td><strong>Just needs a network connection</strong> to GitHub to see if a new version is available</td></tr>
   <tr><td>🔔</td><td><strong>Manual check</strong> anytime via <strong>Check for Updates</strong></td></tr>
   <tr><td>📋</td><td><strong>Release notes</strong> show what's new in each update; the full changelog lives on <a href="https://github.com/mace-app/mace/releases">GitHub Releases</a></td></tr>
-  <tr><td>⬇️</td><td><strong>One click</strong> to download and install</td></tr>
+  <tr><td>⬇️</td><td><strong>One click</strong> to download and install. MACE verifies the download's code signature, then quits and relaunches</td></tr>
 </table>
 
 <div className="themed-image">
@@ -156,7 +156,7 @@ MACE keeps itself up to date. As long as the Mac can reach GitHub, it checks for
 </div>
 
 :::tip
-You may be prompted for admin credentials if the application is not owned by your user account. Older versions may not support automatic updates. Download the latest version from [GitHub Releases](https://github.com/mace-app/mace/releases) to enable this feature.
+If the app or its folder isn't writable by your account, MACE asks for admin credentials with two choices: **Install Helper & Update** keeps a small update helper so you're never asked again, and **Update This Time Only** does a one-off install. You can remove the helper later under **Settings → Advanced → Privileged Helpers**. Older versions may not support automatic updates; download the latest version from [GitHub Releases](https://github.com/mace-app/mace/releases) to enable this feature.
 :::
 
 ### Release Channels
@@ -164,7 +164,7 @@ You may be prompted for admin credentials if the application is not owned by you
 Out of the box, MACE only updates to **stable** releases. If you'd rather run pre-release builds, switch the channel:
 
 <table className="icon-table">
-  <tr><td>⚙️</td><td>Open <strong>MACE Settings → Updates</strong></td></tr>
+  <tr><td>⚙️</td><td>Open <strong>MACE ▸ App Settings… → Updates</strong></td></tr>
   <tr><td>🧪</td><td>Set <strong>Release Channel</strong> to <strong>Beta</strong></td></tr>
 </table>
 

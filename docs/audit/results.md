@@ -68,51 +68,49 @@ At the top of the results view, you'll see:
       <strong>Pass Rate Percentage</strong>
     </div>
     <p>Your main compliance score. Shows what percentage of rules passed out of all the rules that could be automatically checked.</p>
-    <p>N/A and Manual Review rules don't count toward this number.</p>
+    <p>N/A, Manual Review, and exempt rules don't count toward this number. Errors do count against it.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">🏷️</span>
       <strong>Status Badges</strong>
     </div>
-    <p>Color-coded counts for each status type. Click a badge to filter the table to just that status.</p>
+    <p>Color-coded counts for each status type. Click a badge to filter the list to just that status. Errors only appears when there are some, and a <strong>Need Attention</strong> counter adds up unexempt failures, manual reviews, and errors.</p>
     <div className="pill-row">
-      <span className="status-card__pill"><span className="status-card__dot"></span>Total</span>
+      <span className="status-card__pill"><span className="status-card__dot"></span>All</span>
       <span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Passed</span>
       <span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Failed</span>
-      <span className="status-card--manual status-card__pill"><span className="status-card__dot"></span>Manual Review</span>
-      <span className="status-card--error status-card__pill"><span className="status-card__dot"></span>Errors</span>
+      <span className="status-card--manual status-card__pill"><span className="status-card__dot"></span>Manual</span>
       <span className="status-card--na status-card__pill"><span className="status-card__dot"></span>N/A</span>
+      <span className="status-card--error status-card__pill"><span className="status-card__dot"></span>Errors</span>
     </div>
   </div>
 </div>
 
-## Results Table
+## Results List
 
-The main table shows every rule that was checked:
+The main list shows every rule that was checked, with the details of the selected rule in the panel on the right. When nothing is selected, that panel shows a <strong>Summary Dashboard</strong> with the pass-rate donut, quick stats, and a By Section breakdown.
 
-### Table Columns
+### What Each Row Shows
 
 <table className="icon-table">
   <tbody>
-  <tr><td>🚦</td><td><strong>Status</strong></td><td>Color-coded badge, e.g. <span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Pass</span> <span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Fail</span></td></tr>
-  <tr><td>🔢</td><td><strong>Rule ID / STIG ID</strong></td><td>The unique identifier for this rule. For STIG compliance this shows the STIG ID (like APPL-15-005001); other baselines show the rule ID</td></tr>
-  <tr><td>📝</td><td><strong>Title</strong></td><td>Human-readable name describing what the rule checks (e.g., "Enable Firewall Logging")</td></tr>
-  <tr><td>📁</td><td><strong>Section</strong></td><td>The category this rule belongs to (e.g., "System Settings", "Authentication")</td></tr>
-  <tr><td>✅</td><td><strong>Expected Output</strong></td><td>What the check command should return for a passing result — the "correct" value</td></tr>
-  <tr><td>📋</td><td><strong>Actual Output</strong></td><td>What your Mac actually returned. If this matches Expected, the rule passes</td></tr>
-  <tr><td>⏱️</td><td><strong>Execution Time</strong></td><td>How long the check took to run (in seconds). Helps identify slow-running checks</td></tr>
+  <tr><td>🚦</td><td><strong>Status</strong></td><td>Color-coded icon, e.g. <span className="status-card--pass status-card__pill"><span className="status-card__dot"></span>Pass</span> <span className="status-card--fail status-card__pill"><span className="status-card__dot"></span>Fail</span></td></tr>
+  <tr><td>📝</td><td><strong>Title or Rule ID</strong></td><td>The <strong>Title / ID</strong> switch above the list picks which is the main line; the other becomes the caption</td></tr>
+  <tr><td>🏷️</td><td><strong>Pills</strong></td><td>N/A, Overridden, Modified, Disabled, Exempt, Review, or Comment, when they apply</td></tr>
+  <tr><td>⏱️</td><td><strong>Execution Time</strong></td><td>How long the check took, on the right. Helps identify slow-running checks</td></tr>
   </tbody>
 </table>
 
-### Optional Columns
+### Optional Row Details
 
-Depending on your baseline and settings, you may also see:
+The view menu next to the Title / ID switch adds:
 
 <table className="icon-table">
   <tbody>
-  <tr><td>🔖</td><td><strong>CIS ID</strong></td><td>CIS Benchmark reference number (for CIS compliance)</td></tr>
-  <tr><td>📖</td><td><strong>Discussion</strong></td><td>Additional context about the rule</td></tr>
+  <tr><td>🛡️</td><td><strong>Show STIG ID</strong></td><td>STIG reference like APPL-15-005001 (STIG frameworks only)</td></tr>
+  <tr><td>🔖</td><td><strong>Show CIS ID</strong></td><td>CIS Benchmark reference number (CIS frameworks only)</td></tr>
+  <tr><td>📁</td><td><strong>Show Section</strong></td><td>The category this rule belongs to</td></tr>
   </tbody>
 </table>
 
@@ -129,7 +127,9 @@ Depending on your baseline and settings, you may also see:
       <li>Click <strong>Failed</strong> to see only failed rules</li>
       <li>Click <strong>Passed</strong> to see only passing rules</li>
       <li>Click <strong>Manual Review</strong> to see rules needing attention</li>
+      <li>Choose <strong>Exempt Rules</strong> to see rules honored as exempt, with their reasons</li>
       <li>Click <strong>All</strong> to reset and show everything</li>
+      <li>Use the <strong>Filter</strong> menu for payload types, Has Mobileconfig, Has DDM, Has Script, Has ODV, Modified Rules, Disabled Rules, and Flagged Rules</li>
     </ul>
   </div>
   <div className="option-card">
@@ -141,7 +141,8 @@ Depending on your baseline and settings, you may also see:
     <ul>
       <li><strong>Rule ID</strong>: Search "firewall" to find firewall-related rules</li>
       <li><strong>Title</strong>: Search by the rule name</li>
-      <li><strong>Section</strong>: Search by category name</li>
+      <li><strong>STIG ID or CIS ID</strong>: Search by framework reference</li>
+      <li><strong>Comment, exemption reason, or status</strong>: Search the text you've added or a status word like "fail"</li>
     </ul>
   </div>
   <div className="option-card">
@@ -149,12 +150,12 @@ Depending on your baseline and settings, you may also see:
       <span className="option-card__icon">↕️</span>
       <strong>Sorting</strong>
     </div>
-    <p>Click column headers to sort:</p>
+    <p>Use the sort menu and the ascending/descending arrow next to it:</p>
     <ul>
       <li><strong>Rule ID</strong>: Alphabetical by identifier</li>
       <li><strong>STIG ID</strong>: By STIG reference (STIG compliance only)</li>
       <li><strong>Title</strong>: Alphabetical by name</li>
-      <li><strong>Status</strong>: Groups by status (failures first)</li>
+      <li><strong>Status</strong>: Fail, Error, Manual Review, Pass, then N/A</li>
     </ul>
   </div>
 </div>
@@ -169,35 +170,35 @@ Click any rule to see its full details in the right panel:
       <span className="option-card__icon">📜</span>
       <strong>Check Script</strong>
     </div>
-    <p>The command that was run to check this setting. Shows exactly what MACE tested.</p>
+    <p>The command that was run to check this setting. Shows exactly what MACE tested, along with the STIG ID and CIS ID when the framework has them.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">🔧</span>
-      <strong>Fix Script</strong>
+      <strong>Output Values</strong>
     </div>
-    <p>The remediation command that would fix a failing rule. Copy this to run manually, or use Build to generate scripts that include it.</p>
+    <p>The <strong>Expected</strong> and <strong>Machine Output</strong> fields, with a line saying whether they match. Click either to override it.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">📖</span>
       <strong>Discussion</strong>
     </div>
-    <p>Detailed explanation of why this rule exists, what it protects against, and any context for the setting.</p>
+    <p>Shown for Manual Review rules: why the rule exists and what to verify by hand. Click to add your own notes about what you checked.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">⚠️</span>
-      <strong>Error Message</strong>
+      <strong>Context Blocks</strong>
     </div>
-    <p>If the check failed with an error, this shows what went wrong. Helps troubleshoot issues.</p>
+    <p>Extra blocks appear when they apply: <strong>Exemption Reason</strong> with its source, <strong>Review Comment</strong> from the editor, <strong>Disabled Justification</strong>, and <strong>Modified Rule</strong> listing each customized field with its baseline and custom values.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">📋</span>
       <strong>Copy Rule ID</strong>
     </div>
-    <p>Click to copy the rule's ID to your clipboard. Useful for referencing specific rules in documentation or reports.</p>
+    <p>The copy icon next to Rule ID copies it to your clipboard. Useful for referencing specific rules in documentation or reports.</p>
   </div>
 </div>
 
@@ -220,33 +221,33 @@ Sometimes you need to manually change a rule's status. For example:
     <span className="build-step__number">1</span>
     <div className="build-step__content">
       <strong>Select the rule</strong>
-      <span>Click it in the results table</span>
+      <span>Click it in the results list</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">2</span>
     <div className="build-step__content">
-      <strong>Click the status dropdown</strong>
-      <span>Found in the details panel</span>
+      <strong>Click the status picker</strong>
+      <span>Under "Status (Click to override)" in the details panel</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Choose the new status</strong>
-      <span>Pass, Fail, Error, Manual Review, or N/A</span>
+      <span>Pass, Fail, Manual Review, or N/A. Error can't be set by hand</span>
     </div>
   </div>
 </div>
 
 <div className="explanation-box">
   <h4>Overrides Are Tracked</h4>
-  <p>When you override a result, MACE remembers the original value. Exports can show an "Override" indicator so auditors know which results were manually changed.</p>
+  <p>When you override a result, MACE remembers the original value. The row gets an Overridden pill, the original value stays visible under the field, and exports can show a Modified indicator so auditors know which results were manually changed.</p>
 </div>
 
 ### Editing Expected and Actual Output
 
-You can also edit the Expected Output and Actual Output fields — click the field, modify the text, and the change is tracked as an override.
+You can also edit the Expected and Machine Output fields under <strong>Output Values</strong> — click the field, modify the text, and the change is tracked as an override.
 
 This is useful when:
 
@@ -264,7 +265,7 @@ Comments let you document why a rule is in a particular state. Select a rule, fi
 
 <table className="icon-table">
   <tbody>
-  <tr><td>🚫</td><td><strong>Exemptions</strong></td><td>Explain why a rule is exempt from your baseline</td></tr>
+  <tr><td>🚫</td><td><strong>Exceptions</strong></td><td>Explain why a failure is acceptable on this Mac. For a rule that should never be enforced, mark it exempt in the Compliance Editor instead so the reason follows the rule everywhere</td></tr>
   <tr><td>🛡️</td><td><strong>Compensating controls</strong></td><td>Document alternative protections that cover the risk</td></tr>
   <tr><td>📅</td><td><strong>Remediation plans</strong></td><td>Note when a fix is scheduled or planned</td></tr>
   <tr><td>✍️</td><td><strong>Verification records</strong></td><td>Record who verified a manual review item and how</td></tr>
@@ -273,7 +274,7 @@ Comments let you document why a rule is in a particular state. Select a rule, fi
 
 <div className="explanation-box">
   <h4>Comments Travel With Your Reports</h4>
-  <p>Comments appear in every exported format — from PDF reports to STIG checklists — so your documentation stays with the results auditors see.</p>
+  <p>Comments appear in every exported format — from PDF reports to STIG checklists — so your documentation stays with the results auditors see. They're stored in the project's <code>.mace</code> file, and with <strong>Preserve Audit Comments</strong> on in Settings they survive the next audit.</p>
 </div>
 
 ## Re-running Rules
@@ -284,14 +285,14 @@ Comments let you document why a rule is in a particular state. Select a rule, fi
       <span className="option-card__icon">🔄</span>
       <strong>Re-run a Single Rule</strong>
     </div>
-    <p>After making changes to your Mac, re-check one rule without running the entire audit: select the rule, then click <strong>Re-run</strong> (or right-click and select Re-run). The rule is checked again and the result updates.</p>
+    <p>After making changes to your Mac, re-check one rule without running the entire audit: select the rule, then click <strong>Rerun</strong> in the detail header. The rule is checked again and the result updates.</p>
   </div>
   <div className="option-card">
     <div className="option-card__header">
       <span className="option-card__icon">🔁</span>
       <strong>Re-run All Rules</strong>
     </div>
-    <p>Click <strong>Re-run All</strong> in the toolbar to check every rule fresh. User comments are preserved, but statuses are updated.</p>
+    <p>Click <strong>Rerun All</strong> in the footer bar, available once the audit has finished, to check every rule fresh. Comments are preserved, but status and output overrides are reset.</p>
   </div>
 </div>
 
@@ -381,7 +382,7 @@ Failed rules are your immediate priority. For each failed rule:
 
 <div className="explanation-box">
   <h4>Tip: Compliance by Category</h4>
-  <p>Enable <strong>Section Summary</strong> in export options to see compliance broken down by category. This helps identify which areas of your baseline have the most failures — for example, most misses concentrated in "Authentication" or "System Settings".</p>
+  <p>Click away from any rule to see the <strong>By Section</strong> breakdown on the dashboard, worst sections first. <strong>Section Summary</strong>, on by default in exports, puts the same breakdown in reports. This helps identify which areas of your baseline have the most failures — for example, most misses concentrated in "Authentication" or "System Settings".</p>
 </div>
 
 ## Best Practices

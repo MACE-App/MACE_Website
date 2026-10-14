@@ -194,23 +194,30 @@ MACE can generate profiles in different formats for different MDMs:
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📱</span>
-      <strong>.mobileconfig (Standard Apple)</strong>
+      <strong>Mobileconfig</strong>
     </div>
-    <p>The standard format that works with any MDM. Can also be double-clicked to install manually (for testing).</p>
+    <p>The standard Apple format that works with any MDM. Can also be double-clicked to install manually (for testing).</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🟢</span>
-      <strong>.plist (Jamf Pro)</strong>
+      <strong>Mobileconfig (Jamf Compatible)</strong>
     </div>
-    <p>Jamf Pro's "Custom Settings" payload expects a plist file. This contains the settings for a specific preference domain (like <code>com.apple.screensaver</code>). You upload this plist and specify the domain in Jamf.</p>
+    <p>The same profile with its payloads wrapped in Custom Settings, so Jamf Pro keeps every key when you upload it.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🟢</span>
+      <strong>Plist Format (Jamf Pro)</strong>
+    </div>
+    <p>Jamf Pro's "Custom Settings" payload expects a plist file. This contains the settings for a specific preference domain (like <code>com.apple.screensaver</code>). You upload this plist and specify the domain in Jamf. MACE also writes <code>plists/manifest.plist</code>, a map of domain to file to rules. Always one file per domain, and never signed.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔵</span>
-      <strong>.xml (Microsoft Intune)</strong>
+      <strong>XML Format (Intune Compatible)</strong>
     </div>
-    <p>Intune uses a specific XML schema for custom macOS profiles. MACE generates files in Intune's expected format.</p>
+    <p>Raw preference files in the shape Intune's Preference file template expects, one per domain. Payloads that only exist as a profile, such as the password policy, are written as <code>.mobileconfig</code> in the same folder. Never signed.</p>
   </div>
 </div>
 
@@ -230,7 +237,7 @@ Profile signing uses a digital certificate to cryptographically sign the profile
       <span className="build-option-item__icon">✅</span>
       <strong>Verified in System Settings</strong>
     </div>
-    <p>Signed profiles show as "Verified" when users view them in System Settings → Privacy & Security → Profiles. Unsigned profiles show as "Unverified."</p>
+    <p>Signed profiles show as "Verified" when users view them in System Settings → General → Device Management. Unsigned profiles show as "Unverified."</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -262,14 +269,14 @@ Profile signing uses a digital certificate to cryptographically sign the profile
     <span className="deployment-step__number">2</span>
     <div className="deployment-step__content">
       <strong>Enable signing in MACE</strong>
-      <p>In Build options, toggle "Sign Profiles" on. Select your certificate from the dropdown.</p>
+      <p>In the Signing card, turn on <strong>Sign Exported Profiles</strong> and pick a certificate from <strong>Select certificate…</strong>. Only code-signing identities in your login keychain are listed. Then check which <strong>Signed Outputs</strong> to sign: Config Profiles, Audit Prefs, and in Advanced mode the Suppression profile.</p>
     </div>
   </div>
   <div className="deployment-step">
     <span className="deployment-step__number">3</span>
     <div className="deployment-step__content">
       <strong>Build</strong>
-      <p>MACE signs each profile and outputs them to the <code>signed/</code> folder.</p>
+      <p>MACE writes signed copies to the <code>signed/</code> folder next to the unsigned originals. The offline suppression profile is signed into <code>advanced_scripts/</code>.</p>
     </div>
   </div>
 </div>
@@ -346,14 +353,14 @@ Profile signing uses a digital certificate to cryptographically sign the profile
         <span className="deployment-step__number">3</span>
         <div className="deployment-step__content">
           <strong>Upload your .plist</strong>
-          <p>Click "Upload" and select the .plist file from your build (e.g., <code>com.apple.screensaver.plist</code>).</p>
+          <p>Click "Upload" and select the .plist file from your build (e.g., <code>MACE - com.apple.screensaver.plist</code>).</p>
         </div>
       </div>
       <div className="deployment-step">
         <span className="deployment-step__number">4</span>
         <div className="deployment-step__content">
           <strong>Set the Preference Domain</strong>
-          <p>Enter the domain that matches your plist filename (e.g., <code>com.apple.screensaver</code>).</p>
+          <p>Enter the domain, which is the filename after the prefix (e.g., <code>com.apple.screensaver</code>). <code>plists/manifest.plist</code> lists every domain and file.</p>
         </div>
       </div>
       <div className="deployment-step">
@@ -390,15 +397,15 @@ Profile signing uses a digital certificate to cryptographically sign the profile
       <div className="deployment-step">
         <span className="deployment-step__number">3</span>
         <div className="deployment-step__content">
-          <strong>Choose Custom template</strong>
-          <p>Select "Custom" from the template list. This lets you upload your own configuration.</p>
+          <strong>Choose the Preference file template</strong>
+          <p>Select "Preference file" from the template list for the raw XML. (The "Custom" template takes a .mobileconfig instead.)</p>
         </div>
       </div>
       <div className="deployment-step">
         <span className="deployment-step__number">4</span>
         <div className="deployment-step__content">
           <strong>Upload your XML file</strong>
-          <p>In the configuration settings, upload the .xml file from your <code>intune/</code> folder.</p>
+          <p>In the configuration settings, enter the preference domain and upload the matching .xml file from your <code>intune/</code> folder. Any <code>.mobileconfig</code> files in that folder go through the Custom template instead.</p>
         </div>
       </div>
       <div className="deployment-step">
@@ -429,7 +436,7 @@ When a profile is pushed to a Mac:
       <span className="what-happens__icon">📥</span>
       <div className="what-happens__content">
         <strong>Profile is installed</strong>
-        <p>You can see it in System Settings → Privacy & Security → Profiles. It shows the profile name, payloads, and whether it's verified (signed).</p>
+        <p>You can see it in System Settings → General → Device Management. It shows the profile name, payloads, and whether it's verified (signed).</p>
       </div>
     </div>
     <div className="what-happens__item">

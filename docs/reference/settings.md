@@ -26,7 +26,7 @@ import {ThemePicker, LogoSettings} from '@site/src/components/SettingsDemo';
   </div>
 </div>
 
-Open Settings from the MACE menu bar (**MACE ▸ Settings**, or <kbd>⌘</kbd><kbd>,</kbd>). Pick a pane from the sidebar on the left.
+Open Settings from the MACE menu bar (**MACE ▸ App Settings…**, or <kbd>⌘</kbd><kbd>,</kbd>). **Check for Updates…** sits right below it. Pick a pane from the sidebar on the left.
 
 Every option shows its shipped default. Change one and an orange **Restore Default** badge appears beside it, so you can always see what you have moved away from and put it back with a click. To roll back more than one option at a time, see [Resetting Settings](#resetting-settings).
 
@@ -93,15 +93,15 @@ The controls on this page work. Flip a switch and the orange **Restore Default**
   </div>
 </div>
 
-### mSCP Rules
+### Rules
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--purple">📥</span>
-      <strong>Auto-Download mSCP Rules</strong>
+      <strong>Auto-Download Rules</strong>
       <span className="build-option-item__control build-option-item__control--default-on">
-        <input type="checkbox" id="sw-auto-download-mscp-rules" className="build-option-item__input" aria-label="Auto-Download mSCP Rules demo switch" defaultChecked />
+        <input type="checkbox" id="sw-auto-download-mscp-rules" className="build-option-item__input" aria-label="Auto-Download Rules demo switch" defaultChecked />
         <label className="build-option-item__track" htmlFor="sw-auto-download-mscp-rules"></label>
         <span className="build-option-item__label build-option-item__label--on">
           <span className="is-default">Default: <b>On</b></span>
@@ -109,22 +109,35 @@ The controls on this page work. Flip a switch and the orange **Restore Default**
         </span>
       </span>
     </div>
-    <p>Fetch the latest rules from GitHub every time the app launches, so you always have the newest mSCP baseline rules without checking manually.</p>
+    <p>Fetch the latest rules from GitHub whenever the main menu appears, and check for rule updates when a project opens. This also keeps beta branches discovered and downloaded for offline use. With it off, Rules Source only lists branches already in the repo cache.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--red">🧪</span>
-      <strong>Show mSCP Beta Versions</strong>
-      <span className="build-option-item__control build-option-item__control--default-off">
-        <input type="checkbox" id="sw-show-mscp-beta-versions" className="build-option-item__input" aria-label="Show mSCP Beta Versions demo switch" />
-        <label className="build-option-item__track" htmlFor="sw-show-mscp-beta-versions"></label>
-        <span className="build-option-item__label build-option-item__label--off">
-          <span className="is-default">Default: <b>Off</b></span>
-          <span className="is-restore">Restore Default: <b>Off</b></span>
+      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--blue">🌿</span>
+      <strong>Rules Source</strong>
+      <span className="build-option-item__control build-option-item__control--menu build-option-item__control--auto">
+        <select className="build-option-item__menu" aria-label="Rules Source" defaultValue="Release (main)">
+          <option className="is-default-option">Release (main)</option>
+          <option>Beta (dev_27)</option>
+          <option>Beta (dev_2.0)</option>
+        </select>
+        <span className="build-option-item__label build-option-item__label--value">
+          <span className="is-default">Default: <b>Release (main)</b></span>
+          <span className="is-restore">Restore Default: <b>Release (main)</b></span>
         </span>
       </span>
     </div>
-    <p>Offer beta OS versions from the mSCP dev branches, such as macOS 27, when you create a project, and keep their rules downloaded for offline use. See <a href="/docs/beta/overview">Beta Testers</a> for what to expect.</p>
+    <p>Where new projects get their rules. <strong>Release</strong> is the published rule set on mSCP's <code>main</code> branch. <strong>Beta</strong> entries are mSCP development branches such as <code>dev_27</code> that preview upcoming OS releases and rule changes. The menu lists every branch with mSCP 2.0 content, plus any forks you add below. Use <strong>Refresh branches</strong> to ask GitHub for the current list; otherwise it refreshes every six hours. See <a href="/docs/beta/overview">Beta Testers</a> for what to expect from a dev branch.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--orange">🍴</span>
+      <strong>Additional Sources</strong>
+      <span className="build-option-item__control">
+        <button type="button" className="build-option-item__button">Add</button>
+      </span>
+    </div>
+    <p>Public forks of mSCP on GitHub, offered next to the official branches in Rules Source and in Baseline Compare. Enter <code>owner/repo</code> or paste a GitHub URL. The fork must use the mSCP 2.0 layout and be public. Rules include scripts that run on your Mac, so only add repositories you trust. Removing a fork that is the current Rules Source falls back to Release (main).</p>
   </div>
 </div>
 
@@ -214,7 +227,30 @@ The controls on this page work. Flip a switch and the orange **Restore Default**
         </span>
       </span>
     </div>
-    <p>Replace the generic "Output Drift" label with colored icons, so you can tell at a glance which outputs are affected.</p>
+    <p>Replace the generic "Output Drift" label with colored icons, so you can tell at a glance which outputs are affected. Grayed out while Hide Sync Indicator is on.</p>
+  </div>
+</div>
+
+### Rule Editor
+
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--purple">💲</span>
+      <strong>Highlight ODV Placeholders</strong>
+      <span className="build-option-item__control build-option-item__control--menu build-option-item__control--auto">
+        <select className="build-option-item__menu" aria-label="Highlight ODV Placeholders" defaultValue="On">
+          <option className="is-default-option">On</option>
+          <option>Off</option>
+          <option>Always Show Value</option>
+        </select>
+        <span className="build-option-item__label build-option-item__label--value">
+          <span className="is-default">Default: <b>On</b></span>
+          <span className="is-restore">Restore Default: <b>On</b></span>
+        </span>
+      </span>
+    </div>
+    <p>How <code>$ODV</code> appears in rule titles and fields across the Compliance Editor, Audit, and Baseline Compare. <strong>On</strong> tints the placeholder and reveals the rule's current value while hovering. <strong>Off</strong> makes it read like the rest of the text. <strong>Always Show Value</strong> replaces <code>$ODV</code> with the current value at all times.</p>
   </div>
 </div>
 
@@ -268,17 +304,18 @@ Every row in this pane runs an action rather than storing a preference, so there
         <button type="button" className="build-option-item__button">Clear</button>
       </span>
     </div>
-    <p>Remove cached rule data to free memory or fix issues. Reach for this if MACE feels slow or shows stale data.</p>
+    <p>Remove cached rule data to free memory or fix issues. Reach for this if MACE feels slow or shows stale data. It's rebuilt automatically when needed, and the app asks you to confirm first.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon build-option-item__icon--tile build-option-item__icon--purple">🔃</span>
-      <strong>Clear Downloaded Rules</strong>
+      <strong>mSCP Repo Cache</strong>
       <span className="build-option-item__control">
+        <button type="button" className="build-option-item__button">Open</button>
         <button type="button" className="build-option-item__button">Clear</button>
       </span>
     </div>
-    <p>Remove the mSCP rules cache so the next launch downloads a fresh copy. Use this to pull the latest rules or to recover from a corrupted download.</p>
+    <p>The downloaded copies of every source branch, Release, Beta, and forks, under <code>~/Library/Application Support/MACE/RepoCache</code>. <strong>Open</strong> reveals it in Finder. <strong>Clear</strong> removes every branch after a confirmation. Existing projects keep their own rules, and with Auto-Download Rules on the app starts re-downloading right away.</p>
   </div>
 </div>
 
@@ -365,8 +402,8 @@ MACE installs small privileged helpers for the tasks that need elevated rights. 
       <strong>Release Channel</strong>
       <span className="build-option-item__control build-option-item__control--menu build-option-item__control--auto">
         <select className="build-option-item__menu" aria-label="Release Channel" defaultValue="Stable">
-          <option className="is-default-option">Stable</option>
           <option>Beta</option>
+          <option className="is-default-option">Stable</option>
         </select>
         <span className="build-option-item__label build-option-item__label--value">
 
@@ -377,13 +414,13 @@ MACE installs small privileged helpers for the tasks that need elevated rights. 
         </span>
       </span>
     </div>
-    <p>Choose which updates you receive. <strong>Stable</strong> is production ready and offers stable releases only, while <strong>Beta</strong> gives you early access to both beta and stable releases. Read <a href="/docs/beta/overview">Beta Testers</a> before you switch.</p>
+    <p>Choose which updates you receive. <strong>Stable</strong> is production ready and offers stable releases only, while <strong>Beta</strong> gives you early access to both beta and stable releases. Changing the channel runs an update check as soon as you close Settings. Read <a href="/docs/beta/overview">Beta Testers</a> before you switch.</p>
   </div>
 </div>
 
 ## Resetting Settings
 
-MACE gives you two levels of reset. Neither one touches your projects, only the preferences in this window.
+MACE gives you two levels of reset. Neither one touches your projects.
 
 <div className="build-option-detail">
   <div className="build-option-item">
@@ -394,7 +431,7 @@ MACE gives you two levels of reset. Neither one touches your projects, only the 
         <button type="button" className="build-option-item__button">Reset</button>
       </span>
     </div>
-    <p>The <strong>General</strong>, <strong>Appearance</strong>, and <strong>Updates</strong> panes each end with a <strong>Reset … Settings to Defaults</strong> button that restores every option in that pane and leaves the rest alone. <strong>Advanced</strong> has no reset button, because it holds actions rather than preferences.</p>
+    <p>The <strong>General</strong>, <strong>Appearance</strong>, and <strong>Updates</strong> panes each end with a <strong>Reset … Settings to Defaults</strong> button that restores every option in that pane and leaves the rest alone, after asking you to confirm. Resetting General also puts Rules Source back to Release (main) and removes every Additional Source. <strong>Advanced</strong> has no reset button, because it holds actions rather than preferences.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -404,6 +441,6 @@ MACE gives you two levels of reset. Neither one touches your projects, only the 
         <button type="button" className="build-option-item__button">Reset All</button>
       </span>
     </div>
-    <p><strong>Reset All Settings…</strong> in the bottom bar of the Settings window restores every option in every pane at once. It asks you to confirm first, so a stray click will not wipe your preferences.</p>
+    <p><strong>Reset All Settings…</strong> in the bottom bar of the Settings window restores the options in every pane at once and also clears the remembered hub preferences and audit export defaults by deleting the app's settings file. It asks you to confirm first. A few switches are left as they are: Hide Sync Indicator, Show Output Icons, Check for Updates on Launch, and Additional Sources.</p>
   </div>
 </div>

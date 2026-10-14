@@ -69,9 +69,10 @@ MACE pulls in everything mSCP has. Every rule, every baseline, every framework, 
 From there, MACE handles the entire compliance workflow:
 
 <table class="icon-table">
-  <tr><td>📁</td><td><strong>Create</strong> projects for <span class="platform-badge">macOS</span> <span class="platform-badge">iOS</span> <span class="platform-badge">iPadOS</span> <span class="platform-badge">visionOS</span></td></tr>
+  <tr><td>📁</td><td><strong>Create</strong> projects for <span class="platform-badge">macOS</span> <span class="platform-badge">iOS</span> <span class="platform-badge">iPadOS</span> <span class="platform-badge">visionOS</span> <span class="platform-badge">Application (alpha)</span></td></tr>
   <tr><td>🔍</td><td><strong>Browse</strong> 800+ rules across every supported macOS, iOS, and visionOS release, organized by section</td></tr>
   <tr><td>✏️</td><td><strong>Customize</strong> your baseline and rules, or create new rules from scratch</td></tr>
+  <tr><td>⚖️</td><td><strong>Compare</strong> any two baselines side by side: frameworks, OS releases, mSCP sources, or your own projects</td></tr>
   <tr><td>🔨</td><td><strong>Build</strong> deployment-ready scripts and configuration profiles</td></tr>
   <tr><td>✅</td><td><strong>Audit</strong> devices with real-time compliance checks</td></tr>
   <tr><td>📄</td><td><strong>Export</strong> audit results, reports, and documentation in multiple formats, with control over what goes in them</td></tr>

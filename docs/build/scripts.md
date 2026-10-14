@@ -65,7 +65,7 @@ MACE can generate either a single combined compliance script or individual scrip
 
 ### Script Modes
 
-The generated script supports three execution modes:
+The generated script has three run modes, plus a set of single-rule, reporting, and exemption flags. It must run as root, and with no arguments in a terminal it opens an interactive menu.
 
 <div className="build-option-detail">
   <div className="build-option-item">
@@ -80,7 +80,7 @@ The generated script supports three execution modes:
       <span className="build-option-item__icon">🔧</span>
       <strong>--fix (Remediate Only)</strong>
     </div>
-    <p>Runs all remediation functions to apply correct settings. Use this when you want to bring a device into compliance. Typically run after <code>--check</code> identifies failures.</p>
+    <p>Remediates the rules the last scan recorded as failing; already-compliant rules are skipped. It needs an existing scan, so run <code>--check</code> first or use <code>--cfc</code>. Exempt rules are never fixed.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -91,6 +91,16 @@ The generated script supports three execution modes:
   </div>
 </div>
 
+<table className="icon-table">
+  <tr><td>📊</td><td><strong>Results:</strong> <code>--stats</code> (one-line summary for MDMs), <code>--compliant</code>, <code>--non_compliant</code>, <code>--json</code></td></tr>
+  <tr><td>🎯</td><td><strong>Single rules:</strong> <code>--list</code>, <code>--check-rule &lt;id&gt;</code>, <code>--fix-rule &lt;id&gt;</code>, and <code>--dry-run</code> to show what a fix would run</td></tr>
+  <tr><td>➖</td><td><strong>Exemptions:</strong> <code>--exempt &lt;id&gt; &lt;reason&gt;</code> (a reason is required), <code>--unexempt &lt;id&gt;</code>, <code>--exemptions</code></td></tr>
+  <tr><td>🧹</td><td><strong>Housekeeping:</strong> <code>--reset</code> and <code>--reset-all</code> clear stored results without touching exemptions, <code>--reset-ssh</code>, <code>--quiet=1|2</code>, <code>--version</code>, <code>--help</code></td></tr>
+  <tr><td>⚙️</td><td><strong>Settings block</strong> at the top of the script: <code>FORCED_MODE</code>, <code>RESET_RESULTS</code>, <code>DRY_RUN</code>, <code>QUIET_LEVEL</code>, <code>RESET_SSH_BEFORE_FIX</code>. A <code>compliance_args</code> array in the <code>org.&lt;baseline&gt;.audit</code> domain can supply arguments from MDM and overrides <code>FORCED_MODE</code></td></tr>
+</table>
+
+Mode precedence is <code>FORCED_MODE</code>, then Jamf's <code>$4</code>, then the first argument. Individual per-rule scripts only accept <code>--check</code> and <code>--fix</code>.
+
 ### Example: What a Rule Looks Like in the Script
 
 For a rule like "Enable Firewall Logging", the script contains:
@@ -99,37 +109,24 @@ For a rule like "Enable Firewall Logging", the script contains:
 # Rule: os_firewall_log_enable
 # STIG ID: APPL-15-005001
 # Severity: medium
-# Discussion: Firewall logging MUST be enabled...
 
 audit_os_firewall_log_enable() {
-    # Check command from the rule YAML
-    local result=$(/usr/libexec/ApplicationFirewall/socketfilterfw \
-        --getloggingmode 2>/dev/null | grep -c "Log mode is on")
-
-    # Expected result from the rule YAML
-    local expected="1"
-
-    if [[ "$result" == "$expected" ]]; then
-        logmessage "os_firewall_log_enable: PASSED"
-        return 0
-    else
-        logmessage "os_firewall_log_enable: FAILED (expected: $expected, got: $result)"
-        return 1
-    fi
+    # Check command and expected result from the rule YAML
+    check_command='/usr/libexec/ApplicationFirewall/socketfilterfw --getloggingmode 2>/dev/null | grep -c "Log mode is on"'
+    audit_rule "os_firewall_log_enable" "$check_command" "1"
 }
 
 fix_os_firewall_log_enable() {
     # Fix command from the rule YAML
-    /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
-    logmessage "os_firewall_log_enable: Fixed"
+    rule_fix "os_firewall_log_enable" '/usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on'
 }
 ```
 
 **What's happening here:**
-1. The `audit_` function runs the check command defined in the rule's YAML
-2. It compares the result against the expected value
-3. Returns pass (0) or fail (1) and logs the result
-4. The `fix_` function runs the remediation command to correct the setting
+1. The `audit_` function hands the rule's check command and expected value to the shared `audit_rule` helper
+2. The helper runs the command, compares the result, and records the rule as passed, failed, or not applicable
+3. A line like `[INFO] [timestamp] os_firewall_log_enable failed (Result: 0, Expected: "1")` goes to the log, and an exempt failure is recorded as an allowed exemption with its reason
+4. In fix mode, the `fix_` function runs the remediation only if the last scan recorded a failure and the rule isn't exempt
 
 ## Extension Attributes
 
@@ -172,27 +169,31 @@ Extension attributes (EAs) are individual scripts that report a single value bac
 
 ### Example Extension Attribute
 
+MACE writes one reporting script per MDM per baseline into `build/extension_attributes/`, not one per rule. Each one reads the results the compliance script left in `/Library/Preferences/<baseline>_audit.plist` and reports the failed rule IDs:
+
 ```bash
 #!/bin/zsh
-# Extension Attribute: Firewall Logging
-# Checks if firewall logging is enabled
+# jamf_cis_lvl2_extension_attribute.sh
+# Reports the rules that failed the last compliance scan
 
-result=$(/usr/libexec/ApplicationFirewall/socketfilterfw \
-    --getloggingmode 2>/dev/null | grep -c "Log mode is on")
+failed=$(read_failed_rules_from_audit_plist)
 
-if [[ "$result" == "1" ]]; then
+if [[ -z "$scan_data" ]]; then
+    echo "<result>No Scan Data</result>"
+elif [[ -z "$failed" ]]; then
     echo "<result>Compliant</result>"
 else
-    echo "<result>Non-Compliant</result>"
+    echo "<result>$failed</result>"
 fi
 ```
 
-**The output format matters:** Different MDMs expect different formats:
-- **Jamf Pro:** `<result>value</result>`
-- **Iru:** Plain text output
-- **Intune:** Specific schema requirements
+**What each MDM gets:**
+- **Jamf Pro:** `jamf_<baseline>_extension_attribute.sh` with `<result>…</result>` output: `Compliant`, `No Scan Data`, or the failed rule IDs
+- **Intune, Workspace ONE, Addigy:** one plain-text line such as `Non-Compliant (3) - Failed Rules: a,b,c`. Workspace ONE gets both a sensor (`ws1_…`) and a custom attribute (`ws1ca_…`); Intune also gets a compliance discovery script and rules JSON for custom compliance
+- **Iru:** `iru_…` custom attribute
+- **Fleet:** `fleet_<baseline>_policies.sql`, osquery policies to paste into Fleet
 
-MACE generates EAs in the correct format for each supported MDM.
+A README in the folder walks through the setup for each. The scripts only report; the compliance script has to be running on the Mac for them to have data.
 
 ## Deploying Scripts via MDM
 
@@ -213,7 +214,7 @@ MACE generates EAs in the correct format for each supported MDM.
         <span className="deployment-step__number">2</span>
         <div className="deployment-step__content">
           <strong>Create a new script</strong>
-          <p>Click "New" and paste the contents of your compliance script. Set the script to run as the logged-in user or as root (most compliance checks need root).</p>
+          <p>Click "New" and paste the contents of your compliance script. Jamf policy scripts run as root, which the script requires.</p>
         </div>
       </div>
       <div className="deployment-step">
@@ -261,7 +262,7 @@ MACE generates EAs in the correct format for each supported MDM.
         <span className="deployment-step__number">3</span>
         <div className="deployment-step__content">
           <strong>Paste the EA script</strong>
-          <p>Copy the contents of the extension attribute script (e.g., <code>ea_os_firewall_log_enable.sh</code>) into the script field.</p>
+          <p>Copy the contents of <code>jamf_&lt;baseline&gt;_extension_attribute.sh</code> from <code>build/extension_attributes/</code> into the script field.</p>
         </div>
       </div>
       <div className="deployment-step">
@@ -275,7 +276,7 @@ MACE generates EAs in the correct format for each supported MDM.
         <span className="deployment-step__number">5</span>
         <div className="deployment-step__content">
           <strong>Create Smart Groups (optional)</strong>
-          <p>Create a Smart Computer Group where the EA equals "Non-Compliant" to identify devices needing remediation.</p>
+          <p>Create a Smart Computer Group where the EA <strong>is not</strong> "Compliant" and <strong>is not</strong> "No Scan Data" to identify devices needing remediation. MACE's Jamf upload can create these groups for you.</p>
         </div>
       </div>
     </div>
@@ -312,8 +313,8 @@ MACE generates EAs in the correct format for each supported MDM.
       <div className="deployment-step">
         <span className="deployment-step__number">4</span>
         <div className="deployment-step__content">
-          <strong>Set script arguments</strong>
-          <p>In "Script arguments", enter <code>--check</code> for audit or <code>--fix</code> for remediation.</p>
+          <strong>Set the mode in the script</strong>
+          <p>Intune macOS shell scripts take no arguments, so set <strong>Forced Mode</strong> in the Build Hub (or edit <code>FORCED_MODE</code> at the top of the script) to <code>--check</code>, <code>--fix</code>, or <code>--cfc</code> before uploading.</p>
         </div>
       </div>
       <div className="deployment-step">
@@ -369,7 +370,7 @@ When your MDM runs the compliance script, here's the sequence:
       <span className="what-happens__icon">📝</span>
       <div className="what-happens__content">
         <strong>Results are logged</strong>
-        <p>Pass/fail results write to <code>/Library/Logs/</code> and stdout. Your MDM captures this output.</p>
+        <p>Results go to <code>/Library/Logs/&lt;hostname&gt;_&lt;baseline&gt;_baseline.log</code> and a matching <code>.csv</code>, failures to <code>/Library/Logs/&lt;baseline&gt;_failures.log</code>, per-rule status to <code>/Library/Preferences/&lt;baseline&gt;_audit.plist</code>, and a summary to the unified log and stdout. Your MDM captures the stdout.</p>
       </div>
     </div>
     <div className="what-happens__item">
@@ -383,38 +384,42 @@ When your MDM runs the compliance script, here's the sequence:
       <span className="what-happens__icon">📤</span>
       <div className="what-happens__content">
         <strong>Exit code returned to MDM</strong>
-        <p>The script returns 0 (success) or non-zero (failures detected). Some MDMs use this to determine policy success.</p>
+        <p>The script exits 0 when it ran, 2 for a usage error or unknown flag, and 1 if it isn't root, isn't zsh, or <code>--fix</code> was run before any scan. Failed rules don't change the exit code; read the summary line, the audit plist, or the reporting scripts for that. Run from an MDM with no mode and no terminal, it prints usage and exits 0 without scanning, so always set a mode.</p>
       </div>
     </div>
   </div>
 </div>
 
-## Audit Plist and Exemptions
+## Audit Preferences and Exemptions
 
-The compliance script checks for an "audit plist" file that tracks exemptions. If a rule is marked exempt, the script skips it.
+The compliance script reads an **audit preferences** domain, `org.<baseline>.audit`, that holds one entry per rule. An exempt rule is still checked, but a failure is logged as an allowed exemption, kept out of the failures log, and never remediated.
 
 ### How Exemptions Work
 
-```bash
-# The script checks the audit plist before running each rule
-exempt_reason=$(defaults read "/Library/Preferences/org.{baseline}.audit.plist" \
-    os_firewall_log_enable_exempt_reason 2>/dev/null)
-
-if [[ -n "$exempt_reason" ]]; then
-    logmessage "os_firewall_log_enable: EXEMPT - $exempt_reason"
-    return 0  # Skip this rule
-fi
+```xml
+<!-- org.<baseline>.audit: one dictionary per rule -->
+<key>os_firewall_log_enable</key>
+<dict>
+    <key>exempt</key><true/>
+    <key>exempt_reason</key><string>Logging handled by the SIEM agent</string>
+</dict>
 ```
 
-**Why use exemptions?**
-- A device has a legitimate reason to deviate (for example, testing system or specific application requirement)
-- Document the reason in the audit plist so auditors can see why the rule was skipped
+The script looks for exemptions in three places, in order: user-scoped managed preferences, device managed preferences, then the local `/Library/Preferences/org.<baseline>.audit.plist`. Results are stored separately in `/Library/Preferences/<baseline>_audit.plist`.
 
-### Deploying the Audit Plist
+**Where exemptions come from:**
+- **The project.** Rules you mark exempt in the Compliance Editor are pre-set with their reasons in the audit preferences MACE builds. See [Exempting Rules](../compliance-editor/overview#exempting-rules).
+- **The Mac.** An admin can add one locally with `sudo ./script.sh --exempt <rule_id> "reason"`, remove it with `--unexempt`, and list them with `--exemptions`. The interactive menu has the same options.
+- **Jamf's editor.** With **Write JSON Schema instead** on, Jamf Pro admins manage exemptions from the Custom Settings UI.
 
-The audit plist can be deployed as:
+### Deploying the Audit Preferences
+
+The audit preferences file can be deployed as:
+- A `.mobileconfig` profile pushed via MDM (recommended, since managed preferences are read first and can't be edited on the Mac)
 - A `.plist` file copied to `/Library/Preferences/`
-- A `.mobileconfig` profile pushed via MDM (recommended because it ensures the file is managed)
+- An Intune XML preference file or a Jamf JSON schema, depending on the Format you build with
+
+Exempting a rule in the project only takes effect on a Mac once the updated audit preferences land there. Profiles already deployed keep enforcing the setting until they're re-uploaded.
 
 ## Best Practices
 

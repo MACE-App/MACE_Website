@@ -88,7 +88,7 @@ export function LogoSettings() {
 
   const toggleHoliday = (on) => {
     setHoliday(on);
-    if (on) setOverride('logo'); // back to Default, as the app does
+    // The app keeps the stored override; the menu just shows today's pick while disabled.
   };
 
   const resolved = holiday
@@ -127,8 +127,8 @@ export function LogoSettings() {
         </div>
         <p>
           Show seasonal and holiday themed logos on the main menu. MACE ships with more
-          than 75 seasonal, holiday, and character logos that switch automatically by
-          date.
+          than 70 seasonal and holiday logos that switch automatically by date, plus
+          character logos you can pin with Logo Override.
         </p>
       </div>
 
@@ -165,7 +165,7 @@ export function LogoSettings() {
         <p>
           Pick one specific logo to use all year instead of the automatic rotation. Turn
           off <strong>Holiday Logo</strong> above to enable this menu. Turning it back on
-          returns the override to <strong>Default</strong>.
+          shows today's automatic pick again, and your choice is kept for next time.
         </p>
         <div className="logo-preview">
           <img

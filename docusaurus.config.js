@@ -200,6 +200,11 @@ const config = {
             position: 'left',
           },
           {
+            to: '/docs/baseline-compare/overview',
+            label: 'Compare',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/MACE-App/MACE/releases/latest',
             position: 'right',
             className: 'header-download-link',
@@ -247,6 +252,10 @@ const config = {
               {
                 label: 'Documentation',
                 to: '/docs/documentation/overview',
+              },
+              {
+                label: 'Baseline Compare',
+                to: '/docs/baseline-compare/overview',
               },
             ],
           },

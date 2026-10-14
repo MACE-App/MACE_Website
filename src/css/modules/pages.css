@@ -1882,6 +1882,26 @@
   display: block;
 }
 
+.status-item__icon--exempt {
+  background: rgba(88, 86, 214, 0.15);
+  color: #5856D6;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .status-item__icon--exempt {
+  color: #5E5CE6;
+}
+
+.status-item__icon--review {
+  background: rgba(255, 204, 0, 0.18);
+  color: #B38600;
+}
+
+[data-theme='dark'] .status-item__icon--review {
+  color: #FFD60A;
+}
+
 .status-item__content {
   display: flex;
   flex-direction: column;

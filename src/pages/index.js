@@ -379,9 +379,9 @@ function StatsBand() {
   // Deliberately static, so the numbers are in the HTML on first paint with no
   // loading state. Rounded down, so they stay true as the real totals climb.
   const stats = [
-    {value: '10,000+', label: 'Downloads'},
+    {value: '12,000+', label: 'Downloads'},
     {value: '800+', label: 'Security rules'},
-    {value: '150+', label: 'GitHub stars'},
+    {value: '160+', label: 'GitHub stars'},
   ];
 
   return (
@@ -539,6 +539,12 @@ function ScreenshotCarousel() {
       dark: '/img/screenshots/build-dark.webp',
       title: 'Build Hub',
       desc: 'Generate scripts, profiles, and configurations'
+    },
+    {
+      light: '/img/screenshots/baseline-compare-light.webp',
+      dark: '/img/screenshots/baseline-compare-dark.webp',
+      title: 'Baseline Compare',
+      desc: 'See exactly where two baselines differ, rule by rule'
     },
     {
       light: '/img/screenshots/documentation-light.webp',

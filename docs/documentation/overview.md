@@ -39,21 +39,21 @@ Documentation generates comprehensive guides from your compliance baseline. Inst
       <span className="output-type-card__icon">📄</span>
       <h3>PDF</h3>
     </div>
-    <p>Professional document format. Ideal for sharing with auditors, printing for meetings, or archiving compliance documentation. Supports pagination, page numbers, and clickable table of contents.</p>
+    <p>Professional document format. Ideal for sharing with auditors, printing for meetings, or archiving compliance documentation. Always US Letter, with page numbers, a clickable table of contents, and sidebar bookmarks. Pick a Light or Dark color scheme, or Both to get two files.</p>
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
       <span className="output-type-card__icon">🌐</span>
       <h3>HTML</h3>
     </div>
-    <p>Web-based format. Opens in any browser, easy to share via email, and works well for internal team reference. Self-contained single file with all styles embedded.</p>
+    <p>Web-based format. Opens in any browser, easy to share via email, and works well for internal team reference. Self-contained single file with all styles and the logo embedded. By default it follows the reader's light or dark system setting.</p>
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
       <span className="output-type-card__icon">📊</span>
       <h3>XLSX</h3>
     </div>
-    <p>Excel spreadsheet with auto-filters, formatted table, and frozen panes. Best for compliance teams who need to sort, filter, and work with rule data in a spreadsheet.</p>
+    <p>Excel workbook with a Compliance Rules sheet and an Info sheet, auto-filters, frozen panes, and optional row colors by rule status. Best for compliance teams who need to sort, filter, and work with rule data in a spreadsheet.</p>
   </div>
   <div className="output-type-card">
     <div className="output-type-card__header">
@@ -192,42 +192,42 @@ MACE offers six pre-configured document types, each designed for a different aud
     <span className="build-step__number">2</span>
     <div className="build-step__content">
       <strong>Click Documentation</strong>
-      <span>Use the toolbar button to open the Documentation window</span>
+      <span>Use the Documentation button in the editor's bottom bar</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Select engine</strong>
-      <span>Choose M.A.C.E. Documentation (recommended)</span>
+      <span>In the Select Engine sheet, M.A.C.E. Docs is preselected. mSCP Docs runs the original Python scripts</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">4</span>
     <div className="build-step__content">
       <strong>Choose document type</strong>
-      <span>Select Compliance Guide, Technical Reference, or Executive Summary</span>
+      <span>Pick one of the six types: Full Report, Compliance Guide, Technical Reference, Remediation Guide, Audit Report, or Executive Summary. Each applies its own preset</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">5</span>
     <div className="build-step__content">
-      <strong>Select output format</strong>
-      <span>Choose PDF or HTML</span>
+      <strong>Preview a format</strong>
+      <span>Switch between the HTML, PDF, Markdown, AsciiDoc, XLSX, CSV, and JSON tabs. The preview offers light and dark modes, zoom, search, and a raw view for text formats</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">6</span>
     <div className="build-step__content">
       <strong>Configure options</strong>
-      <span>Customize content, structure, and branding</span>
+      <span>Customize content, structure, branding, and format options. Check <strong>Remember for Build Output</strong> to have builds generate documentation automatically</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">7</span>
     <div className="build-step__content">
       <strong>Click Generate</strong>
-      <span>Choose where to save and MACE creates your document</span>
+      <span>Pick a single format from the Generate menu, or <strong>Generate All Formats…</strong> to write all seven into one folder. The save panel starts in Downloads</span>
     </div>
   </div>
 </div>
@@ -240,11 +240,11 @@ MACE offers six pre-configured document types, each designed for a different aud
       <img src="/img/engine-mscp.webp" alt="mSCP" className="engine-card__icon-img" />
       <h3>mSCP Documentation Engine</h3>
     </div>
-    <p>Uses the original mSCP Python scripts. For organizations already using mSCP command-line tools.</p>
+    <p>Runs <code>mscp.py guidance</code> with default options. Output lands in <code>MSCP_Project_Files/build/</code> and overwrites earlier runs.</p>
     <ul>
-      <li>Standard mSCP output formats</li>
-      <li>Python-based execution</li>
-      <li>Full mSCP compatibility</li>
+      <li>Optional Markdown and Excel output</li>
+      <li>Logo from the project's <code>logo.png</code></li>
+      <li>Generate All Artifacts and custom flags under Advanced</li>
     </ul>
     <span className="engine-card__tag">Official Scripts</span>
   </div>
@@ -255,7 +255,7 @@ MACE offers six pre-configured document types, each designed for a different aud
     </div>
     <p>The recommended engine. Fast, full-featured, and built into MACE.</p>
     <ul>
-      <li>PDF, HTML, XLSX, and Markdown output</li>
+      <li>PDF, HTML, Markdown, AsciiDoc, XLSX, CSV, and JSON output</li>
       <li>Clickable table of contents</li>
       <li>Custom branding and colors</li>
       <li>All content options available</li>
@@ -274,7 +274,7 @@ A generated document includes multiple sections organized for easy reference:
       <span className="build-option-item__icon">📖</span>
       <strong>Cover Page</strong>
     </div>
-    <p>Document title, compliance framework, version, author, and organization. Sets the professional tone for the document.</p>
+    <p>Logo, title, subtitle, platform and version, date, and author line. Every piece can be turned off or edited under Branding.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">

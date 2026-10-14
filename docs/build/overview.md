@@ -117,7 +117,7 @@ When you click Build, MACE processes your rules through these phases:
     <span className="pipeline-phase__number">1</span>
     <div className="pipeline-phase__content">
       <strong>Preparing</strong>
-      <span>Creates output folders and validates your build settings</span>
+      <span>Creates the output folders</span>
     </div>
   </div>
   <div className="pipeline-phase">
@@ -145,21 +145,21 @@ When you click Build, MACE processes your rules through these phases:
     <span className="pipeline-phase__number">5</span>
     <div className="pipeline-phase__content">
       <strong>Signing Profiles</strong>
-      <span>Digitally signs profiles with your certificate (if enabled)</span>
+      <span>Digitally signs the selected profiles with your certificate (if enabled), then generates the Advanced offline package when that mode is on</span>
     </div>
   </div>
   <div className="pipeline-phase">
     <span className="pipeline-phase__number">6</span>
     <div className="pipeline-phase__content">
       <strong>Generating DDM</strong>
-      <span>Creates Declarative Device Management JSON files</span>
+      <span>Creates Declarative Device Management JSON files (if enabled)</span>
     </div>
   </div>
   <div className="pipeline-phase">
     <span className="pipeline-phase__number">7</span>
     <div className="pipeline-phase__content">
       <strong>Generating CSV</strong>
-      <span>Exports all rules to a spreadsheet for documentation</span>
+      <span>Exports all rules to a spreadsheet (if enabled)</span>
     </div>
   </div>
   <div className="pipeline-phase">
@@ -172,174 +172,212 @@ When you click Build, MACE processes your rules through these phases:
   <div className="pipeline-phase">
     <span className="pipeline-phase__number">9</span>
     <div className="pipeline-phase__content">
+      <strong>Baseline, Tenable, Manifest, Documentation</strong>
+      <span>Each of these runs only when its output is on, including documentation when Remember for Build Output is set</span>
+    </div>
+  </div>
+  <div className="pipeline-phase">
+    <span className="pipeline-phase__number">10</span>
+    <div className="pipeline-phase__content">
       <strong>Finishing</strong>
-      <span>Generates baseline YAML, README with instructions, and cleanup</span>
+      <span>Writes the Fleet GitOps files and the README with deployment instructions and the exemption list</span>
     </div>
   </div>
 </div>
 
 ## Build Options
 
-The Build Hub organizes outputs into three main columns — **Scripts**, **Profiles**, and **Audit & Reporting** — plus **Additional Outputs** for extra export formats and **Personalized Branding**. Compliance rules can be enforced via shell scripts, configuration profiles, or DDM, so you choose the output formats that match your deployment workflow.
+The **Local Build** screen has two columns. **Build Output** on the right is the core of every build: the baseline name, the profile format, and the switches for configuration profiles, compliance scripts, and audit preferences. The left column holds **Additional Outputs**, **Attribution**, and **Signing**. Compliance rules can be enforced via shell scripts, configuration profiles, or DDM, so you choose the output formats that match your deployment workflow.
 
-### Scripts
+### Build Output
 
-*Audit & remediate macOS security settings.*
+*The baseline name, profile format, and the three main outputs.*
 
 <div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🎛️</span>
+      <strong>Standard / Advanced</strong>
+    </div>
+    <p>The chip in the Build Output header switches between two script modes. <strong>Standard</strong> builds the compliance script as a plain shell script that you or your MDM run on demand, or on the MDM's own schedule. <strong>Advanced</strong> builds the <a href="#advanced-offline-compliance-script">Offline Compliance Script</a> instead: the same script packaged as a self-installing LaunchDaemon that runs on a local schedule, even when the Mac is offline or not checking in to MDM. It swaps the Compliance Scripts row for the installer, uninstaller, and suppression profile rows. Profiles, audit preferences, and the other outputs are the same in both modes. macOS only.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🏷️</span>
+      <strong>Baseline Name</strong>
+    </div>
+    <p>One name for everything this project builds. It sets the script's <code>baseline_name</code>, the <code>org.&lt;name&gt;.audit</code> preference domain that audit exemptions are read from, the audit plist and schema file names, and the profile and declaration identifiers, so they always match. Leave it empty to use the compliance ID, such as <code>cis_lvl2</code>. Set it to mark a tailored baseline as your own, for example <code>company_macos</code>. Lowercase letters, digits, and underscores only.</p>
+    <p>The name is saved with the project and shared with every MDM tab's Upload Settings. Changing it on Macs that already run this baseline moves the exemption domain and log files, so re-export the audit preferences and script together.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📂</span>
+      <strong>Format</strong>
+    </div>
+    <p>One format for every profile this build writes, so the configuration profiles and the audit preferences profile always land on the same MDM in the same shape:<br/>
+    <strong>Mobileconfig:</strong> standard Apple format. Works with every MDM and can be installed by hand.<br/>
+    <strong>Mobileconfig (Jamf Compatible):</strong> wraps the payloads in Custom Settings so Jamf Pro keeps every key when you upload.<br/>
+    <strong>Plist Format:</strong> raw preference files for Jamf Custom Settings.<br/>
+    <strong>XML Format (Intune Compatible):</strong> raw preference files for Intune.</p>
+    <p>Plist and XML are always one file per preference domain, so choosing them switches Configuration Profiles to Individual, and neither can be signed.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">⚙️</span>
+      <strong>Configuration Profiles</strong>
+    </div>
+    <p>Standard mobileconfig profiles for device settings. Rules that map to preference payloads, like screen saver or software update settings, are delivered this way and can't be changed by the user.<br/>
+    <strong>Off:</strong> no profiles.<br/>
+    <strong>Combined:</strong> all settings in one mobileconfig, using the name you set.<br/>
+    <strong>Individual:</strong> each preference domain in its own file under <code>build/mobileconfigs</code>, named with your prefix.</p>
+  </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📜</span>
       <strong>Compliance Scripts</strong>
     </div>
-    <p>Master toggle for script generation. Creates zsh shell scripts that check and remediate security settings on macOS devices.</p>
-  </div>
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">🔍</span>
-      <strong>Audit Script</strong>
-    </div>
-    <p>Adds the check/audit commands. These verify whether each setting is compliant, report pass/fail status, and log failures to <code>/Library/Logs</code>.</p>
+    <p>A zsh shell script generated from your baseline that runs on each Mac, by hand or through any MDM. It checks every rule and records pass/fail results, logging failures to <code>/Library/Logs</code>.<br/>
+    <strong>Off:</strong> no script.<br/>
+    <strong>Combined:</strong> one script containing all rules. Easier to manage and run everything at once.<br/>
+    <strong>Individual:</strong> a separate script per rule. Not recommended for most setups, since it can mean 100+ files.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔧</span>
-      <strong>Remediation Script</strong>
+      <strong>Remediation</strong>
     </div>
-    <p>Adds the fix commands. These apply the correct settings to bring non-compliant settings into compliance when a check fails.</p>
+    <p>Lets the script fix failing rules in fix mode. The audit check always runs first and records what failed; fixes only run against those results. With remediation off, the script only audits and reports and never changes anything on the Mac.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🎚️</span>
       <strong>Forced Mode</strong>
     </div>
-    <p>Controls how the script behaves when run, by setting <code>FORCED_MODE</code> in the script:<br/>
+    <p>Bakes the chosen run mode into the script by setting <code>FORCED_MODE</code>. Pin a mode when the script is launched by something that can't pass arguments.<br/>
     <strong>None (Empty):</strong> read the mode at runtime (command-line argument or Jamf <code>$4</code>).<br/>
     <strong>--check:</strong> audit only.<br/>
     <strong>--fix:</strong> remediate only.<br/>
     <strong>--cfc:</strong> check, fix, then check again.</p>
+    <p>The <code>--fix</code> and <code>--cfc</code> options are hidden when Remediation is off.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📦</span>
-      <strong>Output Format: Combined vs Individual</strong>
+      <span className="build-option-item__icon">📋</span>
+      <strong>Audit Preferences</strong>
     </div>
-    <p><strong>Combined:</strong> One script containing all rules. Easier to manage and run everything at once.<br/>
-    <strong>Individual:</strong> Separate script per rule. Useful when you need to deploy specific checks to your MDM.</p>
+    <p>A configuration profile that manages the baseline's audit settings on each Mac, primarily rule exemptions. Rules marked exempt in this profile are skipped by the compliance script and don't count against the Mac's compliance status. It follows the shared Format above. Deploy via MDM or <code>~/Library/Preferences</code>.</p>
   </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🧾</span>
+      <strong>Write JSON Schema instead</strong>
+    </div>
+    <p>Writes the audit preferences as a JSON Schema manifest for Jamf Pro's Custom Settings UI, so exemptions can be managed from Jamf's editor rather than by hand. This is a manifest, not a profile, so it ignores the Format row and can't be signed. Leave it off to have the audit profile follow the shared Format like everything else.</p>
+  </div>
+</div>
+
+### Advanced: Offline Compliance Script
+
+*Switch the Build Output chip to Advanced for a self-scheduling installer. macOS only.*
+
+<div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📡</span>
-      <strong>Offline Script (Advanced)</strong>
+      <strong>Offline Compliance Script</strong>
     </div>
-    <p>Switches the Scripts column into Offline Script mode, which generates an installer that drops a <strong>LaunchDaemon</strong> and your compliance script onto the Mac. The script then runs automatically on a schedule you configure — no MDM check-in required for each run.</p>
+    <p>The compliance script packaged as a self-installing LaunchDaemon. The installer drops a LaunchDaemon, a 60-second starter, and your script onto the Mac. The starter checks a timestamp every minute and runs the script when your interval elapses, whether or not the device is online. To update, push the installer once; one check-in covers every future run.</p>
     <p><strong>When to use:</strong> Devices that aren't always online, environments where you want continuous compliance without waiting for MDM check-ins, or when you want to ship one installer and have it self-maintain.</p>
-    <p><strong>What gets generated:</strong> An installer script, an uninstaller script, and a suppression profile. Push the installer once from your MDM; the daemon handles future runs independently.</p>
     <div className="explanation-box">
       <h4>Standard vs Offline Script</h4>
       <p><strong>Standard scripts</strong> run when your MDM triggers them. Each execution depends on a policy or check-in.</p>
       <p><strong>Offline Script</strong> installs a LaunchDaemon. The Mac runs the script on your chosen interval whether or not it's online or has checked in.</p>
     </div>
   </div>
-</div>
-
-### Profiles
-
-*Configuration profiles for deploying security settings via MDM.*
-
-<div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">⚙️</span>
-      <strong>Configuration Profiles</strong>
+      <span className="build-option-item__icon">⏱️</span>
+      <strong>Run every</strong>
     </div>
-    <p>Master toggle for profile generation. Creates <code>.mobileconfig</code> files for deploying security settings via MDM (Jamf, Intune, etc.).</p>
+    <p>The local schedule, in minutes or hours. The embedded script is locked to <code>--cfc</code> (check, fix, check) mode. This isn't configurable in Offline Script builds.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📂</span>
-      <strong>Output Format</strong>
+      <span className="build-option-item__icon">🪪</span>
+      <strong>Daemon Label and Org Folder</strong>
     </div>
-    <p>Choose how profiles are packaged:<br/>
-    <strong>Combined Mobileconfig:</strong> a single <code>.mobileconfig</code> with all settings (supported by most MDM vendors).<br/>
-    <strong>Individual Mobileconfigs:</strong> separate files grouped by PayloadType for granular control.<br/>
-    <strong>Jamf Plist / Intune Plist:</strong> formats tailored to Jamf Pro's Custom Settings and Intune's custom profile format.</p>
+    <p><strong>Daemon Label</strong> is the LaunchDaemon's reverse-DNS identifier, such as <code>com.yourorg.cis_lvl2</code>. <strong>Org Folder</strong> is the install folder under <code>/Library/Scripts</code>, which defaults to <code>MACE</code>.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">🔐</span>
-      <strong>Sign Profiles</strong>
+      <span className="build-option-item__icon">🗑️</span>
+      <strong>Uninstaller Script</strong>
     </div>
-    <p>Most MDMs sign profiles automatically when deployed, but can modify them first. Pre-signing with a certificate from your Keychain locks the profile and shows it as "Verified" when installed.</p>
-  </div>
-</div>
-
-### Audit & Reporting
-
-*Audit exemptions and MDM compliance reporting.*
-
-<div className="build-option-detail">
-  <div className="build-option-item">
-    <div className="build-option-item__header">
-      <span className="build-option-item__icon">📋</span>
-      <strong>Audit Preferences</strong>
-    </div>
-    <p>Exempt rules from audit and remediation scripts. The compliance script reads these preferences to skip rules you've marked as exempt. Deploy via MDM or <code>~/Library/Preferences</code>. The <strong>Output Format</strong> can be a mobileconfig (for MDM) or a plist.</p>
+    <p>Boots the daemon out and removes the script and LaunchDaemon plist from the Mac. Logs in <code>/Library/Logs/</code> are preserved. Both the installer and uninstaller must run as root. There's no MDM "unassign" that takes the daemon back, so keep the uninstaller handy.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📊</span>
-      <strong>MDM Reporting — Extension Attributes</strong>
+      <span className="build-option-item__icon">🤫</span>
+      <strong>Suppression Profile</strong>
     </div>
-    <p>Reports failed rules to your MDM for Smart Groups and dashboards. Generates extension-attribute scripts for <strong>Jamf, Iru, Intune, WS1, Addigy, and Fleet</strong>.</p>
+    <p>A single mobileconfig with one Managed Background Items payload that pre-approves the daemon by label. Without it, users see a "Background Items Added" notification and can disable the daemon in Login Items. It's always a standalone profile, even when other profiles are Combined, and it can be signed with the <strong>Suppression</strong> checkbox under Signing.</p>
   </div>
 </div>
 
 ### Additional Outputs
 
-*Extra export formats for documentation, scanning, and legacy workflows.*
+*Reporting, DDM, and extra export formats for scanning, automation, and legacy workflows.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
-      <span className="build-option-item__icon">📱</span>
-      <strong>DDM</strong>
+      <span className="build-option-item__icon">📊</span>
+      <strong>Compliance Reporting &amp; Other MDM Files</strong>
     </div>
-    <p>Declarative Device Management declarations. Apple's modern management format where the device enforces settings autonomously. Requires macOS 13+ and MDM support.</p>
+    <p>Per-vendor artifacts that read each Mac's latest audit results and report its compliance status to your MDM, for Smart Groups and dashboards. One build writes a script for every vendor, so you keep the ones your MDM uses and ignore the rest. They land in <code>build/extension_attributes</code> alongside a README with setup steps:</p>
+    <p><strong>Jamf Pro</strong> extension attribute · <strong>Intune</strong> custom attribute · <strong>Workspace ONE</strong> sensor and custom attribute · <strong>Iru</strong> custom attribute · <strong>Addigy</strong> custom fact · <strong>Fleet</strong> osquery policies (<code>.sql</code>)</p>
+    <p>They read the results the compliance script leaves behind, so that script has to be running on the Mac. The same switch also writes <strong>Fleet GitOps</strong> files to <code>build/fleet_gitops</code>: this build's profiles, scripts, and declarations in a <code>lib/</code> tree plus the matching YAML entries to merge into your repo. macOS only.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">📱</span>
+      <strong>DDM Declarations</strong>
+    </div>
+    <p>Writes rules that have a DDM form as <code>.json</code> declarations under <code>build/</code>. DDM is Apple's newer management protocol, where the Mac enforces the declared state itself. Most of these rules also have a profile payload or script fix, so they're enforced either way. A few are DDM only, and the build pane names them. Few MDMs accept declaration files for direct import today, so check that yours does. MACE delivers them itself only through Export to Fleet.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📝</span>
       <strong>Baseline YAML</strong>
     </div>
-    <p>A YAML baseline compatible with the original mSCP Python scripts. Use this if you need to work with mSCP's <code>generate_guidance.py</code> or other mSCP tools.</p>
+    <p>The baseline in mSCP's own format, listing every included rule by section. Use it with the mSCP Python scripts, such as <code>generate_guidance.py</code>, to rebuild this baseline outside MACE.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📊</span>
-      <strong>CSV</strong>
+      <strong>CSV Export</strong>
     </div>
-    <p>Spreadsheet export of all rules — rule IDs, titles, check/fix commands, and framework references (NIST, DISA, CIS). Great for documentation, auditor reviews, or importing into other systems.</p>
+    <p>One row per included rule with its ID, title, section, and references, for spreadsheets, auditor reviews, and tracking systems.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔭</span>
       <strong>Tenable Audit</strong>
     </div>
-    <p>A Tenable/Nessus <code>.audit</code> file for vulnerability scanning. Use this if your organization uses Tenable for compliance tracking.</p>
+    <p>A <code>.audit</code> file for Tenable Nessus that checks Macs against this baseline during a vulnerability scan. Import it into Tenable as a custom audit. macOS only.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🧩</span>
-      <strong>Manifest</strong>
+      <strong>Vendor Manifest</strong>
     </div>
-    <p>A JSON vendor manifest describing the generated artifacts — useful for automation and tooling that ingests the build output.</p>
+    <p>A JSON Vendor Manifest in the mSCP community format: every automated rule with its check command, expected result, references, severity, and fix, plus where the compliance script writes its audit plist and log. Security vendors and automation tooling read this to evaluate the baseline without parsing the rule YAML. Inherent, permanent, manual, and n_a rules are left out.</p>
   </div>
 </div>
 
-### Personalized Branding
+### Attribution
 
-*Customize author attribution and branding in generated files.*
+*Who produced the baseline, and whether MACE says so.*
 
 <div className="build-option-detail">
   <div className="build-option-item">
@@ -347,14 +385,35 @@ The Build Hub organizes outputs into three main columns — **Scripts**, **Profi
       <span className="build-option-item__icon">👤</span>
       <strong>Author Info</strong>
     </div>
-    <p>Your name and organization appear in generated files including script headers, profile metadata, and documentation. Helps identify who created this baseline.</p>
+    <p>Stamps the project's author name and organization into the generated files, including script headers and profile metadata, so teams can see who produced the baseline. Set them from the Author Info card in the Compliance Editor's left sidebar. With no author configured, the checkbox is disabled and the row reads "No author configured".</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🏷️</span>
       <strong>Hide Branding</strong>
     </div>
-    <p>Removes MACE attribution from generated files if your organization prefers unbranded outputs.</p>
+    <p>Strips the short M.A.C.E. attribution comment from the generated files, so the output carries only your own author info.</p>
+  </div>
+</div>
+
+### Signing
+
+*Pre-sign profiles with a certificate from your Keychain.*
+
+<div className="build-option-detail">
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔐</span>
+      <strong>Sign Exported Profiles</strong>
+    </div>
+    <p>Most MDMs sign profiles automatically when deployed, but can modify them first. Pre-signing locks each profile and shows it as "Verified" when installed. Pick one signing certificate from your login keychain. Signed copies are written to <code>build/signed</code> next to the unsigned originals. Signing only applies to mobileconfig output; Plist and XML formats are never signed.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">☑️</span>
+      <strong>Signed Outputs</strong>
+    </div>
+    <p>Picks which of this build's profiles are signed with the certificate. <strong>Config Profiles</strong> covers every configuration profile. <strong>Audit Prefs</strong> covers the audit preferences profile. <strong>Suppression</strong> appears in Advanced mode and covers the offline package's Managed Background Items profile, so the pre-approval can't be edited before install. Anything left unchecked is written unsigned, and a target is disabled when it has nothing to sign.</p>
   </div>
 </div>
 
@@ -364,23 +423,30 @@ After building, you'll find these files organized in your project's `build/` fol
 
 ```
 build/
-├── {baseline}_compliance.sh              # Main compliance script
-├── {baseline}.mobileconfig               # Combined configuration profile
-├── org.{baseline}.audit.plist            # Audit preferences (for exemptions)
-├── org.{baseline}.audit.mobileconfig     # Audit prefs as profile (for MDM)
-├── {baseline}.csv                        # Spreadsheet export
-├── {baseline}.yaml                       # mSCP-compatible baseline
-├── README.md                             # Deployment instructions
-├── scripts/                              # Individual scripts (if enabled)
-├── mobileconfigs/                        # Individual profiles (if enabled)
-├── plists/                               # Jamf plist files (if enabled)
-├── intune/                               # Intune XML files (if enabled)
-├── signed/                               # Signed profiles (if enabled)
-└── declarative/                          # DDM declarations (if enabled)
+├── {baseline}_compliance_script.sh         # Combined compliance script
+├── {baseline}_configuration_profiles.mobileconfig   # Combined configuration profile
+├── {baseline}_audit.mobileconfig           # Audit preferences (exemptions); .plist, .xml, or
+│                                           #   _jamf_schema.json depending on Format
+├── {baseline}_csv_spreadsheet.csv          # Spreadsheet export (if enabled)
+├── {baseline}_baseline_yaml.yaml           # mSCP-compatible baseline (if enabled)
+├── {baseline}_tenable.audit                # Tenable Nessus audit (if enabled)
+├── {baseline}_manifest.json                # Vendor manifest (if enabled)
+├── README.md / README.txt                  # Deployment instructions and exemption list
+├── scripts/                                # "MACE - <rule>.sh", one per rule (Individual)
+├── mobileconfigs/                          # "MACE - <payload>.mobileconfig" (Individual)
+├── plists/                                 # "MACE - <domain>.plist" + manifest.plist (Plist format)
+├── intune/                                 # "MACE_<domain>.xml" (XML format)
+├── signed/                                 # Signed copies next to the originals (if enabled)
+├── extension_attributes/                   # MDM compliance reporting scripts + README
+├── fleet_gitops/                           # Fleet GitOps lib/ tree and YAML (if enabled)
+├── advanced_scripts/                       # Offline installer, uninstaller, suppression profile (Advanced)
+└── {baseline}_declarative/                 # DDM declarations (if enabled)
     ├── activations/
     ├── assets/
     └── configurations/
 ```
+
+The `MACE` prefix on individual files comes from the Name or Prefix field on each row, so every name above can be changed. Only one audit preferences file is written, in whichever shape the Format row selects.
 
 ## Build Engines
 
@@ -429,38 +495,42 @@ build/
     <span className="build-step__number">2</span>
     <div className="build-step__content">
       <strong>Open the Build Hub</strong>
-      <span>Use the toolbar button or press <code>Cmd+B</code></span>
+      <span>Click <strong>Build</strong> in the editor's bottom bar, pick <strong>M.A.C.E. Build</strong> or <strong>mSCP Build</strong> in the Select Engine sheet, and click Continue</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Choose a destination</strong>
-      <span>Select the <strong>Local Build</strong> tab, or an MDM tab (Jamf Pro, Workspace ONE, Intune) to upload directly</span>
+      <span>In the sidebar, pick <strong>Local Build</strong>, or one of the <strong>MDM Upload</strong> entries (Jamf Pro, Workspace ONE, Intune, Fleet, Iru, Addigy) to upload directly. <strong>Don't see your MDM?</strong> opens a request</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">4</span>
     <div className="build-step__content">
       <strong>Configure outputs</strong>
-      <span>Toggle Scripts, Profiles, Audit &amp; Reporting, and Additional Outputs to match your workflow</span>
+      <span>Set the Baseline Name and Format, switch Configuration Profiles, Compliance Scripts, and Audit Preferences on or off, and pick any Additional Outputs</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">5</span>
     <div className="build-step__content">
-      <strong>Add branding</strong>
-      <span>Set author info and branding under Personalized Branding</span>
+      <strong>Attribution and signing</strong>
+      <span>Choose Author Info or Hide Branding under Attribution, and pick a certificate under Signing if you want pre-signed profiles</span>
     </div>
   </div>
   <div className="build-step">
     <span className="build-step__number">6</span>
     <div className="build-step__content">
       <strong>Click Generate</strong>
-      <span>Watch progress as MACE generates your files, then use <strong>View Build Folder</strong> to open them</span>
+      <span>The stepper moves from <strong>Settings</strong> to <strong>Build</strong> while MACE generates, then to <strong>Done</strong>, where every file is listed with a preview, deploy hints, and <strong>Open Build Folder</strong> and <strong>View README</strong> buttons</span>
     </div>
   </div>
 </div>
+
+:::tip Before you click Generate
+Generating replaces same-named files in the project's `build/` folder, which is what the **Overwrites files in build/** chip in the footer is warning about. Files from earlier runs that this build doesn't write are left in place. The **Output Drift** pill in the title bar turns orange whenever rules change after a build, and goes back to **Output Synced** once you generate again. See [Settings](../reference/settings#sync-indicator) to hide it or swap the label for per-output icons.
+:::
 
 ## MDM Export
 
@@ -472,52 +542,50 @@ In addition to generating files locally, the Build Hub can upload your complianc
       <span className="build-option-item__icon">🟢</span>
       <strong>Jamf Pro</strong>
     </div>
-    <p>Connect to your Jamf Pro server with API Client credentials or username/password. MACE generates scripts, profiles, and extension attributes, then uploads them to Jamf's Scripts, Configuration Profiles, and Extension Attributes objects automatically. You can upload as a combined object or individual items per rule, and configure naming prefixes.</p>
-    <p>Also supports <strong>Offline Script mode</strong> for Jamf — MACE uploads the installer and suppression profile directly to your Jamf server.</p>
+    <p>Connect to your Jamf Pro server with API Client credentials or username/password. MACE generates scripts, profiles, and the extension attribute, then uploads them to Jamf's Scripts, Configuration Profiles, and Extension Attributes objects automatically. Profiles can be combined or split per payload type, scripts per rule. It can also create <strong>Smart Groups</strong> (Compliant and Non-Compliant), an <strong>Audit Policy</strong> on a schedule, pick a <strong>Category</strong> and <strong>Site</strong>, and upload the Audit Preferences or JSON schema. Password policy and FileVault go up as native payloads.</p>
+    <p>In <strong>Advanced</strong> mode MACE uploads the offline installer, uninstaller, and suppression profile, and the audit policy runs once per computer.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🟠</span>
       <strong>Workspace ONE</strong>
     </div>
-    <p>Connect to your Workspace ONE UEM tenant using Basic Auth or OAuth. MACE generates compliance scripts, profiles, and sensors, then uploads them to Workspace ONE. Configure your Organization Group and select which artifacts to upload.</p>
-    <p>Also supports <strong>Offline Script mode</strong> for Workspace ONE deployments.</p>
+    <p>Connect to your Workspace ONE UEM tenant with the API URL, REST API key, and token region. MACE generates compliance scripts, profiles, and reporting as either <strong>Sensors</strong> or <strong>Custom Attributes</strong>, then uploads them. Choose your Organization Group, deliver scripts as Scripts or a Product, and select which artifacts to upload.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔵</span>
-      <strong>Microsoft Intune</strong>
+      <strong>Intune</strong>
     </div>
-    <p>Connect to Intune using your Azure AD tenant ID, client ID, and client secret. MACE generates compliance scripts, configuration profiles, and custom attributes, then uploads them to your Intune tenant. Configure naming and select which artifacts to push.</p>
-    <p>Also supports <strong>Offline Script mode</strong> for Intune deployments.</p>
+    <p>Connect with the Directory (tenant) ID, Application (client) ID, and client secret from the Entra admin center. MACE generates compliance scripts with a Script Frequency, Settings Catalog profiles, custom attributes, and an optional <strong>Compliance Policy</strong> that marks Macs noncompliant when rules fail, with assignment filters. Configure naming and select which artifacts to push.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🟣</span>
-      <strong>Iru</strong> <span className="badge badge--warning">Beta</span>
+      <strong>Iru</strong>
     </div>
-    <p>Connect to your Iru tenant to upload MACE's compliance scripts, profiles, and custom attributes directly. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
+    <p>Connect with your Iru API URL and token. MACE uploads compliance scripts into audit and remediation slots, profiles, and a <strong>Failed Rules Report</strong> custom attribute, and can assign everything to a new or existing <strong>Blueprint</strong> or leave it in the Library.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🟤</span>
-      <strong>Addigy</strong> <span className="badge badge--warning">Beta</span>
+      <strong>Addigy</strong>
     </div>
-    <p>Connect to your Addigy account to push MACE's compliance profiles, scripts, and attribute checks. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
+    <p>Connect with an Addigy API key, pick an Organization, and MACE pushes compliance profiles, scripts, and a <strong>Compliance Fact</strong>, optionally assigned to a Policy.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🔴</span>
-      <strong>Fleet</strong> <span className="badge badge--warning">Beta</span>
+      <strong>Fleet</strong>
     </div>
-    <p>Connect to your Fleet instance to deploy MACE's compliance scripts and policies. This integration is currently in <strong>beta</strong> — connection options and generated artifacts may change.</p>
+    <p>Connect with an API token or email and password. MACE deploys profiles, audit preferences, scripts, <strong>DDM declarations</strong>, labels, and a combined or per-rule <strong>Compliance Policy</strong> with a Failed Rules report. <strong>Hold for Scoping</strong> targets an empty staging label so nothing reaches hosts until you scope it, and a custom profile prefix or name lets you stage rollouts side by side. A GitOps kit is written with every export.</p>
   </div>
 </div>
 
 <div className="explanation-box">
   <h4>Local Build vs MDM Export</h4>
   <p><strong>Local Build</strong> generates files to a folder on your Mac. You then upload them to your MDM manually.</p>
-  <p><strong>MDM Export</strong> generates the same files and uploads them directly to your MDM in one step. Each MDM tab has its own build options and connection settings independent of the Local Build tab.</p>
+  <p><strong>MDM Export</strong> generates the same files and uploads them directly to your MDM in one step. Every MDM follows the same <strong>Settings → Review → Upload → Verify</strong> flow: saved servers live in the Keychain, <strong>Test</strong> checks the connection and permissions, the Review screen shows exactly what will be sent and nothing goes up until you confirm, and after the upload MACE verifies each object on the server. An activity history is kept per project, and an archive of every upload lands in a folder such as <code>jamf_uploads/</code> next to <code>build/</code>. Each MDM has its own options and connection settings, while the Baseline Name is shared with Local Build.</p>
 </div>
 
 ## What's Next?

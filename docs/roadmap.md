@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 sidebar_label: Roadmap
 title: Roadmap
 description: What's being worked on now and the features planned for future versions of MACE, shaped by community feedback.
@@ -77,13 +77,6 @@ The bigger swings. Each of these will take a fair bit of rework to make happen, 
     <div className="roadmap-card__body">
       <h3>MDM Direct Uploads, Reworked</h3>
       <p>A cleaner direct-upload experience: <strong>preview exactly what will be sent</strong> to your MDM before anything uploads, and a streamlined screen with consolidated actions instead of duplicate buttons.</p>
-    </div>
-  </div>
-  <div className="roadmap-card roadmap-card--green">
-    <span className="roadmap-card__icon">🛡️</span>
-    <div className="roadmap-card__body">
-      <h3>Audit Rule Exemptions</h3>
-      <p>A dedicated UI for the audit exemption plist. Exempt a rule <strong>with a documented reason</strong> in a couple of clicks, see exemptions reflected in audit results, and manage the full exemption workflow without hand-editing plists.</p>
     </div>
   </div>
 </div>

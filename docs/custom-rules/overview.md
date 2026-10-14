@@ -76,8 +76,8 @@ The Rule Builder Hub provides a guided interface for creating and editing mSCP-c
   <div className="build-step">
     <span className="build-step__number">1</span>
     <div className="build-step__content">
-      <strong>Open Rule Builder Hub</strong>
-      <span>Click the + button in the Compliance Editor toolbar to create a new rule, or right-click an existing custom rule and choose Edit to modify it</span>
+      <strong>Open the Rule Builder</strong>
+      <span>On the main menu, click <strong>Build New Rule</strong> under Rule Builder, or <strong>Edit Existing Rule</strong> to pick a <code>.yaml</code> file to modify</span>
     </div>
   </div>
   <div className="build-step">
@@ -91,7 +91,7 @@ The Rule Builder Hub provides a guided interface for creating and editing mSCP-c
     <span className="build-step__number">3</span>
     <div className="build-step__content">
       <strong>Select Platforms, Benchmarks & Tags</strong>
-      <span>Choose target platforms (macOS, iOS/iPadOS, visionOS), versions, compliance benchmarks, and framework tags</span>
+      <span>Choose target platforms (macOS, iOS/iPadOS, visionOS), versions, Requires Supervised Mode for iOS and visionOS, compliance benchmarks, and framework tags</span>
     </div>
   </div>
   <div className="build-step">
@@ -105,7 +105,14 @@ The Rule Builder Hub provides a guided interface for creating and editing mSCP-c
     <span className="build-step__number">5</span>
     <div className="build-step__content">
       <strong>Save your rule</strong>
-      <span>Click Save Rule to add it to your project's custom/rules/ folder</span>
+      <span>Save Rule is enabled once Rule ID, Title, Discussion, and at least one platform version are filled in. It opens a Save panel with <code>&lt;id&gt;.yaml</code> as the default name</span>
+    </div>
+  </div>
+  <div className="build-step">
+    <span className="build-step__number">6</span>
+    <div className="build-step__content">
+      <strong>Add it to a project</strong>
+      <span>In the Compliance Editor, click the <strong>+ Add</strong> button above the rules list and pick the file. MACE copies it to <code>custom/rules/</code> and includes it in the baseline</span>
     </div>
   </div>
 </div>
@@ -125,53 +132,61 @@ The Rule Builder Hub provides a guided interface for creating and editing mSCP-c
       <span className="build-option-item__icon">💻</span>
       <strong>Platform & Benchmarks</strong>
     </div>
-    <p>Select target platforms (macOS, iOS/iPadOS, visionOS), versions (macOS 26.0, 15.0, 14.0), and compliance benchmarks. macOS supports CIS Level 1, CIS Level 2, and DISA STIG. iOS supports CIS BYOD/Enterprise levels, iOS STIG, and INDIGO. visionOS supports the visionOS STIG. References are auto-generated based on your selections.</p>
+    <p>Select target platforms (macOS, iOS/iPadOS, visionOS), the versions mSCP currently ships (macOS 26.0 and 15.0 are preselected), an Introduced Version per platform, and compliance benchmarks. macOS supports CIS Level 1, CIS Level 2, and DISA STIG. iOS supports CIS BYOD/Enterprise levels, iOS STIG, and INDIGO. visionOS supports the visionOS STIG. References are auto-generated based on your selections.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">🏷️</span>
       <strong>Tags</strong>
     </div>
-    <p>Tag your rule with compliance framework identifiers so it appears in the right baseline filters. Available tag groups include NIST 800-53r5 (Low/Moderate/High/Privacy), NIST 800-171, CIS Controls v8, CNSSI-1253, CMMC Level 1 and 2, NLMAPGOV, and special tags like manual, inherent, and permanent.</p>
+    <p>Tag your rule with compliance framework identifiers so it appears in the right baseline filters. Available tag groups include NIST 800-53r5 (Low/Moderate/High/Privacy), NIST 800-171, CIS Controls v8, CNSSI-1253, CMMC Level 1 and 2, NLMAPGOV, and special tags like manual, inherent, permanent, n_a, and supervised. You can also add a Custom Tag.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📜</span>
       <strong>Check Script Templates</strong>
     </div>
-    <p>Starter templates for common check patterns: <code>defaults read</code>, <code>osascript</code>, <code>grep/awk</code>, and <code>pwpolicy</code>. Selecting a template fills in a working example you can adapt for your rule.</p>
+    <p>The <strong>Insert Template</strong> menu offers starter templates for common check patterns: <code>defaults read</code>, <code>osascript</code>, <code>grep/awk</code>, and <code>pwpolicy</code>. Selecting a template fills in a working example you can adapt for your rule.</p>
+  </div>
+  <div className="build-option-item">
+    <div className="build-option-item__header">
+      <span className="build-option-item__icon">🔢</span>
+      <strong>ODV, References, Profiles, and DDM</strong>
+    </div>
+    <p>Set a Recommended Value, a STIG Value, per-benchmark values, and validation min/max for the ODV. Add Custom References by category, key, and values. Pick a Payload Type for an MDM configuration profile, or a DDM declaration type, each with a Custom… option. The DDM section also handles configuration-file declarations with Service, Config File, Key, and Value.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">👁️</span>
       <strong>YAML Preview</strong>
     </div>
-    <p>Live preview shows the generated YAML as you fill in fields. Copy the YAML or verify the structure before saving.</p>
+    <p>Live preview shows the generated YAML as you fill in fields. Copy the YAML or verify the structure before saving. Toggle it with <strong>Hide Preview</strong> and <strong>Show Preview</strong> in the toolbar.</p>
   </div>
 </div>
 
 ## Where Custom Rules Live
 
-Custom rules are saved in your project's `custom/rules/` folder:
+Custom rules live in your project's `MSCP_Project_Files/custom/rules/` folder:
 
 ```
-YourProject.maceproj
-└── custom/
-    └── rules/
-        ├── os/                      ← Organize by category
-        │   └── os_my_rule.yaml
-        └── my_other_rule.yaml       ← Or use flat structure
+YourProject/
+├── MACE_Project.mace
+└── MSCP_Project_Files/
+    └── custom/
+        └── rules/
+            ├── os_my_rule.yaml
+            └── my_other_rule.yaml
 ```
 
-The Rule Builder automatically saves rules to this folder when you click Save Rule.
+The Rule Builder saves wherever you choose in its Save panel. The editor's **+ Add** button is what copies a rule into this folder. Keep the folder flat: MACE loads subfolders, but Delete, Show in Finder, and modification tracking expect `custom/rules/<id>.yaml`.
 
 <div className="build-option-detail">
   <div className="build-option-item">
     <div className="build-option-item__header">
       <span className="build-option-item__icon">📂</span>
-      <strong>Organize by Section</strong>
+      <strong>Same ID, Same Rule</strong>
     </div>
-    <p>Place rules in subfolders matching section names (audit/, os/, pwpolicy/, etc.) or use a flat structure.</p>
+    <p>A custom file whose <code>id</code> matches an mSCP rule is treated as a modification of that rule, not a new one. Pick a unique ID for a genuinely new rule.</p>
   </div>
   <div className="build-option-item">
     <div className="build-option-item__header">
@@ -209,7 +224,7 @@ Custom rules are visually identified in the Compliance Editor:
 <table className="icon-table">
   <tr><td>🔧</td><td><strong>Custom Rule Icon</strong></td><td>Wrench icon identifies rules you created</td></tr>
   <tr><td>+</td><td><strong>New Rule Status</strong></td><td>Plus sign shows newly created rules</td></tr>
-  <tr><td>✏️</td><td><strong>Editable</strong></td><td>Custom rules can be modified or deleted</td></tr>
+  <tr><td>✏️</td><td><strong>Editable</strong></td><td>Edit custom rules through <strong>View Raw YAML File</strong> in the detail panel, or reopen the file in the Rule Builder. Delete Rule… removes them</td></tr>
 </table>
 
 ## Compatibility

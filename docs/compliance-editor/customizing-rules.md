@@ -49,6 +49,8 @@ mobileconfig_info:
 
 ## Editable Fields
 
+Title is editable too. References and Tags are read-only in the field view and can only be changed through **View Raw YAML File** in the ⋯ menu, which edits the whole rule file. ID and Introduced are never editable.
+
 <div className="editable-fields-grid">
   <div className="editable-field">
     <span className="editable-field__icon">💬</span>
@@ -61,7 +63,7 @@ mobileconfig_info:
   <div className="editable-field">
     <span className="editable-field__icon">🔍</span>
     <div className="editable-field__content">
-      <strong>Check Script</strong>
+      <strong>Check</strong>
       <code>check.shell</code>
       <span>Verification command</span>
     </div>
@@ -69,15 +71,15 @@ mobileconfig_info:
   <div className="editable-field">
     <span className="editable-field__icon">✓</span>
     <div className="editable-field__content">
-      <strong>Expected Result</strong>
+      <strong>Results</strong>
       <code>check.result</code>
-      <span>Expected check output</span>
+      <span>Expected check output, typed String, Integer, or Boolean</span>
     </div>
   </div>
   <div className="editable-field">
     <span className="editable-field__icon">🔧</span>
     <div className="editable-field__content">
-      <strong>Fix Script</strong>
+      <strong>Fix</strong>
       <code>fix.shell</code>
       <span>Remediation command</span>
     </div>
@@ -103,7 +105,7 @@ mobileconfig_info:
     <div className="editable-field__content">
       <strong>References</strong>
       <code>references</code>
-      <span>NIST, DISA, CIS citations</span>
+      <span>NIST, DISA, CIS citations (Raw YAML only)</span>
     </div>
   </div>
   <div className="editable-field">
@@ -111,7 +113,7 @@ mobileconfig_info:
     <div className="editable-field__content">
       <strong>Tags</strong>
       <code>tags</code>
-      <span>Categorization metadata</span>
+      <span>Categorization metadata (Raw YAML only)</span>
     </div>
   </div>
   <div className="editable-field">
@@ -224,7 +226,7 @@ Customize the check logic for your environment or edge cases.
 
 ### Expected Result
 
-What the check script should return for a passing result. Can be a `string` or `integer` value.
+What the check script should return for a passing result. Can be a `string`, `integer`, or `boolean` value; the Results field has a Type picker for each.
 
 ```yaml
 result:
@@ -375,15 +377,15 @@ references:
   <div className="tracking-feature">
     <div className="tracking-feature__icon">📝</div>
     <div className="tracking-feature__content">
-      <strong>Field-Level Tracking</strong>
-      <span>Each modified field shows what changed from the original baseline value</span>
+      <strong>Field-Level Badges</strong>
+      <span>Each modified field gets an orange Modified badge. To see the original, use Show Original Rule in Finder or compare in Baseline Compare</span>
     </div>
   </div>
   <div className="tracking-feature">
     <div className="tracking-feature__icon">↩️</div>
     <div className="tracking-feature__content">
       <strong>Reset to Baseline</strong>
-      <span>Revert any rule to its original state with one click, restoring all values to baseline</span>
+      <span>Reset Rule… in the ⋯ menu reverts the rule to its original state after a confirmation. Exemptions and comments are kept</span>
     </div>
   </div>
 </div>
@@ -403,15 +405,15 @@ references:
     <div className="save-step__icon">✏️</div>
     <div className="save-step__content">
       <strong>Override Created</strong>
-      <span>Changes saved to <code>custom/rules/</code></span>
+      <span>Saved to <code>MSCP_Project_Files/custom/rules/&lt;id&gt;.yaml</code></span>
     </div>
   </div>
   <div className="save-step__connector">→</div>
   <div className="save-step">
     <div className="save-step__icon">🔀</div>
     <div className="save-step__content">
-      <strong>Smart Merge</strong>
-      <span>Only changed fields stored</span>
+      <strong>Full Copy</strong>
+      <span>The whole rule is written with your edits applied</span>
     </div>
   </div>
 </div>
@@ -438,7 +440,7 @@ references:
   <tr><td>🧪</td><td><strong>Test check scripts</strong> — Verify modified checks work before deploying</td></tr>
   <tr><td>🔧</td><td><strong>Use ODVs</strong> — Prefer ODV variables over hardcoded values for flexibility</td></tr>
   <tr><td>↩️</td><td><strong>Keep fixes reversible</strong> — Remediation scripts should be safely re-runnable</td></tr>
-  <tr><td>📂</td><td><strong>Track in version control</strong> — Commit your <code>custom/rules/</code> folder to git</td></tr>
+  <tr><td>📂</td><td><strong>Track in version control</strong> — Commit your <code>custom/rules/</code> folder to git. New projects are git-ready by default; for older ones use <strong>File ▸ Make Project Git-Ready</strong>, which removes the inherited <code>custom/.gitignore</code> that would otherwise hide your edits</td></tr>
 </table>
 
 ## Creating New Rules
